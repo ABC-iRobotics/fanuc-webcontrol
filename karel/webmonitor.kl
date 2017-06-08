@@ -1,0 +1,46 @@
+PROGRAM webmonitor
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+
+VAR
+
+	currentPosJ: JOINTPOS
+	valuePosJ: ARRAY[6] OF REAL
+	responseFile: FILE
+	STATUS: INTEGER
+
+BEGIN
+
+	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
+	WRITE responseFile( '<!DOCTYPE html>', CR )
+	WRITE responseFile( '<html>', CR )
+	WRITE responseFile( '<head>', CR )
+		WRITE responseFile(' <meta charset="utf-8">',CR)
+		WRITE responseFile( '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>',CR)
+	WRITE responseFile( '</head>', CR )
+	WRITE responseFile( '<body>', CR )
+	
+	currentPosJ = CURJPOS(0,0)
+	CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
+	IF( STATUS <> 0 ) THEN
+		WRITE responseFile( '<error>', 'error converting joints position: ', STATUS, '</error>', CR )
+	ELSE
+		WRITE responseFile( '<div id="currentposj">', CR )
+			WRITE responseFile( '<p>', valuePosJ[1]::3::2, '</p>', CR )
+			WRITE responseFile( '<p>', valuePosJ[2]::3::2, '</p>', CR )
+			WRITE responseFile( '<p>', valuePosJ[3]::3::2, '</p>', CR )
+			WRITE responseFile( '<p>', valuePosJ[4]::3::2, '</p>', CR )
+			WRITE responseFile( '<p>', valuePosJ[5]::3::2, '</p>', CR )
+			WRITE responseFile( '<p>', valuePosJ[6]::3::2, '</p>', CR )
+		WRITE responseFile( '</div>', CR )
+		WRITE responseFile( '<script>', CR )
+			WRITE responseFile('$("#currentposj").load(document.URL +  "#currentposj");',CR)
+		WRITE responseFile( '</script>', CR )
+	ENDIF
+	
+	WRITE responseFile( '</body>',CR )
+	WRITE responseFile( '</html>', CR )
+	
+	CLOSE FILE responseFile
+
+END webmonitor

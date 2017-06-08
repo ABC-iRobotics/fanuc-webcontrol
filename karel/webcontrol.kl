@@ -1,0 +1,232 @@
+PROGRAM webcontrol
+%NOLOCKGROUP
+
+VAR
+	
+	getstart : STRING[127]
+	return_code : INTEGER	
+	
+	start IN DRAM FROM webmotion: BOOLEAN
+	
+	pickup IN DRAM FROM webmotion: BOOLEAN
+	place IN DRAM FROM webmotion: BOOLEAN
+	zero IN DRAM FROM webmotion: BOOLEAN
+	
+	j1dp IN DRAM FROM webmotion: BOOLEAN
+	j1dm IN DRAM FROM webmotion: BOOLEAN
+	j2dp IN DRAM FROM webmotion: BOOLEAN
+	j2dm IN DRAM FROM webmotion: BOOLEAN
+	j3dp IN DRAM FROM webmotion: BOOLEAN
+	j3dm IN DRAM FROM webmotion: BOOLEAN
+	j4dp IN DRAM FROM webmotion: BOOLEAN
+	j4dm IN DRAM FROM webmotion: BOOLEAN
+	j5dp IN DRAM FROM webmotion: BOOLEAN
+	j5dm IN DRAM FROM webmotion: BOOLEAN
+	j6dp IN DRAM FROM webmotion: BOOLEAN
+	j6dm IN DRAM FROM webmotion: BOOLEAN
+
+	j1wp IN DRAM FROM webmotion: BOOLEAN
+	j1wm IN DRAM FROM webmotion: BOOLEAN
+	j2wp IN DRAM FROM webmotion: BOOLEAN
+	j2wm IN DRAM FROM webmotion: BOOLEAN
+	j3wp IN DRAM FROM webmotion: BOOLEAN
+	j3wm IN DRAM FROM webmotion: BOOLEAN
+	j4wp IN DRAM FROM webmotion: BOOLEAN
+	j4wm IN DRAM FROM webmotion: BOOLEAN
+	j5wp IN DRAM FROM webmotion: BOOLEAN
+	j5wm IN DRAM FROM webmotion: BOOLEAN
+	j6wp IN DRAM FROM webmotion: BOOLEAN
+	j6wm IN DRAM FROM webmotion: BOOLEAN				
+	
+BEGIN
+		
+	IF (getstart = 'pickup') THEN
+		start = TRUE
+		pickup = TRUE
+		WRITE('I get pickup command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'place') THEN
+		start = TRUE
+		place = TRUE
+		WRITE('I get place command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'zero') THEN
+		start = TRUE
+		zero = TRUE
+		WRITE('I get zero command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j1dp') THEN
+		start = TRUE
+		j1dp = TRUE
+		WRITE('I get j1dp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j1dm') THEN
+		start = TRUE
+		j1dm = TRUE
+		WRITE('I get j1dm command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j2dp') THEN
+		start = TRUE
+		j2dp = TRUE
+		WRITE('I get j2dp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j2dm') THEN
+		start = TRUE
+		j2dm = TRUE
+		WRITE('I get j2dm command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j3dp') THEN
+		start = TRUE
+		j3dp = TRUE
+		WRITE('I get j3dp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j3dm') THEN
+		start = TRUE
+		j3dm = TRUE
+		WRITE('I get j3dm command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j4dp') THEN
+		start = TRUE
+		j4dp = TRUE
+		WRITE('I get j4dp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j4dm') THEN
+		start = TRUE
+		j4dm = TRUE
+		WRITE('I get j4dm command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j5dp') THEN
+		start = TRUE
+		j5dp = TRUE
+		WRITE('I get j5dp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j5dm') THEN
+		start = TRUE
+		j5dm = TRUE
+		WRITE('I get j5dm command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j6dp') THEN
+		start = TRUE
+		j6dp = TRUE
+		WRITE('I get j6dp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j6dm') THEN
+		start = TRUE
+		j6dm = TRUE
+		WRITE('I get j6dm command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j1wp') THEN
+		start = TRUE
+		j1wp = TRUE
+		WRITE('I get j1wp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j1wm') THEN
+		start = TRUE
+		j1wm = TRUE
+		WRITE('I get j1wm command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j2wp') THEN
+		start = TRUE
+		j2wp = TRUE
+		WRITE('I get j2wp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j2wm') THEN
+		start = TRUE
+		j2wm = TRUE
+		WRITE('I get j2wm command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j3wp') THEN
+		start = TRUE
+		j3wp = TRUE
+		WRITE('I get j3wp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j3wm') THEN
+		start = TRUE
+		j3wm = TRUE
+		WRITE('I get j3wm command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j4wp') THEN
+		start = TRUE
+		j4wp = TRUE
+		WRITE('I get j4wp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j4wm') THEN
+		start = TRUE
+		j4wm = TRUE
+		WRITE('I get j4wm command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j5wp') THEN
+		start = TRUE
+		j5wp = TRUE
+		WRITE('I get j5wp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j5wm') THEN
+		start = TRUE
+		j5wm = TRUE
+		WRITE('I get j5wm command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j6wp') THEN
+		start = TRUE
+		j6wp = TRUE
+		WRITE('I get j6wp command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j6wm') THEN
+		start = TRUE
+		j6wm = TRUE
+		WRITE('I get j6wm command',CR)
+		return_code = 204
+	ENDIF
+	
+END webcontrol

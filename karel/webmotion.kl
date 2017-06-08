@@ -1,0 +1,285 @@
+PROGRAM webmotion
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOABORT=ERROR+COMMAND
+%NOPAUSESHFT
+
+CONST
+	pr_num_pic = 29
+	pr_num_pla = 30
+	pr_num_zro = 31
+
+VAR
+	STATUS: INTEGER
+	pickupPosJ: JOINTPOS
+	placePosJ: JOINTPOS
+	zeroPosJ: JOINTPOS
+	
+	start: BOOLEAN
+	
+	pickup: BOOLEAN
+	place: BOOLEAN
+	zero: BOOLEAN
+	
+	d_degree_p: INTEGER
+	w_degree_p: INTEGER
+	d_degree_m: INTEGER
+	w_degree_m: INTEGER
+		
+	j1dp: BOOLEAN
+	j1dm: BOOLEAN
+	j2dp: BOOLEAN
+	j2dm: BOOLEAN
+	j3dp: BOOLEAN
+	j3dm: BOOLEAN
+	j4dp: BOOLEAN
+	j4dm: BOOLEAN
+	j5dp: BOOLEAN
+	j5dm: BOOLEAN
+	j6dp: BOOLEAN
+	j6dm: BOOLEAN
+
+	j1wp: BOOLEAN
+	j1wm: BOOLEAN
+	j2wp: BOOLEAN
+	j2wm: BOOLEAN
+	j3wp: BOOLEAN
+	j3wm: BOOLEAN
+	j4wp: BOOLEAN
+	j4wm: BOOLEAN
+	j5wp: BOOLEAN
+	j5wm: BOOLEAN
+	j6wp: BOOLEAN
+	j6wm: BOOLEAN
+						
+BEGIN
+
+	$MOTYPE = JOINT
+	$TERMTYPE = FINE
+	$SPEED = 210
+
+	start = FALSE
+	
+	pickup = FALSE
+	place = FALSE
+	zero = FALSE	
+	
+	d_degree_p = 30
+	w_degree_p = 5
+	d_degree_m = -30
+	w_degree_m = -5
+		
+	j1dp = FALSE
+	j1dm = FALSE
+	j2dp = FALSE
+	j2dm = FALSE
+	j3dp = FALSE
+	j3dm = FALSE
+	j4dp = FALSE
+	j4dm = FALSE
+	j5dp = FALSE
+	j5dm = FALSE
+	j6dp = FALSE
+	j6dm = FALSE				
+
+	j1wp = FALSE
+	j1wm = FALSE
+	j2wp = FALSE
+	j2wm = FALSE
+	j3wp = FALSE
+	j3wm = FALSE
+	j4wp = FALSE
+	j4wm = FALSE
+	j5wp = FALSE
+	j5wm = FALSE
+	j6wp = FALSE
+	j6wm = FALSE
+		
+	REPEAT
+		IF (NOT start) THEN
+			DELAY 300
+		ELSE
+			IF pickup THEN
+				pickupPosJ = GET_JPOS_REG(pr_num_pic,STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then pickup')
+				ELSE
+					MOVE TO pickupPosJ
+					WRITE(pickupPosJ,CR)
+					WRITE ('Moving to pickup',CR)
+					pickup = FALSE
+				ENDIF
+			ENDIF
+			
+			IF place THEN
+				placePosJ = GET_JPOS_REG(pr_num_pla,STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then place')
+				ELSE
+					MOVE TO placePosJ
+					WRITE(placePosJ,CR)
+					WRITE ('Moving to place',CR)
+					place = FALSE
+				ENDIF
+			ENDIF
+
+			IF zero THEN
+				zeroPosJ = GET_JPOS_REG(pr_num_zro,STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then place')
+				ELSE
+					MOVE TO zeroPosJ
+					WRITE(zeroPosJ,CR)
+					WRITE ('Moving to zero',CR)
+					zero = FALSE
+				ENDIF
+			ENDIF
+
+			IF j1wp THEN
+				MOVE AXIS 1 BY w_degree_p
+				WRITE ('Moving to j1wp is jogging',CR)
+				 j1wp = FALSE
+			ENDIF
+			
+			IF j1wm THEN
+				MOVE AXIS 1 BY w_degree_m
+				WRITE ('Moving to j1wm is jogging',CR)
+				 j1wm = FALSE
+			ENDIF						
+
+			IF j2wp THEN
+				MOVE AXIS 2 BY w_degree_p
+				WRITE ('Moving to j2wp is jogging',CR)
+				 j2wp = FALSE
+			ENDIF
+			
+			IF j2wm THEN
+				MOVE AXIS 2 BY w_degree_m
+				WRITE ('Moving to j2wm is jogging',CR)
+				 j2wm = FALSE
+			ENDIF
+			
+			IF j3wp THEN
+				MOVE AXIS 3 BY w_degree_p
+				WRITE ('Moving to j3wp is jogging',CR)
+				 j3wp = FALSE
+			ENDIF
+			
+			IF j3wm THEN
+				MOVE AXIS 3 BY w_degree_m
+				WRITE ('Moving to j3wm is jogging',CR)
+				 j3wm = FALSE
+			ENDIF
+			
+			IF j4wp THEN
+				MOVE AXIS 4 BY w_degree_p
+				WRITE ('Moving to j4wp is jogging',CR)
+				 j4wp = FALSE
+			ENDIF
+			
+			IF j4wm THEN
+				MOVE AXIS 4 BY w_degree_m
+				WRITE ('Moving to j4wm is jogging',CR)
+				 j4wm = FALSE
+			ENDIF
+			
+			IF j5wp THEN
+				MOVE AXIS 5 BY w_degree_p
+				WRITE ('Moving to j5wp is jogging',CR)
+				 j5wp = FALSE
+			ENDIF
+			
+			IF j5wm THEN
+				MOVE AXIS 5 BY w_degree_m
+				WRITE ('Moving to j5wm is jogging',CR)
+				 j5wm = FALSE
+			ENDIF									
+
+			IF j6wp THEN
+				MOVE AXIS 6 BY w_degree_p
+				WRITE ('Moving to j6wp is jogging',CR)
+				 j6wp = FALSE
+			ENDIF
+			
+			IF j6wm THEN
+				MOVE AXIS 6 BY w_degree_m
+				WRITE ('Moving to j6wm is jogging',CR)
+				 j6wm = FALSE
+			ENDIF
+			
+			IF j1dp THEN
+				MOVE AXIS 1 BY d_degree_p
+				WRITE ('Moving to j1dp is jogging',CR)
+				 j1dp = FALSE
+			ENDIF
+			
+			IF j1dm THEN
+				MOVE AXIS 1 BY d_degree_m
+				WRITE ('Moving to j1dm is jogging',CR)
+				 j1dm = FALSE
+			ENDIF						
+
+			IF j2dp THEN
+				MOVE AXIS 2 BY d_degree_p
+				WRITE ('Moving to j2dp is jogging',CR)
+				 j2dp = FALSE
+			ENDIF
+			
+			IF j2dm THEN
+				MOVE AXIS 2 BY d_degree_m
+				WRITE ('Moving to j2dm is jogging',CR)
+				 j2dm = FALSE
+			ENDIF
+			
+			IF j3dp THEN
+				MOVE AXIS 3 BY d_degree_p
+				WRITE ('Moving to j3dp is jogging',CR)
+				 j3dp = FALSE
+			ENDIF
+			
+			IF j3dm THEN
+				MOVE AXIS 3 BY d_degree_m
+				WRITE ('Moving to j3dm is jogging',CR)
+				 j3dm = FALSE
+			ENDIF
+			
+			IF j4dp THEN
+				MOVE AXIS 4 BY d_degree_p
+				WRITE ('Moving to j4dp is jogging',CR)
+				 j4dp = FALSE
+			ENDIF
+			
+			IF j4dm THEN
+				MOVE AXIS 4 BY d_degree_m
+				WRITE ('Moving to j4dm is jogging',CR)
+				 j4dm = FALSE
+			ENDIF
+			
+			IF j5dp THEN
+				MOVE AXIS 5 BY d_degree_p
+				WRITE ('Moving to j5dp is jogging',CR)
+				 j5dp = FALSE
+			ENDIF
+			
+			IF j5dm THEN
+				MOVE AXIS 5 BY d_degree_m
+				WRITE ('Moving to j5dm is jogging',CR)
+				 j5dm = FALSE
+			ENDIF									
+
+			IF j6dp THEN
+				MOVE AXIS 6 BY d_degree_p
+				WRITE ('Moving to j6dp is jogging',CR)
+				 j6dp = FALSE
+			ENDIF
+			
+			IF j6dm THEN
+				MOVE AXIS 6 BY d_degree_m
+				WRITE ('Moving to j6dm is jogging',CR)
+				 j6dm = FALSE
+			ENDIF
+			
+			start = FALSE		
+		ENDIF
+	UNTIL FALSE
+
+END webmotion

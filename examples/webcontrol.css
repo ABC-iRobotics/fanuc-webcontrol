@@ -1,0 +1,39 @@
+body {
+	background-color: #CCCCCC;
+}
+
+.ts-row {
+	padding-top: 10px;
+	padding-bottom: 5px;
+	background-color: #EEEEEE;
+}
+
+.ts-row-head {
+	padding-top: 0;
+	padding-bottom: 10px;
+	background-color: #CCCCCC;
+}
+		
+.ts-row-bottom {
+	padding-top: 20px;
+	padding-bottom: 0;
+	background-color: #CCCCCC;			
+}
+
+.ts-row-empty {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #EEEEEE;
+}
+			
+.ts-btn-60 {
+	width: 60px;
+}
+
+.ts-btn-90 {
+	width: 90px;
+}
+
+h3 {
+	display: inline;
+}

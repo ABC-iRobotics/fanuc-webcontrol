@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fanuc- webcontrol</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Fanuc Robot Control">
+	<meta name="author" content="ykcznn" >
+	<meta name="language" content="english">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Custom-->
+	<link rel="stylesheet" href="webcontrol.css">
+	<script src="../js/webcontrol.js"></script>
+	
+</head>
+<body>
+	<form class="text-center" method="GET">
+
+		<div class="container">
+			<div class="row text-center ts-row-head">
+				<div class="col-xs-3">
+					<h2><span class="label label-danger">30&#176;</span></h2>
+				</div>
+				<div class="col-xs-3">
+					<h2><span class="label label-warning">5&#176;</span></h2>
+				</div>
+				<div class="col-xs-3">
+					<h2><span class="label label-warning">5&#176;</span></h2>
+				</div>
+				<div class="col-xs-3">
+					<h2><span class="label label-danger">30&#176;</span></h2>
+				</div>
+			</div>
+			
+			<div class="row text-center ts-row-empty"></div>
+			
+			<div class="row text-center ts-row">
+				<div class="col-xs-3">
+					<input type="button" value="J1-" class="btn btn-danger btn-lg ts-btn-60" name="J1-" onclick="JavaScript:setstr('j1dm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J1-" class="btn btn-warning btn-lg ts-btn-60" name="J1-" onclick="JavaScript:setstr('j1wm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J1+" class="btn btn-warning btn-lg ts-btn-60" name="J1+" onclick="JavaScript:setstr('j1wp')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J1+" class="btn btn-danger btn-lg ts-btn-60" name="J1+" onclick="JavaScript:setstr('j1dp')">
+				</div>
+			</div>
+			
+			<div class="row text-center ts-row">
+				<div class="col-xs-3">
+					<input type="button" value="J2-" class="btn btn-danger btn-lg ts-btn-60" name="J2-" onclick="JavaScript:setstr('j2dm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J2-" class="btn btn-warning btn-lg ts-btn-60" name="J2-" onclick="JavaScript:setstr('j2wm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J2+" class="btn btn-warning btn-lg ts-btn-60" name="J2+" onclick="JavaScript:setstr('j2wp')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J2+" class="btn btn-danger btn-lg ts-btn-60" name="J2+" onclick="JavaScript:setstr('j2dp')">
+				</div>
+			</div>
+			
+			<div class="row text-center ts-row">
+				<div class="col-xs-3">
+					<input type="button" value="J3-" class="btn btn-danger btn-lg ts-btn-60" name="J3-" onclick="JavaScript:setstr('j3dm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J3-" class="btn btn-warning btn-lg ts-btn-60" name="J3-" onclick="JavaScript:setstr('j3wm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J3+" class="btn btn-warning btn-lg ts-btn-60" name="J3+" onclick="JavaScript:setstr('j3wp')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J3+" class="btn btn-danger btn-lg ts-btn-60" name="J3+" onclick="JavaScript:setstr('j3dp')">
+				</div>
+			</div>		
+			
+			<div class="row text-center ts-row">
+				<div class="col-xs-3">
+					<input type="button" value="J4-" class="btn btn-danger btn-lg ts-btn-60" name="J4-" onclick="JavaScript:setstr('j4dm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J4-" class="btn btn-warning btn-lg ts-btn-60" name="J4-" onclick="JavaScript:setstr('j4wm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J4+" class="btn btn-warning btn-lg ts-btn-60" name="J4+" onclick="JavaScript:setstr('j4wp')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J4+" class="btn btn-danger btn-lg ts-btn-60" name="J4+" onclick="JavaScript:setstr('j4dp')">
+				</div>
+			</div>	
+			
+			<div class="row text-center ts-row">
+				<div class="col-xs-3">
+					<input type="button" value="J5-" class="btn btn-danger btn-lg ts-btn-60" name="J5-" onclick="JavaScript:setstr('j5dm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J5-" class="btn btn-warning btn-lg ts-btn-60" name="J5-" onclick="JavaScript:setstr('j5wm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J5+" class="btn btn-warning btn-lg ts-btn-60" name="J5+" onclick="JavaScript:setstr('j5wp')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J5+" class="btn btn-danger btn-lg ts-btn-60" name="J5+" onclick="JavaScript:setstr('j5dp')">
+				</div>
+			</div>	
+			
+			<div class="row text-center ts-row">
+				<div class="col-xs-3">
+					<input type="button" value="J6-" class="btn btn-danger btn-lg ts-btn-60" name="J6-" onclick="JavaScript:setstr('j6dm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J6-" class="btn btn-warning btn-lg ts-btn-60" name="J6-" onclick="JavaScript:setstr('j6wm')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J6+" class="btn btn-warning btn-lg ts-btn-60" name="J6+" onclick="JavaScript:setstr('j6wp')">
+				</div>
+				<div class="col-xs-3">
+					<input type="button" value="J6+" class="btn btn-danger btn-lg ts-btn-60" name="J6+" onclick="JavaScript:setstr('j6dp')">
+				</div>
+			</div>	
+			
+			<div class="row text-center ts-row-empty"></div>
+			
+			<div class="row text-center ts-row-bottom">
+				<div class="col-xs-4">
+					<input type="button" value="Pickup" class="btn btn-primary btn-lg ts-btn-90" name="pickup" onclick="JavaScript:setstr('pickup')">
+				</div>
+				<div class="col-xs-4">
+					<input type="button" value="Zero" class="btn btn-primary btn-lg ts-btn-90" name="zero" onclick="JavaScript:setstr('zero')">
+				</div>				
+				<div class="col-xs-4">
+					<input type="button" value="Place" class="btn btn-primary btn-lg ts-btn-90" name="place" onclick="JavaScript:setstr('place')">
+				</div>
+			</div>
+		
+		</div>
+	
+	</form>
+
+</body>
+</html>
