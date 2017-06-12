@@ -24,6 +24,10 @@ VAR
 	w_degree_p: INTEGER
 	d_degree_m: INTEGER
 	w_degree_m: INTEGER
+
+	direction: VECTOR
+	
+	angle: INTEGER
 		
 	j1dp: BOOLEAN
 	j1dm: BOOLEAN
@@ -50,9 +54,23 @@ VAR
 	j5wm: BOOLEAN
 	j6wp: BOOLEAN
 	j6wm: BOOLEAN
-						
-BEGIN
+	
+	movewlpx: BOOLEAN
+	movewlpy: BOOLEAN
+	movewlpz: BOOLEAN		
+	movewlmx: BOOLEAN
+	movewlmy: BOOLEAN
+	movewlmz: BOOLEAN
 
+	movetrpx: BOOLEAN
+	movetrmx: BOOLEAN
+	movetrpy: BOOLEAN
+	movetrmy: BOOLEAN
+	movetrpz: BOOLEAN
+	movetrmz: BOOLEAN
+	
+BEGIN
+		
 	$MOTYPE = JOINT
 	$TERMTYPE = FINE
 	$SPEED = 210
@@ -67,6 +85,8 @@ BEGIN
 	w_degree_p = 5
 	d_degree_m = -30
 	w_degree_m = -5
+
+	angle = 30	
 		
 	j1dp = FALSE
 	j1dm = FALSE
@@ -93,10 +113,26 @@ BEGIN
 	j5wm = FALSE
 	j6wp = FALSE
 	j6wm = FALSE
+	
+	movewlpx = FALSE
+	movewlpy = FALSE
+	movewlpz = FALSE		
+	movewlmx = FALSE
+	movewlmy = FALSE
+	movewlmz = FALSE
+
+	movetrpx = FALSE
+	movetrpy = FALSE
+	movetrpz = FALSE	
+	movetrmx = FALSE	
+	movetrmy = FALSE
+	movetrmz = FALSE
 		
 	REPEAT
 		IF (NOT start) THEN
+
 			DELAY 300
+
 		ELSE
 			IF pickup THEN
 				pickupPosJ = GET_JPOS_REG(pr_num_pic,STATUS)
@@ -132,6 +168,114 @@ BEGIN
 					WRITE ('Moving to zero',CR)
 					zero = FALSE
 				ENDIF
+			ENDIF
+
+			IF movetrpx THEN
+				direction.x = 1
+				direction.y = 0
+				direction.z = 0
+				MOVE ABOUT direction BY angle
+				WRITE('Rotating +x direction in tool frame',CR)
+				movetrpx = FALSE
+			ENDIF
+			
+			IF movetrmx THEN
+				direction.x = -1
+				direction.y = 0
+				direction.z = 0
+				MOVE ABOUT direction BY angle
+				WRITE('Rotating -x direction in tool frame',CR)
+				movetrmx = FALSE
+			ENDIF			
+
+			IF movetrpy THEN
+				direction.x = 0
+				direction.y = 1
+				direction.z = 0
+				MOVE ABOUT direction BY angle
+				WRITE('Rotating +y direction in tool frame',CR)
+				movetrpy = FALSE
+			ENDIF
+			
+			IF movetrmy THEN
+				direction.x = 0
+				direction.y = -1
+				direction.z = 0
+				MOVE ABOUT direction BY angle
+				WRITE('Rotating -y direction in tool frame',CR)
+				movetrmy = FALSE
+			ENDIF
+			
+			IF movetrpz THEN
+				direction.x = 0
+				direction.y = 0
+				direction.z = 1
+				MOVE ABOUT direction BY angle
+				WRITE('Rotating +z direction in tool frame',CR)
+				movetrpz = FALSE
+			ENDIF
+			
+			IF movetrmz THEN
+				direction.x = 0
+				direction.y = 0
+				direction.z = -1
+				MOVE ABOUT direction BY angle
+				WRITE('Rotating -z direction in tool frame',CR)
+				movetrmz = FALSE
+			ENDIF
+
+			IF movewlpx THEN
+				direction.x = 100
+				direction.y = 0
+				direction.z = 0
+				MOVE RELATIVE direction
+				WRITE('Moving to +x direction',CR)
+				movewlpx = FALSE
+			ENDIF
+			
+			IF movewlmx THEN
+				direction.x = -100
+				direction.y = 0
+				direction.z = 0
+				MOVE RELATIVE direction
+				WRITE('Moving to -x direction',CR)
+				movewlmx = FALSE
+			ENDIF			
+
+			IF movewlpy THEN
+				direction.x = 0
+				direction.y = 100
+				direction.z = 0
+				MOVE RELATIVE direction
+				WRITE('Moving to +y direction',CR)
+				movewlpy = FALSE
+			ENDIF
+			
+			IF movewlmy THEN
+				direction.x = 0
+				direction.y = -100
+				direction.z = 0
+				MOVE RELATIVE direction
+				WRITE('Moving to -y direction',CR)
+				movewlmy = FALSE
+			ENDIF
+			
+			IF movewlpz THEN
+				direction.x = 0
+				direction.y = 0
+				direction.z = 100
+				MOVE RELATIVE direction
+				WRITE('Moving to +z direction',CR)
+				movewlpz = FALSE
+			ENDIF
+			
+			IF movewlmz THEN
+				direction.x = 0
+				direction.y = 0
+				direction.z = -100
+				MOVE RELATIVE direction
+				WRITE('Moving to -z direction',CR)
+				movewlmz = FALSE
 			ENDIF
 
 			IF j1wp THEN

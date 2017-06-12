@@ -38,7 +38,23 @@ VAR
 	j6wp IN DRAM FROM webmotion: BOOLEAN
 	j6wm IN DRAM FROM webmotion: BOOLEAN				
 	
+	movewlpx IN DRAM FROM webmotion: BOOLEAN
+	movewlpy IN DRAM FROM webmotion: BOOLEAN	
+	movewlpz IN DRAM FROM webmotion: BOOLEAN
+	movewlmx IN DRAM FROM webmotion: BOOLEAN
+	movewlmy IN DRAM FROM webmotion: BOOLEAN
+	movewlmz IN DRAM FROM webmotion: BOOLEAN	
+
+	movetrpx IN DRAM FROM webmotion: BOOLEAN
+	movetrpy IN DRAM FROM webmotion: BOOLEAN
+	movetrpz IN DRAM FROM webmotion: BOOLEAN	
+	movetrmx IN DRAM FROM webmotion: BOOLEAN	
+	movetrmy IN DRAM FROM webmotion: BOOLEAN
+	movetrmz IN DRAM FROM webmotion: BOOLEAN	
+		
 BEGIN
+	
+--Movements
 		
 	IF (getstart = 'pickup') THEN
 		start = TRUE
@@ -60,6 +76,96 @@ BEGIN
 		WRITE('I get zero command',CR)
 		return_code = 204
 	ENDIF
+
+--Rotate about TCP axis
+	
+	IF (getstart = 'movetrpx') THEN
+		start = TRUE
+		movetrpx = TRUE
+		WRITE('I get movetrpx command',CR)
+		return_code = 204
+	ENDIF	
+	
+	IF (getstart = 'movetrpy') THEN
+		start = TRUE
+		movetrpy = TRUE
+		WRITE('I get movetrpy command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'movetrpz') THEN
+		start = TRUE
+		movetrpz = TRUE
+		WRITE('I get movetrpz command',CR)
+		return_code = 204
+	ENDIF	
+	
+	IF (getstart = 'movetrmx') THEN
+		start = TRUE
+		movetrmx = TRUE
+		WRITE('I get movetrmx command',CR)
+		return_code = 204
+	ENDIF	
+	
+	IF (getstart = 'movetrmy') THEN
+		start = TRUE
+		movetrmy = TRUE
+		WRITE('I get movetrmy command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'movetrmz') THEN
+		start = TRUE
+		movetrmz = TRUE
+		WRITE('I get movetrmz command',CR)
+		return_code = 204
+	ENDIF	
+
+--Move along World axis 
+
+	IF (getstart = 'movewlpx') THEN
+		start = TRUE
+		movewlpx = TRUE
+		WRITE('I get movewlpx command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'movewlpy') THEN
+		start = TRUE
+		movewlpy = TRUE
+		WRITE('I get movewlpy command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'movewlpz') THEN
+		start = TRUE
+		movewlpz = TRUE
+		WRITE('I get movewlpz command',CR)
+		return_code = 204
+	ENDIF	
+	
+	IF (getstart = 'movewlmx') THEN
+		start = TRUE
+		movewlmx = TRUE
+		WRITE('I get movewlmx command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'movewlmy') THEN
+		start = TRUE
+		movewlmy = TRUE
+		WRITE('I get movewlmy command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'movewlmz') THEN
+		start = TRUE
+		movewlmz = TRUE
+		WRITE('I get movewlmz command',CR)
+		return_code = 204
+	ENDIF
+	
+--Jogging
 
 	IF (getstart = 'j1dp') THEN
 		start = TRUE

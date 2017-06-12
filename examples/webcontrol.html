@@ -22,20 +22,6 @@
 	<form class="text-center" method="GET">
 
 		<div class="container">
-			<div class="row text-center ts-row-head">
-				<div class="col-xs-3">
-					<h2><span class="label label-danger">30&#176;</span></h2>
-				</div>
-				<div class="col-xs-3">
-					<h2><span class="label label-warning">5&#176;</span></h2>
-				</div>
-				<div class="col-xs-3">
-					<h2><span class="label label-warning">5&#176;</span></h2>
-				</div>
-				<div class="col-xs-3">
-					<h2><span class="label label-danger">30&#176;</span></h2>
-				</div>
-			</div>
 			
 			<div class="row text-center ts-row-empty"></div>
 			
@@ -130,8 +116,10 @@
 			</div>	
 			
 			<div class="row text-center ts-row-empty"></div>
+
+			<div class="row text-center ts-row-empty"></div>
 			
-			<div class="row text-center ts-row-bottom">
+			<div class="row text-center ts-row">
 				<div class="col-xs-4">
 					<input type="button" value="Pickup" class="btn btn-primary btn-lg ts-btn-90" name="pickup" onclick="JavaScript:setstr('pickup')">
 				</div>
@@ -142,7 +130,65 @@
 					<input type="button" value="Place" class="btn btn-primary btn-lg ts-btn-90" name="place" onclick="JavaScript:setstr('place')">
 				</div>
 			</div>
-		
+
+			<div class="row text-center ts-row-empty"></div>					
+			
+			<div class="row text-center ts-row-empty"></div>			
+			
+			<div class="row text-center ts-row">
+				<div class="col-xs-4">
+					<input type="button" value="+WLX" class="btn btn-primary btn-lg ts-btn-90" name="+WLX" onclick="JavaScript:setstr('movewlpx')">
+				</div>
+				<div class="col-xs-4">
+					<input type="button" value="+WLY" class="btn btn-primary btn-lg ts-btn-90" name="+WLY" onclick="JavaScript:setstr('movewlpy')">
+				</div>				
+				<div class="col-xs-4">
+					<input type="button" value="+WLZ" class="btn btn-primary btn-lg ts-btn-90" name="+WLZ" onclick="JavaScript:setstr('movewlpz')">
+				</div>
+			</div>
+
+			<div class="row text-center ts-row">
+				<div class="col-xs-4">
+					<input type="button" value="-WLX" class="btn btn-primary btn-lg ts-btn-90" name="-WLX" onclick="JavaScript:setstr('movewlmx')">
+				</div>
+				<div class="col-xs-4">
+					<input type="button" value="-WLY" class="btn btn-primary btn-lg ts-btn-90" name="-WLY" onclick="JavaScript:setstr('movewlmy')">
+				</div>				
+				<div class="col-xs-4">
+					<input type="button" value="-WLZ" class="btn btn-primary btn-lg ts-btn-90" name="-WLZ" onclick="JavaScript:setstr('movewlmz')">
+				</div>
+			</div>
+
+			<div class="row text-center ts-row-empty"></div>			
+
+			<div class="row text-center ts-row-empty"></div>			
+			
+			<div class="row text-center ts-row">
+				<div class="col-xs-4">
+					<input type="button" value="+TRX" class="btn btn-primary btn-lg ts-btn-90" name="+TRX" onclick="JavaScript:setstr('movetrpx')">
+				</div>
+				<div class="col-xs-4">
+					<input type="button" value="+TRY" class="btn btn-primary btn-lg ts-btn-90" name="+TRY" onclick="JavaScript:setstr('movetrpy')">
+				</div>				
+				<div class="col-xs-4">
+					<input type="button" value="+TRZ" class="btn btn-primary btn-lg ts-btn-90" name="+TRZ" onclick="JavaScript:setstr('movetrpz')">
+				</div>
+			</div>
+
+			<div class="row text-center ts-row">
+				<div class="col-xs-4">
+					<input type="button" value="-TRX" class="btn btn-primary btn-lg ts-btn-90" name="-TRX" onclick="JavaScript:setstr('movetrmx')">
+				</div>
+				<div class="col-xs-4">
+					<input type="button" value="-TRY" class="btn btn-primary btn-lg ts-btn-90" name="-TRY" onclick="JavaScript:setstr('movetrmy')">
+				</div>				
+				<div class="col-xs-4">
+					<input type="button" value="-TRZ" class="btn btn-primary btn-lg ts-btn-90" name="-TRZ" onclick="JavaScript:setstr('movetrmz')">
+				</div>
+			</div>
+
+			<div class="row text-center ts-row-empty"></div>
+			
 		</div>
 	
 	</form>
