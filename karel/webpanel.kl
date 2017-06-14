@@ -15,20 +15,19 @@ BEGIN
 	WRITE responseFile( '<!DOCTYPE html>', CR )
 	WRITE responseFile( '<html>', CR )
 	WRITE responseFile( '<head>', CR )
-		WRITE responseFile(' <meta charset="utf-8">',CR)
+		WRITE responseFile( '<meta charset="utf-8">',CR)
+		WRITE responseFile( '<meta name="viewport" content="width=device-width, initial-scale=1">',CR)
 		WRITE responseFile( '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">', CR )
-		WRITE responseFile( '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>', CR )
+		WRITE responseFile( '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>', CR )
 		WRITE responseFile( '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>', CR )
 		WRITE responseFile( '<link rel="stylesheet" href="http://192.168.1.102/webcontrol.css">', CR )
 		WRITE responseFile( '<script src="http://192.168.1.102/webpanel.js"></script>', CR )
 	WRITE responseFile( '</head>', CR )
 	WRITE responseFile( '<body>', CR )
 
-	WRITE responseFile( '<form class="text-center" method="GET">', CR )
-
 		WRITE responseFile( '<div class="container">', CR )
 			
-			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )
+			WRITE responseFile( '<div class="row ts-row-empty"></div>', CR )
 			
 			WRITE responseFile( '<div class="row text-center ts-row">', CR )
 				WRITE responseFile( '<div class="col-xs-4">', CR )
@@ -102,9 +101,9 @@ BEGIN
 				WRITE responseFile( '</div>', CR )
 			WRITE responseFile( '</div>', CR )	
 			
-			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )
+			WRITE responseFile( '<div class="row ts-row-empty"></div>', CR )
 
-			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )
+			WRITE responseFile( '<div class="row ts-row-empty"></div>', CR )
 			
 			WRITE responseFile( '<div class="row text-center ts-row">', CR )
 				WRITE responseFile( '<div class="col-xs-4">', CR )
@@ -118,9 +117,9 @@ BEGIN
 				WRITE responseFile( '</div>', CR )
 			WRITE responseFile( '</div>', CR )
 
-			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )					
+			WRITE responseFile( '<div class="row ts-row-empty"></div>', CR )					
 			
-			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )			
+			WRITE responseFile( '<div class="row ts-row-empty"></div>', CR )			
 			
 			WRITE responseFile( '<div class="row text-center ts-row">', CR )
 				WRITE responseFile( '<div class="col-xs-4">', CR )
@@ -146,9 +145,9 @@ BEGIN
 				WRITE responseFile( '</div>', CR )
 			WRITE responseFile( '</div>', CR )
 
-			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )			
-
-			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )			
+			WRITE responseFile( '<div class="row ts-row-empty"></div>', CR )					
+			
+			WRITE responseFile( '<div class="row ts-row-empty"></div>', CR )		
 			
 			WRITE responseFile( '<div class="row text-center ts-row">', CR )
 				WRITE responseFile( '<div class="col-xs-4">', CR )
@@ -174,11 +173,9 @@ BEGIN
 				WRITE responseFile( '</div>', CR )
 			WRITE responseFile( '</div>', CR )
 
-			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )
+			WRITE responseFile( '<div class="row ts-row-empty"></div>', CR )
 			
 		WRITE responseFile( '</div>', CR )
-	
-	WRITE responseFile( '</form>', CR )
 
 	WRITE responseFile( '</body>',CR )
 	WRITE responseFile( '</html>', CR )
