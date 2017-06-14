@@ -19,41 +19,27 @@ VAR
 	pickup: BOOLEAN
 	place: BOOLEAN
 	zero: BOOLEAN
-	
-	d_degree_p: INTEGER
-	w_degree_p: INTEGER
-	d_degree_m: INTEGER
-	w_degree_m: INTEGER
 
 	direction: VECTOR
 	
-	angle: INTEGER
-		
-	j1dp: BOOLEAN
-	j1dm: BOOLEAN
-	j2dp: BOOLEAN
-	j2dm: BOOLEAN
-	j3dp: BOOLEAN
-	j3dm: BOOLEAN
-	j4dp: BOOLEAN
-	j4dm: BOOLEAN
-	j5dp: BOOLEAN
-	j5dm: BOOLEAN
-	j6dp: BOOLEAN
-	j6dm: BOOLEAN
+	degree_p: INTEGER
+	degree_m: INTEGER
 
-	j1wp: BOOLEAN
-	j1wm: BOOLEAN
-	j2wp: BOOLEAN
-	j2wm: BOOLEAN
-	j3wp: BOOLEAN
-	j3wm: BOOLEAN
-	j4wp: BOOLEAN
-	j4wm: BOOLEAN
-	j5wp: BOOLEAN
-	j5wm: BOOLEAN
-	j6wp: BOOLEAN
-	j6wm: BOOLEAN
+	distance_p: INTEGER 
+	distance_m: INTEGER 
+		
+	j1p: BOOLEAN
+	j2p: BOOLEAN
+	j3p: BOOLEAN
+	j4p: BOOLEAN
+	j5p: BOOLEAN
+	j6p: BOOLEAN
+	j1m: BOOLEAN
+	j2m: BOOLEAN
+	j3m: BOOLEAN
+	j4m: BOOLEAN
+	j5m: BOOLEAN
+	j6m: BOOLEAN
 	
 	movewlpx: BOOLEAN
 	movewlpy: BOOLEAN
@@ -70,7 +56,7 @@ VAR
 	movetrmz: BOOLEAN
 	
 BEGIN
-		
+
 	$MOTYPE = JOINT
 	$TERMTYPE = FINE
 	$SPEED = 210
@@ -81,38 +67,24 @@ BEGIN
 	place = FALSE
 	zero = FALSE	
 	
-	d_degree_p = 30
-	w_degree_p = 5
-	d_degree_m = -30
-	w_degree_m = -5
-
-	angle = 30	
+	degree_p = 30
+	degree_m = -30	
 		
-	j1dp = FALSE
-	j1dm = FALSE
-	j2dp = FALSE
-	j2dm = FALSE
-	j3dp = FALSE
-	j3dm = FALSE
-	j4dp = FALSE
-	j4dm = FALSE
-	j5dp = FALSE
-	j5dm = FALSE
-	j6dp = FALSE
-	j6dm = FALSE				
-
-	j1wp = FALSE
-	j1wm = FALSE
-	j2wp = FALSE
-	j2wm = FALSE
-	j3wp = FALSE
-	j3wm = FALSE
-	j4wp = FALSE
-	j4wm = FALSE
-	j5wp = FALSE
-	j5wm = FALSE
-	j6wp = FALSE
-	j6wm = FALSE
+	distance_p = 100
+	distance_m = -100	
+		
+	j1p = FALSE
+	j2p = FALSE
+	j3p = FALSE
+	j4p = FALSE
+	j5p = FALSE
+	j6p = FALSE
+	j1m = FALSE
+	j2m = FALSE
+	j3m = FALSE
+	j4m = FALSE
+	j5m = FALSE					
+	j6m = FALSE
 	
 	movewlpx = FALSE
 	movewlpy = FALSE
@@ -170,20 +142,21 @@ BEGIN
 				ENDIF
 			ENDIF
 
+--Rotate in TCP
 			IF movetrpx THEN
 				direction.x = 1
 				direction.y = 0
 				direction.z = 0
-				MOVE ABOUT direction BY angle
+				MOVE ABOUT direction BY degree_p
 				WRITE('Rotating +x direction in tool frame',CR)
 				movetrpx = FALSE
 			ENDIF
 			
 			IF movetrmx THEN
-				direction.x = -1
+				direction.x = 1
 				direction.y = 0
 				direction.z = 0
-				MOVE ABOUT direction BY angle
+				MOVE ABOUT direction BY degree_m
 				WRITE('Rotating -x direction in tool frame',CR)
 				movetrmx = FALSE
 			ENDIF			
@@ -192,16 +165,16 @@ BEGIN
 				direction.x = 0
 				direction.y = 1
 				direction.z = 0
-				MOVE ABOUT direction BY angle
+				MOVE ABOUT direction BY degree_p
 				WRITE('Rotating +y direction in tool frame',CR)
 				movetrpy = FALSE
 			ENDIF
 			
 			IF movetrmy THEN
 				direction.x = 0
-				direction.y = -1
+				direction.y = 1
 				direction.z = 0
-				MOVE ABOUT direction BY angle
+				MOVE ABOUT direction BY  degree_m
 				WRITE('Rotating -y direction in tool frame',CR)
 				movetrmy = FALSE
 			ENDIF
@@ -210,7 +183,7 @@ BEGIN
 				direction.x = 0
 				direction.y = 0
 				direction.z = 1
-				MOVE ABOUT direction BY angle
+				MOVE ABOUT direction BY degree_p
 				WRITE('Rotating +z direction in tool frame',CR)
 				movetrpz = FALSE
 			ENDIF
@@ -218,14 +191,15 @@ BEGIN
 			IF movetrmz THEN
 				direction.x = 0
 				direction.y = 0
-				direction.z = -1
-				MOVE ABOUT direction BY angle
+				direction.z = 1
+				MOVE ABOUT direction BY  degree_m
 				WRITE('Rotating -z direction in tool frame',CR)
 				movetrmz = FALSE
 			ENDIF
 
+--Move in World
 			IF movewlpx THEN
-				direction.x = 100
+				direction.x = distance_p
 				direction.y = 0
 				direction.z = 0
 				MOVE RELATIVE direction
@@ -234,7 +208,7 @@ BEGIN
 			ENDIF
 			
 			IF movewlmx THEN
-				direction.x = -100
+				direction.x = distance_m
 				direction.y = 0
 				direction.z = 0
 				MOVE RELATIVE direction
@@ -244,7 +218,7 @@ BEGIN
 
 			IF movewlpy THEN
 				direction.x = 0
-				direction.y = 100
+				direction.y = distance_p
 				direction.z = 0
 				MOVE RELATIVE direction
 				WRITE('Moving to +y direction',CR)
@@ -253,7 +227,7 @@ BEGIN
 			
 			IF movewlmy THEN
 				direction.x = 0
-				direction.y = -100
+				direction.y = distance_m
 				direction.z = 0
 				MOVE RELATIVE direction
 				WRITE('Moving to -y direction',CR)
@@ -263,7 +237,7 @@ BEGIN
 			IF movewlpz THEN
 				direction.x = 0
 				direction.y = 0
-				direction.z = 100
+				direction.z = distance_p
 				MOVE RELATIVE direction
 				WRITE('Moving to +z direction',CR)
 				movewlpz = FALSE
@@ -272,158 +246,90 @@ BEGIN
 			IF movewlmz THEN
 				direction.x = 0
 				direction.y = 0
-				direction.z = -100
+				direction.z = distance_m
 				MOVE RELATIVE direction
 				WRITE('Moving to -z direction',CR)
 				movewlmz = FALSE
 			ENDIF
 
-			IF j1wp THEN
-				MOVE AXIS 1 BY w_degree_p
-				WRITE ('Moving to j1wp is jogging',CR)
-				 j1wp = FALSE
+
+-- Jogging			
+			IF j1p THEN
+				MOVE AXIS 1 BY degree_p
+				WRITE ('j1p is jogging',CR)
+				 j1p = FALSE
+			ENDIF
+
+			IF j2p THEN
+				MOVE AXIS 2 BY degree_p
+				WRITE ('j2p is jogging',CR)
+				 j2p = FALSE
+			ENDIF
+
+			IF j3p THEN
+				MOVE AXIS 3 BY degree_p
+				WRITE ('j3p is jogging',CR)
+				 j3p = FALSE
+			ENDIF
+
+			IF j4p THEN
+				MOVE AXIS 4 BY degree_p
+				WRITE ('j4p is jogging',CR)
+				 j4p = FALSE
+			ENDIF
+
+			IF j5p THEN
+				MOVE AXIS 5 BY degree_p
+				WRITE ('j5p is jogging',CR)
+				 j5p = FALSE
+			ENDIF
+
+			IF j6p THEN
+				MOVE AXIS 6 BY degree_p
+				WRITE ('j6p is jogging',CR)
+				 j6p = FALSE
 			ENDIF
 			
-			IF j1wm THEN
-				MOVE AXIS 1 BY w_degree_m
-				WRITE ('Moving to j1wm is jogging',CR)
-				 j1wm = FALSE
+			IF j1m THEN
+				MOVE AXIS 1 BY degree_m
+				WRITE ('j1m is jogging',CR)
+				 j1m = FALSE
 			ENDIF						
-
-			IF j2wp THEN
-				MOVE AXIS 2 BY w_degree_p
-				WRITE ('Moving to j2wp is jogging',CR)
-				 j2wp = FALSE
+			
+			IF j2m THEN
+				MOVE AXIS 2 BY degree_m
+				WRITE ('j2m is jogging',CR)
+				 j2m = FALSE
 			ENDIF
 			
-			IF j2wm THEN
-				MOVE AXIS 2 BY w_degree_m
-				WRITE ('Moving to j2wm is jogging',CR)
-				 j2wm = FALSE
+			IF j3m THEN
+				MOVE AXIS 3 BY degree_m
+				WRITE ('j3m is jogging',CR)
+				 j3m = FALSE
 			ENDIF
 			
-			IF j3wp THEN
-				MOVE AXIS 3 BY w_degree_p
-				WRITE ('Moving to j3wp is jogging',CR)
-				 j3wp = FALSE
+			IF j4m THEN
+				MOVE AXIS 4 BY degree_m
+				WRITE ('j4m is jogging',CR)
+				 j4m = FALSE
 			ENDIF
 			
-			IF j3wm THEN
-				MOVE AXIS 3 BY w_degree_m
-				WRITE ('Moving to j3wm is jogging',CR)
-				 j3wm = FALSE
+			IF j5m THEN
+				MOVE AXIS 5 BY degree_m
+				WRITE ('j5m is jogging',CR)
+				 j5m = FALSE
 			ENDIF
 			
-			IF j4wp THEN
-				MOVE AXIS 4 BY w_degree_p
-				WRITE ('Moving to j4wp is jogging',CR)
-				 j4wp = FALSE
+			IF j6m THEN
+				MOVE AXIS 6 BY degree_m
+				WRITE ('j6m is jogging',CR)
+				 j6m = FALSE
 			ENDIF
 			
-			IF j4wm THEN
-				MOVE AXIS 4 BY w_degree_m
-				WRITE ('Moving to j4wm is jogging',CR)
-				 j4wm = FALSE
-			ENDIF
-			
-			IF j5wp THEN
-				MOVE AXIS 5 BY w_degree_p
-				WRITE ('Moving to j5wp is jogging',CR)
-				 j5wp = FALSE
-			ENDIF
-			
-			IF j5wm THEN
-				MOVE AXIS 5 BY w_degree_m
-				WRITE ('Moving to j5wm is jogging',CR)
-				 j5wm = FALSE
-			ENDIF									
-
-			IF j6wp THEN
-				MOVE AXIS 6 BY w_degree_p
-				WRITE ('Moving to j6wp is jogging',CR)
-				 j6wp = FALSE
-			ENDIF
-			
-			IF j6wm THEN
-				MOVE AXIS 6 BY w_degree_m
-				WRITE ('Moving to j6wm is jogging',CR)
-				 j6wm = FALSE
-			ENDIF
-			
-			IF j1dp THEN
-				MOVE AXIS 1 BY d_degree_p
-				WRITE ('Moving to j1dp is jogging',CR)
-				 j1dp = FALSE
-			ENDIF
-			
-			IF j1dm THEN
-				MOVE AXIS 1 BY d_degree_m
-				WRITE ('Moving to j1dm is jogging',CR)
-				 j1dm = FALSE
-			ENDIF						
-
-			IF j2dp THEN
-				MOVE AXIS 2 BY d_degree_p
-				WRITE ('Moving to j2dp is jogging',CR)
-				 j2dp = FALSE
-			ENDIF
-			
-			IF j2dm THEN
-				MOVE AXIS 2 BY d_degree_m
-				WRITE ('Moving to j2dm is jogging',CR)
-				 j2dm = FALSE
-			ENDIF
-			
-			IF j3dp THEN
-				MOVE AXIS 3 BY d_degree_p
-				WRITE ('Moving to j3dp is jogging',CR)
-				 j3dp = FALSE
-			ENDIF
-			
-			IF j3dm THEN
-				MOVE AXIS 3 BY d_degree_m
-				WRITE ('Moving to j3dm is jogging',CR)
-				 j3dm = FALSE
-			ENDIF
-			
-			IF j4dp THEN
-				MOVE AXIS 4 BY d_degree_p
-				WRITE ('Moving to j4dp is jogging',CR)
-				 j4dp = FALSE
-			ENDIF
-			
-			IF j4dm THEN
-				MOVE AXIS 4 BY d_degree_m
-				WRITE ('Moving to j4dm is jogging',CR)
-				 j4dm = FALSE
-			ENDIF
-			
-			IF j5dp THEN
-				MOVE AXIS 5 BY d_degree_p
-				WRITE ('Moving to j5dp is jogging',CR)
-				 j5dp = FALSE
-			ENDIF
-			
-			IF j5dm THEN
-				MOVE AXIS 5 BY d_degree_m
-				WRITE ('Moving to j5dm is jogging',CR)
-				 j5dm = FALSE
-			ENDIF									
-
-			IF j6dp THEN
-				MOVE AXIS 6 BY d_degree_p
-				WRITE ('Moving to j6dp is jogging',CR)
-				 j6dp = FALSE
-			ENDIF
-			
-			IF j6dm THEN
-				MOVE AXIS 6 BY d_degree_m
-				WRITE ('Moving to j6dm is jogging',CR)
-				 j6dm = FALSE
-			ENDIF
-			
-			start = FALSE		
+			start = FALSE
+				
 		ENDIF
+		
 	UNTIL FALSE
 
 END webmotion

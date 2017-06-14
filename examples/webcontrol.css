@@ -8,38 +8,12 @@ body {
 	background-color: #EEEEEE;
 }
 
-.ts-row-head {
-	padding-top: 20px;
-	padding-bottom: 20px;
-	background-color: #DDDDDD;
-}
-		
-.ts-row-bottom {
-	padding-top: 20px;
-	padding-bottom: 0;
-	background-color: #DDDDDD;			
-}
-
 .ts-row-empty {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: #EEEEEE;
 }
 
-.ts-row-empty-head {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	background-color: #DDDDDD;
-}
-			
-.ts-btn-60 {
-	width: 60px;
-}
-
 .ts-btn-90 {
 	width: 90px;
-}
-
-h3 {
-	display: inline;
 }

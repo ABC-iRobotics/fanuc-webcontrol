@@ -12,31 +12,18 @@ VAR
 	place IN DRAM FROM webmotion: BOOLEAN
 	zero IN DRAM FROM webmotion: BOOLEAN
 	
-	j1dp IN DRAM FROM webmotion: BOOLEAN
-	j1dm IN DRAM FROM webmotion: BOOLEAN
-	j2dp IN DRAM FROM webmotion: BOOLEAN
-	j2dm IN DRAM FROM webmotion: BOOLEAN
-	j3dp IN DRAM FROM webmotion: BOOLEAN
-	j3dm IN DRAM FROM webmotion: BOOLEAN
-	j4dp IN DRAM FROM webmotion: BOOLEAN
-	j4dm IN DRAM FROM webmotion: BOOLEAN
-	j5dp IN DRAM FROM webmotion: BOOLEAN
-	j5dm IN DRAM FROM webmotion: BOOLEAN
-	j6dp IN DRAM FROM webmotion: BOOLEAN
-	j6dm IN DRAM FROM webmotion: BOOLEAN
-
-	j1wp IN DRAM FROM webmotion: BOOLEAN
-	j1wm IN DRAM FROM webmotion: BOOLEAN
-	j2wp IN DRAM FROM webmotion: BOOLEAN
-	j2wm IN DRAM FROM webmotion: BOOLEAN
-	j3wp IN DRAM FROM webmotion: BOOLEAN
-	j3wm IN DRAM FROM webmotion: BOOLEAN
-	j4wp IN DRAM FROM webmotion: BOOLEAN
-	j4wm IN DRAM FROM webmotion: BOOLEAN
-	j5wp IN DRAM FROM webmotion: BOOLEAN
-	j5wm IN DRAM FROM webmotion: BOOLEAN
-	j6wp IN DRAM FROM webmotion: BOOLEAN
-	j6wm IN DRAM FROM webmotion: BOOLEAN				
+	j1p IN DRAM FROM webmotion: BOOLEAN
+	j2p IN DRAM FROM webmotion: BOOLEAN
+	j3p IN DRAM FROM webmotion: BOOLEAN
+	j4p IN DRAM FROM webmotion: BOOLEAN
+	j5p IN DRAM FROM webmotion: BOOLEAN
+	j6p IN DRAM FROM webmotion: BOOLEAN
+	j1m IN DRAM FROM webmotion: BOOLEAN
+	j2m IN DRAM FROM webmotion: BOOLEAN
+	j3m IN DRAM FROM webmotion: BOOLEAN
+	j4m IN DRAM FROM webmotion: BOOLEAN
+	j5m IN DRAM FROM webmotion: BOOLEAN					
+	j6m IN DRAM FROM webmotion: BOOLEAN				
 	
 	movewlpx IN DRAM FROM webmotion: BOOLEAN
 	movewlpy IN DRAM FROM webmotion: BOOLEAN	
@@ -53,8 +40,94 @@ VAR
 	movetrmz IN DRAM FROM webmotion: BOOLEAN	
 		
 BEGIN
+
+--Jogging
+
+	IF (getstart = 'j1p') THEN
+		start = TRUE
+		j1p = TRUE
+		WRITE('I get j1p command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j2p') THEN
+		start = TRUE
+		j2p = TRUE
+		WRITE('I get j2p command',CR)
+		return_code = 204
+	ENDIF
 	
---Movements
+	IF (getstart = 'j3p') THEN
+		start = TRUE
+		j3p = TRUE
+		WRITE('I get j3p command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j4p') THEN
+		start = TRUE
+		j4p = TRUE
+		WRITE('I get j4p command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j5p') THEN
+		start = TRUE
+		j5p = TRUE
+		WRITE('I get j5p command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'j6p') THEN
+		start = TRUE
+		j6p = TRUE
+		WRITE('I get j6p command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j1m') THEN
+		start = TRUE
+		j1m = TRUE
+		WRITE('I get j1m command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j2m') THEN
+		start = TRUE
+		j2m = TRUE
+		WRITE('I get j2m command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j3m') THEN
+		start = TRUE
+		j3m = TRUE
+		WRITE('I get j3m command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j4m') THEN
+		start = TRUE
+		j4m = TRUE
+		WRITE('I get j4m command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j5m') THEN
+		start = TRUE
+		j5m = TRUE
+		WRITE('I get j5m command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'j6m') THEN
+		start = TRUE
+		j6m = TRUE
+		WRITE('I get j6m command',CR)
+		return_code = 204
+	ENDIF
+
+--Move to preset PR positions
 		
 	IF (getstart = 'pickup') THEN
 		start = TRUE
@@ -77,51 +150,7 @@ BEGIN
 		return_code = 204
 	ENDIF
 
---Rotate about TCP axis
-	
-	IF (getstart = 'movetrpx') THEN
-		start = TRUE
-		movetrpx = TRUE
-		WRITE('I get movetrpx command',CR)
-		return_code = 204
-	ENDIF	
-	
-	IF (getstart = 'movetrpy') THEN
-		start = TRUE
-		movetrpy = TRUE
-		WRITE('I get movetrpy command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'movetrpz') THEN
-		start = TRUE
-		movetrpz = TRUE
-		WRITE('I get movetrpz command',CR)
-		return_code = 204
-	ENDIF	
-	
-	IF (getstart = 'movetrmx') THEN
-		start = TRUE
-		movetrmx = TRUE
-		WRITE('I get movetrmx command',CR)
-		return_code = 204
-	ENDIF	
-	
-	IF (getstart = 'movetrmy') THEN
-		start = TRUE
-		movetrmy = TRUE
-		WRITE('I get movetrmy command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'movetrmz') THEN
-		start = TRUE
-		movetrmz = TRUE
-		WRITE('I get movetrmz command',CR)
-		return_code = 204
-	ENDIF	
-
---Move along World axis 
+--Move TCP in the WORLD frame
 
 	IF (getstart = 'movewlpx') THEN
 		start = TRUE
@@ -164,174 +193,48 @@ BEGIN
 		WRITE('I get movewlmz command',CR)
 		return_code = 204
 	ENDIF
+
+--Rotate TCP in the UTOOL frame
 	
---Jogging
-
-	IF (getstart = 'j1dp') THEN
+	IF (getstart = 'movetrpx') THEN
 		start = TRUE
-		j1dp = TRUE
-		WRITE('I get j1dp command',CR)
+		movetrpx = TRUE
+		WRITE('I get movetrpx command',CR)
 		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j1dm') THEN
+	ENDIF	
+	
+	IF (getstart = 'movetrpy') THEN
 		start = TRUE
-		j1dm = TRUE
-		WRITE('I get j1dm command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j2dp') THEN
-		start = TRUE
-		j2dp = TRUE
-		WRITE('I get j2dp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j2dm') THEN
-		start = TRUE
-		j2dm = TRUE
-		WRITE('I get j2dm command',CR)
+		movetrpy = TRUE
+		WRITE('I get movetrpy command',CR)
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'j3dp') THEN
+	IF (getstart = 'movetrpz') THEN
 		start = TRUE
-		j3dp = TRUE
-		WRITE('I get j3dp command',CR)
+		movetrpz = TRUE
+		WRITE('I get movetrpz command',CR)
 		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j3dm') THEN
+	ENDIF	
+	
+	IF (getstart = 'movetrmx') THEN
 		start = TRUE
-		j3dm = TRUE
-		WRITE('I get j3dm command',CR)
+		movetrmx = TRUE
+		WRITE('I get movetrmx command',CR)
+		return_code = 204
+	ENDIF	
+	
+	IF (getstart = 'movetrmy') THEN
+		start = TRUE
+		movetrmy = TRUE
+		WRITE('I get movetrmy command',CR)
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'j4dp') THEN
+	IF (getstart = 'movetrmz') THEN
 		start = TRUE
-		j4dp = TRUE
-		WRITE('I get j4dp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j4dm') THEN
-		start = TRUE
-		j4dm = TRUE
-		WRITE('I get j4dm command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j5dp') THEN
-		start = TRUE
-		j5dp = TRUE
-		WRITE('I get j5dp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j5dm') THEN
-		start = TRUE
-		j5dm = TRUE
-		WRITE('I get j5dm command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j6dp') THEN
-		start = TRUE
-		j6dp = TRUE
-		WRITE('I get j6dp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j6dm') THEN
-		start = TRUE
-		j6dm = TRUE
-		WRITE('I get j6dm command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j1wp') THEN
-		start = TRUE
-		j1wp = TRUE
-		WRITE('I get j1wp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j1wm') THEN
-		start = TRUE
-		j1wm = TRUE
-		WRITE('I get j1wm command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j2wp') THEN
-		start = TRUE
-		j2wp = TRUE
-		WRITE('I get j2wp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j2wm') THEN
-		start = TRUE
-		j2wm = TRUE
-		WRITE('I get j2wm command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j3wp') THEN
-		start = TRUE
-		j3wp = TRUE
-		WRITE('I get j3wp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j3wm') THEN
-		start = TRUE
-		j3wm = TRUE
-		WRITE('I get j3wm command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j4wp') THEN
-		start = TRUE
-		j4wp = TRUE
-		WRITE('I get j4wp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j4wm') THEN
-		start = TRUE
-		j4wm = TRUE
-		WRITE('I get j4wm command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j5wp') THEN
-		start = TRUE
-		j5wp = TRUE
-		WRITE('I get j5wp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j5wm') THEN
-		start = TRUE
-		j5wm = TRUE
-		WRITE('I get j5wm command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j6wp') THEN
-		start = TRUE
-		j6wp = TRUE
-		WRITE('I get j6wp command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j6wm') THEN
-		start = TRUE
-		j6wm = TRUE
-		WRITE('I get j6wm command',CR)
+		movetrmz = TRUE
+		WRITE('I get movetrmz command',CR)
 		return_code = 204
 	ENDIF
 	
