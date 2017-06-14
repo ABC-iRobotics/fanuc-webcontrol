@@ -1,0 +1,188 @@
+PROGRAM webpanel
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+
+VAR
+
+	currentPosj: JOINTPOS
+	valuePosJ: ARRAY[6] OF REAL
+	responseFile: FILE
+	STATUS: INTEGER
+
+BEGIN
+
+	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
+	WRITE responseFile( '<!DOCTYPE html>', CR )
+	WRITE responseFile( '<html>', CR )
+	WRITE responseFile( '<head>', CR )
+		WRITE responseFile(' <meta charset="utf-8">',CR)
+		WRITE responseFile( '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">', CR )
+		WRITE responseFile( '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>', CR )
+		WRITE responseFile( '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>', CR )
+		WRITE responseFile( '<link rel="stylesheet" href="http://192.168.1.102/webcontrol.css">', CR )
+		WRITE responseFile( '<script src="http://192.168.1.102/webpanel.js"></script>', CR )
+	WRITE responseFile( '</head>', CR )
+	WRITE responseFile( '<body>', CR )
+
+	WRITE responseFile( '<form class="text-center" method="GET">', CR )
+
+		WRITE responseFile( '<div class="container">', CR )
+			
+			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j1m" class="btn btn-danger btn-lg ts-btn-90">J1-</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<h4 id="joint-1">load...</h4>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j1p" class="btn btn-danger btn-lg ts-btn-90">J1+</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j2m" class="btn btn-danger btn-lg ts-btn-90">J2-</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<h4 id="joint-2">load...</h4>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j2p" class="btn btn-danger btn-lg ts-btn-90">J2+</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j3m" class="btn btn-danger btn-lg ts-btn-90">J3-</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<h4 id="joint-3">load...</h4>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j3p" class="btn btn-danger btn-lg ts-btn-90">J3+</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )		
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j4m" class="btn btn-danger btn-lg ts-btn-90">J4-</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<h4 id="joint-4">load...</h4>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j4p" class="btn btn-danger btn-lg ts-btn-90">J4+</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )	
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j5m" class="btn btn-danger btn-lg ts-btn-90">J5-</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<h4 id="joint-5">load...</h4>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j5p" class="btn btn-danger btn-lg ts-btn-90">J5+</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )	
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j6m" class="btn btn-danger btn-lg ts-btn-90">J6-</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<h4 id="joint-6">load...</h4>', CR )					
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="j6p" class="btn btn-danger btn-lg ts-btn-90">J6+</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )	
+			
+			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )
+
+			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="pickup" class="btn btn-primary btn-lg ts-btn-90">Pickup</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="zero" class="btn btn-primary btn-lg ts-btn-90">Zero</button>', CR )
+				WRITE responseFile( '</div>', CR )				
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="place" class="btn btn-primary btn-lg ts-btn-90">Place</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )
+
+			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )					
+			
+			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )			
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="wlpx" class="btn btn-primary btn-lg ts-btn-90">+WLX</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="wlpy" class="btn btn-primary btn-lg ts-btn-90">+WLY</button>', CR )
+				WRITE responseFile( '</div>', CR )				
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="wlpz" class="btn btn-primary btn-lg ts-btn-90">+WLZ</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )
+
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="wlmx" class="btn btn-primary btn-lg ts-btn-90">-WLX</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="wlmy" class="btn btn-primary btn-lg ts-btn-90">-WLY</button>', CR )
+				WRITE responseFile( '</div>', CR )				
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="wlmz" class="btn btn-primary btn-lg ts-btn-90">-WLZ</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )
+
+			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )			
+
+			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )			
+			
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="trpx" class="btn btn-primary btn-lg ts-btn-90">+TRX</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="trpy" class="btn btn-primary btn-lg ts-btn-90">+TRY</button>', CR )
+				WRITE responseFile( '</div>', CR )				
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="trpz" class="btn btn-primary btn-lg ts-btn-90">+TRZ</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )
+
+			WRITE responseFile( '<div class="row text-center ts-row">', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="trmx" class="btn btn-primary btn-lg ts-btn-90">-TRX</button>', CR )
+				WRITE responseFile( '</div>', CR )
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="trmy" class="btn btn-primary btn-lg ts-btn-90">-TRY</button>', CR )
+				WRITE responseFile( '</div>', CR )				
+				WRITE responseFile( '<div class="col-xs-4">', CR )
+					WRITE responseFile( '<button type="button" id="trmz" class="btn btn-primary btn-lg ts-btn-90">-TRZ</button>', CR )
+				WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '</div>', CR )
+
+			WRITE responseFile( '<div class="row text-center ts-row-empty"></div>', CR )
+			
+		WRITE responseFile( '</div>', CR )
+	
+	WRITE responseFile( '</form>', CR )
+
+	WRITE responseFile( '</body>',CR )
+	WRITE responseFile( '</html>', CR )
+
+	CLOSE FILE responseFile
+
+END webpanel
