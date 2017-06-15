@@ -1,5 +1,27 @@
 $(document).ready(function(){	
 
+	$('#joint').show();
+	$('#tcp').hide();
+	$('#poses').hide();
+
+	$('#menu-joint').click(function(){
+		$('#joint').show();
+		$('#tcp').hide();
+		$('#poses').hide();
+	});	
+
+	$('#menu-tcp').click(function(){
+		$('#joint').hide();
+		$('#tcp').show();
+		$('#poses').hide();
+	});	
+	
+	$('#menu-poses').click(function(){
+		$('#joint').hide();
+		$('#tcp').hide();
+		$('#poses').show();
+	});		
+	
 	getposj();
 
 	function getposj() {
@@ -8,18 +30,34 @@ $(document).ready(function(){
 			url: "/KAREL/webmonitor",
 			success: function (data) {
 				var data = $(data);
-				$("#joint-1").html($(data).find("#joint1"));
-				$("#joint-2").html($(data).find("#joint2"));
-				$("#joint-3").html($(data).find("#joint3"));
-				$("#joint-4").html($(data).find("#joint4"));
-				$("#joint-5").html($(data).find("#joint5"));
-				$("#joint-6").html($(data).find("#joint6"));
-				console.log("anyad");
+				$(".joint1").html($(data).find("#joint1"));
+				$(".joint2").html($(data).find("#joint2"));
+				$(".joint3").html($(data).find("#joint3"));
+				$(".joint4").html($(data).find("#joint4"));
+				$(".joint5").html($(data).find("#joint5"));
+				$(".joint6").html($(data).find("#joint6"));
+				$(".wlx").html($(data).find("#wlx"));
+				$(".wly").html($(data).find("#wly"));
+				$(".wlz").html($(data).find("#wlz"));
+				$(".trx").html($(data).find("#trx"));
+				$(".try").html($(data).find("#try"));
+				$(".trz").html($(data).find("#trz"));				
 				setTimeout(getposj(),300);
 			},
 		});
 	};
 
+	$('#stop').click(function(){
+		$.ajax({
+			type: 'GET',
+			url: '/KAREL/webstop?getstart=stop',
+			cache: false,
+			success: function(){
+			}
+		});								
+		return false;									
+	});	
+	
 	$('#j1m').click(function(){
 		$.ajax({
 			type: 'GET',
@@ -145,39 +183,6 @@ $(document).ready(function(){
 		$.ajax({
 			type: 'GET',
 			url: '/KAREL/webcontrol?getstart=j6p',
-			cache: false,
-			success: function(){
-			}
-		});								
-		return false;									
-	});	
-
-	$('#pickup').click(function(){
-		$.ajax({
-			type: 'GET',
-			url: '/KAREL/webcontrol?getstart=pickup',
-			cache: false,
-			success: function(){
-			}
-		});								
-		return false;									
-	});
-	
-	$('#zero').click(function(){
-		$.ajax({
-			type: 'GET',
-			url: '/KAREL/webcontrol?getstart=zero',
-			cache: false,
-			success: function(){
-			}
-		});								
-		return false;									
-	});
-
-	$('#place').click(function(){
-		$.ajax({
-			type: 'GET',
-			url: '/KAREL/webcontrol?getstart=place',
 			cache: false,
 			success: function(){
 			}
@@ -310,6 +315,72 @@ $(document).ready(function(){
 		$.ajax({
 			type: 'GET',
 			url: '/KAREL/webcontrol?getstart=movetrmz',
+			cache: false,
+			success: function(){
+			}
+		});								
+		return false;									
+	});
+
+	$('#pickup').click(function(){
+		$.ajax({
+			type: 'GET',
+			url: '/KAREL/webcontrol?getstart=pickup',
+			cache: false,
+			success: function(){
+			}
+		});								
+		return false;									
+	});
+	
+	$('#zero').click(function(){
+		$.ajax({
+			type: 'GET',
+			url: '/KAREL/webcontrol?getstart=zero',
+			cache: false,
+			success: function(){
+			}
+		});								
+		return false;									
+	});
+
+	$('#place').click(function(){
+		$.ajax({
+			type: 'GET',
+			url: '/KAREL/webcontrol?getstart=place',
+			cache: false,
+			success: function(){
+			}
+		});								
+		return false;									
+	});
+
+	$('#coord').click(function(){
+		$.ajax({
+			type: 'GET',
+			url: '/KAREL/webcontrol?getstart=coord',
+			cache: false,
+			success: function(){
+			}
+		});								
+		return false;									
+	});
+
+	$('#show').click(function(){
+		$.ajax({
+			type: 'GET',
+			url: '/KAREL/webcontrol?getstart=show',
+			cache: false,
+			success: function(){
+			}
+		});								
+		return false;									
+	});
+
+	$('#touch').click(function(){
+		$.ajax({
+			type: 'GET',
+			url: '/KAREL/webcontrol?getstart=touch',
 			cache: false,
 			success: function(){
 			}

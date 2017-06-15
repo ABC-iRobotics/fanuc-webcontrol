@@ -5,12 +5,15 @@ VAR
 	
 	getstart : STRING[127]
 	return_code : INTEGER	
-	
+
 	start IN DRAM FROM webmotion: BOOLEAN
 	
 	pickup IN DRAM FROM webmotion: BOOLEAN
 	place IN DRAM FROM webmotion: BOOLEAN
 	zero IN DRAM FROM webmotion: BOOLEAN
+	coord IN DRAM FROM webmotion: BOOLEAN
+	show IN DRAM FROM webmotion: BOOLEAN
+	touch IN DRAM FROM webmotion: BOOLEAN
 	
 	j1p IN DRAM FROM webmotion: BOOLEAN
 	j2p IN DRAM FROM webmotion: BOOLEAN
@@ -149,6 +152,27 @@ BEGIN
 		WRITE('I get zero command',CR)
 		return_code = 204
 	ENDIF
+
+	IF (getstart = 'coord') THEN
+		start = TRUE
+		coord = TRUE
+		WRITE('I get coord command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'show') THEN
+		start = TRUE
+		show = TRUE
+		WRITE('I get show command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'touch') THEN
+		start = TRUE
+		touch = TRUE
+		WRITE('I get touch command',CR)
+		return_code = 204
+	ENDIF	
 
 --Move TCP in the WORLD frame
 

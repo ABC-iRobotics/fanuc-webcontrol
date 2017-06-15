@@ -1,19 +1,25 @@
 body {
-	background-color: #CCCCCC;
+	padding-top: 60px;
+	padding-bottom: 60px;
+	background-color: #f8f8f8;
 }
 
 .ts-row {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: #EEEEEE;
+	background-color: #f8f8f8;
 }
 
 .ts-row-empty {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: #EEEEEE;
+	background-color: #f8f8f8;
 }
 
 .ts-btn-90 {
 	width: 90px;
+}
+
+.ts-btn-full {
+	width: 100%;
 }

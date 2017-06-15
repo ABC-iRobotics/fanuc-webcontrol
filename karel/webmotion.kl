@@ -4,22 +4,31 @@ PROGRAM webmotion
 %NOPAUSESHFT
 
 CONST
-	pr_num_pic = 29
-	pr_num_pla = 30
-	pr_num_zro = 31
+	pr_num_pck = 29
+	pr_num_plc = 30
+	pr_num_zer = 31
+	pr_num_crd = 32
+	pr_num_shw = 33
+	pr_num_tch = 34
 
 VAR
 	STATUS: INTEGER
 	pickupPosJ: JOINTPOS
 	placePosJ: JOINTPOS
 	zeroPosJ: JOINTPOS
-	
+	coordPosJ: JOINTPOS
+	showPosJ: JOINTPOS
+	touchPosJ: JOINTPOS
+
 	start: BOOLEAN
 	
 	pickup: BOOLEAN
 	place: BOOLEAN
 	zero: BOOLEAN
-
+	coord: BOOLEAN
+	show: BOOLEAN
+	touch: BOOLEAN
+	
 	direction: VECTOR
 	
 	degree_p: INTEGER
@@ -57,6 +66,9 @@ VAR
 	
 BEGIN
 
+	$UFRAME = $MNUFRAME[1,1]  --Assuming your uframe is in group 1, and is the 1st one
+	$UTOOL = $MNUTOOL[1,1]     --Assuming your utool is in group 1, and is the 1st one
+
 	$MOTYPE = JOINT
 	$TERMTYPE = FINE
 	$SPEED = 210
@@ -65,7 +77,10 @@ BEGIN
 	
 	pickup = FALSE
 	place = FALSE
-	zero = FALSE	
+	zero = FALSE
+	coord = FALSE
+	show = FALSE
+	touch = FALSE
 	
 	degree_p = 30
 	degree_m = -30	
@@ -107,7 +122,7 @@ BEGIN
 
 		ELSE
 			IF pickup THEN
-				pickupPosJ = GET_JPOS_REG(pr_num_pic,STATUS)
+				pickupPosJ = GET_JPOS_REG(pr_num_pck,STATUS)
 				IF (STATUS<>0) THEN 
 					WRITE ('Something happend then pickup')
 				ELSE
@@ -119,7 +134,7 @@ BEGIN
 			ENDIF
 			
 			IF place THEN
-				placePosJ = GET_JPOS_REG(pr_num_pla,STATUS)
+				placePosJ = GET_JPOS_REG(pr_num_plc,STATUS)
 				IF (STATUS<>0) THEN 
 					WRITE ('Something happend then place')
 				ELSE
@@ -131,9 +146,9 @@ BEGIN
 			ENDIF
 
 			IF zero THEN
-				zeroPosJ = GET_JPOS_REG(pr_num_zro,STATUS)
+				zeroPosJ = GET_JPOS_REG(pr_num_zer,STATUS)
 				IF (STATUS<>0) THEN 
-					WRITE ('Something happend then place')
+					WRITE ('Something happend then zero')
 				ELSE
 					MOVE TO zeroPosJ
 					WRITE(zeroPosJ,CR)
@@ -141,6 +156,42 @@ BEGIN
 					zero = FALSE
 				ENDIF
 			ENDIF
+
+			IF coord THEN
+				coordPosJ = GET_JPOS_REG(pr_num_crd,STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then coord')
+				ELSE
+					MOVE TO coordPosJ
+					WRITE(coordPosJ,CR)
+					WRITE ('Moving to coord',CR)
+					coord = FALSE
+				ENDIF
+			ENDIF
+			
+			IF show THEN
+				showPosJ = GET_JPOS_REG(pr_num_shw,STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then show')
+				ELSE
+					MOVE TO showPosJ
+					WRITE(showPosJ,CR)
+					WRITE ('Moving to show',CR)
+					show = FALSE
+				ENDIF
+			ENDIF
+			
+			IF touch THEN
+				touchPosJ = GET_JPOS_REG(pr_num_tch,STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then touch')
+				ELSE
+					MOVE TO touchPosJ
+					WRITE(touchPosJ,CR)
+					WRITE ('Moving to touch',CR)
+					touch = FALSE
+				ENDIF
+			ENDIF				
 
 --Rotate in TCP
 			IF movetrpx THEN
