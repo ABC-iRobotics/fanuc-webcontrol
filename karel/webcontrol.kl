@@ -1,5 +1,6 @@
 PROGRAM webcontrol
 %NOLOCKGROUP
+%NOBUSYLAMP
 
 VAR
 	
