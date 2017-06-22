@@ -1,0 +1,9 @@
+PROGRAM webabort
+
+BEGIN
+
+	--After run this empty program from a webbrowser, you have to reset the robot controller
+	--This empty program creates an error
+	--After robot controller reset and run the main program again the motion will keep going!!!
+
+END webabort

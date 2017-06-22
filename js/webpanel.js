@@ -47,10 +47,10 @@ $(document).ready(function(){
 		});
 	};
 
-	$('#stop').click(function(){
+	$('#abort').click(function(){
 		$.ajax({
 			type: 'GET',
-			url: '/KAREL/webstop?getstart=stop',
+			url: '/KAREL/webabort',
 			cache: false,
 			success: function(){
 			}

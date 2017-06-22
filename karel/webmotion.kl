@@ -15,12 +15,12 @@ CONST
 
 VAR
 	STATUS: INTEGER
-	pickupPosJ: JOINTPOS
-	placePosJ: JOINTPOS
-	zeroPosJ: JOINTPOS
-	coordPosJ: JOINTPOS
-	showPosJ: JOINTPOS
-	touchPosJ: JOINTPOS
+	pickupPosJ: JOINTPOS IN GROUP[1]
+	placePosJ: JOINTPOS IN GROUP[1]
+	zeroPosJ: JOINTPOS IN GROUP[1]
+	coordPosJ: JOINTPOS IN GROUP[1]
+	showPosJ: JOINTPOS IN GROUP[1]
+	touchPosJ: JOINTPOS IN GROUP[1]
 
 	start: BOOLEAN
 	
@@ -69,9 +69,9 @@ VAR
 BEGIN
 
 	--$GROUP[1].$UFRAME = $MNUFRAME[1, $MNUFRAMENUM[1]]  --Assign the value of current user frame to user frame used in KAREL
-	$GROUP[1].$UTOOL = $MNUTOOL[1, $MNUTOOLNUM[1]]     --Assign the value of current tool frame to tool frame used in KAREL
-
-	--$GROUP[1].$UFRAME = $MOR_GRP[1].$NILPOS
+	$GROUP[1].$UFRAME = $MOR_GRP[1].$NILPOS
+	
+	--$GROUP[1].$UTOOL = $MNUTOOL[1, $MNUTOOLNUM[1]]     --Assign the value of current tool frame to tool frame used in KAREL
 	$GROUP[1].$UTOOL = $MOR_GRP[1].$NILPOS
 
 	$TERMTYPE = FINE
