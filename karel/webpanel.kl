@@ -22,8 +22,8 @@ BEGIN
 		WRITE responseFile( '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">',CR )
 		WRITE responseFile( '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>',CR )
 		WRITE responseFile( '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>',CR )
-		WRITE responseFile( '<link rel="stylesheet" href="http://192.168.1.102/webcontrol.css">',CR )
-		WRITE responseFile( '<script src="http://192.168.1.102/webpanel.js"></script>',CR )
+		WRITE responseFile( '<link rel="stylesheet" href="http://ykcznn.hu/webpanel/css/webpanel.css">',CR )
+		WRITE responseFile( '<script src="http://ykcznn.hu/webpanel/js/webpanel.js"></script>',CR )
 	WRITE responseFile( '</head>',CR )
 	WRITE responseFile( '<body>',CR )
 	

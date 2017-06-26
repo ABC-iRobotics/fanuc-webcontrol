@@ -11,20 +11,6 @@ VAR
 	responseFile: FILE
 	STATUS: INTEGER
 	
-	rel_j1: REAL
-	rel_j2: REAL
-	rel_j3: REAL
-	rel_j4: REAL
-	rel_j5: REAL
-	rel_j6: REAL
-	
-	rel_x: REAL
-	rel_y: REAL
-	rel_z: REAL
-	rel_w: REAL
-	rel_p: REAL
-	rel_r: REAL
-	
 	int_j1: INTEGER
 	int_j2: INTEGER
 	int_j3: INTEGER
@@ -42,71 +28,48 @@ VAR
 BEGIN
 
 	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
-	WRITE responseFile( '<!DOCTYPE html>', CR )
-	WRITE responseFile( '<html>', CR )
-	WRITE responseFile( '<head>', CR )
-		WRITE responseFile(' <meta charset="utf-8">',CR)
-	WRITE responseFile( '</head>', CR )
-	WRITE responseFile( '<body>', CR )
 	
-	currentPosJ = CURJPOS(0,0)
-	CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
-
-	IF( STATUS = 0 ) THEN
-
-		currentPos = CURPOS(0,0)
-
-		rel_j1 = valuePosJ[1]
-		rel_j2 = valuePosJ[2]
-		rel_j3 = valuePosJ[3]
-		rel_j4 = valuePosJ[4]
-		rel_j5 = valuePosJ[5]
-		rel_j6 = valuePosJ[6]
-		
-		rel_x = currentPos.x
-		rel_y = currentPos.y
-		rel_z = currentPos.z
-		rel_w = currentPos.w
-		rel_p = currentPos.p
-		rel_r = currentPos.r
-		
-		int_j1 = ROUND(rel_j1)
-		int_j2 = ROUND(rel_j2)
-		int_j3 = ROUND(rel_j3)
-		int_j4 = ROUND(rel_j4)
-		int_j5 = ROUND(rel_j5)
-		int_j6 = ROUND(rel_j6)
-		
-		int_x = ROUND(rel_x)
-		int_y = ROUND(rel_y)
-		int_z = ROUND(rel_z)
-		int_w = ROUND(rel_w)
-		int_p = ROUND(rel_p)
-		int_r = ROUND(rel_r)
-		
-		WRITE responseFile( '<div>', CR )
-			WRITE responseFile( '<p id="joint1">',int_j1, '&#176;</p>', CR )
-			WRITE responseFile( '<p id="joint2">',int_j2, '&#176;</p>', CR )
-			WRITE responseFile( '<p id="joint3">',int_j3, '&#176;</p>', CR )
-			WRITE responseFile( '<p id="joint4">',int_j4, '&#176;</p>', CR )
-			WRITE responseFile( '<p id="joint5">',int_j5, '&#176;</p>', CR )
-			WRITE responseFile( '<p id="joint6">',int_j6, '&#176;</p>', CR )
-			WRITE responseFile( '<p id="wlx">',int_x, ' mm</p>', CR )
-			WRITE responseFile( '<p id="wly">',int_y, ' mm</p>', CR )
-			WRITE responseFile( '<p id="wlz">',int_z, ' mm</p>', CR )
-			WRITE responseFile( '<p id="trx">',int_w, '&#176;</p>', CR )
-			WRITE responseFile( '<p id="try">',int_p, '&#176;</p>', CR )
-			WRITE responseFile( '<p id="trz">',int_r, '&#176;</p>', CR )
-		WRITE responseFile( '</div>', CR )
-
-	ELSE
-
-		WRITE responseFile(  'Something happend then  converting joints  position...', CR )
-
-	ENDIF
+		currentPosJ = CURJPOS(0,0)
+		CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
 	
-	WRITE responseFile( '</body>',CR )
-	WRITE responseFile( '</html>', CR )
+		IF( STATUS = 0 ) THEN
+	
+			currentPos = CURPOS(0,0)
+			
+			int_j1 = ROUND(valuePosJ[1])
+			int_j2 = ROUND(valuePosJ[2])
+			int_j3 = ROUND(valuePosJ[3])
+			int_j4 = ROUND(valuePosJ[4])
+			int_j5 = ROUND(valuePosJ[5])
+			int_j6 = ROUND(valuePosJ[6])
+			
+			int_x = ROUND(currentPos.x)
+			int_y = ROUND(currentPos.y)
+			int_z = ROUND(currentPos.z)
+			int_w = ROUND(currentPos.w)
+			int_p = ROUND(currentPos.p)
+			int_r = ROUND(currentPos.r)
+			
+			WRITE responseFile( '<div>', CR )
+				WRITE responseFile( '<p id="joint1">',int_j1, '&#176;</p>', CR )
+				WRITE responseFile( '<p id="joint2">',int_j2, '&#176;</p>', CR )
+				WRITE responseFile( '<p id="joint3">',int_j3, '&#176;</p>', CR )
+				WRITE responseFile( '<p id="joint4">',int_j4, '&#176;</p>', CR )
+				WRITE responseFile( '<p id="joint5">',int_j5, '&#176;</p>', CR )
+				WRITE responseFile( '<p id="joint6">',int_j6, '&#176;</p>', CR )
+				WRITE responseFile( '<p id="wlx">',int_x, ' mm</p>', CR )
+				WRITE responseFile( '<p id="wly">',int_y, ' mm</p>', CR )
+				WRITE responseFile( '<p id="wlz">',int_z, ' mm</p>', CR )
+				WRITE responseFile( '<p id="trx">',int_w, '&#176;</p>', CR )
+				WRITE responseFile( '<p id="try">',int_p, '&#176;</p>', CR )
+				WRITE responseFile( '<p id="trz">',int_r, '&#176;</p>', CR )
+			WRITE responseFile( '</div>', CR )
+	
+		ELSE
+	
+			WRITE responseFile(  'Something happend then  converting joints  position...', CR )
+	
+		ENDIF
 
 	CLOSE FILE responseFile
 
