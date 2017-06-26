@@ -29,19 +29,19 @@ VAR
 	j5m IN DRAM FROM webmotion: BOOLEAN					
 	j6m IN DRAM FROM webmotion: BOOLEAN				
 	
-	movewlpx IN DRAM FROM webmotion: BOOLEAN
-	movewlpy IN DRAM FROM webmotion: BOOLEAN	
-	movewlpz IN DRAM FROM webmotion: BOOLEAN
-	movewlmx IN DRAM FROM webmotion: BOOLEAN
-	movewlmy IN DRAM FROM webmotion: BOOLEAN
-	movewlmz IN DRAM FROM webmotion: BOOLEAN	
+	wlpx IN DRAM FROM webmotion: BOOLEAN
+	wlpy IN DRAM FROM webmotion: BOOLEAN	
+	wlpz IN DRAM FROM webmotion: BOOLEAN
+	wlmx IN DRAM FROM webmotion: BOOLEAN
+	wlmy IN DRAM FROM webmotion: BOOLEAN
+	wlmz IN DRAM FROM webmotion: BOOLEAN	
 
-	movetrpx IN DRAM FROM webmotion: BOOLEAN
-	movetrpy IN DRAM FROM webmotion: BOOLEAN
-	movetrpz IN DRAM FROM webmotion: BOOLEAN	
-	movetrmx IN DRAM FROM webmotion: BOOLEAN	
-	movetrmy IN DRAM FROM webmotion: BOOLEAN
-	movetrmz IN DRAM FROM webmotion: BOOLEAN	
+	trpx IN DRAM FROM webmotion: BOOLEAN
+	trpy IN DRAM FROM webmotion: BOOLEAN
+	trpz IN DRAM FROM webmotion: BOOLEAN	
+	trmx IN DRAM FROM webmotion: BOOLEAN	
+	trmy IN DRAM FROM webmotion: BOOLEAN
+	trmz IN DRAM FROM webmotion: BOOLEAN	
 		
 BEGIN
 
@@ -131,7 +131,7 @@ BEGIN
 		return_code = 204
 	ENDIF
 
---Move to preset PR positions
+-- to preset PR positions
 		
 	IF (getstart = 'pickup') THEN
 		start = TRUE
@@ -175,91 +175,91 @@ BEGIN
 		return_code = 204
 	ENDIF	
 
---Move TCP in the WORLD frame
+-- TCP in the WORLD frame
 
-	IF (getstart = 'movewlpx') THEN
+	IF (getstart = 'wlpx') THEN
 		start = TRUE
-		movewlpx = TRUE
-		WRITE('I get movewlpx command',CR)
+		wlpx = TRUE
+		WRITE('I get wlpx command',CR)
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'movewlpy') THEN
+	IF (getstart = 'wlpy') THEN
 		start = TRUE
-		movewlpy = TRUE
-		WRITE('I get movewlpy command',CR)
+		wlpy = TRUE
+		WRITE('I get wlpy command',CR)
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'movewlpz') THEN
+	IF (getstart = 'wlpz') THEN
 		start = TRUE
-		movewlpz = TRUE
-		WRITE('I get movewlpz command',CR)
+		wlpz = TRUE
+		WRITE('I get wlpz command',CR)
 		return_code = 204
 	ENDIF	
 	
-	IF (getstart = 'movewlmx') THEN
+	IF (getstart = 'wlmx') THEN
 		start = TRUE
-		movewlmx = TRUE
-		WRITE('I get movewlmx command',CR)
+		wlmx = TRUE
+		WRITE('I get wlmx command',CR)
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'movewlmy') THEN
+	IF (getstart = 'wlmy') THEN
 		start = TRUE
-		movewlmy = TRUE
-		WRITE('I get movewlmy command',CR)
+		wlmy = TRUE
+		WRITE('I get wlmy command',CR)
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'movewlmz') THEN
+	IF (getstart = 'wlmz') THEN
 		start = TRUE
-		movewlmz = TRUE
-		WRITE('I get movewlmz command',CR)
+		wlmz = TRUE
+		WRITE('I get wlmz command',CR)
 		return_code = 204
 	ENDIF
 
 --Rotate TCP in the UTOOL frame
 	
-	IF (getstart = 'movetrpx') THEN
+	IF (getstart = 'trpx') THEN
 		start = TRUE
-		movetrpx = TRUE
-		WRITE('I get movetrpx command',CR)
+		trpx = TRUE
+		WRITE('I get trpx command',CR)
 		return_code = 204
 	ENDIF	
 	
-	IF (getstart = 'movetrpy') THEN
+	IF (getstart = 'trpy') THEN
 		start = TRUE
-		movetrpy = TRUE
-		WRITE('I get movetrpy command',CR)
+		trpy = TRUE
+		WRITE('I get trpy command',CR)
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'movetrpz') THEN
+	IF (getstart = 'trpz') THEN
 		start = TRUE
-		movetrpz = TRUE
-		WRITE('I get movetrpz command',CR)
+		trpz = TRUE
+		WRITE('I get trpz command',CR)
 		return_code = 204
 	ENDIF	
 	
-	IF (getstart = 'movetrmx') THEN
+	IF (getstart = 'trmx') THEN
 		start = TRUE
-		movetrmx = TRUE
-		WRITE('I get movetrmx command',CR)
+		trmx = TRUE
+		WRITE('I get trmx command',CR)
 		return_code = 204
 	ENDIF	
 	
-	IF (getstart = 'movetrmy') THEN
+	IF (getstart = 'trmy') THEN
 		start = TRUE
-		movetrmy = TRUE
-		WRITE('I get movetrmy command',CR)
+		trmy = TRUE
+		WRITE('I get trmy command',CR)
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'movetrmz') THEN
+	IF (getstart = 'trmz') THEN
 		start = TRUE
-		movetrmz = TRUE
-		WRITE('I get movetrmz command',CR)
+		trmz = TRUE
+		WRITE('I get trmz command',CR)
 		return_code = 204
 	ENDIF
 	

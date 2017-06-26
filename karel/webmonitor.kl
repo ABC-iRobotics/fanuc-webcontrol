@@ -50,24 +50,28 @@ BEGIN
 			int_p = ROUND(currentPos.p)
 			int_r = ROUND(currentPos.r)
 			
-			WRITE responseFile( '<div>', CR )
-				WRITE responseFile( '<p id="joint1">',int_j1, '&#176;</p>', CR )
-				WRITE responseFile( '<p id="joint2">',int_j2, '&#176;</p>', CR )
-				WRITE responseFile( '<p id="joint3">',int_j3, '&#176;</p>', CR )
-				WRITE responseFile( '<p id="joint4">',int_j4, '&#176;</p>', CR )
-				WRITE responseFile( '<p id="joint5">',int_j5, '&#176;</p>', CR )
-				WRITE responseFile( '<p id="joint6">',int_j6, '&#176;</p>', CR )
-				WRITE responseFile( '<p id="wlx">',int_x, ' mm</p>', CR )
-				WRITE responseFile( '<p id="wly">',int_y, ' mm</p>', CR )
-				WRITE responseFile( '<p id="wlz">',int_z, ' mm</p>', CR )
-				WRITE responseFile( '<p id="trx">',int_w, '&#176;</p>', CR )
-				WRITE responseFile( '<p id="try">',int_p, '&#176;</p>', CR )
-				WRITE responseFile( '<p id="trz">',int_r, '&#176;</p>', CR )
-			WRITE responseFile( '</div>', CR )
+			WRITE responseFile( '{', CR )
+				WRITE responseFile( '"joint": [' )
+					WRITE responseFile( int_j1,',' ) 
+					WRITE responseFile( int_j2,',' )
+					WRITE responseFile( int_j3,',' )
+					WRITE responseFile( int_j4,',' )
+					WRITE responseFile( int_j5,',' )
+					WRITE responseFile( int_j6 )
+				WRITE responseFile( ' ],', CR )
+				WRITE responseFile( '"pose": [' )
+					WRITE responseFile( int_x,',')  
+					WRITE responseFile( int_y,',')
+					WRITE responseFile( int_z,',')
+					WRITE responseFile( int_w,',')
+					WRITE responseFile( int_p,',')
+					WRITE responseFile( int_r )
+				WRITE responseFile( ' ] ', CR )
+			WRITE responseFile( '}')
 	
 		ELSE
 	
-			WRITE responseFile(  'Something happend then  converting joints  position...', CR )
+			WRITE responseFile(  'Something happend then  converting joints  position... :(.', CR )
 	
 		ENDIF
 

@@ -52,19 +52,19 @@ VAR
 	j5m: BOOLEAN
 	j6m: BOOLEAN
 	
-	movewlpx: BOOLEAN
-	movewlpy: BOOLEAN
-	movewlpz: BOOLEAN		
-	movewlmx: BOOLEAN
-	movewlmy: BOOLEAN
-	movewlmz: BOOLEAN
+	wlpx: BOOLEAN
+	wlpy: BOOLEAN
+	wlpz: BOOLEAN		
+	wlmx: BOOLEAN
+	wlmy: BOOLEAN
+	wlmz: BOOLEAN
 
-	movetrpx: BOOLEAN
-	movetrmx: BOOLEAN
-	movetrpy: BOOLEAN
-	movetrmy: BOOLEAN
-	movetrpz: BOOLEAN
-	movetrmz: BOOLEAN
+	trpx: BOOLEAN
+	trmx: BOOLEAN
+	trpy: BOOLEAN
+	trmy: BOOLEAN
+	trpz: BOOLEAN
+	trmz: BOOLEAN
 	
 BEGIN
 
@@ -105,19 +105,19 @@ BEGIN
 	j5m = FALSE					
 	j6m = FALSE
 	
-	movewlpx = FALSE
-	movewlpy = FALSE
-	movewlpz = FALSE		
-	movewlmx = FALSE
-	movewlmy = FALSE
-	movewlmz = FALSE
+	wlpx = FALSE
+	wlpy = FALSE
+	wlpz = FALSE		
+	wlmx = FALSE
+	wlmy = FALSE
+	wlmz = FALSE
 
-	movetrpx = FALSE
-	movetrpy = FALSE
-	movetrpz = FALSE	
-	movetrmx = FALSE	
-	movetrmy = FALSE
-	movetrmz = FALSE
+	trpx = FALSE
+	trpy = FALSE
+	trpz = FALSE	
+	trmx = FALSE	
+	trmy = FALSE
+	trmz = FALSE
 		
 	REPEAT
 		IF (NOT start) THEN
@@ -204,125 +204,125 @@ BEGIN
 			ENDIF				
 
 --Rotate in TCP
-			IF movetrpx THEN
+			IF trpx THEN
 				$MOTYPE = LINEAR
 				direction.x = 1
 				direction.y = 0
 				direction.z = 0
 				MOVE ABOUT direction BY degree_p
 				WRITE('Rotating +x direction in tool frame',CR)
-				movetrpx = FALSE
+				trpx = FALSE
 			ENDIF
 			
-			IF movetrmx THEN
+			IF trmx THEN
 				$MOTYPE = LINEAR
 				direction.x = 1
 				direction.y = 0
 				direction.z = 0
 				MOVE ABOUT direction BY degree_m
 				WRITE('Rotating -x direction in tool frame',CR)
-				movetrmx = FALSE
+				trmx = FALSE
 			ENDIF			
 
-			IF movetrpy THEN
+			IF trpy THEN
 				$MOTYPE = LINEAR
 				direction.x = 0
 				direction.y = 1
 				direction.z = 0
 				MOVE ABOUT direction BY degree_p
 				WRITE('Rotating +y direction in tool frame',CR)
-				movetrpy = FALSE
+				trpy = FALSE
 			ENDIF
 			
-			IF movetrmy THEN
+			IF trmy THEN
 				$MOTYPE = LINEAR
 				direction.x = 0
 				direction.y = 1
 				direction.z = 0
 				MOVE ABOUT direction BY  degree_m
 				WRITE('Rotating -y direction in tool frame',CR)
-				movetrmy = FALSE
+				trmy = FALSE
 			ENDIF
 			
-			IF movetrpz THEN
+			IF trpz THEN
 				$MOTYPE = LINEAR
 				direction.x = 0
 				direction.y = 0
 				direction.z = 1
 				MOVE ABOUT direction BY degree_p
 				WRITE('Rotating +z direction in tool frame',CR)
-				movetrpz = FALSE
+				trpz = FALSE
 			ENDIF
 			
-			IF movetrmz THEN
+			IF trmz THEN
 				$MOTYPE = LINEAR
 				direction.x = 0
 				direction.y = 0
 				direction.z = 1
 				MOVE ABOUT direction BY  degree_m
 				WRITE('Rotating -z direction in tool frame',CR)
-				movetrmz = FALSE
+				trmz = FALSE
 			ENDIF
 
 --Move in World
-			IF movewlpx THEN
+			IF wlpx THEN
 				$MOTYPE = LINEAR
 				direction.x = distance_p
 				direction.y = 0
 				direction.z = 0
 				MOVE RELATIVE direction
 				WRITE('Moving to +x direction',CR)
-				movewlpx = FALSE
+				wlpx = FALSE
 			ENDIF
 			
-			IF movewlmx THEN
+			IF wlmx THEN
 				$MOTYPE = LINEAR
 				direction.x = distance_m
 				direction.y = 0
 				direction.z = 0
 				MOVE RELATIVE direction
 				WRITE('Moving to -x direction',CR)
-				movewlmx = FALSE
+				wlmx = FALSE
 			ENDIF			
 
-			IF movewlpy THEN
+			IF wlpy THEN
 				$MOTYPE = LINEAR
 				direction.x = 0
 				direction.y = distance_p
 				direction.z = 0
 				MOVE RELATIVE direction
 				WRITE('Moving to +y direction',CR)
-				movewlpy = FALSE
+				wlpy = FALSE
 			ENDIF
 			
-			IF movewlmy THEN
+			IF wlmy THEN
 				$MOTYPE = LINEAR
 				direction.x = 0
 				direction.y = distance_m
 				direction.z = 0
 				MOVE RELATIVE direction
 				WRITE('Moving to -y direction',CR)
-				movewlmy = FALSE
+				wlmy = FALSE
 			ENDIF
 			
-			IF movewlpz THEN
+			IF wlpz THEN
 				$MOTYPE = LINEAR
 				direction.x = 0
 				direction.y = 0
 				direction.z = distance_p
 				MOVE RELATIVE direction
 				WRITE('Moving to +z direction',CR)
-				movewlpz = FALSE
+				wlpz = FALSE
 			ENDIF
 			
-			IF movewlmz THEN
+			IF wlmz THEN
 				$MOTYPE = LINEAR
 				direction.x = 0
 				direction.y = 0
 				direction.z = distance_m
 				MOVE RELATIVE direction
 				WRITE('Moving to -z direction',CR)
-				movewlmz = FALSE
+				wlmz = FALSE
 			ENDIF
 
 
