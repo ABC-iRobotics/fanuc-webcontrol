@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- <link rel="stylesheet" href="http://ykcznn.hu/webpanel/css/webpanel.css"> -->
+	<!-- <script src="http://ykcznn.hu/webpanel/js/webpanel.js"></script> -->
+	
+	<style>
+		body {
+			padding-top: 60px;
+			padding-bottom: 60px;
+			background-color: #f8f8f8;
+		}
+
+		.ts-row {
+			padding-top: 10px;
+			padding-bottom: 10px;
+			background-color: #f8f8f8;
+		}
+
+		.ts-row-empty {
+			padding-top: 10px;
+			padding-bottom: 10px;
+			background-color: #f8f8f8;
+		}
+
+		.ts-btn-90 {
+			width: 90px;
+		}
+
+		.ts-btn-full {
+			width: 100%;
+		}	
+	</style>
+	
+</head>
+<body>
+	
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="row text-center">
+			<div class="col-xs-4">
+				<button type="button" id="menu-joint" class="btn btn-warning navbar-btn btn-lg ts-btn-full">JOINT</button>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="menu-tcp" class="btn btn-primary navbar-btn btn-lg ts-btn-full">TCP</button>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="menu-poses" class="btn btn-success navbar-btn btn-lg ts-btn-full">POSES</button>
+			</div>
+			</div>
+		</div>
+	</nav>
+	
+	<div id="joint" class="container">
+	
+		<div class="row ts-row-empty"></div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="j1m" class="btn btn-warning btn-lg ts-btn-90">J1-</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="joint1">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="j1p" class="btn btn-warning btn-lg ts-btn-90">J1+</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="j2m" class="btn btn-warning btn-lg ts-btn-90">J2-</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="joint2">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="j2p" class="btn btn-warning btn-lg ts-btn-90">J2+</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="j3m" class="btn btn-warning btn-lg ts-btn-90">J3-</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="joint3">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="j3p" class="btn btn-warning btn-lg ts-btn-90">J3+</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="j4m" class="btn btn-warning btn-lg ts-btn-90">J4-</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="joint4">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="j4p" class="btn btn-warning btn-lg btn-lg ts-btn-90">J4+</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="j5m" class="btn btn-warning btn-lg ts-btn-90">J5-</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="joint5">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="j5p" class="btn btn-warning btn-lg ts-btn-90">J5+</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="j6m" class="btn btn-warning btn-lg ts-btn-90">J6-</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="joint6">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="j6p" class="btn btn-warning btn-lg ts-btn-90">J6+</button>
+			</div>
+		</div>
+	
+	</div>
+	
+	<div id="tcp" class="container">
+	
+		<div class="row ts-row-empty"></div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="wlpx" class="btn btn-primary btn-lg ts-btn-90">+WLX</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="wlx">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="wlmx" class="btn btn-primary btn-lg ts-btn-90">-WLX</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="wlpy" class="btn btn-primary btn-lg ts-btn-90">+WLY</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="wly">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="wlmy" class="btn btn-primary btn-lg ts-btn-90">-WLY</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="wlpz" class="btn btn-primary btn-lg ts-btn-90">+WLZ</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="wlz">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="wlmz" class="btn btn-primary btn-lg ts-btn-90">-WLZ</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="trpx" class="btn btn-primary btn-lg ts-btn-90">+TRX</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="trx">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="trmx" class="btn btn-primary btn-lg ts-btn-90">-TRX</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="trpy" class="btn btn-primary btn-lg ts-btn-90">+TRY</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="try">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="trmy" class="btn btn-primary btn-lg ts-btn-90">-TRY</button>
+			</div>
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<button type="button" id="trpz" class="btn btn-primary btn-lg ts-btn-90">+TRZ</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="trz">load...</h4>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="trmz" class="btn btn-primary btn-lg ts-btn-90">-TRZ</button>
+			</div>
+		</div>
+	
+	</div>
+	
+	<div id="poses" class="container">
+	
+		<div class="row ts-row-empty"></div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<h4 class="joint1">load...</h4>
+			</div>			
+			<div class="col-xs-4">
+				<button type="button" id="pickup" class="btn btn-success btn-lg ts-btn-90">Pickup</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="wlx">load...</h4>
+			</div>				
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<h4 class="joint2">load...</h4>
+			</div>			
+			<div class="col-xs-4">
+				<button type="button" id="zero" class="btn btn-success btn-lg ts-btn-90">Zero</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="wly">load...</h4>
+			</div>				
+		</div>
+	
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<h4 class="joint3">load...</h4>
+			</div>			
+			<div class="col-xs-4">
+				<button type="button" id="place" class="btn btn-success btn-lg ts-btn-90">Place</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="wlz">load...</h4>
+			</div>				
+		</div>
+
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<h4 class="joint4">load...</h4>
+			</div>			
+			<div class="col-xs-4">
+				<button type="button" id="coord" class="btn btn-success btn-lg ts-btn-90">Coord</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="trx">load...</h4>
+			</div>				
+		</div>
+			
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<h4 class="joint5">load...</h4>
+			</div>			
+			<div class="col-xs-4">
+				<button type="button" id="show" class="btn btn-success btn-lg ts-btn-90">Show</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="try">load...</h4>
+			</div>				
+		</div>		
+
+		<div class="row text-center ts-row">
+			<div class="col-xs-4">
+				<h4 class="joint6">load...</h4>
+			</div>			
+			<div class="col-xs-4">
+				<button type="button" id="touch" class="btn btn-success btn-lg ts-btn-90">Touch</button>
+			</div>
+			<div class="col-xs-4">
+				<h4 class="trz">load...</h4>
+			</div>				
+		</div>	
+
+	</div>
+	
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+		<div class="container">
+		<div class="row text-center">
+			<div class="col-xs-12">
+				<button type="button" id="abort" class="btn btn-danger navbar-btn btn-lg ts-btn-full">Abort</button>
+			</div>				
+		</div>
+		</div>
+	</nav>
+	
+	<script>
+		$(document).ready(function () {
+
+		  $('#joint').show()
+		  $('#tcp').hide()
+		  $('#poses').hide()
+
+		  $('#menu-joint').click(function () {
+			$('#joint').show()
+			$('#tcp').hide()
+			$('#poses').hide()
+		  })  
+
+		  $('#menu-tcp').click(function () {
+			$('#joint').hide()
+			$('#tcp').show()
+			$('#poses').hide()
+		  })  
+
+		  $('#menu-poses').click(function () {
+			$('#joint').hide()
+			$('#tcp').hide()
+			$('#poses').show()
+		  })    
+
+		  getposj()
+
+		  function getposj () {
+
+			console.log('I am in the getposj function :-)')  
+
+			$.getJSON("/KAREL/webmonitor", function (data) {
+			  $('.joint1').html(Math.round(data.joint[0]) + '&#176;')
+			  $('.joint2').html(Math.round(data.joint[1]) + '&#176;')
+			  $('.joint3').html(Math.round(data.joint[2]) + '&#176;')
+			  $('.joint4').html(Math.round(data.joint[3]) + '&#176;')
+			  $('.joint5').html(Math.round(data.joint[4]) + '&#176;')
+			  $('.joint6').html(Math.round(data.joint[5]) + '&#176;')
+			  $('.wlx').html(Math.round(data.pose[0]) + ' mm')
+			  $('.wly').html(Math.round(data.pose[1]) + ' mm')
+			  $('.wlz').html(Math.round(data.pose[2]) + ' mm')
+			  $('.trx').html(Math.round(data.pose[3]) + '&#176;')
+			  $('.try').html(Math.round(data.pose[4]) + '&#176;')
+			  $('.trz').html(Math.round(data.pose[5]) + '&#176;')
+			  setTimeout(getposj(), 300)
+			  })
+
+		  }
+
+		  $('#abort').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webabort',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })  
+
+		  $('#j1m').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j1m',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j1p').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j1p',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j2m').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j2m',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j2p').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j2p',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j3m').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j3m',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j3p').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j3p',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })  
+
+		  $('#j4m').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j4m',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j4p').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j4p',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j5m').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j5m',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j5p').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j5p',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j6m').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j6m',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#j6p').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=j6p',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#wlpx').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=wlpx',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#wlpy').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=wlpy',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#wlpz').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=wlpz',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#wlmx').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=wlmx',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#wlmy').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=wlmy',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#wlmz').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=wlmz',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#trpx').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=trpx',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#trpy').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=trpy',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#trpz').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=trpz',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#trmx').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=trmx',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#trmy').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=trmy',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#trmz').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=trmz',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#pickup').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=pickup',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#zero').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=zero',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#place').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=place',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#coord').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=coord',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#show').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=show',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		  $('#touch').click(function () {
+			$.ajax({
+			  type: 'GET',
+			  url: '/KAREL/webcontrol?getstart=touch',
+			  cache: false,
+			  success: function () {}
+			})
+			return false
+		  })
+
+		})
+	</script>	
+	
+</body>
+</html>

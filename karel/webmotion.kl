@@ -1,5 +1,4 @@
 PROGRAM webmotion
---%NOLOCKGROUP
 %NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOABORT=ERROR+COMMAND
 %NOPAUSESHFT
@@ -14,7 +13,9 @@ CONST
 	PR_NUM_TCH = 34
 
 VAR
+
 	STATUS: INTEGER
+
 	pickupPosJ: JOINTPOS IN GROUP[1]
 	placePosJ: JOINTPOS IN GROUP[1]
 	zeroPosJ: JOINTPOS IN GROUP[1]
@@ -23,22 +24,15 @@ VAR
 	touchPosJ: JOINTPOS IN GROUP[1]
 
 	start: BOOLEAN
-	
-	pickup: BOOLEAN
-	place: BOOLEAN
-	zero: BOOLEAN
-	coord: BOOLEAN
-	show: BOOLEAN
-	touch: BOOLEAN
-	
+
 	direction: VECTOR
-	
+
 	degree_p: INTEGER
 	degree_m: INTEGER
 
 	distance_p: INTEGER 
 	distance_m: INTEGER 
-		
+
 	j1p: BOOLEAN
 	j2p: BOOLEAN
 	j3p: BOOLEAN
@@ -51,7 +45,7 @@ VAR
 	j4m: BOOLEAN
 	j5m: BOOLEAN
 	j6m: BOOLEAN
-	
+
 	wlpx: BOOLEAN
 	wlpy: BOOLEAN
 	wlpz: BOOLEAN		
@@ -65,7 +59,14 @@ VAR
 	trmy: BOOLEAN
 	trpz: BOOLEAN
 	trmz: BOOLEAN
-	
+
+	pickup: BOOLEAN
+	place: BOOLEAN
+	zero: BOOLEAN
+	coord: BOOLEAN
+	show: BOOLEAN
+	touch: BOOLEAN
+
 BEGIN
 
 	--$GROUP[1].$UFRAME = $MNUFRAME[1, $MNUFRAMENUM[1]]  --Assign the value of current user frame to user frame used in KAREL
@@ -75,16 +76,9 @@ BEGIN
 	$GROUP[1].$UTOOL = $MOR_GRP[1].$NILPOS
 
 	$TERMTYPE = FINE
-	$SPEED = 210
+	$SPEED = 200
 
 	start = FALSE
-	
-	pickup = FALSE
-	place = FALSE
-	zero = FALSE
-	coord = FALSE
-	show = FALSE
-	touch = FALSE
 	
 	degree_p = 30
 	degree_m = -30	
@@ -118,6 +112,13 @@ BEGIN
 	trmx = FALSE	
 	trmy = FALSE
 	trmz = FALSE
+
+	pickup = FALSE
+	place = FALSE
+	zero = FALSE
+	coord = FALSE
+	show = FALSE
+	touch = FALSE
 		
 	REPEAT
 		IF (NOT start) THEN
@@ -125,208 +126,9 @@ BEGIN
 			DELAY 300
 
 		ELSE
-			IF pickup THEN
-				$MOTYPE = JOINT
-				pickupPosJ = GET_JPOS_REG(PR_NUM_PCK, STATUS)
-				IF (STATUS<>0) THEN 
-					WRITE ('Something happend then pickup')
-				ELSE
-					MOVE TO pickupPosJ
-					WRITE(pickupPosJ,CR)
-					WRITE ('Moving to pickup',CR)
-					pickup = FALSE
-				ENDIF
-			ENDIF
 			
-			IF place THEN
-				$MOTYPE = JOINT
-				placePosJ = GET_JPOS_REG(PR_NUM_PLC, STATUS)
-				IF (STATUS<>0) THEN 
-					WRITE ('Something happend then place')
-				ELSE
-					MOVE TO placePosJ
-					WRITE(placePosJ,CR)
-					WRITE ('Moving to place',CR)
-					place = FALSE
-				ENDIF
-			ENDIF
-
-			IF zero THEN
-				$MOTYPE = JOINT
-				zeroPosJ = GET_JPOS_REG(PR_NUM_ZER, STATUS)
-				IF (STATUS<>0) THEN 
-					WRITE ('Something happend then zero')
-				ELSE
-					MOVE TO zeroPosJ
-					WRITE(zeroPosJ,CR)
-					WRITE ('Moving to zero',CR)
-					zero = FALSE
-				ENDIF
-			ENDIF
-
-			IF coord THEN
-				$MOTYPE = JOINT
-				coordPosJ = GET_JPOS_REG(PR_NUM_CRD, STATUS)
-				IF (STATUS<>0) THEN 
-					WRITE ('Something happend then coord')
-				ELSE
-					MOVE TO coordPosJ
-					WRITE(coordPosJ,CR)
-					WRITE ('Moving to coord',CR)
-					coord = FALSE
-				ENDIF
-			ENDIF
+			-- Jogging			
 			
-			IF show THEN
-				$MOTYPE = JOINT
-				showPosJ = GET_JPOS_REG(PR_NUM_SHW, STATUS)
-				IF (STATUS<>0) THEN 
-					WRITE ('Something happend then show')
-				ELSE
-					MOVE TO showPosJ
-					WRITE(showPosJ,CR)
-					WRITE ('Moving to show',CR)
-					show = FALSE
-				ENDIF
-			ENDIF
-			
-			IF touch THEN
-				$MOTYPE = JOINT
-				touchPosJ = GET_JPOS_REG(PR_NUM_TCH, STATUS)
-				IF (STATUS<>0) THEN 
-					WRITE ('Something happend then touch')
-				ELSE
-					MOVE TO touchPosJ
-					WRITE(touchPosJ,CR)
-					WRITE ('Moving to touch',CR)
-					touch = FALSE
-				ENDIF
-			ENDIF				
-
---Rotate in TCP
-			IF trpx THEN
-				$MOTYPE = LINEAR
-				direction.x = 1
-				direction.y = 0
-				direction.z = 0
-				MOVE ABOUT direction BY degree_p
-				WRITE('Rotating +x direction in tool frame',CR)
-				trpx = FALSE
-			ENDIF
-			
-			IF trmx THEN
-				$MOTYPE = LINEAR
-				direction.x = 1
-				direction.y = 0
-				direction.z = 0
-				MOVE ABOUT direction BY degree_m
-				WRITE('Rotating -x direction in tool frame',CR)
-				trmx = FALSE
-			ENDIF			
-
-			IF trpy THEN
-				$MOTYPE = LINEAR
-				direction.x = 0
-				direction.y = 1
-				direction.z = 0
-				MOVE ABOUT direction BY degree_p
-				WRITE('Rotating +y direction in tool frame',CR)
-				trpy = FALSE
-			ENDIF
-			
-			IF trmy THEN
-				$MOTYPE = LINEAR
-				direction.x = 0
-				direction.y = 1
-				direction.z = 0
-				MOVE ABOUT direction BY  degree_m
-				WRITE('Rotating -y direction in tool frame',CR)
-				trmy = FALSE
-			ENDIF
-			
-			IF trpz THEN
-				$MOTYPE = LINEAR
-				direction.x = 0
-				direction.y = 0
-				direction.z = 1
-				MOVE ABOUT direction BY degree_p
-				WRITE('Rotating +z direction in tool frame',CR)
-				trpz = FALSE
-			ENDIF
-			
-			IF trmz THEN
-				$MOTYPE = LINEAR
-				direction.x = 0
-				direction.y = 0
-				direction.z = 1
-				MOVE ABOUT direction BY  degree_m
-				WRITE('Rotating -z direction in tool frame',CR)
-				trmz = FALSE
-			ENDIF
-
---Move in World
-			IF wlpx THEN
-				$MOTYPE = LINEAR
-				direction.x = distance_p
-				direction.y = 0
-				direction.z = 0
-				MOVE RELATIVE direction
-				WRITE('Moving to +x direction',CR)
-				wlpx = FALSE
-			ENDIF
-			
-			IF wlmx THEN
-				$MOTYPE = LINEAR
-				direction.x = distance_m
-				direction.y = 0
-				direction.z = 0
-				MOVE RELATIVE direction
-				WRITE('Moving to -x direction',CR)
-				wlmx = FALSE
-			ENDIF			
-
-			IF wlpy THEN
-				$MOTYPE = LINEAR
-				direction.x = 0
-				direction.y = distance_p
-				direction.z = 0
-				MOVE RELATIVE direction
-				WRITE('Moving to +y direction',CR)
-				wlpy = FALSE
-			ENDIF
-			
-			IF wlmy THEN
-				$MOTYPE = LINEAR
-				direction.x = 0
-				direction.y = distance_m
-				direction.z = 0
-				MOVE RELATIVE direction
-				WRITE('Moving to -y direction',CR)
-				wlmy = FALSE
-			ENDIF
-			
-			IF wlpz THEN
-				$MOTYPE = LINEAR
-				direction.x = 0
-				direction.y = 0
-				direction.z = distance_p
-				MOVE RELATIVE direction
-				WRITE('Moving to +z direction',CR)
-				wlpz = FALSE
-			ENDIF
-			
-			IF wlmz THEN
-				$MOTYPE = LINEAR
-				direction.x = 0
-				direction.y = 0
-				direction.z = distance_m
-				MOVE RELATIVE direction
-				WRITE('Moving to -z direction',CR)
-				wlmz = FALSE
-			ENDIF
-
-
--- Jogging			
 			IF j1p THEN
 				$MOTYPE = JOINT
 				MOVE AXIS 1 BY degree_p
@@ -409,6 +211,213 @@ BEGIN
 				MOVE AXIS 6 BY degree_m
 				WRITE ('j6m is jogging',CR)
 				 j6m = FALSE
+			ENDIF
+
+
+			--Move TCP in the WORLD frame
+
+			IF wlpx THEN
+				$MOTYPE = LINEAR
+				direction.x = distance_p
+				direction.y = 0
+				direction.z = 0
+				MOVE RELATIVE direction
+				WRITE('Moving to +x direction',CR)
+				wlpx = FALSE
+			ENDIF
+			
+			IF wlmx THEN
+				$MOTYPE = LINEAR
+				direction.x = distance_m
+				direction.y = 0
+				direction.z = 0
+				MOVE RELATIVE direction
+				WRITE('Moving to -x direction',CR)
+				wlmx = FALSE
+			ENDIF			
+
+			IF wlpy THEN
+				$MOTYPE = LINEAR
+				direction.x = 0
+				direction.y = distance_p
+				direction.z = 0
+				MOVE RELATIVE direction
+				WRITE('Moving to +y direction',CR)
+				wlpy = FALSE
+			ENDIF
+			
+			IF wlmy THEN
+				$MOTYPE = LINEAR
+				direction.x = 0
+				direction.y = distance_m
+				direction.z = 0
+				MOVE RELATIVE direction
+				WRITE('Moving to -y direction',CR)
+				wlmy = FALSE
+			ENDIF
+			
+			IF wlpz THEN
+				$MOTYPE = LINEAR
+				direction.x = 0
+				direction.y = 0
+				direction.z = distance_p
+				MOVE RELATIVE direction
+				WRITE('Moving to +z direction',CR)
+				wlpz = FALSE
+			ENDIF
+			
+			IF wlmz THEN
+				$MOTYPE = LINEAR
+				direction.x = 0
+				direction.y = 0
+				direction.z = distance_m
+				MOVE RELATIVE direction
+				WRITE('Moving to -z direction',CR)
+				wlmz = FALSE
+			ENDIF
+
+
+			--Rotate TCP in the UTOOL frame
+			
+			IF trpx THEN
+				$MOTYPE = LINEAR
+				direction.x = 1
+				direction.y = 0
+				direction.z = 0
+				MOVE ABOUT direction BY degree_p
+				WRITE('Rotating +x direction in tool frame',CR)
+				trpx = FALSE
+			ENDIF
+			
+			IF trmx THEN
+				$MOTYPE = LINEAR
+				direction.x = 1
+				direction.y = 0
+				direction.z = 0
+				MOVE ABOUT direction BY degree_m
+				WRITE('Rotating -x direction in tool frame',CR)
+				trmx = FALSE
+			ENDIF			
+
+			IF trpy THEN
+				$MOTYPE = LINEAR
+				direction.x = 0
+				direction.y = 1
+				direction.z = 0
+				MOVE ABOUT direction BY degree_p
+				WRITE('Rotating +y direction in tool frame',CR)
+				trpy = FALSE
+			ENDIF
+			
+			IF trmy THEN
+				$MOTYPE = LINEAR
+				direction.x = 0
+				direction.y = 1
+				direction.z = 0
+				MOVE ABOUT direction BY  degree_m
+				WRITE('Rotating -y direction in tool frame',CR)
+				trmy = FALSE
+			ENDIF
+			
+			IF trpz THEN
+				$MOTYPE = LINEAR
+				direction.x = 0
+				direction.y = 0
+				direction.z = 1
+				MOVE ABOUT direction BY degree_p
+				WRITE('Rotating +z direction in tool frame',CR)
+				trpz = FALSE
+			ENDIF
+			
+			IF trmz THEN
+				$MOTYPE = LINEAR
+				direction.x = 0
+				direction.y = 0
+				direction.z = 1
+				MOVE ABOUT direction BY  degree_m
+				WRITE('Rotating -z direction in tool frame',CR)
+				trmz = FALSE
+			ENDIF
+
+
+			--Go to preset PR positions
+
+			IF pickup THEN
+				$MOTYPE = JOINT
+				pickupPosJ = GET_JPOS_REG(PR_NUM_PCK, STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then pickup')
+				ELSE
+					MOVE TO pickupPosJ
+					WRITE(pickupPosJ,CR)
+					WRITE ('Moving to pickup',CR)
+					pickup = FALSE
+				ENDIF
+			ENDIF
+			
+			IF place THEN
+				$MOTYPE = JOINT
+				placePosJ = GET_JPOS_REG(PR_NUM_PLC, STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then place')
+				ELSE
+					MOVE TO placePosJ
+					WRITE(placePosJ,CR)
+					WRITE ('Moving to place',CR)
+					place = FALSE
+				ENDIF
+			ENDIF
+
+			IF zero THEN
+				$MOTYPE = JOINT
+				zeroPosJ = GET_JPOS_REG(PR_NUM_ZER, STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then zero')
+				ELSE
+					MOVE TO zeroPosJ
+					WRITE(zeroPosJ,CR)
+					WRITE ('Moving to zero',CR)
+					zero = FALSE
+				ENDIF
+			ENDIF
+
+			IF coord THEN
+				$MOTYPE = JOINT
+				coordPosJ = GET_JPOS_REG(PR_NUM_CRD, STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then coord')
+				ELSE
+					MOVE TO coordPosJ
+					WRITE(coordPosJ,CR)
+					WRITE ('Moving to coord',CR)
+					coord = FALSE
+				ENDIF
+			ENDIF
+			
+			IF show THEN
+				$MOTYPE = JOINT
+				showPosJ = GET_JPOS_REG(PR_NUM_SHW, STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then show')
+				ELSE
+					MOVE TO showPosJ
+					WRITE(showPosJ,CR)
+					WRITE ('Moving to show',CR)
+					show = FALSE
+				ENDIF
+			ENDIF
+			
+			IF touch THEN
+				$MOTYPE = JOINT
+				touchPosJ = GET_JPOS_REG(PR_NUM_TCH, STATUS)
+				IF (STATUS<>0) THEN 
+					WRITE ('Something happend then touch')
+				ELSE
+					MOVE TO touchPosJ
+					WRITE(touchPosJ,CR)
+					WRITE ('Moving to touch',CR)
+					touch = FALSE
+				ENDIF
 			ENDIF
 			
 			start = FALSE

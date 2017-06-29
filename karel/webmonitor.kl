@@ -1,77 +1,49 @@
 PROGRAM webmonitor
 %NOLOCKGROUP
-%NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
 
 VAR
 
-	currentPosj: JOINTPOS
+	currentPosJ: JOINTPOS
 	valuePosJ: ARRAY[6] OF REAL
 	currentPos: XYZWPREXT
 	responseFile: FILE
 	STATUS: INTEGER
-	
-	int_j1: INTEGER
-	int_j2: INTEGER
-	int_j3: INTEGER
-	int_j4: INTEGER
-	int_j5: INTEGER
-	int_j6: INTEGER
-	
-	int_x: INTEGER
-	int_y: INTEGER
-	int_z: INTEGER
-	int_w: INTEGER
-	int_p: INTEGER
-	int_r: INTEGER
 
 BEGIN
 
 	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
 	
 		currentPosJ = CURJPOS(0,0)
+
 		CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
 	
 		IF( STATUS = 0 ) THEN
 	
 			currentPos = CURPOS(0,0)
 			
-			int_j1 = ROUND(valuePosJ[1])
-			int_j2 = ROUND(valuePosJ[2])
-			int_j3 = ROUND(valuePosJ[3])
-			int_j4 = ROUND(valuePosJ[4])
-			int_j5 = ROUND(valuePosJ[5])
-			int_j6 = ROUND(valuePosJ[6])
-			
-			int_x = ROUND(currentPos.x)
-			int_y = ROUND(currentPos.y)
-			int_z = ROUND(currentPos.z)
-			int_w = ROUND(currentPos.w)
-			int_p = ROUND(currentPos.p)
-			int_r = ROUND(currentPos.r)
-			
 			WRITE responseFile( '{', CR )
 				WRITE responseFile( '"joint": [' )
-					WRITE responseFile( int_j1,',' ) 
-					WRITE responseFile( int_j2,',' )
-					WRITE responseFile( int_j3,',' )
-					WRITE responseFile( int_j4,',' )
-					WRITE responseFile( int_j5,',' )
-					WRITE responseFile( int_j6 )
+					WRITE responseFile( valuePosJ[1],',' ) 
+					WRITE responseFile( valuePosJ[2],',' )
+					WRITE responseFile( valuePosJ[3],',' )
+					WRITE responseFile( valuePosJ[4],',' )
+					WRITE responseFile( valuePosJ[5],',' )
+					WRITE responseFile( valuePosJ[6] )
 				WRITE responseFile( ' ],', CR )
 				WRITE responseFile( '"pose": [' )
-					WRITE responseFile( int_x,',')  
-					WRITE responseFile( int_y,',')
-					WRITE responseFile( int_z,',')
-					WRITE responseFile( int_w,',')
-					WRITE responseFile( int_p,',')
-					WRITE responseFile( int_r )
+					WRITE responseFile( currentPos.x,',')  
+					WRITE responseFile( currentPos.y,',')
+					WRITE responseFile( currentPos.z,',')
+					WRITE responseFile( currentPos.w,',')
+					WRITE responseFile( currentPos.p,',')
+					WRITE responseFile( currentPos.r )
 				WRITE responseFile( ' ] ', CR )
 			WRITE responseFile( '}')
 	
 		ELSE
 	
-			WRITE responseFile(  'Something happend then  converting joints  position... :(.', CR )
+			WRITE responseFile(  'Something happend while joint positions are converted to real... :(.', CR )
 	
 		ENDIF
 

@@ -8,14 +8,7 @@ VAR
 	return_code : INTEGER	
 
 	start IN DRAM FROM webmotion: BOOLEAN
-	
-	pickup IN DRAM FROM webmotion: BOOLEAN
-	place IN DRAM FROM webmotion: BOOLEAN
-	zero IN DRAM FROM webmotion: BOOLEAN
-	coord IN DRAM FROM webmotion: BOOLEAN
-	show IN DRAM FROM webmotion: BOOLEAN
-	touch IN DRAM FROM webmotion: BOOLEAN
-	
+
 	j1p IN DRAM FROM webmotion: BOOLEAN
 	j2p IN DRAM FROM webmotion: BOOLEAN
 	j3p IN DRAM FROM webmotion: BOOLEAN
@@ -27,7 +20,7 @@ VAR
 	j3m IN DRAM FROM webmotion: BOOLEAN
 	j4m IN DRAM FROM webmotion: BOOLEAN
 	j5m IN DRAM FROM webmotion: BOOLEAN					
-	j6m IN DRAM FROM webmotion: BOOLEAN				
+	j6m IN DRAM FROM webmotion: BOOLEAN
 	
 	wlpx IN DRAM FROM webmotion: BOOLEAN
 	wlpy IN DRAM FROM webmotion: BOOLEAN	
@@ -42,6 +35,13 @@ VAR
 	trmx IN DRAM FROM webmotion: BOOLEAN	
 	trmy IN DRAM FROM webmotion: BOOLEAN
 	trmz IN DRAM FROM webmotion: BOOLEAN	
+
+	pickup IN DRAM FROM webmotion: BOOLEAN
+	place IN DRAM FROM webmotion: BOOLEAN
+	zero IN DRAM FROM webmotion: BOOLEAN
+	coord IN DRAM FROM webmotion: BOOLEAN
+	show IN DRAM FROM webmotion: BOOLEAN
+	touch IN DRAM FROM webmotion: BOOLEAN
 		
 BEGIN
 
@@ -131,51 +131,8 @@ BEGIN
 		return_code = 204
 	ENDIF
 
--- to preset PR positions
-		
-	IF (getstart = 'pickup') THEN
-		start = TRUE
-		pickup = TRUE
-		WRITE('I get pickup command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'place') THEN
-		start = TRUE
-		place = TRUE
-		WRITE('I get place command',CR)
-		return_code = 204
-	ENDIF
 
-	IF (getstart = 'zero') THEN
-		start = TRUE
-		zero = TRUE
-		WRITE('I get zero command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'coord') THEN
-		start = TRUE
-		coord = TRUE
-		WRITE('I get coord command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'show') THEN
-		start = TRUE
-		show = TRUE
-		WRITE('I get show command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'touch') THEN
-		start = TRUE
-		touch = TRUE
-		WRITE('I get touch command',CR)
-		return_code = 204
-	ENDIF	
-
--- TCP in the WORLD frame
+--Move TCP in the WORLD frame
 
 	IF (getstart = 'wlpx') THEN
 		start = TRUE
@@ -219,6 +176,7 @@ BEGIN
 		return_code = 204
 	ENDIF
 
+
 --Rotate TCP in the UTOOL frame
 	
 	IF (getstart = 'trpx') THEN
@@ -260,6 +218,51 @@ BEGIN
 		start = TRUE
 		trmz = TRUE
 		WRITE('I get trmz command',CR)
+		return_code = 204
+	ENDIF
+
+
+--Go to preset PR positions
+		
+	IF (getstart = 'pickup') THEN
+		start = TRUE
+		pickup = TRUE
+		WRITE('I get pickup command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'place') THEN
+		start = TRUE
+		place = TRUE
+		WRITE('I get place command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'zero') THEN
+		start = TRUE
+		zero = TRUE
+		WRITE('I get zero command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'coord') THEN
+		start = TRUE
+		coord = TRUE
+		WRITE('I get coord command',CR)
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'show') THEN
+		start = TRUE
+		show = TRUE
+		WRITE('I get show command',CR)
+		return_code = 204
+	ENDIF
+	
+	IF (getstart = 'touch') THEN
+		start = TRUE
+		touch = TRUE
+		WRITE('I get touch command',CR)
 		return_code = 204
 	ENDIF
 	
