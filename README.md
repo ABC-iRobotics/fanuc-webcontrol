@@ -12,7 +12,7 @@ Simple software to control Fanuc robots through browser.
 1. [Requirements](#requirements)
 2. [Installation](#installation)
 3. [Configuration](#configuration)
-4. [Example usage](#example-useage)
+4. [Example usage](#example-usage)
 5. [Acknowledgement](#acknowledgement)
 7. [Bugs, feature requests, etc](#bugs-feature-requests-etc)
 
