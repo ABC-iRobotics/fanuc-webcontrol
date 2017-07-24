@@ -1,0 +1,98 @@
+PROGRAM webcheck
+%COMMENT = 'v2'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+CONST
+
+	PR_WEBJOINTS = 40
+	PR_WEBXYZWPR = 41
+	R_WEBSTEP = 41
+
+VAR
+
+	STATUS: INTEGER
+	cur_pos: XYZWPR	
+	new_jpos: JOINTPOS
+	new_pos: XYZWPREXT
+	websteprel: REAL
+	webstepint: INTEGER
+	zlimit: REAL
+
+BEGIN
+
+
+	--limit the Z direction
+
+	cur_pos = CURPOS(0,0)
+	
+	GET_REG(R_WEBSTEP, TRUE, webstepint, websteprel, STATUS)
+
+	IF (STATUS <> 0 ) THEN
+	
+		WRITE ('GET_JPOS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+		FLG[6] = ON
+		
+	ELSE
+
+		zlimit = cur_pos.z + websteprel
+	
+		IF zlimit <= -250 THEN
+	
+			FLG[6] = ON
+			WRITE('Z limit is reached!', CR)
+	
+		ENDIF
+		
+	ENDIF
+
+
+	--check the new jpos is in range
+	
+	IF FLG[2] THEN
+
+		new_jpos = GET_JPOS_REG(PR_WEBJOINTS, STATUS)
+
+		IF (STATUS <> 0 ) THEN
+		
+			WRITE ('GET_JPOS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+			
+		ELSE
+			
+			IF NOT J_IN_RANGE(new_jpos) THEN
+		
+				FLG[6] = ON
+				WRITE('Joint Position is not reachable!', CR)
+			
+			ENDIF
+	
+		ENDIF
+
+	ENDIF
+
+
+	--check the new pos is in range
+
+	IF FLG[3] OR FLG[4] THEN
+
+		new_pos = GET_POS_REG(PR_WEBXYZWPR, STATUS)
+
+		IF (STATUS <> 0 ) THEN
+		
+			WRITE ('GET_POS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+			
+		ELSE
+			
+			IF NOT IN_RANGE(new_pos) THEN
+		
+				FLG[6] = ON
+				WRITE('Position is not reachable!', CR)
+			
+			ENDIF
+		
+		ENDIF
+
+	ENDIF
+
+END webcheck

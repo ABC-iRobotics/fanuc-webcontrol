@@ -1,268 +1,216 @@
 PROGRAM webcontrol
+%COMMENT = 'v2'
 %NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
 
+CONST
+	
+	PR_WEBJOINTS = 40
+	PR_WEBXYZWPR = 41
+	R_WEBCOORD = 40	
+	R_WEBSTEP = 41
+
 VAR
+
+	STATUS: INTEGER
+	return_code: INTEGER
+	getstart: STRING[127]
+	getcpos: STRING[127]
+	getstep: STRING[127]
 	
-	getstart : STRING[127]
-	return_code : INTEGER	
+	coordpos: REAL
+	movestep: REAL
 
-	start IN DRAM FROM webmotion: BOOLEAN
+	j1: STRING[4]
+	j2: STRING[4]
+	j3: STRING[4]
+	j4: STRING[4]
+	j5: STRING[4]
+	j6: STRING[4]
 
-	j1p IN DRAM FROM webmotion: BOOLEAN
-	j2p IN DRAM FROM webmotion: BOOLEAN
-	j3p IN DRAM FROM webmotion: BOOLEAN
-	j4p IN DRAM FROM webmotion: BOOLEAN
-	j5p IN DRAM FROM webmotion: BOOLEAN
-	j6p IN DRAM FROM webmotion: BOOLEAN
-	j1m IN DRAM FROM webmotion: BOOLEAN
-	j2m IN DRAM FROM webmotion: BOOLEAN
-	j3m IN DRAM FROM webmotion: BOOLEAN
-	j4m IN DRAM FROM webmotion: BOOLEAN
-	j5m IN DRAM FROM webmotion: BOOLEAN					
-	j6m IN DRAM FROM webmotion: BOOLEAN
+
+--Set the current JOINT position as initial position and jogging
+
+ROUTINE setcurjpos
+
+VAR
+
+	cur_jpos: JOINTPOS
+
+BEGIN
 	
-	wlpx IN DRAM FROM webmotion: BOOLEAN
-	wlpy IN DRAM FROM webmotion: BOOLEAN	
-	wlpz IN DRAM FROM webmotion: BOOLEAN
-	wlmx IN DRAM FROM webmotion: BOOLEAN
-	wlmy IN DRAM FROM webmotion: BOOLEAN
-	wlmz IN DRAM FROM webmotion: BOOLEAN	
+	cur_jpos = CURJPOS(0,0)
+	
+	SET_JPOS_REG(PR_WEBJOINTS, cur_jpos, STATUS)
+	
+	IF (STATUS <> 0 ) THEN
+	
+		WRITE ('SET_JPOS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+	
+	ELSE
 
-	trpx IN DRAM FROM webmotion: BOOLEAN
-	trpy IN DRAM FROM webmotion: BOOLEAN
-	trpz IN DRAM FROM webmotion: BOOLEAN	
-	trmx IN DRAM FROM webmotion: BOOLEAN	
-	trmy IN DRAM FROM webmotion: BOOLEAN
-	trmz IN DRAM FROM webmotion: BOOLEAN	
-
-	pickup IN DRAM FROM webmotion: BOOLEAN
-	place IN DRAM FROM webmotion: BOOLEAN
-	zero IN DRAM FROM webmotion: BOOLEAN
-	coord IN DRAM FROM webmotion: BOOLEAN
-	show IN DRAM FROM webmotion: BOOLEAN
-	touch IN DRAM FROM webmotion: BOOLEAN
+		FLG[2] = ON
+		FLG[1] = ON
 		
+		IF FLG[2] AND FLG[1] THEN
+			WRITE('FLG2 and FLG1 are ON', CR)
+		ENDIF
+	
+	ENDIF
+
+END setcurjpos
+
+
+--Set the current XYZWPR position as initial position and move
+
+ROUTINE setcurxyz
+
+VAR
+
+	cur_pos: XYZWPR
+
+BEGIN
+	
+	cur_pos = CURPOS(0,0)
+	
+	SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
+	
+	IF (STATUS <> 0 ) THEN
+	
+		WRITE ('SET_POS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+	
+	ELSE
+
+		FLG[3] = ON
+		FLG[1] = ON
+		
+		IF FLG[3] AND FLG[1] THEN
+			WRITE('FLG3 and FLG1 are ON', CR)
+		ENDIF
+	
+	ENDIF
+
+END setcurxyz
+
+
+--Set the current TCP position as initial position and rotating
+
+ROUTINE setcurwpr
+
+VAR
+
+	cur_pos: XYZWPR
+
+BEGIN
+	
+	cur_pos = CURPOS(0,0)
+	
+	SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
+	
+	IF (STATUS <> 0 ) THEN
+	
+		WRITE ('SET_POS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+	
+	ELSE
+
+		FLG[4] = ON
+		FLG[1] = ON
+
+		IF FLG[4] AND FLG[1] THEN
+			WRITE('FLG4 and FLG1 are ON', CR)
+		ENDIF
+	
+	ENDIF
+
+END setcurwpr
+
+
+--Move to predefined pose
+
+ROUTINE setpose
+
+VAR 
+
+	jpos: JOINTPOS
+	jposVal: ARRAY[9] OF REAL
+
 BEGIN
 
---Jogging
-
-	IF (getstart = 'j1p') THEN
-		start = TRUE
-		j1p = TRUE
-		WRITE('I get j1p command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j2p') THEN
-		start = TRUE
-		j2p = TRUE
-		WRITE('I get j2p command',CR)
-		return_code = 204
-	ENDIF
+	CNV_STR_REAL(j1, jposVal[1]) 
+	CNV_STR_REAL(j2, jposVal[2])
+	CNV_STR_REAL(j3, jposVal[3])
+	CNV_STR_REAL(j4, jposVal[4])
+	CNV_STR_REAL(j5, jposVal[5])
+	CNV_STR_REAL(j6, jposVal[6])
+	jposVal[7] = 0
+	jposVal[8] = 0
+	jposVal[9] = 0
 	
-	IF (getstart = 'j3p') THEN
-		start = TRUE
-		j3p = TRUE
-		WRITE('I get j3p command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j4p') THEN
-		start = TRUE
-		j4p = TRUE
-		WRITE('I get j4p command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j5p') THEN
-		start = TRUE
-		j5p = TRUE
-		WRITE('I get j5p command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'j6p') THEN
-		start = TRUE
-		j6p = TRUE
-		WRITE('I get j6p command',CR)
-		return_code = 204
-	ENDIF
+	CNV_REL_JPOS(jposVal, jpos, STATUS)
 
-	IF (getstart = 'j1m') THEN
-		start = TRUE
-		j1m = TRUE
-		WRITE('I get j1m command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j2m') THEN
-		start = TRUE
-		j2m = TRUE
-		WRITE('I get j2m command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j3m') THEN
-		start = TRUE
-		j3m = TRUE
-		WRITE('I get j3m command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j4m') THEN
-		start = TRUE
-		j4m = TRUE
-		WRITE('I get j4m command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j5m') THEN
-		start = TRUE
-		j5m = TRUE
-		WRITE('I get j5m command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'j6m') THEN
-		start = TRUE
-		j6m = TRUE
-		WRITE('I get j6m command',CR)
-		return_code = 204
-	ENDIF
-
-
---Move TCP in the WORLD frame
-
-	IF (getstart = 'wlpx') THEN
-		start = TRUE
-		wlpx = TRUE
-		WRITE('I get wlpx command',CR)
-		return_code = 204
-	ENDIF
+	IF (STATUS <> 0 ) THEN
 	
-	IF (getstart = 'wlpy') THEN
-		start = TRUE
-		wlpy = TRUE
-		WRITE('I get wlpy command',CR)
-		return_code = 204
-	ENDIF
+		WRITE ('CNV_REL_JPOS built-IN failed WITH STATUS = ', STATUS, CR)
 	
-	IF (getstart = 'wlpz') THEN
-		start = TRUE
-		wlpz = TRUE
-		WRITE('I get wlpz command',CR)
-		return_code = 204
-	ENDIF	
-	
-	IF (getstart = 'wlmx') THEN
-		start = TRUE
-		wlmx = TRUE
-		WRITE('I get wlmx command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'wlmy') THEN
-		start = TRUE
-		wlmy = TRUE
-		WRITE('I get wlmy command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'wlmz') THEN
-		start = TRUE
-		wlmz = TRUE
-		WRITE('I get wlmz command',CR)
-		return_code = 204
-	ENDIF
+	ELSE
 
-
---Rotate TCP in the UTOOL frame
-	
-	IF (getstart = 'trpx') THEN
-		start = TRUE
-		trpx = TRUE
-		WRITE('I get trpx command',CR)
-		return_code = 204
-	ENDIF	
-	
-	IF (getstart = 'trpy') THEN
-		start = TRUE
-		trpy = TRUE
-		WRITE('I get trpy command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'trpz') THEN
-		start = TRUE
-		trpz = TRUE
-		WRITE('I get trpz command',CR)
-		return_code = 204
-	ENDIF	
-	
-	IF (getstart = 'trmx') THEN
-		start = TRUE
-		trmx = TRUE
-		WRITE('I get trmx command',CR)
-		return_code = 204
-	ENDIF	
-	
-	IF (getstart = 'trmy') THEN
-		start = TRUE
-		trmy = TRUE
-		WRITE('I get trmy command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'trmz') THEN
-		start = TRUE
-		trmz = TRUE
-		WRITE('I get trmz command',CR)
-		return_code = 204
-	ENDIF
-
-
---Go to preset PR positions
+		SET_JPOS_REG(PR_WEBJOINTS, jpos, STATUS)
 		
-	IF (getstart = 'pickup') THEN
-		start = TRUE
-		pickup = TRUE
-		WRITE('I get pickup command',CR)
+		IF (STATUS <> 0 ) THEN
+		
+			WRITE ('SET_JPOS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+		
+		ELSE		
+		
+			FLG[5] = ON
+			FLG[1] = ON
+	
+			IF FLG[5] AND FLG[1] THEN
+				WRITE('FLG5 and FLG1 are ON', CR)
+			ENDIF
+			
+		ENDIF
+	ENDIF
+
+END setpose
+
+
+--The main program
+
+BEGIN
+
+	WRITE (CHR(128),CHR(137))
+
+	IF (getstart = 'j') THEN
+		CNV_STR_REAL(getcpos, coordpos)
+		CNV_STR_REAL(getstep, movestep)
+		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
+		SET_REAL_REG(R_WEBSTEP, movestep, STATUS)
+		setcurjpos
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'l') THEN
+		CNV_STR_REAL(getcpos, coordpos)
+		CNV_STR_REAL(getstep, movestep)		
+		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
+		SET_REAL_REG(R_WEBSTEP, movestep, STATUS)
+		setcurxyz
+		return_code = 204
+	ENDIF
+
+	IF (getstart = 'r') THEN
+		CNV_STR_REAL(getcpos, coordpos)
+		CNV_STR_REAL(getstep, movestep)		
+		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
+		SET_REAL_REG(R_WEBSTEP, movestep, STATUS)
+		setcurwpr
 		return_code = 204
 	ENDIF
 	
-	IF (getstart = 'place') THEN
-		start = TRUE
-		place = TRUE
-		WRITE('I get place command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'zero') THEN
-		start = TRUE
-		zero = TRUE
-		WRITE('I get zero command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'coord') THEN
-		start = TRUE
-		coord = TRUE
-		WRITE('I get coord command',CR)
-		return_code = 204
-	ENDIF
-
-	IF (getstart = 'show') THEN
-		start = TRUE
-		show = TRUE
-		WRITE('I get show command',CR)
-		return_code = 204
-	ENDIF
-	
-	IF (getstart = 'touch') THEN
-		start = TRUE
-		touch = TRUE
-		WRITE('I get touch command',CR)
+	IF getstart = 'p' THEN
+		setpose
 		return_code = 204
 	ENDIF
 	

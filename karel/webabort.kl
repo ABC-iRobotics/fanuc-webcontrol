@@ -1,4 +1,5 @@
 PROGRAM webabort
+%COMMENT = 'v1'
 
 BEGIN
 

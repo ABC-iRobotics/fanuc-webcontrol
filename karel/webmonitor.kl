@@ -1,27 +1,29 @@
 PROGRAM webmonitor
+%COMMENT = 'v2'
 %NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
 
 VAR
 
-	currentPosJ: JOINTPOS
+	STATUS: INTEGER
+	currentPosj: JOINTPOS
 	valuePosJ: ARRAY[6] OF REAL
 	currentPos: XYZWPREXT
 	responseFile: FILE
-	STATUS: INTEGER
 
 BEGIN
 
 	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
 	
 		currentPosJ = CURJPOS(0,0)
-
+		
 		CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
 	
 		IF( STATUS = 0 ) THEN
-	
+
 			currentPos = CURPOS(0,0)
-			
+		
 			WRITE responseFile( '{', CR )
 				WRITE responseFile( '"joint": [' )
 					WRITE responseFile( valuePosJ[1],',' ) 
@@ -43,7 +45,7 @@ BEGIN
 	
 		ELSE
 	
-			WRITE responseFile(  'Something happend while joint positions are converted to real... :(.', CR )
+			WRITE responseFile(  'Something happend then  converting joints  position... :(.', CR )
 	
 		ENDIF
 
