@@ -47,7 +47,7 @@ Run the WEBMOTION tp program on the controller
 Open a browser and type: http://robotIP/md/webpanel.htm
 - JOG: jogging the robot (Push and hold down a button, but only use just one at the same time!)
 - POSE: move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.)
-- CART: move the TCP +/-xyz direction and/or rotate it in the UFRAME (Push and hold down a button, but only use just one at the same time!)
+- CART: move the TCP +/-xyz direction and/or rotate it in the World frame (Push and hold down a button, but only use just one at the same time!)
 
 ## Notes
 1. You can change the steps (defaults: 1 degree, 3 mm) and the predefined positions in the javascript part of the `webpanel.htm`.
