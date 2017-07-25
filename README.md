@@ -45,7 +45,7 @@ Set UNLOCK to HTTP authentication of KAREL:
 ## Example usage
 Run the WEBMOTION tp program on the controller
 Open a browser and type: http://robotIP/md/webpanel.htm
-- JOG page: jogging the robot (Push and hold down a button, but only use just one at the same time!)
+- JOG: jogging the robot (Push and hold down a button, but only use just one at the same time!)
 - POSE: move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.)
 - CART: move the TCP +/-xyz direction and/or rotate it in the UFRAME (Push and hold down a button, but only use just one at the same time!)
 
