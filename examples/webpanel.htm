@@ -10,27 +10,15 @@
   
   <style>
     body {
-      padding-top: 60px;
-      padding-bottom: 60px;
       background-color: #f8f8f8;
     }
-
     .ts-row {
       padding-top: 10px;
       padding-bottom: 10px;
-      background-color: #f8f8f8;
     }
-
-    .ts-row-empty {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      background-color: #f8f8f8;
-    }
-
     .ts-btn-90 {
       width: 90px;
     }
-
     .ts-btn-full {
       width: 100%;
     }  
@@ -38,33 +26,29 @@
   
 </head>
 <body>
-  
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="row text-center">
+
+  <div class="container">
+    <div class="row text-center ts-row">
       <div class="col-xs-4">
-      <button type="button" id="menu-joint" class="btn btn-warning navbar-btn btn-lg ts-btn-full ts-menu">JOG</button>
+        <button type="button" id="menu-jog" class="btn btn-warning navbar-btn btn-lg ts-btn-full ts-menu">JOG</button>
       </div>
       <div class="col-xs-4">
-      <button type="button" id="menu-poses" class="btn btn-success navbar-btn btn-lg ts-btn-full ts-menu">POSE</button>
+        <button type="button" id="menu-pose" class="btn btn-success navbar-btn btn-lg ts-btn-full ts-menu">POSE</button>
       </div>
       <div class="col-xs-4">
-      <button type="button" id="menu-tcp" class="btn btn-primary navbar-btn btn-lg ts-btn-full ts-menu">CART</button>
-      </div>
+        <button type="button" id="menu-cart" class="btn btn-primary navbar-btn btn-lg ts-btn-full ts-menu">CART</button>
       </div>
     </div>
-  </nav>
+  </div>
 
-  <div id="joint" class="container">
-
-    <div class="row ts-row-empty"></div>
+  <div id="jog" class="container">
 
     <div class="row text-center ts-row">
       <div class="col-xs-4">
         <button type="button" id="j1m" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J1-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="joint1">load...</h4>
+        <h4 class="j1">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j1p" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J1+</button>
@@ -76,7 +60,7 @@
         <button type="button" id="j2m" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J2-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="joint2">load...</h4>
+        <h4 class="j2">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j2p" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J2+</button>
@@ -88,7 +72,7 @@
         <button type="button" id="j3m" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J3-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="joint3">load...</h4>
+        <h4 class="j3">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j3p" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J3+</button>
@@ -100,7 +84,7 @@
         <button type="button" id="j4m" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J4-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="joint4">load...</h4>
+        <h4 class="j4">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j4p" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J4+</button>
@@ -112,7 +96,7 @@
         <button type="button" id="j5m" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J5-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="joint5">load...</h4>
+        <h4 class="j5">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j5p" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J5+</button>
@@ -124,7 +108,7 @@
         <button type="button" id="j6m" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J6-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="joint6">load...</h4>
+        <h4 class="j6">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j6p" class="btn btn-warning btn-lg ts-btn-90" touch-action="none">J6+</button>
@@ -133,174 +117,170 @@
 
   </div>
 
-  <div id="tcp" class="container">
-
-    <div class="row ts-row-empty"></div>
+  <div id="pose" class="container">
 
     <div class="row text-center ts-row">
       <div class="col-xs-4">
-        <button type="button" id="wlmx" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">X-</button>
-      </div>
-      <div class="col-xs-4">
-        <h4 class="wlx">load...</h4>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="wlpx" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">X+</button>
-      </div>
-    </div>
-
-    <div class="row text-center ts-row">
-      <div class="col-xs-4">
-        <button type="button" id="wlmy" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">Y-</button>
-      </div>
-      <div class="col-xs-4">
-        <h4 class="wly">load...</h4>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="wlpy" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">Y+</button>
-      </div>
-    </div>
-
-    <div class="row text-center ts-row">
-      <div class="col-xs-4">
-        <button type="button" id="wlmz" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">Z-</button>
-      </div>
-      <div class="col-xs-4">
-        <h4 class="wlz">load...</h4>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="wlpz" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">Z+</button>
-      </div>
-    </div>
-
-    <div class="row text-center ts-row">
-      <div class="col-xs-4">
-        <button type="button" id="wrmx" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">W-</button>
-      </div>
-      <div class="col-xs-4">
-        <h4 class="trx">load...</h4>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="wrpx" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">W+</button>
-      </div>
-    </div>
-
-    <div class="row text-center ts-row">
-      <div class="col-xs-4">
-        <button type="button" id="wrmy" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">P-</button>
-      </div>
-      <div class="col-xs-4">
-        <h4 class="try">load...</h4>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="wrpy" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">P+</button>
-      </div>
-    </div>
-
-    <div class="row text-center ts-row">
-      <div class="col-xs-4">
-        <button type="button" id="wrmz" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">R-</button>
-      </div>
-      <div class="col-xs-4">
-        <h4 class="trz">load...</h4>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="wrpz" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">R+</button>
-      </div>
-    </div>
-
-  </div>
-
-  <div id="poses" class="container">
-
-    <div class="row ts-row-empty"></div>
-
-    <div class="row text-center ts-row">
-      <div class="col-xs-4">
-        <h4 class="joint1">load...</h4>
+        <h4 class="j1">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="pickup" class="btn btn-success btn-lg ts-btn-90">Pickup</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wlx">load...</h4>
+        <h4 class="wx">load...</h4>
       </div>
     </div>
 
     <div class="row text-center ts-row">
       <div class="col-xs-4">
-        <h4 class="joint2">load...</h4>
+        <h4 class="j2">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="zero" class="btn btn-success btn-lg ts-btn-90">Zero</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wly">load...</h4>
+        <h4 class="wy">load...</h4>
       </div>
     </div>
 
     <div class="row text-center ts-row">
       <div class="col-xs-4">
-        <h4 class="joint3">load...</h4>
+        <h4 class="j3">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="place" class="btn btn-success btn-lg ts-btn-90">Place</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wlz">load...</h4>
+        <h4 class="wz">load...</h4>
       </div>  
     </div>
 
     <div class="row text-center ts-row">
       <div class="col-xs-4">
-        <h4 class="joint4">load...</h4>
+        <h4 class="j4">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="coord" class="btn btn-success btn-lg ts-btn-90">Coord</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="trx">load...</h4>
+        <h4 class="ww">load...</h4>
       </div>
     </div>
 
     <div class="row text-center ts-row">
       <div class="col-xs-4">
-        <h4 class="joint5">load...</h4>
+        <h4 class="j5">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="show" class="btn btn-success btn-lg ts-btn-90">Show</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="try">load...</h4>
+        <h4 class="wp">load...</h4>
       </div>
     </div>
 
     <div class="row text-center ts-row">
       <div class="col-xs-4">
-        <h4 class="joint6">load...</h4>
+        <h4 class="j6">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="touch" class="btn btn-success btn-lg ts-btn-90">Touch</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="trz">load...</h4>
+        <h4 class="wr">load...</h4>
       </div>
     </div>
 
   </div>
 
-  <div id="output"></div>
+  <div id="cart" class="container">
 
-  <nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-    <div class="row text-center">
-      <div class="col-xs-12">
-        <button type="button" id="abort" class="btn btn-danger navbar-btn btn-lg ts-btn-full">Abort</button>
+    <div class="row text-center ts-row">
+      <div class="col-xs-4">
+        <button type="button" id="wmx" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">X-</button>
+      </div>
+      <div class="col-xs-4">
+        <h4 class="wx">load...</h4>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="wpx" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">X+</button>
       </div>
     </div>
-    </div>
-  </nav>
 
+    <div class="row text-center ts-row">
+      <div class="col-xs-4">
+        <button type="button" id="wmy" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">Y-</button>
+      </div>
+      <div class="col-xs-4">
+        <h4 class="wy">load...</h4>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="wpy" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">Y+</button>
+      </div>
+    </div>
+
+    <div class="row text-center ts-row">
+      <div class="col-xs-4">
+        <button type="button" id="wmz" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">Z-</button>
+      </div>
+      <div class="col-xs-4">
+        <h4 class="wz">load...</h4>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="wpz" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">Z+</button>
+      </div>
+    </div>
+
+    <div class="row text-center ts-row">
+      <div class="col-xs-4">
+        <button type="button" id="wmw" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">W-</button>
+      </div>
+      <div class="col-xs-4">
+        <h4 class="ww">load...</h4>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="wpw" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">W+</button>
+      </div>
+    </div>
+
+    <div class="row text-center ts-row">
+      <div class="col-xs-4">
+        <button type="button" id="wmp" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">P-</button>
+      </div>
+      <div class="col-xs-4">
+        <h4 class="wp">load...</h4>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="wpp" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">P+</button>
+      </div>
+    </div>
+
+    <div class="row text-center ts-row">
+      <div class="col-xs-4">
+        <button type="button" id="wmr" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">R-</button>
+      </div>
+      <div class="col-xs-4">
+        <h4 class="wr">load...</h4>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="wpr" class="btn btn-primary btn-lg ts-btn-90" touch-action="none">R+</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row text-center ts-row">
+      <div class="col-xs-12">
+	    <button type="button" id="abort" class="btn btn-danger navbar-btn btn-lg ts-btn-full">Abort</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center">
+    <small>&copy; Copyright 2017, &#211;buda University - <a href="http://irob.uni-obuda.hu">iROB</a></small>
+  </footer>
+  
   <script>
 
     $(document).ready(function() {  
@@ -310,44 +290,44 @@
       var enButVar
       var setTime = 500
     
-      $('#joint').show()
-      $('#tcp').hide()
-      $('#poses').hide()
+      $('#jog').show()
+      $('#cart').hide()
+      $('#pose').hide()
 
-      $('#menu-joint').click(function() {
-        $('#joint').show()
-        $('#tcp').hide()
-        $('#poses').hide()
-      })  
+      $('#menu-jog').click(function() {
+        $('#jog').show()
+        $('#cart').hide()
+        $('#pose').hide()
+      })
 
-      $('#menu-tcp').click(function() {
-        $('#joint').hide()
-        $('#tcp').show()
-        $('#poses').hide()
-      })  
-
-      $('#menu-poses').click(function() {
-        $('#joint').hide()
-        $('#tcp').hide()
-        $('#poses').show()
+      $('#menu-pose').click(function() {
+        $('#jog').hide()
+        $('#cart').hide()
+        $('#pose').show()
       })      
+
+      $('#menu-cart').click(function() {
+        $('#jog').hide()
+        $('#cart').show()
+        $('#pose').hide()
+      })
 
       getposj()
 
       function getposj () {
         $.getJSON("/KAREL/webmonitor", function(data) {
-          $('.joint1').html(Math.round(data.joint[0]) + '&#176;')
-          $('.joint2').html(Math.round(data.joint[1]) + '&#176;')
-          $('.joint3').html(Math.round(data.joint[2]) + '&#176;')
-          $('.joint4').html(Math.round(data.joint[3]) + '&#176;')
-          $('.joint5').html(Math.round(data.joint[4]) + '&#176;')
-          $('.joint6').html(Math.round(data.joint[5]) + '&#176;')
-          $('.wlx').html(Math.round(data.pose[0]) + ' mm')
-          $('.wly').html(Math.round(data.pose[1]) + ' mm')
-          $('.wlz').html(Math.round(data.pose[2]) + ' mm')
-          $('.trx').html(Math.round(data.pose[3]) + '&#176;')
-          $('.try').html(Math.round(data.pose[4]) + '&#176;')
-          $('.trz').html(Math.round(data.pose[5]) + '&#176;')
+          $('.j1').html(Math.round(data.joint[0]) + '&#176;')
+          $('.j2').html(Math.round(data.joint[1]) + '&#176;')
+          $('.j3').html(Math.round(data.joint[2]) + '&#176;')
+          $('.j4').html(Math.round(data.joint[3]) + '&#176;')
+          $('.j5').html(Math.round(data.joint[4]) + '&#176;')
+          $('.j6').html(Math.round(data.joint[5]) + '&#176;')
+          $('.wx').html(Math.round(data.pose[0]) + ' mm')
+          $('.wy').html(Math.round(data.pose[1]) + ' mm')
+          $('.wz').html(Math.round(data.pose[2]) + ' mm')
+          $('.ww').html(Math.round(data.pose[3]) + '&#176;')
+          $('.wp').html(Math.round(data.pose[4]) + '&#176;')
+          $('.wr').html(Math.round(data.pose[5]) + '&#176;')
           setTimeout(getposj(), 100)
         })
       }
@@ -614,7 +594,7 @@
 
       // Move to linear
       
-      $('#wlmx').on('pointerdown', function() {
+      $('#wmx').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -633,7 +613,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wlpx').on('pointerdown', function() {
+      $('#wpx').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -650,7 +630,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wlmy').on('pointerdown', function() {
+      $('#wmy').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -667,7 +647,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wlpy').on('pointerdown', function() {
+      $('#wpy').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -684,7 +664,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wlmz').on('pointerdown', function() {
+      $('#wmz').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -701,7 +681,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wlpz').on('pointerdown', function() {
+      $('#wpz').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -721,7 +701,7 @@
 
       // Rotate the TCP
 
-      $('#wrmx').on('pointerdown', function() {
+      $('#wmw').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -738,7 +718,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wrpx').on('pointerdown', function() {
+      $('#wpw').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -755,7 +735,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wrmy').on('pointerdown', function() {
+      $('#wmp').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -772,7 +752,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wrpy').on('pointerdown', function() {
+      $('#wpp').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -789,7 +769,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wrmz').on('pointerdown', function() {
+      $('#wmr').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
@@ -806,7 +786,7 @@
         enButVar = setTimeout(enBut, setTime)
       })
 
-      $('#wrpz').on('pointerdown', function() {
+      $('#wpr').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
         $("#abort").prop("disabled", false)
