@@ -1,10 +1,66 @@
 PROGRAM webabort
-%COMMENT = 'v1'
+%COMMENT = 'v2'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+CONST
+	
+	PR_WEBJOINTS = 40
+	PR_WEBXYZWPR = 41
+	R_WEBCOORD = 40	
+	R_WEBSTEP = 41
+	R_WEBPUSH = 42
+
+VAR
+
+	STATUS: INTEGER
+	cur_jpos: JOINTPOS
+	cur_pos: XYZWPR
+	return_code: INTEGER
 
 BEGIN
 
-	--After run this empty program from a webbrowser, you have to reset the robot controller
-	--This empty program creates an error
-	--After robot controller reset and run the main program again the motion will keep going!!!
+	ABORT_TASK('WEBMOTiON', TRUE, TRUE, STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('ABORT_TASK built-IN failed WITH STATUS = ', STATUS, CR)
+	ENDIF
+	
+	cur_jpos = CURJPOS(0,0)
+	cur_pos = CURPOS(0,0)
+	
+	SET_JPOS_REG(PR_WEBJOINTS, cur_jpos, STATUS)	
+	IF (STATUS <> 0 ) THEN
+		WRITE ('SET_JPOS_REG built-IN failed in ABORT task WITH STATUS = ', STATUS, CR)
+	ENDIF
+	
+	SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('SET_POS_REG built-IN failed in ABORT task WITH STATUS = ', STATUS, CR)
+	ENDIF
+	
+	FLG[1] = OFF
+	FLG[2] = OFF
+	FLG[3] = OFF
+	FLG[4] = OFF
+	FLG[5] = OFF
+	FLG[6] = OFF
+	
+	SET_REAL_REG(R_WEBCOORD, 0, STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('SET_REL_REG built-IN 1 failed in ABORT task WITH STATUS = ', STATUS, CR)
+	ENDIF
+	
+	SET_REAL_REG(R_WEBSTEP, 0, STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('SET_REL_REG built-IN 2 failed in ABORT task WITH STATUS = ', STATUS, CR)
+	ENDIF
+
+	SET_REAL_REG(R_WEBPUSH, 99, STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('SET_REL_REG built-IN 3 failed in ABORT task WITH STATUS = ', STATUS, CR)
+	ENDIF
+
+	return_code = 204
 
 END webabort

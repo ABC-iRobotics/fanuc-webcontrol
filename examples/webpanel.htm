@@ -271,9 +271,12 @@
 
   <div class="container">
     <div class="row text-center ts-row">
-      <div class="col-xs-12">
+      <div class="col-xs-6">
 	    <button type="button" id="abort" class="btn btn-danger navbar-btn btn-lg ts-btn-full">Abort</button>
       </div>
+      <div class="col-xs-6">
+	    <button type="button" id="start" class="btn btn-success navbar-btn btn-lg ts-btn-full">Start</button>
+      </div>	  
     </div>
   </div>
 
@@ -333,6 +336,20 @@
       }
 
 
+      // Start motion
+
+      $('#start').click(function() {
+        console.log('Start motion')
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webstart',
+          cache: false,
+          success: function() {
+            console.log('Send START is success')
+          }
+        })
+      })	  
+	  
       // Abort motion
 
       $('#abort').click(function() {
