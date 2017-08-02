@@ -12,42 +12,74 @@ VAR
 	currentPos: XYZWPREXT
 	responseFile: FILE
 
+	task_no: INTEGER
+	attr_out: INTEGER
+	dummy_str: STRING[127]
+	running: INTEGER
+	
+	error_code: INTEGER
+	error_string: STRING[127]
+	cause_code: INTEGER
+	cause_string: STRING[127]
+	time_int: INTEGER
+	severity: INTEGER
+	prog_nam: STRING[127]
+
 BEGIN
 
-	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
-	
-		currentPosJ = CURJPOS(0,0)
-		
-		CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
-	
-		IF( STATUS = 0 ) THEN
+	WRITE (CHR(128),CHR(137))
 
-			currentPos = CURPOS(0,0)
-		
-			WRITE responseFile( '{', CR )
-				WRITE responseFile( '"joint": [' )
-					WRITE responseFile( valuePosJ[1],',' ) 
-					WRITE responseFile( valuePosJ[2],',' )
-					WRITE responseFile( valuePosJ[3],',' )
-					WRITE responseFile( valuePosJ[4],',' )
-					WRITE responseFile( valuePosJ[5],',' )
-					WRITE responseFile( valuePosJ[6] )
-				WRITE responseFile( ' ],', CR )
-				WRITE responseFile( '"pose": [' )
-					WRITE responseFile( currentPos.x,',')  
-					WRITE responseFile( currentPos.y,',')
-					WRITE responseFile( currentPos.z,',')
-					WRITE responseFile( currentPos.w,',')
-					WRITE responseFile( currentPos.p,',')
-					WRITE responseFile( currentPos.r )
-				WRITE responseFile( ' ] ', CR )
-			WRITE responseFile( '}')
+	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
 	
+	GET_TSK_INFO('webmotion', task_no, TSK_STATUS, attr_out, dummy_str, STATUS)
+
+	IF (STATUS <> 0 ) THEN
+		WRITE ('GET_TSK_INFO built-IN failed WITH STATUS = ', STATUS, CR)
+	ELSE
+		IF (attr_out = PG_RUNNING) THEN
+			running = 0
 		ELSE
-	
-			WRITE responseFile(  'Something happend then  converting joints  position... :(.', CR )
-	
+			running = 1
 		ENDIF
+	ENDIF
+	
+	currentPos = CURPOS(0,0)
+	
+	currentPosJ = CURJPOS(0,0)
+	
+	CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
+
+	IF (STATUS <> 0 ) THEN
+		WRITE ('CNV_JPOS_REL built-IN failed WITH STATUS = ', STATUS, CR)
+	ENDIF
+
+	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
+		
+		WRITE responseFile( '{', CR )
+			WRITE responseFile( '"joint": [' )
+				WRITE responseFile( valuePosJ[1],',') 
+				WRITE responseFile( valuePosJ[2],',')
+				WRITE responseFile( valuePosJ[3],',')
+				WRITE responseFile( valuePosJ[4],',')
+				WRITE responseFile( valuePosJ[5],',')
+				WRITE responseFile( valuePosJ[6] )
+			WRITE responseFile( ' ],', CR )
+			WRITE responseFile( '"pose": [' )
+				WRITE responseFile( currentPos.x,',')  
+				WRITE responseFile( currentPos.y,',')
+				WRITE responseFile( currentPos.z,',')
+				WRITE responseFile( currentPos.w,',')
+				WRITE responseFile( currentPos.p,',')
+				WRITE responseFile( currentPos.r )
+			WRITE responseFile( ' ],', CR )
+			WRITE responseFile( '"error": [' )
+				WRITE responseFile( error_code,',' )
+				WRITE responseFile( '"',error_string,'"' )
+			WRITE responseFile( ' ] ,', CR )
+			WRITE responseFile( '"status": [' )
+				WRITE responseFile( running )
+			WRITE responseFile( ' ] ', CR )							
+		WRITE responseFile( '}')
 
 	CLOSE FILE responseFile
 

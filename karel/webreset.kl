@@ -1,0 +1,22 @@
+PROGRAM webreset
+%COMMENT = 'v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+VAR
+
+	successful: BOOLEAN
+	prog_index: INTEGER
+
+BEGIN
+	
+	RESET(successful)
+
+	IF successful <> TRUE THEN
+		WRITE('RESET is NOT sucessful',CR)
+	ENDIF
+
+	CALL_PROG('webabort', prog_index)
+	
+END webreset

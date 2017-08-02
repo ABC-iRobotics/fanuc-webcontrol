@@ -10,6 +10,11 @@ VAR
 
 BEGIN
 
+	WRITE (CHR(128),CHR(137))
+
 	RUN_TASK('webmotion', 0, FALSE, FALSE, 1, STATUS )
+	IF (STATUS <> 0 ) THEN
+		WRITE ('RUN_TASK built-IN failed WITH STATUS = ', STATUS, CR)
+	ENDIF
 	
 END webstart
