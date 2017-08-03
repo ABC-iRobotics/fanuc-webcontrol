@@ -1,5 +1,5 @@
 PROGRAM webmonitor
-%COMMENT = 'v2'
+%COMMENT = 'v3'
 %NOLOCKGROUP
 %NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
@@ -26,8 +26,6 @@ VAR
 	prog_nam: STRING[127]
 
 BEGIN
-
-	WRITE (CHR(128),CHR(137))
 
 	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
 	

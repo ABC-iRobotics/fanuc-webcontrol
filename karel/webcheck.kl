@@ -16,37 +16,13 @@ VAR
 	cur_pos: XYZWPR	
 	new_jpos: JOINTPOS
 	new_pos: XYZWPREXT
-	websteprel: REAL
-	webstepint: INTEGER
-	zlimit: REAL
+	
+	config_ref: INTEGER
+	out_pos: POSITION
+	wjnt_cfg: CONFIG
+	ext_ang: ARRAY[3] OF REAL
 
 BEGIN
-
-
-	--limit the Z direction
-
-	cur_pos = CURPOS(0,0)
-	
-	GET_REG(R_WEBSTEP, TRUE, webstepint, websteprel, STATUS)
-
-	IF (STATUS <> 0 ) THEN
-	
-		WRITE ('GET_JPOS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
-		FLG[6] = ON
-		
-	ELSE
-
-		zlimit = cur_pos.z + websteprel
-	
-		IF zlimit <= -250 THEN
-	
-			FLG[6] = ON
-			WRITE('Z limit is reached!', CR)
-	
-		ENDIF
-		
-	ENDIF
-
 
 	--check the new jpos is in range
 	
@@ -60,17 +36,26 @@ BEGIN
 			
 		ELSE
 			
-			IF NOT J_IN_RANGE(new_jpos) THEN
-		
+			IF NOT J_IN_RANGE(new_jpos) THEN		
 				FLG[6] = ON
 				WRITE('Joint Position is not reachable!', CR)
-			
 			ENDIF
-	
+
+			--limit the Z direction
+
+			 config_ref = HALF_SOLN
+			
+			JOINT2POS (new_jpos, $UFRAME, $UTOOL, config_ref, out_pos, wjnt_cfg, ext_ang, STATUS)
+
+			new_pos = out_pos --Convert out_pos (POSITION) to XYZWPREXT
+
+			IF new_pos.z <= -250 THEN
+				FLG[6] = ON
+				WRITE('Z limit is reached!', CR)
+			ENDIF
 		ENDIF
 
 	ENDIF
-
 
 	--check the new pos is in range
 
@@ -85,10 +70,14 @@ BEGIN
 		ELSE
 			
 			IF NOT IN_RANGE(new_pos) THEN
-		
 				FLG[6] = ON
-				WRITE('Position is not reachable!', CR)
+				WRITE('Position is not reachable!', CR)			
+			ENDIF
 			
+			--limit the Z direction
+			IF new_pos.z <= -250 THEN
+				FLG[6] = ON
+				WRITE('Z limit is reached!', CR)
 			ENDIF
 		
 		ENDIF

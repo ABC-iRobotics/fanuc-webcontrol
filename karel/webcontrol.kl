@@ -180,8 +180,6 @@ END setpose
 
 BEGIN
 
-	WRITE (CHR(128),CHR(137))
-
 	IF (getstart = 'j') THEN
 		CNV_STR_REAL(getcpos, coordpos)
 		CNV_STR_REAL(getstep, movestep)
