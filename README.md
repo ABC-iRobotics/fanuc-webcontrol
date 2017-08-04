@@ -1,7 +1,7 @@
 # fanuc-webcontrol
 
 ## Overview
-Simple software to control Fanuc robots through browser.
+Simple software to control FANUC six degree of freedom robotic arms through a webbrowser.
 
 ![Image of fanuc-webcontrol](preview.png)
 
@@ -19,7 +19,7 @@ THE SOFTWARE IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT WITHOUT ANY 
 7. [Bugs, feature requests, etc](#bugs-feature-requests-etc)
 
 ## Requirements
-This is written in Fanuc Karel language and TP code. It is tested on FANUC M-430iA2P robot with R-J3iC controller v7.40
+This is written in Fanuc Karel language, TP code and JavaScript. It is tested on FANUC M-430iA2P robot with R-J3iC controller v7.40
 
 The following registers [R], position registers[PR] and FLAGs are used:
 - [R]: 40, 41, 42,
@@ -43,17 +43,16 @@ Set UNLOCK to HTTP authentication of KAREL:
 4. Set the cursor on `A` left side of KAREL. Select `F3[UNLOCK]`
 
 ## Example usage
-Run the WEBMOTION tp program on the controller
-Open a browser and type: http://robotIP/md/webpanel.htm
+Run the WEBMOTION tp program on the controller or open a browser and type: http://robotIP/md/webpanel.htm and click on the `Start` button (`Reset` may be needed)
 - JOG: jogging the robot (Push and hold down a button, but only use just one at the same time!)
-- POSE: move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.)
-- CART: move the TCP +/-xyz direction and/or rotate it in the World frame (Push and hold down a button, but only use just one at the same time!)
+- POSE: move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.) **Important: SEE NOTE NO.2**
+- CART: move the TCP +/-xyz direction and/or rotate it in the currently selected tool coordinate system. (Push and hold down a button, but only use just one at the same time!)
 
 ## Notes
-1. You can change the steps (defaults: 1 degree, 3 mm) and the predefined positions in the javascript part of the `webpanel.htm`.
-2. After push ABORT buttons, you have to reset the controller and abort all running task (`Fctn -> 1 ABORT (ALL)`), AND jump back to the first line of the `WEBMOTION` TP program.
-3. If you push very offen (e.g. twice in a second) a button on the `webpanel.htm` then your browser can be crashed and need to be reload or re-open it.
-4. If the Z limit is reached the robot motion is locked. Press a POSE key to unlock it.
+1. You can change the default steps (1 degree, 3 mm) in the javascript part of the `webpanel.htm`. In this case you may also have to update the `setInt` variable in this file.
+2. The predefined positions were tested on FANUC M-430iA2P. If you have an other type of FANUC robot, you might have to change these positions' coordinates.
+3. If you try to push more buttons at the same time then your browser may be malfunctioning and will continously send the `keep` moving command... You need to be ABORT the motion and reload or re-open the browser page. Please push only one button at the same time!
+4. The PR[40] and PR[41] contain the movements coordinates. In these the UF:F and UT:F. This means that the coordinate system of the tool coordinate system number currently selected is used.
 
 ## Acknowledgement
 We acknowledge the financial support of this work by the Hungarian State and the European Union under the  EFOP-3.6.1-16-2016-00010 project.

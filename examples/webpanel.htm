@@ -12,10 +12,16 @@
     body {
       background-color: #f8f8f8;
     }
-    .ts-row {
+    .ts-row-0 {
+      padding-top: 10px;
+    } 	
+    .ts-row-1 {
+      padding-bottom: 10px;
+    } 	
+    .ts-row-2 {
       padding-top: 10px;
       padding-bottom: 10px;
-    }
+    } 
     .ts-btn-90 {
       width: 90px;
     }
@@ -28,7 +34,7 @@
 <body>
 
   <div class="container">
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-0">
       <div class="col-xs-4">
         <button type="button" id="menu-jog" class="btn btn-warning navbar-btn ts-btn-full ts-menu">JOG</button>
       </div>
@@ -44,14 +50,14 @@
   <div class="container">  
     <div class="row">
       <div class="col-xs-12 text-center">
-        <h4 id="status">load...</h4>
+        <h4 class="well well-sm" id="status">load...</h4>
       </div>
     </div>    
   </div>
   
   <div id="jog" class="container">
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-1">
       <div class="col-xs-4">
         <button type="button" id="j1m" class="btn btn-warning ts-btn-90" touch-action="none">J1-</button>
       </div>
@@ -63,7 +69,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="j2m" class="btn btn-warning ts-btn-90" touch-action="none">J2-</button>
       </div>
@@ -75,7 +81,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="j3m" class="btn btn-warning ts-btn-90" touch-action="none">J3-</button>
       </div>
@@ -87,7 +93,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="j4m" class="btn btn-warning ts-btn-90" touch-action="none">J4-</button>
       </div>
@@ -99,7 +105,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="j5m" class="btn btn-warning ts-btn-90" touch-action="none">J5-</button>
       </div>
@@ -111,7 +117,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="j6m" class="btn btn-warning ts-btn-90" touch-action="none">J6-</button>
       </div>
@@ -127,7 +133,7 @@
 
   <div id="pose" class="container">
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-1">
       <div class="col-xs-4">
         <h4 class="j1">load...</h4>
       </div>
@@ -139,7 +145,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <h4 class="j2">load...</h4>
       </div>
@@ -151,7 +157,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <h4 class="j3">load...</h4>
       </div>
@@ -163,7 +169,7 @@
       </div>  
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <h4 class="j4">load...</h4>
       </div>
@@ -175,7 +181,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <h4 class="j5">load...</h4>
       </div>
@@ -187,7 +193,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <h4 class="j6">load...</h4>
       </div>
@@ -203,7 +209,7 @@
 
   <div id="cart" class="container">
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-1">
       <div class="col-xs-4">
         <button type="button" id="wmx" class="btn btn-primary ts-btn-90" touch-action="none">X-</button>
       </div>
@@ -215,7 +221,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="wmy" class="btn btn-primary ts-btn-90" touch-action="none">Y-</button>
       </div>
@@ -227,7 +233,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="wmz" class="btn btn-primary ts-btn-90" touch-action="none">Z-</button>
       </div>
@@ -239,7 +245,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="wmw" class="btn btn-primary ts-btn-90" touch-action="none">W-</button>
       </div>
@@ -251,7 +257,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="wmp" class="btn btn-primary ts-btn-90" touch-action="none">P-</button>
       </div>
@@ -263,7 +269,7 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-2">
       <div class="col-xs-4">
         <button type="button" id="wmr" class="btn btn-primary ts-btn-90" touch-action="none">R-</button>
       </div>
@@ -278,16 +284,16 @@
   </div>
 
   <div class="container">
-    <div class="row text-center ts-row">
+    <div class="row text-center ts-row-1">
       <div class="col-xs-4">
-	    <button type="button" id="reset" class="btn navbar-btn ts-btn-full">Reset</button>
+      <button type="button" id="reset" class="btn navbar-btn ts-btn-full">Reset</button>
       </div>
       <div class="col-xs-4">
-	    <button type="button" id="abort" class="btn btn-danger navbar-btn ts-btn-full">Abort</button>
-      </div>	  
+      <button type="button" id="abort" class="btn btn-danger navbar-btn ts-btn-full">Abort</button>
+      </div>    
       <div class="col-xs-4">
-	    <button type="button" id="start" class="btn btn-info navbar-btn ts-btn-full">Start</button>
-      </div>	  
+      <button type="button" id="start" class="btn btn-info navbar-btn ts-btn-full">Start</button>
+      </div>    
     </div>
   </div>
 
@@ -303,10 +309,7 @@
       var setInt = 50
       var enButVar
       var setTime = 500
-      var error_code
-	  var error_string
-	  var running
-	  
+    
       $('#jog').show()
       $('#cart').hide()
       $('#pose').hide()
@@ -345,25 +348,51 @@
           $('.ww').html(Math.round(data.pose[3]) + '&#176;')
           $('.wp').html(Math.round(data.pose[4]) + '&#176;')
           $('.wr').html(Math.round(data.pose[5]) + '&#176;')
-		  error_code = data.error[0]
-		  error_string = data.error[1]
-		  running = data.status[0]
-		  if (error_code == 0) {
-		    if (running == 0) {
-			  $('#status').html("RUNNING")
-			  $('#status').css("color", "#5cb85c")
-			} else {
-			  $('#status').html("READY")
-			  $('#status').css("color", "#428bca")
-			}
-		  } else {
-		    $('#status').html(error_string)
-			$('#status').css("color", "#d9534f")
-		  }
-          setTimeout(getposj(), 100)
+      if (data.error[0] == 0) {
+        if (data.status[0] == 0) {
+        $('#status').html("Webmotion is running")
+        $('#status').css("color", "#5cb85c")
+      } else {
+        $('#status').html("Webmotion is ready")
+        $('#status').css("color", "#428bca")
+      }
+      } else {
+        $('#status').html(data.error[1])
+      $('#status').css("color", "#d9534f")
+      }
+      if (data.joint[0] > 170 || data.joint[0] < -170) {
+        $('.j1').css("color", "#ff0000")
+      } else {
+        $('.j1').css("color", "")
+      }
+      if (data.joint[1] > 105 || data.joint[1] < -105) {
+        $('.j2').css("color", "#ff0000")
+      } else {
+        $('.j2').css("color", "")
+      }
+      if (data.joint[2] > 140 || data.joint[2] < -140) {
+        $('.j3').css("color", "#ff0000")
+      } else {
+        $('.j3').css("color", "")
+      }
+      if (data.joint[3] > 180 || data.joint[3] < -180) {
+        $('.j4').css("color", "#ff0000")
+      } else {
+        $('.j4').css("color", "")
+      }
+      if (data.joint[4] > 140 || data.joint[4] < -140) {
+        $('.j5').css("color", "#ff0000")
+      } else {
+        $('.j5').css("color", "")
+      }
+      if (data.joint[5] > 260 || data.joint[5] < -260) {
+        $('.j6').css("color", "#ff0000")
+      } else {
+        $('.j6').css("color", "")
+      }      
+          setTimeout(getposj(), 111)
         })
       }
-
 
       // Start motion
 
@@ -377,7 +406,7 @@
             console.log('Send START is successful')
           }
         })
-      })	  
+      })
 
       // Reset the controller
 
@@ -392,7 +421,7 @@
           }
         })
       })
-	  
+
       // Abort motion
 
       $('#abort').click(function() {
@@ -406,8 +435,7 @@
           }
         })
       })
-      
-      
+
       // Keep motion
       
       function webkeep() {
@@ -420,9 +448,8 @@
             console.log('Send KEEP is successful')
           }
         })  
-      }    
+      }
 
-      
       // Stop motion
       
       function webstop() {
@@ -437,14 +464,12 @@
         })
       }
 
-      
       // Enable buttons after motion
       
       function enBut() {
         $(".btn").removeAttr("disabled")
       }
-
-
+    
       // Jogging
 
       $('#j1m').on('pointerdown', function() {
@@ -480,7 +505,7 @@
         clearInterval(refresh)
         enButVar = setTimeout(enBut, setTime)
       })
- 
+
       $('#j2m').on('pointerdown', function() {
         clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
@@ -651,7 +676,6 @@
         enButVar = setTimeout(enBut, setTime)
       }) 
 
-
       // Move to linear
       
       $('#wmx').on('pointerdown', function() {
@@ -757,7 +781,6 @@
         clearInterval(refresh)
         enButVar = setTimeout(enBut, setTime)
       })
-
 
       // Rotate the TCP
 
