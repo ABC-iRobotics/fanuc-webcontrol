@@ -53,6 +53,7 @@ Run the WEBMOTION tp program on the controller or open a browser and type: http:
 2. The predefined positions were tested on FANUC M-430iA2P. If you have an other type of FANUC robot, you might have to change these positions' coordinates.
 3. If you try to push more buttons at the same time then your browser may be malfunctioning and will continously send the `keep` moving command... You need to be ABORT the motion and reload or re-open the browser page. Please push only one button at the same time!
 4. The PR[40] and PR[41] contain the movements coordinates. In these the UF:F and UT:F. This means that the coordinate system of the tool coordinate system number currently selected is used.
+5. TCP Z limit is -250mm. It is set for floor mounted FANUC M-430iA2P robot. If you have an other type of FANUC robot and/or it is mounted an other way, you might have to modify this limit.
 
 ## Acknowledgement
 We acknowledge the financial support of this work by the Hungarian State and the European Union under the  EFOP-3.6.1-16-2016-00010 project.

@@ -27,6 +27,14 @@ VAR
 
 BEGIN
 
+	IF UNINIT( running ) THEN running = 1; ENDIF
+	IF UNINIT( valuePosJ[1] ) THEN valuePosJ[1] = 100000; ENDIF
+	IF UNINIT( valuePosJ[2] ) THEN valuePosJ[2] = 100000; ENDIF
+	IF UNINIT( valuePosJ[3] ) THEN valuePosJ[3] = 100000; ENDIF
+	IF UNINIT( valuePosJ[4] ) THEN valuePosJ[4] = 100000; ENDIF
+	IF UNINIT( valuePosJ[5] ) THEN valuePosJ[5] = 100000; ENDIF
+	IF UNINIT( valuePosJ[6] ) THEN valuePosJ[6] = 100000; ENDIF
+
 	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
 	
 	GET_TSK_INFO('webmotion', task_no, TSK_STATUS, attr_out, dummy_str, STATUS)

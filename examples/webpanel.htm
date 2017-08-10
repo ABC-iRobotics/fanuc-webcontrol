@@ -14,20 +14,20 @@
     }
     .ts-row-0 {
       padding-top: 10px;
-    } 	
+    }
     .ts-row-1 {
       padding-bottom: 10px;
-    } 	
+    }
     .ts-row-2 {
       padding-top: 10px;
       padding-bottom: 10px;
-    } 
+    }
     .ts-btn-90 {
       width: 90px;
     }
     .ts-btn-full {
       width: 100%;
-    }  
+    }
   </style>
   
 </head>
@@ -336,60 +336,37 @@
 
       function getposj () {
         $.getJSON("/KAREL/webmonitor", function(data) {
-          $('.j1').html(Math.round(data.joint[0]) + '&#176;')
-          $('.j2').html(Math.round(data.joint[1]) + '&#176;')
-          $('.j3').html(Math.round(data.joint[2]) + '&#176;')
-          $('.j4').html(Math.round(data.joint[3]) + '&#176;')
-          $('.j5').html(Math.round(data.joint[4]) + '&#176;')
-          $('.j6').html(Math.round(data.joint[5]) + '&#176;')
+
+          for (i = 0; i <= 5; i++) {
+            if (data.joint[i] == 100000) { 
+              $('.j' + (i+1)).html('N/A')
+			  $('#j' + (i+1) + 'p').prop("disabled", true)
+			  $('#j' + (i+1) + 'm').prop("disabled", true)
+            } else {
+              $('.j' + (i+1)).html(Math.round(data.joint[i]) + '&#176;')
+            }
+          }
+
           $('.wx').html(Math.round(data.pose[0]) + ' mm')
           $('.wy').html(Math.round(data.pose[1]) + ' mm')
           $('.wz').html(Math.round(data.pose[2]) + ' mm')
           $('.ww').html(Math.round(data.pose[3]) + '&#176;')
           $('.wp').html(Math.round(data.pose[4]) + '&#176;')
           $('.wr').html(Math.round(data.pose[5]) + '&#176;')
-      if (data.error[0] == 0) {
-        if (data.status[0] == 0) {
-        $('#status').html("Webmotion is running")
-        $('#status').css("color", "#5cb85c")
-      } else {
-        $('#status').html("Webmotion is ready")
-        $('#status').css("color", "#428bca")
-      }
-      } else {
-        $('#status').html(data.error[1])
-      $('#status').css("color", "#d9534f")
-      }
-      if (data.joint[0] > 170 || data.joint[0] < -170) {
-        $('.j1').css("color", "#ff0000")
-      } else {
-        $('.j1').css("color", "")
-      }
-      if (data.joint[1] > 105 || data.joint[1] < -105) {
-        $('.j2').css("color", "#ff0000")
-      } else {
-        $('.j2').css("color", "")
-      }
-      if (data.joint[2] > 140 || data.joint[2] < -140) {
-        $('.j3').css("color", "#ff0000")
-      } else {
-        $('.j3').css("color", "")
-      }
-      if (data.joint[3] > 180 || data.joint[3] < -180) {
-        $('.j4').css("color", "#ff0000")
-      } else {
-        $('.j4').css("color", "")
-      }
-      if (data.joint[4] > 140 || data.joint[4] < -140) {
-        $('.j5').css("color", "#ff0000")
-      } else {
-        $('.j5').css("color", "")
-      }
-      if (data.joint[5] > 260 || data.joint[5] < -260) {
-        $('.j6').css("color", "#ff0000")
-      } else {
-        $('.j6').css("color", "")
-      }      
+
+          if (data.error[0] == 0) {
+            if (data.status[0] == 0) {
+              $('#status').html("Webmotion is running")
+              $('#status').css("color", "#5cb85c")
+            } else {
+              $('#status').html("Standby")
+              $('#status').css("color", "#428bca")
+            }
+          } else {
+            $('#status').html(data.error[1])
+            $('#status').css("color", "#d9534f")
+          }
+
           setTimeout(getposj(), 111)
         })
       }
@@ -790,7 +767,7 @@
         $("#abort").prop("disabled", false)
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?getstart=r&getcpos=4&getstep=-3',
+          url: '/KAREL/webcontrol?getstart=r&getcpos=4&getstep=-1',
           cache: false,
           success: function() {}
         })
@@ -807,7 +784,7 @@
         $("#abort").prop("disabled", false)
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?getstart=r&getcpos=4&getstep=3',
+          url: '/KAREL/webcontrol?getstart=r&getcpos=4&getstep=1',
           cache: false,
           success: function() {}
         })
@@ -824,7 +801,7 @@
         $("#abort").prop("disabled", false)
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?getstart=r&getcpos=5&getstep=-3',
+          url: '/KAREL/webcontrol?getstart=r&getcpos=5&getstep=-1',
           cache: false,
           success: function() {}
         })
@@ -841,7 +818,7 @@
         $("#abort").prop("disabled", false)
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?getstart=r&getcpos=5&getstep=3',
+          url: '/KAREL/webcontrol?getstart=r&getcpos=5&getstep=1',
           cache: false,
           success: function() {}
         })
@@ -858,7 +835,7 @@
         $("#abort").prop("disabled", false)
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?getstart=r&getcpos=6&getstep=-3',
+          url: '/KAREL/webcontrol?getstart=r&getcpos=6&getstep=-1',
           cache: false,
           success: function() {}
         })
@@ -875,7 +852,7 @@
         $("#abort").prop("disabled", false)
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?getstart=r&getcpos=6&getstep=3',
+          url: '/KAREL/webcontrol?getstart=r&getcpos=6&getstep=1',
           cache: false,
           success: function() {}
         })
