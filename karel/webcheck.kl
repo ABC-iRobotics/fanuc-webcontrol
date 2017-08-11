@@ -16,6 +16,8 @@ VAR
 	cur_pos: XYZWPR	
 	new_jpos: JOINTPOS
 	new_pos: XYZWPREXT
+	reach_ab: INTEGER
+	limit_z: INTEGER
 	
 	config_ref: INTEGER
 	out_pos: POSITION
@@ -26,7 +28,7 @@ BEGIN
 
 	--check the new jpos is in range
 	
-	IF FLG[2] THEN
+	IF FLG[2] OR FLG[5] THEN
 
 		new_jpos = GET_JPOS_REG(PR_WEBJOINTS, STATUS)
 
@@ -38,7 +40,9 @@ BEGIN
 			
 			IF NOT J_IN_RANGE(new_jpos) THEN		
 				FLG[6] = ON
-				WRITE('Joint Position is not reachable!', CR)
+				reach_ab = 1
+			ELSE
+				reach_ab = 0
 			ENDIF
 
 			--limit the Z direction
@@ -51,7 +55,9 @@ BEGIN
 
 			IF new_pos.z <= -250 THEN
 				FLG[6] = ON
-				WRITE('Z limit is reached!', CR)
+				limit_z = 1
+			ELSE
+				limit_z = 0
 			ENDIF
 		ENDIF
 
@@ -71,13 +77,17 @@ BEGIN
 			
 			IF NOT IN_RANGE(new_pos) THEN
 				FLG[6] = ON
-				WRITE('Position is not reachable!', CR)			
+				reach_ab = 1
+			ELSE
+				reach_ab = 0
 			ENDIF
 			
 			--limit the Z direction
 			IF new_pos.z <= -250 THEN
 				FLG[6] = ON
-				WRITE('Z limit is reached!', CR)
+				limit_z = 1
+			ELSE
+				limit_z = 0
 			ENDIF
 		
 		ENDIF

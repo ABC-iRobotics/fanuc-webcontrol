@@ -24,10 +24,15 @@ VAR
 	time_int: INTEGER
 	severity: INTEGER
 	prog_nam: STRING[127]
+	
+	reach_ab IN DRAM FROM webcheck: INTEGER
+	limit_z IN DRAM FROM webcheck: INTEGER
 
 BEGIN
 
-	IF UNINIT( running ) THEN running = 1; ENDIF
+	IF UNINIT( running ) THEN running = 0; ENDIF
+	IF UNINIT( reach_ab ) THEN reach_ab = 0; ENDIF
+	IF UNINIT( limit_z ) THEN limit_z = 0; ENDIF
 	IF UNINIT( valuePosJ[1] ) THEN valuePosJ[1] = 100000; ENDIF
 	IF UNINIT( valuePosJ[2] ) THEN valuePosJ[2] = 100000; ENDIF
 	IF UNINIT( valuePosJ[3] ) THEN valuePosJ[3] = 100000; ENDIF
@@ -43,9 +48,9 @@ BEGIN
 		WRITE ('GET_TSK_INFO built-IN failed WITH STATUS = ', STATUS, CR)
 	ELSE
 		IF (attr_out = PG_RUNNING) THEN
-			running = 0
-		ELSE
 			running = 1
+		ELSE
+			running = 0
 		ENDIF
 	ENDIF
 	
@@ -83,8 +88,10 @@ BEGIN
 				WRITE responseFile( '"',error_string,'"' )
 			WRITE responseFile( ' ] ,', CR )
 			WRITE responseFile( '"status": [' )
-				WRITE responseFile( running )
-			WRITE responseFile( ' ] ', CR )							
+				WRITE responseFile( running,',')
+				WRITE responseFile( reach_ab,',')
+				WRITE responseFile( limit_z)
+			WRITE responseFile( ' ] ', CR )
 		WRITE responseFile( '}')
 
 	CLOSE FILE responseFile

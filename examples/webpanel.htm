@@ -355,9 +355,15 @@
           $('.wr').html(Math.round(data.pose[5]) + '&#176;')
 
           if (data.error[0] == 0) {
-            if (data.status[0] == 0) {
+            if (data.status[0] == 1) {
               $('#status').html("Webmotion is running")
               $('#status').css("color", "#5cb85c")
+              if (data.status[1] == 1) {
+                $('#status').html("Position not reachable")
+              }
+              if (data.status[2] == 1) {
+                $('#status').html("Z limit is reached")
+              }
             } else {
               $('#status').html("Standby")
               $('#status').css("color", "#428bca")
