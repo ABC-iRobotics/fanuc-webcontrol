@@ -10,6 +10,13 @@ CONST
 	PR_WEBXYZWPR = 41
 	R_WEBSTEP = 41
 
+	R_WEBXMAX = 43	
+	R_WEBYMAX = 44
+	R_WEBZMAX = 45
+	R_WEBXMIN = 46
+	R_WEBYMIN = 47
+	R_WEBZMIN = 48
+
 VAR
 
 	STATUS: INTEGER
@@ -17,6 +24,8 @@ VAR
 	new_jpos: JOINTPOS
 	new_pos: XYZWPREXT
 	reach_ab: INTEGER
+	limit_x: INTEGER
+	limit_y: INTEGER
 	limit_z: INTEGER
 	
 	config_ref: INTEGER
@@ -24,7 +33,39 @@ VAR
 	wjnt_cfg: CONFIG
 	ext_ang: ARRAY[3] OF REAL
 
+	xmax_flag: BOOLEAN
+	ymax_flag: BOOLEAN
+	zmax_flag: BOOLEAN
+	xmin_flag: BOOLEAN
+	ymin_flag: BOOLEAN
+	zmin_flag: BOOLEAN
+	
+	xmax_int: INTEGER
+	ymax_int: INTEGER
+	zmax_int: INTEGER
+	xmin_int: INTEGER
+	ymin_int: INTEGER
+	zmin_int: INTEGER
+	
+	xmax_real: REAL
+	ymax_real: REAL
+	zmax_real: REAL
+	xmin_real: REAL
+	ymin_real: REAL
+	zmin_real: REAL
+
 BEGIN
+
+	GET_REG(R_WEBXMAX, xmax_flag, xmax_int, xmax_real, STATUS)
+	GET_REG(R_WEBYMAX, ymax_flag, ymax_int, ymax_real, STATUS)
+	GET_REG(R_WEBZMAX, zmax_flag, zmax_int, zmax_real, STATUS)
+	GET_REG(R_WEBXMIN, xmin_flag, xmin_int, xmin_real, STATUS)
+	GET_REG(R_WEBYMIN, ymin_flag, ymin_int, ymin_real, STATUS)
+	GET_REG(R_WEBZMIN, zmin_flag, zmin_int, zmin_real, STATUS)
+
+	limit_x = 0
+	limit_y = 0
+	limit_z = 0
 
 	--check the new jpos is in range
 	
@@ -53,12 +94,35 @@ BEGIN
 
 			new_pos = out_pos --Convert out_pos (POSITION) to XYZWPREXT
 
-			IF new_pos.z <= -250 THEN
+			IF new_pos.x <= xmin_real THEN
 				FLG[6] = ON
-				limit_z = 1
-			ELSE
-				limit_z = 0
+				limit_x = 6
 			ENDIF
+			
+			IF new_pos.x >= xmax_real THEN
+				FLG[6] = ON
+				limit_x = 3
+			ENDIF
+
+			IF new_pos.y <= ymin_real THEN
+				FLG[6] = ON
+				limit_y = 6
+			ENDIF
+			
+			IF new_pos.y >= ymax_real THEN
+				FLG[6] = ON
+				limit_y = 3
+			ENDIF
+
+			IF new_pos.z <= zmin_real THEN
+				FLG[6] = ON
+				limit_z = 6
+			ENDIF
+			
+			IF new_pos.z >= zmax_real THEN
+				FLG[6] = ON
+				limit_z = 3
+			ENDIF		
 		ENDIF
 
 	ENDIF
@@ -83,13 +147,36 @@ BEGIN
 			ENDIF
 			
 			--limit the Z direction
-			IF new_pos.z <= -250 THEN
+
+			IF new_pos.x <= xmin_real THEN
 				FLG[6] = ON
-				limit_z = 1
-			ELSE
-				limit_z = 0
+				limit_x = 6
 			ENDIF
-		
+			
+			IF new_pos.x >= xmax_real THEN
+				FLG[6] = ON
+				limit_x = 3
+			ENDIF
+
+			IF new_pos.y <= ymin_real THEN
+				FLG[6] = ON
+				limit_y = 6
+			ENDIF
+			
+			IF new_pos.y >= ymax_real THEN
+				FLG[6] = ON
+				limit_y = 3
+			ENDIF
+
+			IF new_pos.z <= zmin_real THEN
+				FLG[6] = ON
+				limit_z = 6
+			ENDIF
+
+			IF new_pos.z >= zmax_real THEN
+				FLG[6] = ON
+				limit_z = 3
+			ENDIF		
 		ENDIF
 
 	ENDIF

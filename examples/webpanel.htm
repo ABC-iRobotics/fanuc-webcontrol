@@ -41,7 +41,7 @@
         <button type="button" id="menu-cart" class="btn btn-primary navbar-btn ts-btn-full ts-menu">CART</button>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="menu-pose" class="btn btn-success navbar-btn ts-btn-full ts-menu">POSE</button>
+        <button type="button" id="menu-set" class="btn btn-success navbar-btn ts-btn-full ts-menu">SET</button>
       </div>
     </div>
   </div>
@@ -206,92 +206,100 @@
 
   </div>
 
-  <div id="pose" class="container">
+  <div id="set" class="container">
 
-    <div class="row text-center ts-row-1">
+    <div class="row text-center">
       <div class="col-xs-4">
-        <h4 class="j1">load...</h4>
+        <h4 id="xMax">Load...</h4>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="pickup" class="btn btn-success ts-btn-90">Pickup</button>
+        <h4 id="yMax">Load...</h4>
       </div>
       <div class="col-xs-4">
-        <h4 class="wx">load...</h4>
+        <h4 id="zMax">Load...</h4>
       </div>
     </div>
 
+    <div class="row text-center ts-row-1">
+      <div class="col-xs-4">
+        <button type="button" id="xMaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#xMaxSet">X max</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="yMaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#yMaxSet">Y max</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="zMaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#zMaxSet">Z max</button>
+      </div>
+    </div>
+
+    <div class="row text-center ts-row-1"></div>
+
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <h4 id="xMin">Load...</h4>
+      </div>
+      <div class="col-xs-4">
+        <h4 id="yMin">Load...</h4>
+      </div>
+      <div class="col-xs-4">
+        <h4 id="zMin">Load...</h4>
+      </div> 
+    </div>
+
+    <div class="row text-center ts-row-1">
+      <div class="col-xs-4">
+        <button type="button" id="xMinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#xMinSet">X min</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="yMinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#yMinSet">Y min</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="zMinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#zMinSet">Z min</button>
+      </div>
+    </div>
+
+    <div class="row text-center ts-row-2"></div>
+
     <div class="row text-center ts-row-2">
       <div class="col-xs-4">
-        <h4 class="j2">load...</h4>
+        <button type="button" id="pickup" class="btn btn-success ts-btn-90">Pickup</button>
       </div>
       <div class="col-xs-4">
         <button type="button" id="zero" class="btn btn-success ts-btn-90">Zero</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wy">load...</h4>
-      </div>
-    </div>
-
-    <div class="row text-center ts-row-2">
-      <div class="col-xs-4">
-        <h4 class="j3">load...</h4>
-      </div>
-      <div class="col-xs-4">
         <button type="button" id="place" class="btn btn-success ts-btn-90">Place</button>
       </div>
-      <div class="col-xs-4">
-        <h4 class="wz">load...</h4>
-      </div>  
     </div>
 
+    <div class="row text-center ts-row-2"></div>
+
     <div class="row text-center ts-row-2">
-      <div class="col-xs-4">
-        <h4 class="j4">load...</h4>
-      </div>
       <div class="col-xs-4">
         <button type="button" id="coord" class="btn btn-success ts-btn-90">Coord</button>
-      </div>
-      <div class="col-xs-4">
-        <h4 class="ww">load...</h4>
-      </div>
-    </div>
-
-    <div class="row text-center ts-row-2">
-      <div class="col-xs-4">
-        <h4 class="j5">load...</h4>
       </div>
       <div class="col-xs-4">
         <button type="button" id="show" class="btn btn-success ts-btn-90">Show</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wp">load...</h4>
+        <button type="button" id="touch" class="btn btn-success ts-btn-90">Touch</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
-      <div class="col-xs-4">
-        <h4 class="j6">load...</h4>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="touch" class="btn btn-success ts-btn-90">Touch</button>
-      </div>
-      <div class="col-xs-4">
-        <h4 class="wr">load...</h4>
-      </div>
-    </div>
+    <div class="row text-center ts-row-2"></div>
 
   </div>
 
   <div class="container">
     <div class="row text-center ts-row-1">
       <div class="col-xs-4">
-      <button type="button" id="reset" class="btn navbar-btn ts-btn-full">Reset</button>
+        <button type="button" id="reset" class="btn navbar-btn ts-btn-full">Reset</button>
       </div>
       <div class="col-xs-4">
-      <button type="button" id="abort" class="btn btn-danger navbar-btn ts-btn-full">Abort</button>
+        <button type="button" id="abort" class="btn btn-danger navbar-btn ts-btn-full">Abort</button>
       </div>    
       <div class="col-xs-4">
-      <button type="button" id="start" class="btn btn-info navbar-btn ts-btn-full">Start</button>
+        <button type="button" id="start" class="btn btn-info navbar-btn ts-btn-full">Start</button>
       </div>    
     </div>
   </div>
@@ -299,7 +307,117 @@
   <footer class="text-center">
     <small>&copy; Copyright 2017, &#211;buda University - <a href="http://irob.uni-obuda.hu">iROB</a></small>
   </footer>
-  
+
+  <!-- Modals -->
+
+  <div id="xMaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enter the new value</h4>
+        </div>
+        <div class="modal-body">
+          <h4>X max: <input type="number" id="xMaxNew" min="-9999" max="9999"></h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="xMaxSave" class="btn btn-default" data-dismiss="modal">Save</button>
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="yMaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enter the new value</h4>
+        </div>
+        <div class="modal-body">
+          <h4>Y max: <input type="number" id="yMaxNew" min="-9999" max="9999"></h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="yMaxSave" class="btn btn-default" data-dismiss="modal">Save</button>
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="zMaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enter the new value</h4>
+        </div>
+        <div class="modal-body">
+          <h4>Z max: <input type="number" id="zMaxNew" min="-9999" max="9999"></h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="zMaxSave" class="btn btn-default" data-dismiss="modal">Save</button>
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="xMinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enter the new value</h4>
+        </div>
+        <div class="modal-body">
+          <h4>X min: <input type="number" id="xMinNew" min="-9999" max="9999"></h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="xMinSave" class="btn btn-default" data-dismiss="modal">Save</button>
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="yMinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enter the new value</h4>
+        </div>
+        <div class="modal-body">
+          <h4>Y min: <input type="number" id="yMinNew" min="-9999" max="9999"></h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="yMinSave" class="btn btn-default" data-dismiss="modal">Save</button>
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="zMinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enter the new value</h4>
+        </div>
+        <div class="modal-body">
+          <h4>Z min: <input type="number" id="zMinNew" min="-9999" max="9999"></h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="zMinSave" class="btn btn-default" data-dismiss="modal">Save</button>
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
 
     $(document).ready(function() {  
@@ -311,24 +429,24 @@
     
       $('#jog').show()
       $('#cart').hide()
-      $('#pose').hide()
+      $('#set').hide()
 
       $('#menu-jog').click(function() {
         $('#jog').show()
         $('#cart').hide()
-        $('#pose').hide()
-      })
-
-      $('#menu-pose').click(function() {
-        $('#jog').hide()
-        $('#cart').hide()
-        $('#pose').show()
-      })      
+        $('#set').hide()
+      })     
 
       $('#menu-cart').click(function() {
         $('#jog').hide()
         $('#cart').show()
-        $('#pose').hide()
+        $('#set').hide()
+      })
+
+      $('#menu-set').click(function() {
+        $('#jog').hide()
+        $('#cart').hide()
+        $('#set').show()
       })
 
       getposj()
@@ -339,8 +457,8 @@
           for (i = 0; i <= 5; i++) {
             if (data.joint[i] == 100000) { 
               $('.j' + (i+1)).html('N/A')
-			  $('#j' + (i+1) + 'p').prop("disabled", true)
-			  $('#j' + (i+1) + 'm').prop("disabled", true)
+              $('#j' + (i+1) + 'p').prop("disabled", true)
+              $('#j' + (i+1) + 'm').prop("disabled", true)
             } else {
               $('.j' + (i+1)).html(Math.round(data.joint[i]) + '&#176;')
             }
@@ -353,6 +471,13 @@
           $('.wp').html(Math.round(data.pose[4]) + '&#176;')
           $('.wr').html(Math.round(data.pose[5]) + '&#176;')
 
+          $('#xMax').html(data.limit[0]) + ' mm'
+          $('#yMax').html(data.limit[1]) + ' mm'
+          $('#zMax').html(data.limit[2]) + ' mm'
+          $('#xMin').html(data.limit[3]) + ' mm'
+          $('#yMin').html(data.limit[4]) + ' mm'
+          $('#zMin').html(data.limit[5]) + ' mm'
+
           if (data.error[0] == 0) {
             if (data.status[0] == 1) {
               $('#status').html("Webmotion is running")
@@ -360,9 +485,12 @@
               if (data.status[1] == 1) {
                 $('#status').html("Position not reachable")
               }
-              if (data.status[2] == 1) {
-                $('#status').html("Z limit is reached")
+              if (data.status[2] == 3) {
+                $('#status').html("Z max limit is reached")
               }
+              if (data.status[2] == 6) {
+                $('#status').html("Z min limit is reached")
+              }			  
             } else {
               $('#status').html("Standby")
               $('#status').css("color", "#428bca")
@@ -455,9 +583,9 @@
       // Jogging
 
       $('#j1m').on('mousedown touchstart', function() {
-		clearTimeout(enButVar)
+        clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
-		$("#abort").prop("disabled", false)
+        $("#abort").prop("disabled", false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=1&getstep=-1',
@@ -472,9 +600,9 @@
       })
 
       $('#j1p').on('mousedown touchstart', function() {
-		clearTimeout(enButVar)
+        clearTimeout(enButVar)
         $(".btn").not(this).prop("disabled", true)
-		$("#abort").prop("disabled", false)
+        $("#abort").prop("disabled", false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=1&getstep=1',
@@ -866,6 +994,62 @@
         webstop()
         clearInterval(refresh)
         enButVar = setTimeout(enBut, setTime)
+      })
+
+      //Set limits
+      
+      $('#xMaxSave').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/weblimit?getlimit_id=1&getlimit_val=' + $("#xMaxNew").val(),
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#yMaxSave').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/weblimit?getlimit_id=2&getlimit_val=' + $("#yMaxNew").val(),
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#zMaxSave').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/weblimit?getlimit_id=3&getlimit_val=' + $("#zMaxNew").val(),
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#xMinSave').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/weblimit?getlimit_id=4&getlimit_val=' + $("#xMinNew").val(),
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#yMinSave').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/weblimit?getlimit_id=5&getlimit_val=' + $("#yMinNew").val(),
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#zMinSave').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/weblimit?getlimit_id=6&getlimit_val=' + $("#zMinNew").val(),
+          cache: false,
+          success: function() {}
+        })
       })
 
       //Move to predefined pose

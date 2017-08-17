@@ -1,16 +1,47 @@
 PROGRAM webmonitor
-%COMMENT = 'v3'
+%COMMENT = 'v4'
 %NOLOCKGROUP
 %NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
 
+CONST
+
+	R_WEBXMAX = 43	
+	R_WEBYMAX = 44
+	R_WEBZMAX = 45
+	R_WEBXMIN = 46
+	R_WEBYMIN = 47
+	R_WEBZMIN = 48
+
 VAR
 
 	STATUS: INTEGER
+	responseFile: FILE
+
+	xmax_flag: BOOLEAN
+	ymax_flag: BOOLEAN
+	zmax_flag: BOOLEAN
+	xmin_flag: BOOLEAN
+	ymin_flag: BOOLEAN
+	zmin_flag: BOOLEAN
+	
+	xmax_int: INTEGER
+	ymax_int: INTEGER
+	zmax_int: INTEGER
+	xmin_int: INTEGER
+	ymin_int: INTEGER
+	zmin_int: INTEGER
+	
+	xmax_real: REAL
+	ymax_real: REAL
+	zmax_real: REAL
+	xmin_real: REAL
+	ymin_real: REAL
+	zmin_real: REAL
+	
 	currentPosj: JOINTPOS
 	valuePosJ: ARRAY[6] OF REAL
 	currentPos: XYZWPREXT
-	responseFile: FILE
 
 	task_no: INTEGER
 	attr_out: INTEGER
@@ -26,12 +57,16 @@ VAR
 	prog_nam: STRING[127]
 	
 	reach_ab IN DRAM FROM webcheck: INTEGER
+	limit_x IN DRAM FROM webcheck: INTEGER
+	limit_y IN DRAM FROM webcheck: INTEGER
 	limit_z IN DRAM FROM webcheck: INTEGER
 
 BEGIN
 
 	IF UNINIT( running ) THEN running = 0; ENDIF
 	IF UNINIT( reach_ab ) THEN reach_ab = 0; ENDIF
+	IF UNINIT( limit_x ) THEN limit_x = 0; ENDIF
+	IF UNINIT( limit_y ) THEN limit_y = 0; ENDIF
 	IF UNINIT( limit_z ) THEN limit_z = 0; ENDIF
 	IF UNINIT( valuePosJ[1] ) THEN valuePosJ[1] = 100000; ENDIF
 	IF UNINIT( valuePosJ[2] ) THEN valuePosJ[2] = 100000; ENDIF
@@ -39,6 +74,13 @@ BEGIN
 	IF UNINIT( valuePosJ[4] ) THEN valuePosJ[4] = 100000; ENDIF
 	IF UNINIT( valuePosJ[5] ) THEN valuePosJ[5] = 100000; ENDIF
 	IF UNINIT( valuePosJ[6] ) THEN valuePosJ[6] = 100000; ENDIF
+
+	GET_REG(R_WEBXMAX, xmax_flag, xmax_int, xmax_real, STATUS)
+	GET_REG(R_WEBYMAX, ymax_flag, ymax_int, ymax_real, STATUS)
+	GET_REG(R_WEBZMAX, zmax_flag, zmax_int, zmax_real, STATUS)
+	GET_REG(R_WEBXMIN, xmin_flag, xmin_int, xmin_real, STATUS)
+	GET_REG(R_WEBYMIN, ymin_flag, ymin_int, ymin_real, STATUS)
+	GET_REG(R_WEBZMIN, zmin_flag, zmin_int, zmin_real, STATUS)
 
 	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
 	
@@ -83,6 +125,14 @@ BEGIN
 				WRITE responseFile( currentPos.p,',')
 				WRITE responseFile( currentPos.r )
 			WRITE responseFile( ' ],', CR )
+			WRITE responseFile( '"limit": [' )
+				WRITE responseFile( xmax_real,',')  
+				WRITE responseFile( ymax_real,',')
+				WRITE responseFile( zmax_real,',')
+				WRITE responseFile( xmin_real,',')
+				WRITE responseFile( ymin_real,',')
+				WRITE responseFile( zmin_real )
+			WRITE responseFile( ' ],', CR )			
 			WRITE responseFile( '"error": [' )
 				WRITE responseFile( error_code,',' )
 				WRITE responseFile( '"',error_string,'"' )
@@ -90,6 +140,8 @@ BEGIN
 			WRITE responseFile( '"status": [' )
 				WRITE responseFile( running,',')
 				WRITE responseFile( reach_ab,',')
+				WRITE responseFile( limit_x,',')
+				WRITE responseFile( limit_y,',')
 				WRITE responseFile( limit_z)
 			WRITE responseFile( ' ] ', CR )
 		WRITE responseFile( '}')

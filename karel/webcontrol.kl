@@ -29,7 +29,6 @@ VAR
 	j5: STRING[4]
 	j6: STRING[4]
 
-
 --Set the current JOINT position as initial position and jogging
 
 ROUTINE setcurjpos
@@ -60,7 +59,6 @@ BEGIN
 	ENDIF
 
 END setcurjpos
-
 
 --Set the current XYZWPR position as initial position and move
 
@@ -93,7 +91,6 @@ BEGIN
 
 END setcurxyz
 
-
 --Set the current TCP position as initial position and rotating
 
 ROUTINE setcurwpr
@@ -124,7 +121,6 @@ BEGIN
 	ENDIF
 
 END setcurwpr
-
 
 --Move to predefined pose
 
@@ -174,7 +170,6 @@ BEGIN
 	ENDIF
 
 END setpose
-
 
 --The main program
 
