@@ -47,8 +47,8 @@ Run the WEBMOTION tp program on the controller or open a browser and type: http:
 - JOG: Jogging the robot (Push and hold down a button, but only use just one at the same time!)
 - CART: Move the TCP +/-xyz direction and/or rotate it in the currently selected tool coordinate system. (Push and hold down a button, but only use just one at the same time!)
 - SET: 
-..* Set the axis limits. The default values are 0, thus you have to change these to make possible any movement.
-..* Move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.) **Important: SEE NOTE NO.2**
+  * Set the axis limits. The default values are 0, thus you have to change these to make possible any movement.
+  * Move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.) **Important: SEE NOTE NO.2**
 
 ## Notes
 1. You can change the default steps (1 degree, 3 mm) in the javascript part of the `webpanel.htm`. In this case you may also have to update the `setInt` variable in this file.
