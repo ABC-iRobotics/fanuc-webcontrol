@@ -39,15 +39,6 @@ VAR
 	ymin_real: REAL
 	zmin_real: REAL
 	
-	currentPosj: JOINTPOS
-	valuePosJ: ARRAY[6] OF REAL
-	currentPos: XYZWPREXT
-
-	task_no: INTEGER
-	attr_out: INTEGER
-	dummy_str: STRING[127]
-	running: INTEGER
-	
 	error_code: INTEGER
 	error_string: STRING[127]
 	cause_code: INTEGER
@@ -55,8 +46,22 @@ VAR
 	time_int: INTEGER
 	severity: INTEGER
 	prog_nam: STRING[127]
+
+	proga: ARRAY[100] OF STRING[16]
+	progc: INTEGER
+	progn: INTEGER
+
+	task_no: INTEGER
+	attr_out: INTEGER
+	dummy_str: STRING[127]
+	running: INTEGER
+
+	currentPos: XYZWPREXT
+	currentPosJ: JOINTPOS
+	valuePosJ: ARRAY[6] OF REAL
 	
 	reach_ab IN DRAM FROM webcheck: INTEGER
+
 	limit_x IN DRAM FROM webcheck: INTEGER
 	limit_y IN DRAM FROM webcheck: INTEGER
 	limit_z IN DRAM FROM webcheck: INTEGER
@@ -64,10 +69,13 @@ VAR
 BEGIN
 
 	IF UNINIT( running ) THEN running = 0; ENDIF
+
 	IF UNINIT( reach_ab ) THEN reach_ab = 0; ENDIF
+
 	IF UNINIT( limit_x ) THEN limit_x = 0; ENDIF
 	IF UNINIT( limit_y ) THEN limit_y = 0; ENDIF
 	IF UNINIT( limit_z ) THEN limit_z = 0; ENDIF
+
 	IF UNINIT( valuePosJ[1] ) THEN valuePosJ[1] = 100000; ENDIF
 	IF UNINIT( valuePosJ[2] ) THEN valuePosJ[2] = 100000; ENDIF
 	IF UNINIT( valuePosJ[3] ) THEN valuePosJ[3] = 100000; ENDIF
@@ -83,9 +91,17 @@ BEGIN
 	GET_REG(R_WEBZMIN, zmin_flag, zmin_int, zmin_real, STATUS)
 
 	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
-	
-	GET_TSK_INFO('webmotion', task_no, TSK_STATUS, attr_out, dummy_str, STATUS)
 
+	FOR progc = 1 TO ARRAY_LEN(proga) DO
+		IF UNINIT( proga[progc] ) THEN  proga[progc] = '######'; ENDIF
+	ENDFOR
+
+	PROG_LIST('*', 8, 0, 2, proga, ARRAY_LEN(proga), STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('PROG_LIST built-IN failed WITH STATUS = ', STATUS, CR)
+	ENDIF
+
+	GET_TSK_INFO('webmotion', task_no, TSK_STATUS, attr_out, dummy_str, STATUS)
 	IF (STATUS <> 0 ) THEN
 		WRITE ('GET_TSK_INFO built-IN failed WITH STATUS = ', STATUS, CR)
 	ELSE
@@ -101,7 +117,6 @@ BEGIN
 	currentPosJ = CURJPOS(0,0)
 	
 	CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
-
 	IF (STATUS <> 0 ) THEN
 		WRITE ('CNV_JPOS_REL built-IN failed WITH STATUS = ', STATUS, CR)
 	ENDIF
@@ -143,6 +158,12 @@ BEGIN
 				WRITE responseFile( limit_x,',')
 				WRITE responseFile( limit_y,',')
 				WRITE responseFile( limit_z)
+			WRITE responseFile( ' ] ,', CR )
+			WRITE responseFile( '"progs": [' )
+				FOR progn = 1 TO ARRAY_LEN(proga) - 1 DO
+					WRITE responseFile('"' ,proga[progn],'"',',' )
+				ENDFOR				
+				WRITE responseFile( '"',proga[ARRAY_LEN(proga)],'"' )
 			WRITE responseFile( ' ] ', CR )
 		WRITE responseFile( '}')
 

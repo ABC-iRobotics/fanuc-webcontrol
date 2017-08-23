@@ -278,11 +278,8 @@
       <div class="col-xs-4">
         <button type="button" id="coord" class="btn btn-success ts-btn-90">Coord</button>
       </div>
-      <div class="col-xs-4">
-        <button type="button" id="show" class="btn btn-success ts-btn-90">Show</button>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="touch" class="btn btn-success ts-btn-90">Touch</button>
+      <div class="col-xs-8" id="runTask">
+        <select class="form-control" id="selectTask"></select>
       </div>
     </div>
 
@@ -326,7 +323,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="xMaxSave" class="btn btn-default">Save</button>
-		  <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -348,7 +345,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="yMaxSave" class="btn btn-default">Save</button>
-		  <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -370,7 +367,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="zMaxSave" class="btn btn-default">Save</button>
-		  <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -392,7 +389,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="xMinSave" class="btn btn-default">Save</button>
-		  <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -414,7 +411,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="yMinSave" class="btn btn-default">Save</button>
-		  <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -436,7 +433,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="zMinSave" class="btn btn-default">Save</button>
-		  <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -455,6 +452,8 @@
       $('#jog').show()
       $('#cart').hide()
       $('#set').hide()
+      $('#reset').hide()
+      $('#start').hide()
       $('.limitWarning').hide()
       $('.limitSuccess').hide()
 
@@ -462,25 +461,48 @@
         $('#jog').show()
         $('#cart').hide()
         $('#set').hide()
+        $('#reset').hide()
+        $('#start').hide()
       })     
 
       $('#menu-cart').click(function() {
         $('#jog').hide()
         $('#cart').show()
         $('#set').hide()
+        $('#reset').hide()
+        $('#start').hide()
       })
 
       $('#menu-set').click(function() {
         $('#jog').hide()
         $('#cart').hide()
         $('#set').show()
+        $('#reset').show()
+        $('#start').show()
       })
 
+      $.getJSON("/KAREL/webmonitor", function(data) {    
+
+        var removeItem = '######'
+        
+        progList = jQuery.grep(data.progs, function(value) {
+          return value != removeItem;
+        });
+        
+        for(var i=2; i< progList.length;i++) {
+          //creates option tag and appends to select if parent div has id dropdown
+          jQuery('<option/>', {value: progList[i], html: progList[i]}).appendTo('#runTask select');
+        }
+
+      })
+      
+      $('#selectTask option:contains("WEBMOTION TP")').prop('selected',true);
+      
       getposj()
 
       function getposj () {
         $.getJSON("/KAREL/webmonitor", function(data) {
-
+        
           for (i = 0; i <= 5; i++) {
             if (data.joint[i] == 100000) { 
               $('.j' + (i+1)).html('N/A')
@@ -623,17 +645,19 @@
             }
           })
 
-          setTimeout(getposj(), 111)
+          setTimeout(getposj(), 333)
         })
       }
 
       // Start motion
 
       $('#start').click(function() {
+        var sendTask = $('#runTask :selected').text()
         console.log('Start motion')
+        console.log('cica: ' + sendTask )
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webstart',
+          url: '/KAREL/webstart?gettask=' + sendTask,
           cache: false,
           success: function() {
             console.log('Send START is successful')

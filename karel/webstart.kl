@@ -7,15 +7,27 @@ PROGRAM webstart
 VAR
 
 	STATUS: INTEGER
+	return_code: INTEGER
 	prog_index: INTEGER
+	
+	gettask: STRING[127]
 
 BEGIN
 	
+	IF UNINIT( gettask ) THEN gettask = ''; ENDIF
+	
 	CALL_PROG('webcheck', prog_index)
 	
-	RUN_TASK('webmotion', 0, FALSE, FALSE, 1, STATUS )
+	RUN_TASK(gettask, 0, FALSE, FALSE, 1, STATUS )
+	
 	IF (STATUS <> 0 ) THEN
+	
 		WRITE ('RUN_TASK built-IN failed WITH STATUS = ', STATUS, CR)
+	
+	ELSE
+	
+		return_code = 204
+	
 	ENDIF
 	
 END webstart
