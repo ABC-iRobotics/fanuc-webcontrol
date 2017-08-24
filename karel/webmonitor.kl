@@ -47,14 +47,14 @@ VAR
 	severity: INTEGER
 	prog_nam: STRING[127]
 
-	proga: ARRAY[100] OF STRING[16]
-	progc: INTEGER
-	progn: INTEGER
-
 	task_no: INTEGER
 	attr_out: INTEGER
 	dummy_str: STRING[127]
 	running: INTEGER
+
+	proga: ARRAY[100] OF STRING[16]
+	progc: INTEGER
+	progn: INTEGER
 
 	currentPos: XYZWPREXT
 	currentPosJ: JOINTPOS
@@ -92,16 +92,7 @@ BEGIN
 
 	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
 
-	FOR progc = 1 TO ARRAY_LEN(proga) DO
-		IF UNINIT( proga[progc] ) THEN  proga[progc] = '######'; ENDIF
-	ENDFOR
-
-	PROG_LIST('*', 8, 0, 2, proga, ARRAY_LEN(proga), STATUS)
-	IF (STATUS <> 0 ) THEN
-		WRITE ('PROG_LIST built-IN failed WITH STATUS = ', STATUS, CR)
-	ENDIF
-
-	GET_TSK_INFO('webmotion', task_no, TSK_STATUS, attr_out, dummy_str, STATUS)
+	GET_TSK_INFO('WEBMOTION', task_no, TSK_STATUS, attr_out, dummy_str, STATUS)
 	IF (STATUS <> 0 ) THEN
 		WRITE ('GET_TSK_INFO built-IN failed WITH STATUS = ', STATUS, CR)
 	ELSE
@@ -110,6 +101,15 @@ BEGIN
 		ELSE
 			running = 0
 		ENDIF
+	ENDIF
+
+	FOR progc = 1 TO ARRAY_LEN(proga) DO
+		IF UNINIT( proga[progc] ) THEN  proga[progc] = '######'; ENDIF
+	ENDFOR
+
+	PROG_LIST('*', 8, 0, 2, proga, ARRAY_LEN(proga), STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('PROG_LIST built-IN failed WITH STATUS = ', STATUS, CR)
 	ENDIF
 	
 	currentPos = CURPOS(0,0)

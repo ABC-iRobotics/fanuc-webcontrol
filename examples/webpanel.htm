@@ -275,11 +275,14 @@
     <div class="row text-center ts-row-2"></div>
 
     <div class="row text-center ts-row-2">
-      <div class="col-xs-4">
-        <button type="button" id="coord" class="btn btn-success ts-btn-90">Coord</button>
-      </div>
-      <div class="col-xs-8" id="runTask">
+      <div class="col-xs-4" id="runTask">
         <select class="form-control" id="selectTask"></select>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="start" class="btn btn-info ts-btn-90">Start</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="reset" class="btn ts-btn-90">Reset</button>
       </div>
     </div>
 
@@ -289,15 +292,9 @@
 
   <div class="container">
     <div class="row text-center ts-row-1">
-      <div class="col-xs-4">
-        <button type="button" id="reset" class="btn navbar-btn ts-btn-full">Reset</button>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="abort" class="btn btn-danger navbar-btn ts-btn-full">Abort</button>
-      </div>    
-      <div class="col-xs-4">
-        <button type="button" id="start" class="btn btn-info navbar-btn ts-btn-full">Start</button>
-      </div>    
+      <div class="col-xs-12">
+        <button type="button" id="abort" class="btn btn-danger navbar-btn ts-btn-full">ABORT</button>
+      </div>   
     </div>
   </div>
 
@@ -452,8 +449,6 @@
       $('#jog').show()
       $('#cart').hide()
       $('#set').hide()
-      $('#reset').hide()
-      $('#start').hide()
       $('.limitWarning').hide()
       $('.limitSuccess').hide()
 
@@ -461,43 +456,44 @@
         $('#jog').show()
         $('#cart').hide()
         $('#set').hide()
-        $('#reset').hide()
-        $('#start').hide()
       })     
 
       $('#menu-cart').click(function() {
         $('#jog').hide()
         $('#cart').show()
         $('#set').hide()
-        $('#reset').hide()
-        $('#start').hide()
       })
 
       $('#menu-set').click(function() {
         $('#jog').hide()
         $('#cart').hide()
         $('#set').show()
-        $('#reset').show()
-        $('#start').show()
       })
 
-      $.getJSON("/KAREL/webmonitor", function(data) {    
+      $.getJSON("/KAREL/webmonitor", function(data) {
+        $('#selectTask').html('')
 
-        var removeItem = '######'
-        
-        progList = jQuery.grep(data.progs, function(value) {
-          return value != removeItem;
-        });
-        
-        for(var i=2; i< progList.length;i++) {
-          //creates option tag and appends to select if parent div has id dropdown
-          jQuery('<option/>', {value: progList[i], html: progList[i]}).appendTo('#runTask select');
+        var notRelevant = '######'      
+
+        for ( var i = 0; i < data.progs.length; i++ ) {
+          if ( data.progs[i].indexOf(" TP") == -1 ) {
+            data.progs[i] = notRelevant
+          }
         }
 
+        progList = jQuery.grep(data.progs, function(value) {
+          return value != notRelevant;
+        })
+
+        for ( var i = 2; i < progList.length; i++ ) {
+          //creates option tag and appends to select if parent div has id dropdown
+          jQuery('<option/>', {value: progList[i], html: progList[i]}).appendTo('#runTask select')
+          if ( progList[i].indexOf("WEBMOTION") >= 0 ) {
+            $('#selectTask').val(progList[i])
+          }
+        }
       })
-      
-      $('#selectTask option:contains("WEBMOTION TP")').prop('selected',true);
-      
+
       getposj()
 
       function getposj () {
@@ -594,7 +590,7 @@
               $("#xMaxNew").val(data.limit[0])
             }
           })
- 
+
           $('#yMaxCh').click(function() {
             $('.limitWarning').hide()
             $('.limitSuccess').hide()
@@ -604,7 +600,7 @@
               $("#yMaxNew").val(data.limit[1])
             }
           })
- 
+
           $('#zMaxCh').click(function() {
             $('.limitWarning').hide()
             $('.limitSuccess').hide()
@@ -1271,33 +1267,6 @@
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=p&j1=0&j2=45&j3=135&j4=0&j5=-45&j6=0',
-          cache: false,
-          success: function() {}
-        })
-      })
-
-      $('#coord').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: '/KAREL/webcontrol?getstart=p&j1=0&j2=30&j3=90&j4=0&j5=-90&j6=0',
-          cache: false,
-          success: function() {}
-        })
-      })
-
-      $('#show').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: '/KAREL/webcontrol?getstart=p&j1=90&j2=0&j3=90&j4=0&j5=-90&j6=-90',
-          cache: false,
-          success: function() {}
-        })
-      })
-
-      $('#touch').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: '/KAREL/webcontrol?getstart=p&j1=90&j2=60&j3=30&j4=0&j5=60&j6=-90',
           cache: false,
           success: function() {}
         })
