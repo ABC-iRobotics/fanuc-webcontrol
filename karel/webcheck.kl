@@ -23,6 +23,7 @@ VAR
 	cur_pos: XYZWPR	
 	new_jpos: JOINTPOS
 	new_pos: XYZWPREXT
+
 	reach_ab: INTEGER
 	limit_x: INTEGER
 	limit_y: INTEGER
@@ -63,6 +64,7 @@ BEGIN
 	GET_REG(R_WEBYMIN, ymin_flag, ymin_int, ymin_real, STATUS)
 	GET_REG(R_WEBZMIN, zmin_flag, zmin_int, zmin_real, STATUS)
 
+	reach_ab = 0
 	limit_x = 0
 	limit_y = 0
 	limit_z = 0

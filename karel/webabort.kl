@@ -15,9 +15,10 @@ CONST
 VAR
 
 	STATUS: INTEGER
+	return_code: INTEGER
+	
 	cur_jpos: JOINTPOS
 	cur_pos: XYZWPR
-	return_code: INTEGER
 
 BEGIN
 
@@ -50,17 +51,22 @@ BEGIN
 	
 	SET_REAL_REG(R_WEBCOORD, 0, STATUS)
 	IF (STATUS <> 0 ) THEN
-		WRITE ('SET_REL_REG built-IN 1 failed in ABORT task WITH STATUS = ', STATUS, CR)
+		WRITE ('SET_REL_REG built-IN 1 failed: ', STATUS, CR)
 	ENDIF
 	
 	SET_REAL_REG(R_WEBSTEP, 0, STATUS)
 	IF (STATUS <> 0 ) THEN
-		WRITE ('SET_REL_REG built-IN 2 failed in ABORT task WITH STATUS = ', STATUS, CR)
+		WRITE ('SET_REL_REG built-IN 2 failed: ', STATUS, CR)
 	ENDIF
 
 	SET_REAL_REG(R_WEBKEEP, 99, STATUS)
 	IF (STATUS <> 0 ) THEN
-		WRITE ('SET_REL_REG built-IN 3 failed in ABORT task WITH STATUS = ', STATUS, CR)
+		WRITE ('SET_REL_REG built-IN 3 failed: ', STATUS, CR)
+	ENDIF
+
+	CLEAR('webmonitor.pc', STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('CLEAR  built-IN failed: ', STATUS, CR)
 	ENDIF
 
 	return_code = 204

@@ -13,9 +13,10 @@ VAR
 	gettask: STRING[127]
 
 BEGIN
+	WRITE (CHR(128),CHR(137))
 	
-	IF UNINIT( gettask ) THEN gettask = ''; ENDIF
-	
+	IF UNINIT( gettask ) THEN gettask = '###@@@###'; ENDIF
+
 	CALL_PROG('webcheck', prog_index)
 	
 	RUN_TASK(gettask, 0, FALSE, FALSE, 1, STATUS )

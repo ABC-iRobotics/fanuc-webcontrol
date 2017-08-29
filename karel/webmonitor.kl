@@ -1,5 +1,5 @@
 PROGRAM webmonitor
-%COMMENT = 'v4'
+%COMMENT = 'v5'
 %NOLOCKGROUP
 %NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
@@ -47,14 +47,10 @@ VAR
 	severity: INTEGER
 	prog_nam: STRING[127]
 
-	task_no: INTEGER
-	attr_out: INTEGER
-	dummy_str: STRING[127]
+	gettask IN DRAM FROM webstart: STRING[127]
+	task_att: INTEGER
+	task_dum: STRING[127]
 	running: INTEGER
-
-	proga: ARRAY[100] OF STRING[16]
-	progc: INTEGER
-	progn: INTEGER
 
 	currentPos: XYZWPREXT
 	currentPosJ: JOINTPOS
@@ -66,9 +62,10 @@ VAR
 	limit_y IN DRAM FROM webcheck: INTEGER
 	limit_z IN DRAM FROM webcheck: INTEGER
 
+
 BEGIN
 
-	IF UNINIT( running ) THEN running = 0; ENDIF
+	IF UNINIT( gettask ) THEN gettask = '@@@###@@@'; ENDIF
 
 	IF UNINIT( reach_ab ) THEN reach_ab = 0; ENDIF
 
@@ -92,24 +89,20 @@ BEGIN
 
 	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
 
-	GET_TSK_INFO('WEBMOTION', task_no, TSK_STATUS, attr_out, dummy_str, STATUS)
+	running = 0
+	GET_TSK_INFO(gettask, 0, TSK_STATUS, task_att, task_dum, STATUS)
 	IF (STATUS <> 0 ) THEN
-		WRITE ('GET_TSK_INFO built-IN failed WITH STATUS = ', STATUS, CR)
+		WRITE ('GET_TSK_INFO is failed, STATUS = ', STATUS, CR)
 	ELSE
-		IF (attr_out = PG_RUNNING) THEN
-			running = 1
-		ELSE
-			running = 0
-		ENDIF
-	ENDIF
-
-	FOR progc = 1 TO ARRAY_LEN(proga) DO
-		IF UNINIT( proga[progc] ) THEN  proga[progc] = '######'; ENDIF
-	ENDFOR
-
-	PROG_LIST('*', 8, 0, 2, proga, ARRAY_LEN(proga), STATUS)
-	IF (STATUS <> 0 ) THEN
-		WRITE ('PROG_LIST built-IN failed WITH STATUS = ', STATUS, CR)
+		--IF ( gettask = 'webmonitor') THEN
+			--running = 0
+		--ELSE
+			IF ( task_att = PG_RUNNING ) THEN
+				running = 1
+			ELSE
+				running = 0
+			ENDIF
+		--ENDIF
 	ENDIF
 	
 	currentPos = CURPOS(0,0)
@@ -118,7 +111,7 @@ BEGIN
 	
 	CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
 	IF (STATUS <> 0 ) THEN
-		WRITE ('CNV_JPOS_REL built-IN failed WITH STATUS = ', STATUS, CR)
+		WRITE ('CNV_JPOS_REL is failed, STATUS = ', STATUS, CR)
 	ENDIF
 
 	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
@@ -147,23 +140,19 @@ BEGIN
 				WRITE responseFile( xmin_real,',')
 				WRITE responseFile( ymin_real,',')
 				WRITE responseFile( zmin_real )
-			WRITE responseFile( ' ],', CR )			
-			WRITE responseFile( '"error": [' )
-				WRITE responseFile( error_code,',' )
-				WRITE responseFile( '"',error_string,'"' )
 			WRITE responseFile( ' ] ,', CR )
 			WRITE responseFile( '"status": [' )
-				WRITE responseFile( running,',')
+				WRITE responseFile( running )
+			WRITE responseFile( ' ] ,', CR )
+			WRITE responseFile( '"message": [' )
 				WRITE responseFile( reach_ab,',')
 				WRITE responseFile( limit_x,',')
 				WRITE responseFile( limit_y,',')
 				WRITE responseFile( limit_z)
-			WRITE responseFile( ' ] ,', CR )
-			WRITE responseFile( '"progs": [' )
-				FOR progn = 1 TO ARRAY_LEN(proga) - 1 DO
-					WRITE responseFile('"' ,proga[progn],'"',',' )
-				ENDFOR				
-				WRITE responseFile( '"',proga[ARRAY_LEN(proga)],'"' )
+			WRITE responseFile( ' ],', CR )			
+			WRITE responseFile( '"error": [' )
+				WRITE responseFile( error_code,',' )
+				WRITE responseFile( '"',error_string,'"' )
 			WRITE responseFile( ' ] ', CR )
 		WRITE responseFile( '}')
 

@@ -6,221 +6,338 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
   
   <style>
     body {
       background-color: #f8f8f8;
     }
-    .ts-row-0 {
+    .ts-row-3px {
+      padding-top: 3px;
+    }
+    .ts-row-5px {
+      padding-top: 5px;
+    }
+    .ts-row-10px {
       padding-top: 10px;
-    }
-    .ts-row-1 {
-      padding-bottom: 10px;
-    }
-    .ts-row-2 {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
+    }    
+    .ts-row-20px {
+      padding-top: 20px;
+    }    
     .ts-btn-90 {
       width: 90px;
     }
     .ts-btn-full {
       width: 100%;
     }
+    .coord {
+      color: #428bca;
+      font-family: 'Oswald', sans-serif;
+    }
+    p {
+      padding-top: 2px;
+      font-size: 17px;
+      padding-bottom: 0;
+    }
+    .screen-data {
+      font-family: 'Oswald', sans-serif;
+	}
   </style>
   
 </head>
 <body>
 
-  <div class="container">
-    <div class="row text-center ts-row-0">
-      <div class="col-xs-4">
-        <button type="button" id="menu-jog" class="btn btn-warning navbar-btn ts-btn-full ts-menu">JOG</button>
+  <div id="infoscreen" class="container">
+
+    <div class="ts-row-10px"></div>
+    
+    <div class="row">
+      <div class="col-xs-4 text-center">
+        <p id="status" class="well well-sm screen-data">load...</p>
       </div>
-      <div class="col-xs-4">
-        <button type="button" id="menu-cart" class="btn btn-primary navbar-btn ts-btn-full ts-menu">CART</button>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="menu-set" class="btn btn-success navbar-btn ts-btn-full ts-menu">SET</button>
+      <div class="col-xs-8 text-center">
+        <p id="message" class="well well-sm screen-data">load...</p>
       </div>
     </div>
-  </div>
 
-  <div class="container">  
     <div class="row">
       <div class="col-xs-12 text-center">
-        <h4 class="well well-sm" id="status">load...</h4>
+        <p id="error" class="well well-sm screen-data">load...</p>
       </div>
-    </div>    
+    </div>
+
   </div>
-  
+
+  <div id="coord-jog" class="container">
+
+    <div class="ts-row-5px"></div>
+
+    <div class="row">
+      <div class="col-xs-4 text-center">
+        <p class="j1 coord well well-sm">load...</p>
+      </div>
+      <div class="col-xs-4 text-center">
+        <p class="j2 coord well well-sm">load...</p>
+      </div>
+      <div class="col-xs-4 text-center">
+        <p class="j3 coord well well-sm">load...</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4 text-center">
+        <p class="j4 coord well well-sm">load...</p>
+      </div>
+      <div class="col-xs-4 text-center">
+        <p class="j5 coord well well-sm">load...</p>
+      </div>
+      <div class="col-xs-4 text-center">
+        <p class="j6 coord well well-sm">load...</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="coord-cart" class="container">
+
+    <div class="row">
+      <div class="col-xs-4 text-center">
+        <p class="wx coord well well-sm">load...</span></p>
+      </div>
+      <div class="col-xs-4 text-center">
+        <p class="wy coord well well-sm">load...</span></p>
+      </div>
+      <div class="col-xs-4 text-center">
+        <p class="wz coord well well-sm">load...</span></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4 text-center">
+        <p class="ww coord well well-sm">load...</p>
+      </div>
+      <div class="col-xs-4 text-center">
+        <p class="wp coord well well-sm">load...</p>
+      </div>
+      <div class="col-xs-4 text-center">
+        <p class="wr coord well well-sm">load...</p>
+      </div>
+    </div>
+
+  </div>
+ 
+  <div id="webmotion-menu" class="container">
+
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <button type="button" id="menu-jog" class="btn btn-warning ts-btn-full">JOG</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="menu-cart" class="btn btn-primary ts-btn-full">CART</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="menu-set" class="btn btn-success ts-btn-full">SET</button>
+      </div>
+    </div>
+
+    <div class="ts-row-20px"></div>
+    <div class="ts-row-5px"></div>
+
+  </div>
+ 
   <div id="jog" class="container">
 
-    <div class="row text-center ts-row-1">
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="j1m" class="btn btn-warning ts-btn-90">J1-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="j1">load...</h4>
+        <p class="j1 coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j1p" class="btn btn-warning ts-btn-90">J1+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="j2m" class="btn btn-warning ts-btn-90">J2-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="j2">load...</h4>
+        <p class="j2 coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j2p" class="btn btn-warning ts-btn-90">J2+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="j3m" class="btn btn-warning ts-btn-90">J3-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="j3">load...</h4>
+        <p class="j3 coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j3p" class="btn btn-warning ts-btn-90">J3+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="j4m" class="btn btn-warning ts-btn-90">J4-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="j4">load...</h4>
+        <p class="j4 coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j4p" class="btn btn-warning ts-btn-90">J4+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="j5m" class="btn btn-warning ts-btn-90">J5-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="j5">load...</h4>
+        <p class="j5 coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j5p" class="btn btn-warning ts-btn-90">J5+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="j6m" class="btn btn-warning ts-btn-90">J6-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="j6">load...</h4>
+        <p class="j6 coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="j6p" class="btn btn-warning ts-btn-90">J6+</button>
       </div>
     </div>
 
+    <div class="ts-row-5px"></div>
+
   </div>
 
   <div id="cart" class="container">
 
-    <div class="row text-center ts-row-1">
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="wmx" class="btn btn-primary ts-btn-90">X-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wx">load...</h4>
+        <p class="wx coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="wpx" class="btn btn-primary ts-btn-90">X+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="wmy" class="btn btn-primary ts-btn-90">Y-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wy">load...</h4>
+        <p class="wy coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="wpy" class="btn btn-primary ts-btn-90">Y+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="wmz" class="btn btn-primary ts-btn-90">Z-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wz">load...</h4>
+        <p class="wz coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="wpz" class="btn btn-primary ts-btn-90">Z+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="wmw" class="btn btn-primary ts-btn-90">W-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="ww">load...</h4>
+        <p class="ww coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="wpw" class="btn btn-primary ts-btn-90">W+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="wmp" class="btn btn-primary ts-btn-90">P-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wp">load...</h4>
+        <p class="wp coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="wpp" class="btn btn-primary ts-btn-90">P+</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2">
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="wmr" class="btn btn-primary ts-btn-90">R-</button>
       </div>
       <div class="col-xs-4">
-        <h4 class="wr">load...</h4>
+        <p class="wr coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="wpr" class="btn btn-primary ts-btn-90">R+</button>
       </div>
     </div>
 
+    <div class="ts-row-5px"></div>
+
   </div>
 
   <div id="set" class="container">
 
+    <div class="ts-row-10px"></div>
+
     <div class="row text-center">
       <div class="col-xs-4">
-        <h4 id="xMax">Load...</h4>
+        <p id="xMax" class="coord">Load...</p>
       </div>
       <div class="col-xs-4">
-        <h4 id="yMax">Load...</h4>
+        <p id="yMax" class="coord">Load...</p>
       </div>
       <div class="col-xs-4">
-        <h4 id="zMax">Load...</h4>
+        <p id="zMax" class="coord">Load...</p>
       </div>
     </div>
 
-    <div class="row text-center ts-row-1">
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="xMaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#xMaxSet">X max</button>
       </div>
@@ -232,21 +349,22 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row-1"></div>
+    <div class="ts-row-10px"></div>
+    <div class="ts-row-20px"></div>
 
     <div class="row text-center">
       <div class="col-xs-4">
-        <h4 id="xMin">Load...</h4>
+        <p id="xMin" class="coord">Load...</p>
       </div>
       <div class="col-xs-4">
-        <h4 id="yMin">Load...</h4>
+        <p id="yMin" class="coord">Load...</p>
       </div>
       <div class="col-xs-4">
-        <h4 id="zMin">Load...</h4>
+        <p id="zMin" class="coord">Load...</p>
       </div> 
     </div>
 
-    <div class="row text-center ts-row-1">
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="xMinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#xMinSet">X min</button>
       </div>
@@ -258,9 +376,11 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row-2"></div>
+    <div class="ts-row-3px"></div>    
+    <div class="ts-row-10px"></div>
+    <div class="ts-row-20px"></div>
 
-    <div class="row text-center ts-row-2">
+    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="pickup" class="btn btn-success ts-btn-90">Pickup</button>
       </div>
@@ -272,30 +392,84 @@
       </div>
     </div>
 
-    <div class="row text-center ts-row-2"></div>
+    <div class="ts-row-10px"></div>
+    <div class="ts-row-20px"></div>
 
-    <div class="row text-center ts-row-2">
-      <div class="col-xs-4" id="runTask">
-        <select class="form-control" id="selectTask"></select>
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <button type="button" id="coord" class="btn btn-success ts-btn-90">Coord</button>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="start" class="btn btn-info ts-btn-90">Start</button>
+        <button type="button" id="show" class="btn btn-success ts-btn-90">Show</button>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="reset" class="btn ts-btn-90">Reset</button>
+        <button type="button" id="touch" class="btn btn-success ts-btn-90">Touch</button>
       </div>
     </div>
 
-    <div class="row text-center ts-row-2"></div>
+    <div class="ts-row-10px"></div>
 
   </div>
 
-  <div class="container">
-    <div class="row text-center ts-row-1">
-      <div class="col-xs-12">
-        <button type="button" id="abort" class="btn btn-danger navbar-btn ts-btn-full">ABORT</button>
+  <div id="run" class="container">
+
+    <div class="ts-row-10px"></div>
+
+    <div class="row text-center">
+      <div class="col-sm-6 col-sm-offset-3 col-xs-12" id="runTask">
+        <select class="form-control" id="selectTask"></select>
+      </div>
+    </div>
+
+    <div class="ts-row-10px"></div>
+    <div class="ts-row-10px"></div>
+    <div class="ts-row-10px"></div>
+
+    <div class="row text-center">
+      <div class="col-sm-3 col-sm-offset-3 col-xs-6">
+        <button type="button" id="start-webprogram" class="btn btn-info ts-btn-full">START</button>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <button type="button" class="btn ts-btn-full reset">RESET</button>
+      </div>
+    </div>
+
+    <div class="ts-row-10px"></div>
+
+  </div>
+
+  <div id="webmotion-control" class="container">
+
+    <div class="ts-row-20px"></div>
+
+    <div class="row text-center">
+      <div class="col-xs-4 text-center">
+        <button type="button" class="btn ts-btn-full reset">RESET</button>
+      </div>
+      <div class="col-xs-4 text-center">
+        <button type="button" class="btn btn-danger ts-btn-full abort">ABORT</button>
+      </div>
+      <div class="col-xs-4 text-center">
+        <button type="button" id="start-webmotion" class="btn btn-info ts-btn-full">START</button>
+      </div>
+    </div>
+
+    <div class="ts-row-10px"></div>
+
+  </div>
+
+  <div id="webprogram-control" class="container">
+    
+    <div class="ts-row-20px"></div>
+    
+    <div class="row text-center">
+      <div class="col-xs-12 text-center">
+        <button type="button" class="btn btn-danger ts-btn-full abort">ABORT</button>
       </div>   
     </div>
+
+    <div class="ts-row-10px"></div>
+  
   </div>
 
   <footer class="text-center">
@@ -309,14 +483,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Enter the new value</h4>
+          <p class="modal-title">Enter the new value</p>
           <span>(from -9999 to 9999)<span>
         </div>
         <div class="modal-body">
           <p>If you leave it empty the axis limit is maximized</p>
-          <h4>X max: <input type="number" id="xMaxNew" min="-9999" max="9999"></h4>
+          <p>X max: <input type="number" id="xMaxNew" min="-9999" max="9999"></p>
           <p class="limitWarning" style="color:red">The limit is need to be between -9999 and 9999</p>
-          <p class="limitSuccess" style="color:green">Saved!</p>
         </div>
         <div class="modal-footer">
           <button type="button" id="xMaxSave" class="btn btn-default">Save</button>
@@ -331,14 +504,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Enter the new value</h4>
+          <p class="modal-title">Enter the new value</p>
           <span>(from -9999 to 9999)<span>
         </div>
         <div class="modal-body">
           <p>If you leave it empty the axis limit is maximized</p>
-          <h4>Y max: <input type="number" id="yMaxNew" min="-9999" max="9999"></h4>
+          <p>Y max: <input type="number" id="yMaxNew" min="-9999" max="9999"></p>
           <p class="limitWarning" style="color:red">The limit is need to be between -9999 and 9999</p>
-          <p class="limitSuccess" style="color:green">Saved!</p>
         </div>
         <div class="modal-footer">
           <button type="button" id="yMaxSave" class="btn btn-default">Save</button>
@@ -353,14 +525,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Enter the new value</h4>
+          <p class="modal-title">Enter the new value</p>
           <span>(from -9999 to 9999)<span>
         </div>
         <div class="modal-body">
           <p>If you leave it empty the axis limit is maximized</p>
-          <h4>Z max: <input type="number" id="zMaxNew" min="-9999" max="9999"></h4>
+          <p>Z max: <input type="number" id="zMaxNew" min="-9999" max="9999"></p>
           <p class="limitWarning" style="color:red">The limit is need to be between -9999 and 9999</p>
-          <p class="limitSuccess" style="color:green">Saved!</p>
         </div>
         <div class="modal-footer">
           <button type="button" id="zMaxSave" class="btn btn-default">Save</button>
@@ -375,14 +546,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Enter the new value</h4>
+          <p class="modal-title">Enter the new value</p>
           <span>(from -9999 to 9999)<span>
         </div>
         <div class="modal-body">
           <p>If you leave it empty the axis limit is maximized</p>
-          <h4>X min: <input type="number" id="xMinNew" min="-9999" max="9999"></h4>
+          <p>X min: <input type="number" id="xMinNew" min="-9999" max="9999"></p>
           <p class="limitWarning" style="color:red">The limit is need to be between -9999 and 9999</p>
-          <p class="limitSuccess" style="color:green">Saved!</p>
         </div>
         <div class="modal-footer">
           <button type="button" id="xMinSave" class="btn btn-default">Save</button>
@@ -397,14 +567,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Enter the new value</h4>
+          <p class="modal-title">Enter the new value</p>
           <span>(from -9999 to 9999)<span>
         </div>
         <div class="modal-body">
           <p>If you leave it empty the axis limit is maximized</p>
-          <h4>Y min: <input type="number" id="yMinNew" min="-9999" max="9999"></h4>
+          <p>Y min: <input type="number" id="yMinNew" min="-9999" max="9999"></p>
           <p class="limitWarning" style="color:red">The limit is need to be between -9999 and 9999</p>
-          <p class="limitSuccess" style="color:green">Saved!</p>
         </div>
         <div class="modal-footer">
           <button type="button" id="yMinSave" class="btn btn-default">Save</button>
@@ -419,14 +588,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Enter the new value</h4>
+          <p class="modal-title">Enter the new value</p>
           <span>(from -9999 to 9999)<span>
         </div>
         <div class="modal-body">
           <p>If you leave it empty the axis limit is maximized</p>
-          <h4>Z min: <input type="number" id="zMinNew" min="-9999" max="9999"></h4>
+          <p>Z min: <input type="number" id="zMinNew" min="-9999" max="9999"></p>
           <p class="limitWarning" style="color:red">The limit is need to be between -9999 and 9999</p>
-          <p class="limitSuccess" style="color:green">Saved!</p>
         </div>
         <div class="modal-footer">
           <button type="button" id="zMinSave" class="btn btn-default">Save</button>
@@ -445,12 +613,17 @@
       var enButVar
       var setTime = 1000
       var axisLimit = 9999
-    
-      $('#jog').show()
+      
+      $('#run').show()
+      $('#coord-jog').show()
+      $('#coord-cart').show()
+      $('#webprogram-control').show()
+      $('#webmotion-menu').hide()
+      $('#jog').hide()
       $('#cart').hide()
       $('#set').hide()
+      $('#webmotion-control').hide()
       $('.limitWarning').hide()
-      $('.limitSuccess').hide()
 
       $('#menu-jog').click(function() {
         $('#jog').show()
@@ -470,7 +643,7 @@
         $('#set').show()
       })
 
-      $.getJSON("/KAREL/webmonitor", function(data) {
+      $.getJSON("/KAREL/webprogram", function(data) {
         $('#selectTask').html('')
 
         var notRelevant = '######'      
@@ -502,16 +675,16 @@
           for (i = 0; i <= 5; i++) {
             if (data.joint[i] == 100000) { 
               $('.j' + (i+1)).html('N/A')
-              $('#j' + (i+1) + 'p').prop("disabled", true)
-              $('#j' + (i+1) + 'm').prop("disabled", true)
+              $('#j' + (i+1) + 'p').prop('disabled', true)
+              $('#j' + (i+1) + 'm').prop('disabled', true)
             } else {
               $('.j' + (i+1)).html(Math.round(data.joint[i]) + '&#176;')
             }
           }
 
-          $('.wx').html(Math.round(data.pose[0]) + ' mm')
-          $('.wy').html(Math.round(data.pose[1]) + ' mm')
-          $('.wz').html(Math.round(data.pose[2]) + ' mm')
+          $('.wx').html(Math.round(data.pose[0]) + 'mm')
+          $('.wy').html(Math.round(data.pose[1]) + 'mm')
+          $('.wz').html(Math.round(data.pose[2]) + 'mm')
           $('.ww').html(Math.round(data.pose[3]) + '&#176;')
           $('.wp').html(Math.round(data.pose[4]) + '&#176;')
           $('.wr').html(Math.round(data.pose[5]) + '&#176;')
@@ -547,43 +720,52 @@
             $('#zMin').html(data.limit[5]) + ' mm'
           }
 
-          if (data.error[0] == 0) {
-            if (data.status[0] == 1) {
-              $('#status').html("Webmotion is running")
-              $('#status').css("color", "#5cb85c")
-              if (data.status[1] == 1) {
-                $('#status').html("Position not reachable")
-              }
-              if (data.status[4] == 3) {
-                $('#status').html("Z max limit STOP")
-              }
-              if (data.status[4] == 6) {
-                $('#status').html("Z min limit STOP")
-              }
-              if (data.status[3] == 3) {
-                $('#status').html("Y max limit STOP")
-              }
-              if (data.status[3] == 6) {
-                $('#status').html("Y min limit STOP")
-              }
-              if (data.status[2] == 3) {
-                $('#status').html("X max limit STOP")
-              }
-              if (data.status[2] == 6) {
-                $('#status').html("X min limit STOP")
-              }
-            } else {
-              $('#status').html("Standby")
-              $('#status').css("color", "#428bca")
-            }
+          if (data.status[0] == 1) {
+            $('#status').html("RUNNING")
+            $('#status').css("color", "#5cb85c")
+            $('#selectTask').prop('disabled', true)
           } else {
-            $('#status').html(data.error[1])
-            $('#status').css("color", "#d9534f")
+            $('#status').html("STANDBY")
+            $('#status').css("color", "#428bca")
+            $('#selectTask').prop('disabled', false)
+          }
+
+          if (data.message[0] == 1) {
+            $('#message').html("Position not reachable")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[3] == 3) {
+            $('#message').html("Z max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[3] == 6) {
+            $('#message').html("Z min limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[2] == 3) {
+            $('#message').html("Y max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[2] == 6) {
+            $('#message').html("Y min limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[1] == 3) {
+            $('#message').html("X max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[1] == 6) {
+            $('#message').html("X min limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else {
+            $('#message').html("NO MESSAGE")
+            $('#message').css("color", "#5cb85c")
+          }
+
+          if (data.error[0] == 0) {
+            $('#error').html("NO ERROR")
+            $('#error').css("color", "#5cb85c")
+          } else {
+            $('#error').html(data.error[1])
+            $('#error').css("color", "#d9534f")
           }
 
           $('#xMaxCh').click(function() {
             $('.limitWarning').hide()
-            $('.limitSuccess').hide()
             if ( data.limit[0] >= 10000 || data.limit[0] <= -10000 ) {
               $("#xMaxNew").val('')
             } else {
@@ -593,7 +775,6 @@
 
           $('#yMaxCh').click(function() {
             $('.limitWarning').hide()
-            $('.limitSuccess').hide()
             if ( data.limit[1] >= 10000 || data.limit[1] <= -10000 ) {
               $("#yMaxNew").val('')
             } else {
@@ -603,7 +784,6 @@
 
           $('#zMaxCh').click(function() {
             $('.limitWarning').hide()
-            $('.limitSuccess').hide()
             if ( data.limit[2] >= 10000 || data.limit[2] <= -10000 ) {
               $("#zMaxNew").val('')
             } else {
@@ -613,7 +793,6 @@
 
           $('#xMinCh').click(function() {
             $('.limitWarning').hide()
-            $('.limitSuccess').hide()
             if ( data.limit[3] >= 10000 || data.limit[3] <= -10000 ) {
               $("#xMinNew").val('')
             } else {
@@ -623,7 +802,6 @@
 
           $('#yMinCh').click(function() {
             $('.limitWarning').hide()
-            $('.limitSuccess').hide()
             if ( data.limit[4] >= 10000 || data.limit[4] <= -10000 ) {
               $("#yMinNew").val('')
             } else {
@@ -633,7 +811,6 @@
 
           $('#zMinCh').click(function() {
             $('.limitWarning').hide()
-            $('.limitSuccess').hide()
             if ( data.limit[5] >= 10000 || data.limit[5] <= -10000 ) {
               $("#zMinNew").val('')
             } else {
@@ -645,25 +822,47 @@
         })
       }
 
-      // Start motion
+      // Start program
 
-      $('#start').click(function() {
-        var sendTask = $('#runTask :selected').text()
-        console.log('Start motion')
-        console.log('cica: ' + sendTask )
+      $('#start-webprogram').click(function() {
+        var sendTask = $('#selectTask').find('option:selected').text();
+        if ( sendTask.indexOf("WEBMOTION") >= 0 ) {
+          $('#coord-jog').hide()
+          $('#coord-cart').hide()
+          $('#run').hide()
+          $('#webprogram-control').hide()
+          $('#webmotion-menu').show()
+          $('#jog').show()
+          $('#webmotion-control').show()
+        }        
+        console.log('Start ' + sendTask)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webstart?gettask=' + sendTask,
           cache: false,
           success: function() {
-            console.log('Send START is successful')
+            console.log('Send START ' + sendTask + ' is successful')
+          }
+        })
+      })
+
+      // Start webmotion
+
+      $('#start-webmotion').click(function() {  
+        console.log('Start webmotion')
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webstart?gettask=webmotion',
+          cache: false,
+          success: function() {
+            console.log('Send START webmotion is successful')
           }
         })
       })
 
       // Reset the controller
 
-      $('#reset').click(function() {
+      $('.reset').click(function() {
         console.log('Reset the controller')
         $.ajax({
           type: 'GET',
@@ -677,8 +876,17 @@
 
       // Abort motion
 
-      $('#abort').click(function() {
+      $('.abort').click(function() {
         console.log('ABORT motion')
+        $('#coord-jog').show()
+        $('#coord-cart').show()
+        $('#run').show()
+        $('#webprogram-control').show()
+        $('#webmotion-menu').hide()
+        $('#jog').hide()
+        $('#cart').hide()
+        $('#set').hide()
+        $('#webmotion-control').hide()
         $.ajax({
           type: 'GET',
           url: '/KAREL/webabort',
@@ -720,15 +928,15 @@
       // Enable buttons after motion
       
       function enBut() {
-        $(".btn").removeAttr("disabled")
+        $(".btn").removeAttr('disabled')
       }
     
       // Jogging
 
       $('#j1m').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=1&getstep=-1',
@@ -744,8 +952,8 @@
 
       $('#j1p').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=1&getstep=1',
@@ -761,8 +969,8 @@
 
       $('#j2m').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=2&getstep=-1',
@@ -778,8 +986,8 @@
 
       $('#j2p').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=2&getstep=1',
@@ -795,8 +1003,8 @@
 
       $('#j3m').on('mousedown touchstart', function() {
         clearTimeout(enButVar)      
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=3&getstep=-1',
@@ -812,8 +1020,8 @@
 
       $('#j3p').on('mousedown touchstart', function() {
         clearTimeout(enButVar)      
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=3&getstep=1',
@@ -829,8 +1037,8 @@
 
       $('#j4m').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false) 
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false) 
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=4&getstep=-1',
@@ -846,8 +1054,8 @@
 
       $('#j4p').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=4&getstep=1',
@@ -863,8 +1071,8 @@
 
       $('#j5m').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=5&getstep=-1',
@@ -880,8 +1088,8 @@
 
       $('#j5p').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=5&getstep=1',
@@ -897,8 +1105,8 @@
 
       $('#j6m').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)  
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)  
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=6&getstep=-1',
@@ -914,8 +1122,8 @@
 
       $('#j6p').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false) 
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false) 
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=j&getcpos=6&getstep=1',
@@ -933,8 +1141,8 @@
       
       $('#wmx').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=l&getcpos=1&getstep=-3',
@@ -952,8 +1160,8 @@
 
       $('#wpx').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=l&getcpos=1&getstep=3',
@@ -969,8 +1177,8 @@
 
       $('#wmy').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=l&getcpos=2&getstep=-3',
@@ -986,8 +1194,8 @@
 
       $('#wpy').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=l&getcpos=2&getstep=3',
@@ -1003,8 +1211,8 @@
 
       $('#wmz').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=l&getcpos=3&getstep=-3',
@@ -1020,8 +1228,8 @@
 
       $('#wpz').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=l&getcpos=3&getstep=3',
@@ -1039,8 +1247,8 @@
 
       $('#wmw').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=r&getcpos=4&getstep=-1',
@@ -1056,8 +1264,8 @@
 
       $('#wpw').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=r&getcpos=4&getstep=1',
@@ -1073,8 +1281,8 @@
 
       $('#wmp').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=r&getcpos=5&getstep=-1',
@@ -1090,8 +1298,8 @@
 
       $('#wpp').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=r&getcpos=5&getstep=1',
@@ -1107,8 +1315,8 @@
 
       $('#wmr').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=r&getcpos=6&getstep=-1',
@@ -1124,8 +1332,8 @@
 
       $('#wpr').on('mousedown touchstart', function() {
         clearTimeout(enButVar)
-        $(".btn").not(this).prop("disabled", true)
-        $("#abort").prop("disabled", false)
+        $(".btn").not(this).prop('disabled', true)
+        $("#abort").prop('disabled', false)
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=r&getcpos=6&getstep=1',
@@ -1143,7 +1351,6 @@
       
       $('#xMaxSave').click(function() {
         if ( $("#xMaxNew").val() > axisLimit || $("#xMaxNew").val() < -axisLimit) {
-          $('.limitSuccess').hide()
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1152,7 +1359,7 @@
             url: '/KAREL/weblimit?getlimit_id=1&getlimit_val=' + $("#xMaxNew").val(),
             cache: false,
             success: function() {
-              $('.limitSuccess').show()
+              $('#xMaxSet').modal('hide')
             }
           })
         }
@@ -1160,7 +1367,6 @@
 
       $('#yMaxSave').click(function() {
         if ( $("#yMaxNew").val() > axisLimit || $("#yMaxNew").val() < -axisLimit) {
-          $('.limitSuccess').hide()
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1169,7 +1375,7 @@
             url: '/KAREL/weblimit?getlimit_id=2&getlimit_val=' + $("#yMaxNew").val(),
             cache: false,
             success: function() {
-              $('.limitSuccess').show()
+              $('#yMaxSet').modal('hide')
             }
           })
         }
@@ -1177,7 +1383,6 @@
 
       $('#zMaxSave').click(function() {
         if ( $("#zMaxNew").val() > axisLimit || $("#zMaxNew").val() < -axisLimit) {
-          $('.limitSuccess').hide()
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1186,7 +1391,7 @@
             url: '/KAREL/weblimit?getlimit_id=3&getlimit_val=' + $("#zMaxNew").val(),
             cache: false,
             success: function() {
-              $('.limitSuccess').show()
+              $('#zMaxSet').modal('hide')
             }
           })
         }
@@ -1194,7 +1399,6 @@
 
       $('#xMinSave').click(function() {
         if ( $("#xMinNew").val() > axisLimit || $("#xMinNew").val() < -axisLimit) {
-          $('.limitSuccess').hide()
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1203,7 +1407,7 @@
             url: '/KAREL/weblimit?getlimit_id=4&getlimit_val=' + $("#xMinNew").val(),
             cache: false,
             success: function() {
-              $('.limitSuccess').show()
+              $('#xMinSet').modal('hide')
             }
           })
         }
@@ -1211,7 +1415,6 @@
 
       $('#yMinSave').click(function() {
         if ( $("#yMinNew").val() > axisLimit || $("#yMinNew").val() < -axisLimit) {
-          $('.limitSuccess').hide()
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1220,7 +1423,7 @@
             url: '/KAREL/weblimit?getlimit_id=5&getlimit_val=' + $("#yMinNew").val(),
             cache: false,
             success: function() {
-              $('.limitSuccess').show()
+              $('#yMinSet').modal('hide')
             }
           })
         }
@@ -1228,7 +1431,6 @@
 
       $('#zMinSave').click(function() {
         if ( $("#yMinNew").val() > axisLimit || $("#yMinNew").val() < -axisLimit) {
-          $('.limitSuccess').hide()
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1237,7 +1439,7 @@
             url: '/KAREL/weblimit?getlimit_id=6&getlimit_val=' + $("#zMinNew").val(),
             cache: false,
             success: function() {
-              $('.limitSuccess').show()
+              $('#zMinSet').modal('hide')
             }
           })
         }
@@ -1267,6 +1469,33 @@
         $.ajax({
           type: 'GET',
           url: '/KAREL/webcontrol?getstart=p&j1=0&j2=45&j3=135&j4=0&j5=-45&j6=0',
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#coord').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webcontrol?getstart=p&j1=0&j2=30&j3=90&j4=0&j5=-90&j6=0',
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#show').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webcontrol?getstart=p&j1=90&j2=0&j3=90&j4=0&j5=-90&j6=-90',
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#touch').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webcontrol?getstart=p&j1=90&j2=60&j3=30&j4=0&j5=60&j6=-90',
           cache: false,
           success: function() {}
         })
