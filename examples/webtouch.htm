@@ -1,66 +1,64 @@
 <html>
 <head>
-	<title>WEBTOUCH</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://192.168.1.102/cdn/virtualjoystick.js/virtualjoystick.js"></script>
-	<style>
-		body {
-			overflow: hidden;
-			padding: 0;
-			margin: 0;
-			background-color: #BBB;
-		}
-		#touch-container {
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
-			padding: 0;
-			margin: 0;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-		}
-	</style>
+  <title>WEBTOUCH</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="http://192.168.1.102/cdn/virtualjoystick.js/virtualjoystick.js"></script>
+  <style>
+    body {
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      background-color: #BBB;
+    }
+    #touch-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+    }
+  </style>
 </head>
 <body>
 
-	<div id="touch-container"></div>
+  <div id="touch-container"></div>
 
-	<script>
-		
-		var refresh
-		
-		var joystick = new VirtualJoystick({ container: document.getElementById('touch-container'), mouseSupport: true, })
-		
-		function sendNewPos(){
-			$.ajax({
-				type: 'GET',
-				url: '/KAREL/webcontrol?getstart=t&gettouchx=' + joystick.deltaX() + '&gettouchy=' + joystick.deltaY(),
-				cache: false,
-				success: function() {
-					console.log('Touch is successfull send')
-				}
-			})
-		}		
-		
-		$('#touch-container').on('mousedown touchstart', function() {
-			$.ajax({
-				type: 'GET',
-				url: '/KAREL/webcontrol?getstart=f',
-				cache: false,
-				success: function() {
-					console.log('Start pose is saved')
-				}
-			})
-			refresh = setInterval(sendNewPos, 150)
-		}).on('mouseup touchend', function() {
-			clearInterval(refresh)
-		})
+  <script>
+    
+    var refresh
+    
+    var joystick = new VirtualJoystick({ container: document.getElementById('touch-container'), mouseSupport: true, })
+    
+    function sendNewPos(){
+      $.ajax({
+        type: 'GET',
+        url: '/KAREL/webcontrol?getstart=t&gettouchx=' + joystick.deltaX() + '&gettouchy=' + joystick.deltaY(),
+        cache: false,
+        success: function() {
+          console.log('Touch is successfull send')
+        }
+      })
+    }    
+    
+    $('#touch-container').on('mousedown touchstart', function() {
+      $.ajax({
+        type: 'GET',
+        url: '/KAREL/webcontrol?getstart=f',
+        cache: false,
+        success: function() {
+          console.log('Start pose is saved')
+        }
+      })
+      refresh = setInterval(sendNewPos, 150)
+    }).on('mouseup touchend', function() {
+      clearInterval(refresh)
+    })
 
-	</script>
+  </script>
 
 </body>
 </html>
