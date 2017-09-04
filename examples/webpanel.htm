@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>WEBPANEL</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -1468,7 +1469,7 @@
       $('#place').click(function() {
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?getstart=p&j1=0&j2=45&j3=135&j4=0&j5=-45&j6=0',
+          url: '/KAREL/webcontrol?getstart=p&j1=0&j2=45&j3=135&j4=0&j5=45&j6=0',
           cache: false,
           success: function() {}
         })

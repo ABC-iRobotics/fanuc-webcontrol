@@ -8,6 +8,7 @@ CONST
 	
 	PR_WEBJOINTS = 40
 	PR_WEBXYZWPR = 41
+	PR_WEBTOUCH = 42
 	R_WEBCOORD = 40	
 	R_WEBSTEP = 41
 
@@ -18,6 +19,13 @@ VAR
 	getstart: STRING[127]
 	getcpos: STRING[127]
 	getstep: STRING[127]
+	
+	save_cur_pos: XYZWPR
+	saved_pos: XYZWPR
+	gettouchx: STRING[127]
+	gettouchy: STRING[127]
+	touchx_rel: REAL
+	touchy_rel: REAL
 	
 	coordpos: REAL
 	movestep: REAL
@@ -45,7 +53,7 @@ BEGIN
 	
 	IF (STATUS <> 0 ) THEN
 	
-		WRITE ('SET_JPOS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+		WRITE ('SET_POS_REG  failed (setcurjpos) = ', STATUS, CR)
 	
 	ELSE
 
@@ -76,7 +84,7 @@ BEGIN
 	
 	IF (STATUS <> 0 ) THEN
 	
-		WRITE ('SET_POS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+		WRITE ('SET_POS_REG  failed (setcurxyz) = ', STATUS, CR)
 	
 	ELSE
 
@@ -107,7 +115,7 @@ BEGIN
 	
 	IF (STATUS <> 0 ) THEN
 	
-		WRITE ('SET_POS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+		WRITE ('SET_POS_REG  failed (setcurwpr) = ', STATUS, CR)
 	
 	ELSE
 
@@ -155,7 +163,7 @@ BEGIN
 		
 		IF (STATUS <> 0 ) THEN
 		
-			WRITE ('SET_JPOS_REG  built-IN failed WITH STATUS = ', STATUS, CR)
+			WRITE ('SET_JPOS_REG failed (setpose) = ', STATUS, CR)
 		
 		ELSE		
 		
@@ -175,7 +183,11 @@ END setpose
 
 BEGIN
 
-	IF (getstart = 'j') THEN
+	WRITE (CHR(128),CHR(137))
+
+	IF UNINIT( getstart ) THEN getstart = ''; ENDIF
+
+	IF ( getstart = 'j' ) THEN
 		CNV_STR_REAL(getcpos, coordpos)
 		CNV_STR_REAL(getstep, movestep)
 		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
@@ -184,7 +196,7 @@ BEGIN
 		return_code = 204
 	ENDIF
 
-	IF (getstart = 'l') THEN
+	IF ( getstart = 'l' ) THEN
 		CNV_STR_REAL(getcpos, coordpos)
 		CNV_STR_REAL(getstep, movestep)		
 		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
@@ -193,7 +205,7 @@ BEGIN
 		return_code = 204
 	ENDIF
 
-	IF (getstart = 'r') THEN
+	IF ( getstart = 'r' ) THEN
 		CNV_STR_REAL(getcpos, coordpos)
 		CNV_STR_REAL(getstep, movestep)		
 		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
@@ -202,8 +214,28 @@ BEGIN
 		return_code = 204
 	ENDIF
 	
-	IF getstart = 'p' THEN
+	IF ( getstart = 'p' ) THEN
 		setpose
+		return_code = 204
+	ENDIF
+
+	IF ( getstart = 'f' ) THEN
+		save_cur_pos = CURPOS(0,0)
+		SET_POS_REG(PR_WEBTOUCH, save_cur_pos, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('SET_POS_REG  failed (getstart=f) = ', STATUS, CR)
+		ENDIF
+		return_code = 204
+	ENDIF
+
+	IF ( getstart = 't' ) THEN
+		CNV_STR_REAL( gettouchx, touchx_rel )
+		CNV_STR_REAL( gettouchy, touchy_rel )
+		saved_pos = GET_POS_REG(PR_WEBTOUCH, STATUS)
+		saved_pos.x = saved_pos.x + touchx_rel
+		saved_pos.y = saved_pos.y + touchy_rel
+		SET_POS_REG(PR_WEBXYZWPR, saved_pos, STATUS)
+		FLG[1] = ON
 		return_code = 204
 	ENDIF
 	
