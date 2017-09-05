@@ -5,12 +5,23 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="http://192.168.1.102/cdn/virtualjoystick.js/virtualjoystick.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400" rel="stylesheet">
   <style>
     body {
       overflow: hidden;
       padding: 0;
       margin: 0;
       background-color: #BBB;
+    }
+    #touch-info {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      padding-top: 5px;
+      text-align: center;
+      color: #428bca;
+      font-family: 'Oswald', sans-serif;
+      font-size: 27px;
     }
     #touch-container {
       width: 100%;
@@ -25,18 +36,25 @@
 </head>
 <body>
 
+  <div id="touch-info"></div>
   <div id="touch-container"></div>
 
   <script>
     
     var refresh
-    
+    var outputEl  = document.getElementById('touch-info');
+
     var joystick = new VirtualJoystick({ container: document.getElementById('touch-container'), mouseSupport: true, })
     
+    $(document).ready(function() {
+      outputEl.innerHTML  = ' dx: ' + Math.round(joystick.deltaX()) + '; dy: ' + Math.round(joystick.deltaY()) + ';' 
+    })
+  
     function sendNewPos(){
+      outputEl.innerHTML  = ' dx: ' + Math.round(joystick.deltaX()) + '; dy: ' + Math.round(joystick.deltaY()) + ';' 
       $.ajax({
         type: 'GET',
-        url: '/KAREL/webcontrol?getstart=t&gettouchx=' + joystick.deltaX() + '&gettouchy=' + joystick.deltaY(),
+        url: '/KAREL/webcontrol?getstart=t&gettouchx=' + Math.round(joystick.deltaX()) + '&gettouchy=' + Math.round(joystick.deltaY()),
         cache: false,
         success: function() {
           console.log('Touch is successfull send')
