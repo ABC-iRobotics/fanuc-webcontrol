@@ -47,11 +47,11 @@
     var joystick = new VirtualJoystick({ container: document.getElementById('touch-container'), mouseSupport: true, })
     
     $(document).ready(function() {
-      outputEl.innerHTML  = ' dx: ' + Math.round(joystick.deltaX()) + '; dy: ' + Math.round(joystick.deltaY()) + ';' 
+      outputEl.innerHTML  = ' dx: ' + Math.round(joystick.deltaX()) + 'mm; dy: ' + Math.round(joystick.deltaY()) + 'mm;' 
     })
   
     function sendNewPos(){
-      outputEl.innerHTML  = ' dx: ' + Math.round(joystick.deltaX()) + '; dy: ' + Math.round(joystick.deltaY()) + ';' 
+      outputEl.innerHTML  = ' dx: ' + Math.round(joystick.deltaX()) + 'mm; dy: ' + Math.round(joystick.deltaY()) + 'mm;' 
       $.ajax({
         type: 'GET',
         url: '/KAREL/webcontrol?getstart=t&gettouchx=' + Math.round(joystick.deltaX()) + '&gettouchy=' + Math.round(joystick.deltaY()),
