@@ -1,0 +1,43 @@
+PROGRAM websave
+%COMMENT = 'v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+CONST
+
+	PR_WEBSAVEJP = 42
+	PR_WEBSAVEP = 43
+
+VAR
+
+	STATUS: INTEGER
+	return_code: INTEGER
+
+	cur_jpos: JOINTPOS
+	cur_pos: XYZWPR
+
+BEGIN
+
+	WRITE (CHR(128),CHR(137))
+
+	cur_jpos = CURJPOS(0,0)
+	cur_pos = CURPOS(0,0)
+
+	SET_JPOS_REG(PR_WEBSAVEJP, cur_jpos, STATUS)	
+	IF (STATUS <> 0 ) THEN
+	
+		WRITE ('WEBSAVE SET_JPOS_REG  failed = ', STATUS, CR)
+	
+	ENDIF
+	
+	SET_POS_REG(PR_WEBSAVEP, cur_pos, STATUS)
+	IF (STATUS <> 0 ) THEN
+	
+		WRITE ('WEBSAVE SET_POS_REG  failed = ', STATUS, CR)
+	
+	ENDIF
+
+	return_code = 204
+	
+END websave

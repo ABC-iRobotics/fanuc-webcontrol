@@ -1,5 +1,5 @@
 PROGRAM webcontrol
-%COMMENT = 'v2'
+%COMMENT = 'v3'
 %NOLOCKGROUP
 %NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
@@ -8,235 +8,235 @@ CONST
 	
 	PR_WEBJOINTS = 40
 	PR_WEBXYZWPR = 41
-	PR_WEBTOUCH = 42
-	R_WEBCOORD = 40	
-	R_WEBSTEP = 41
+	
+	R_WEBCOORD1 = 51
+	R_WEBCOORD2 = 52
+	R_WEBCOORD3 = 53
+	R_WEBCOORD4 = 54
+	R_WEBCOORD5 = 55
+	R_WEBCOORD6 = 56
+	R_WEBCOORD7 = 57
+	R_WEBCOORD8 = 58
+	R_WEBCOORD9 = 59
 
 VAR
 
 	STATUS: INTEGER
 	return_code: INTEGER
-	getstart: STRING[127]
-	getcpos: STRING[127]
-	getstep: STRING[127]
-	
-	save_cur_pos: XYZWPR
-	saved_pos: XYZWPR
-	gettouchx: STRING[127]
-	gettouchy: STRING[127]
-	touchx_rel: REAL
-	touchy_rel: REAL
-	
-	coordpos: REAL
-	movestep: REAL
 
-	j1: STRING[4]
-	j2: STRING[4]
-	j3: STRING[4]
-	j4: STRING[4]
-	j5: STRING[4]
-	j6: STRING[4]
+	str_mtn_mod: STRING[127]
+	int_mtn_mod: INTEGER
 
---Set the current JOINT position as initial position and jogging
+	str_coord1: STRING[127]
+	str_coord2: STRING[127]
+	str_coord3: STRING[127]
+	str_coord4: STRING[127]
+	str_coord5: STRING[127]
+	str_coord6: STRING[127]
+	str_coord7: STRING[127]
+	str_coord8: STRING[127]
+	str_coord9: STRING[127]
 
-ROUTINE setcurjpos
-
-VAR
+	coord: ARRAY[9] OF REAL
 
 	cur_jpos: JOINTPOS
-
-BEGIN
-	
-	cur_jpos = CURJPOS(0,0)
-	
-	SET_JPOS_REG(PR_WEBJOINTS, cur_jpos, STATUS)
-	
-	IF (STATUS <> 0 ) THEN
-	
-		WRITE ('SET_POS_REG  failed (setcurjpos) = ', STATUS, CR)
-	
-	ELSE
-
-		FLG[2] = ON
-		FLG[1] = ON
-		
-		IF FLG[2] AND FLG[1] THEN
-			WRITE('FLG2 and FLG1 are ON', CR)
-		ENDIF
-	
-	ENDIF
-
-END setcurjpos
-
---Set the current XYZWPR position as initial position and move
-
-ROUTINE setcurxyz
-
-VAR
-
 	cur_pos: XYZWPR
+	
+	new_jpos: JOINTPOS
+	new_pos: XYZWPR
+
+ROUTINE setreg
 
 BEGIN
 	
-	cur_pos = CURPOS(0,0)
-	
-	SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
-	
+	SET_REAL_REG( R_WEBCOORD1, coord[1], STATUS)
 	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord1  failed = ', STATUS, CR)
+	ENDIF
 	
-		WRITE ('SET_POS_REG  failed (setcurxyz) = ', STATUS, CR)
+	SET_REAL_REG( R_WEBCOORD2, coord[2], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord2  failed = ', STATUS, CR)
+	ENDIF
 	
-	ELSE
-
-		FLG[3] = ON
-		FLG[1] = ON
-		
-		IF FLG[3] AND FLG[1] THEN
-			WRITE('FLG3 and FLG1 are ON', CR)
-		ENDIF
+	SET_REAL_REG( R_WEBCOORD3, coord[3], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord3  failed = ', STATUS, CR)
+	ENDIF
 	
+	SET_REAL_REG( R_WEBCOORD4, coord[4], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord4  failed = ', STATUS, CR)
+	ENDIF
+	
+	SET_REAL_REG( R_WEBCOORD5, coord[5], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord5  failed = ', STATUS, CR)
+	ENDIF
+	
+	SET_REAL_REG( R_WEBCOORD6, coord[6], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord6  failed = ', STATUS, CR)
 	ENDIF
 
-END setcurxyz
-
---Set the current TCP position as initial position and rotating
-
-ROUTINE setcurwpr
-
-VAR
-
-	cur_pos: XYZWPR
-
-BEGIN
-	
-	cur_pos = CURPOS(0,0)
-	
-	SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
-	
-	IF (STATUS <> 0 ) THEN
-	
-		WRITE ('SET_POS_REG  failed (setcurwpr) = ', STATUS, CR)
-	
-	ELSE
-
-		FLG[4] = ON
-		FLG[1] = ON
-
-		IF FLG[4] AND FLG[1] THEN
-			WRITE('FLG4 and FLG1 are ON', CR)
-		ENDIF
-	
-	ENDIF
-
-END setcurwpr
-
---Move to predefined pose
-
-ROUTINE setpose
-
-VAR 
-
-	jpos: JOINTPOS
-	jposVal: ARRAY[9] OF REAL
-
-BEGIN
-
-	CNV_STR_REAL(j1, jposVal[1]) 
-	CNV_STR_REAL(j2, jposVal[2])
-	CNV_STR_REAL(j3, jposVal[3])
-	CNV_STR_REAL(j4, jposVal[4])
-	CNV_STR_REAL(j5, jposVal[5])
-	CNV_STR_REAL(j6, jposVal[6])
-	jposVal[7] = 0
-	jposVal[8] = 0
-	jposVal[9] = 0
-	
-	CNV_REL_JPOS(jposVal, jpos, STATUS)
-
-	IF (STATUS <> 0 ) THEN
-	
-		WRITE ('CNV_REL_JPOS built-IN failed WITH STATUS = ', STATUS, CR)
-	
-	ELSE
-
-		SET_JPOS_REG(PR_WEBJOINTS, jpos, STATUS)
-		
-		IF (STATUS <> 0 ) THEN
-		
-			WRITE ('SET_JPOS_REG failed (setpose) = ', STATUS, CR)
-		
-		ELSE		
-		
-			FLG[5] = ON
-			FLG[1] = ON
-	
-			IF FLG[5] AND FLG[1] THEN
-				WRITE('FLG5 and FLG1 are ON', CR)
-			ENDIF
-			
-		ENDIF
-	ENDIF
-
-END setpose
-
---The main program
+END setreg
 
 BEGIN
 
 	WRITE (CHR(128),CHR(137))
 
-	IF UNINIT( getstart ) THEN getstart = ''; ENDIF
+	CNV_STR_INT(str_mtn_mod, int_mtn_mod)
 
-	IF ( getstart = 'j' ) THEN
-		CNV_STR_REAL(getcpos, coordpos)
-		CNV_STR_REAL(getstep, movestep)
-		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
-		SET_REAL_REG(R_WEBSTEP, movestep, STATUS)
-		setcurjpos
-		return_code = 204
-	ENDIF
+	CNV_STR_REAL(str_coord1, coord[1])
+	CNV_STR_REAL(str_coord2, coord[2])
+	CNV_STR_REAL(str_coord3, coord[3])
+	CNV_STR_REAL(str_coord4, coord[4])
+	CNV_STR_REAL(str_coord5, coord[5])
+	CNV_STR_REAL(str_coord6, coord[6])
+	coord[7] = 0
+	coord[8] = 0
+	coord[9] = 0
 
-	IF ( getstart = 'l' ) THEN
-		CNV_STR_REAL(getcpos, coordpos)
-		CNV_STR_REAL(getstep, movestep)		
-		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
-		SET_REAL_REG(R_WEBSTEP, movestep, STATUS)
-		setcurxyz
-		return_code = 204
-	ENDIF
+	cur_jpos = CURJPOS(0,0)
+	cur_pos = CURPOS(0,0)
 
-	IF ( getstart = 'r' ) THEN
-		CNV_STR_REAL(getcpos, coordpos)
-		CNV_STR_REAL(getstep, movestep)		
-		SET_REAL_REG(R_WEBCOORD, coordpos, STATUS)
-		SET_REAL_REG(R_WEBSTEP, movestep, STATUS)
-		setcurwpr
-		return_code = 204
-	ENDIF
-	
-	IF ( getstart = 'p' ) THEN
-		setpose
-		return_code = 204
-	ENDIF
+	SELECT int_mtn_mod OF
 
-	IF ( getstart = 'f' ) THEN
-		save_cur_pos = CURPOS(0,0)
-		SET_POS_REG(PR_WEBTOUCH, save_cur_pos, STATUS)
-		IF (STATUS <> 0 ) THEN
-			WRITE ('SET_POS_REG  failed (getstart=f) = ', STATUS, CR)
-		ENDIF
-		return_code = 204
-	ENDIF
+		CASE(1): --Absolute motion in Joint space
 
-	IF ( getstart = 't' ) THEN
-		CNV_STR_REAL( gettouchx, touchx_rel )
-		CNV_STR_REAL( gettouchy, touchy_rel )
-		saved_pos = GET_POS_REG(PR_WEBTOUCH, STATUS)
-		saved_pos.x = saved_pos.x + touchx_rel
-		saved_pos.y = saved_pos.y + touchy_rel
-		SET_POS_REG(PR_WEBXYZWPR, saved_pos, STATUS)
-		FLG[1] = ON
-		return_code = 204
-	ENDIF
+			CNV_REL_JPOS(coord, new_jpos, STATUS)
+		
+			IF (STATUS <> 0 ) THEN
+			
+				WRITE ('WEBCONTROL CNV_REL_JPOS failed = ', STATUS, CR)
+			
+			ELSE
+		
+				SET_JPOS_REG(PR_WEBJOINTS, new_jpos, STATUS)
+				
+				IF (STATUS <> 0 ) THEN
+				
+					WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)
+				
+				ELSE		
+				
+					FLG[3] = ON
+					FLG[1] = ON
+					
+				ENDIF
+
+			ENDIF
+		
+			return_code = 204
+
+		CASE(2): --Relative motion in Joint space
+
+			setreg
+			
+			SET_JPOS_REG(PR_WEBJOINTS, cur_jpos, STATUS)			
+
+			IF (STATUS <> 0 ) THEN
+			
+				WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)
+			
+			ELSE
+			
+				FLG[4] = ON
+				FLG[1] = ON
+		
+			ENDIF
+		
+			return_code = 204
+
+		CASE(3): --Absolute motion in Cartesion space
+			
+			new_pos = cur_pos --Keep the current configuration
+
+			new_pos.x = coord[1]
+			new_pos.y = coord[2]
+			new_pos.z = coord[3]
+			new_pos.w = coord[4]
+			new_pos.p = coord[5]
+			new_pos.r = coord[6]
+
+			SET_POS_REG(PR_WEBXYZWPR, new_pos, STATUS)
+			
+			IF (STATUS <> 0 ) THEN
+			
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
+			
+			ELSE
+		
+				FLG[5] = ON
+				FLG[1] = ON
+			
+			ENDIF
+		
+			return_code = 204
+			
+		CASE(4): --Relative motion in Cartesion space (XYZ - linear motion)
+		
+			setreg
+			
+			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
+			
+			IF (STATUS <> 0 ) THEN
+			
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
+			
+			ELSE
+		
+				FLG[6] = ON
+				FLG[1] = ON
+			
+			ENDIF
+		
+			return_code = 204
+
+		CASE(5): --Relative motion in Cartesion space (WPR - joint motion)
+		
+			setreg
+			
+			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
+			
+			IF (STATUS <> 0 ) THEN
+			
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
+			
+			ELSE
+		
+				FLG[7] = ON
+				FLG[1] = ON
+			
+			ENDIF
+		
+			return_code = 204
+
+		CASE(6): --Relative motion in Cartesion space (Touchpad motion)
+		
+			setreg
+			
+			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
+			
+			IF (STATUS <> 0 ) THEN
+			
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
+			
+			ELSE
+		
+				FLG[8] = ON
+				FLG[1] = ON
+			
+			ENDIF
+		
+			return_code = 204
+
+		ELSE:
+
+			WRITE('WEBCONTROL ERROR',CR)
+
+			return_code = 204
+
+	ENDSELECT
 	
 END webcontrol

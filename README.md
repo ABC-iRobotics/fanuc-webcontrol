@@ -1,7 +1,7 @@
 # fanuc-webcontrol
 
 ## Overview
-Simple software to control FANUC six degree of freedom robotic arms through a webbrowser.
+Simple software to control FANUC six degree of freedom robotic arms through a web browser.
 
 ![Image of fanuc-webcontrol](preview.png)
 

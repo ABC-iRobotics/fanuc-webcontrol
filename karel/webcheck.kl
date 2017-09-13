@@ -1,5 +1,5 @@
 PROGRAM webcheck
-%COMMENT = 'v2'
+%COMMENT = 'v3'
 %NOLOCKGROUP
 %NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
@@ -8,7 +8,6 @@ CONST
 
 	PR_WEBJOINTS = 40
 	PR_WEBXYZWPR = 41
-	R_WEBSTEP = 41
 
 	R_WEBXMAX = 43	
 	R_WEBYMAX = 44
@@ -71,7 +70,7 @@ BEGIN
 
 	--check the new jpos is in range
 	
-	IF FLG[2] OR FLG[5] THEN
+	IF FLG[3] OR FLG[4] THEN
 
 		new_jpos = GET_JPOS_REG(PR_WEBJOINTS, STATUS)
 
@@ -82,7 +81,7 @@ BEGIN
 		ELSE
 			
 			IF NOT J_IN_RANGE(new_jpos) THEN		
-				FLG[6] = ON
+				FLG[2] = ON
 				reach_ab = 1
 			ELSE
 				reach_ab = 0
@@ -97,32 +96,32 @@ BEGIN
 			new_pos = out_pos --Convert out_pos (POSITION) to XYZWPREXT
 
 			IF new_pos.x <= xmin_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_x = 6
 			ENDIF
 			
 			IF new_pos.x >= xmax_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_x = 3
 			ENDIF
 
 			IF new_pos.y <= ymin_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_y = 6
 			ENDIF
 			
 			IF new_pos.y >= ymax_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_y = 3
 			ENDIF
 
 			IF new_pos.z <= zmin_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_z = 6
 			ENDIF
 			
 			IF new_pos.z >= zmax_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_z = 3
 			ENDIF		
 		ENDIF
@@ -131,7 +130,7 @@ BEGIN
 
 	--check the new pos is in range
 
-	IF FLG[3] OR FLG[4] THEN
+	IF FLG[5] OR FLG[6] OR FLG[7] OR FLG[8] THEN
 
 		new_pos = GET_POS_REG(PR_WEBXYZWPR, STATUS)
 
@@ -142,7 +141,7 @@ BEGIN
 		ELSE
 			
 			IF NOT IN_RANGE(new_pos) THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				reach_ab = 1
 			ELSE
 				reach_ab = 0
@@ -151,32 +150,32 @@ BEGIN
 			--limit the Z direction
 
 			IF new_pos.x <= xmin_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_x = 6
 			ENDIF
 			
 			IF new_pos.x >= xmax_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_x = 3
 			ENDIF
 
 			IF new_pos.y <= ymin_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_y = 6
 			ENDIF
 			
 			IF new_pos.y >= ymax_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_y = 3
 			ENDIF
 
 			IF new_pos.z <= zmin_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_z = 6
 			ENDIF
 
 			IF new_pos.z >= zmax_real THEN
-				FLG[6] = ON
+				FLG[2] = ON
 				limit_z = 3
 			ENDIF		
 		ENDIF

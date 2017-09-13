@@ -1,0 +1,143 @@
+<html>
+<head>
+  <title>WEBTOUCHPAD</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="http://192.168.1.102/cdn/virtualjoystick.js/virtualjoystick.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400" rel="stylesheet">
+  <style>
+    body {
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      background-color: #BBB;
+    }
+    #touchpad-info {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      padding-top: 5px;
+      text-align: center;
+      color: #428bca;
+      font-family: 'Oswald', sans-serif;
+      font-size: 27px;
+    }
+    #touchpad-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="touchpad-info"></div>
+  <div id="touchpad-container"></div>
+
+  <script>
+
+    $(document).ready(function() {
+
+      var refresh
+      var displacement  = document.getElementById('touchpad-info');
+      var joystick = new VirtualJoystick({ container: document.getElementById('touchpad-container'), mouseSupport: true, })
+
+      displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;' 
+
+      // Send new relative displacement
+      
+      function sendDisplacement(){
+        displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;' 
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webcontrol?str_mtn_mod=6&str_coord1=' + (-1 * Math.round(joystick.deltaY() / 2)) + '&str_coord2=' + (-1 * Math.round(joystick.deltaX() / 2)) + '&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0',
+          cache: false,
+          success: function() {
+            console.log('Touch is successfull send')
+          }
+        })
+      }
+
+      // Keep the motion
+
+      function webkeep() {
+        console.log('KEEP motion')
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webkeep',
+          cache: false,
+          success: function() {
+            console.log('Send KEEP is successful')
+          }
+        })
+      }
+
+      // Stop the motion
+
+      function webstop() {
+        console.log('STOP(999) motion')
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webstop',
+          cache: false,
+          success: function() {
+            console.log('Send STOP(999) is successful')
+          }
+        })
+      }
+
+      // setInterval base
+
+      function websetInt() {
+        sendDisplacement()
+        webkeep()
+      }
+
+      // clearInterval
+
+      function webclrInt() {
+        if (refresh !== undefined) {
+          clearInterval(refresh)
+          console.log('refresh is cleared')
+        } else {
+          console.log('refresh is undefined')
+        }
+      }
+
+      // Start motion
+
+      $('#touchpad-container').on('mousedown touchstart', function() {
+        webclrInt()
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webregzero',
+          cache: false,
+          success: function() {
+            console.log('Registers are zero')
+          }
+        })
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/websave',
+          cache: false,
+          success: function() {
+            console.log('Start pose is saved')
+          }
+        })
+        refresh = setInterval(websetInt, 100)
+      }).on('mouseup touchend', function() {
+        webclrInt()
+        webstop()
+      })
+
+    })
+
+  </script>
+
+</body>
+</html>
