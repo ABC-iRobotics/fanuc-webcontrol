@@ -15,9 +15,6 @@ CONST
 	R_WEBCOORD4 = 54
 	R_WEBCOORD5 = 55
 	R_WEBCOORD6 = 56
-	R_WEBCOORD7 = 57
-	R_WEBCOORD8 = 58
-	R_WEBCOORD9 = 59
 
 VAR
 
@@ -33,9 +30,6 @@ VAR
 	str_coord4: STRING[127]
 	str_coord5: STRING[127]
 	str_coord6: STRING[127]
-	str_coord7: STRING[127]
-	str_coord8: STRING[127]
-	str_coord9: STRING[127]
 
 	coord: ARRAY[9] OF REAL
 

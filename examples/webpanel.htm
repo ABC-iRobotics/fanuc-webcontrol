@@ -125,11 +125,14 @@
     <div class="ts-row-10px"></div>
     <div class="ts-row-10px"></div>
     <div class="row text-center">
-      <div class="col-sm-3 col-sm-offset-3 col-xs-6">
+      <div class="col-sm-2 col-sm-offset-3 col-xs-4">
         <button type="button" id="webprogram-start" class="btn btn-info ts-btn-full">START</button>
       </div>
-      <div class="col-sm-3 col-xs-6">
+      <div class="col-sm-2 col-xs-4">
         <button type="button" class="btn ts-btn-full reset">RESET</button>
+      </div>
+      <div class="col-sm-2 col-xs-4">
+        <button type="button" id="webmotion-join" class="btn btn-default ts-btn-full">JOIN</button>
       </div>
     </div>
     <div class="ts-row-10px"></div>
@@ -139,7 +142,7 @@
     <div class="ts-row-20px"></div>   
     <div class="row text-center">
       <div class="col-xs-12 text-center">
-        <button type="button" class="btn btn-danger ts-btn-full abort">ABORT</button>
+        <button type="button" class="btn btn-danger ts-btn-full abort">ABORT / STOP</button>
       </div>   
     </div>
     <div class="ts-row-10px"></div> 
@@ -647,10 +650,18 @@
             $('#status').html("RUNNING")
             $('#status').css("color", "#5cb85c")
             $('#selectTask').prop('disabled', true)
+            $('#webprogram-start').prop('disabled', true)
           } else {
             $('#status').html("STANDBY")
             $('#status').css("color", "#428bca")
             $('#selectTask').prop('disabled', false)
+            $('#webprogram-start').prop('disabled', false)
+          }
+
+          if (data.status[0] == 1 && data.status[1] == 1) {
+            $('#webmotion-join').prop('disabled', false)
+          } else {
+            $('#webmotion-join').prop('disabled', true)
           }
 
           // Show the messages
@@ -835,13 +846,26 @@
         })
       })
 
+      // Join the running webmotion session
+
+      $('#webmotion-join').click(function() {
+          $('#info-controller').show()
+          $('#info-jog').hide()
+          $('#info-cart').hide()
+          $('#webprogram-run').hide()
+          $('#webprogram-control').hide()
+          $('#webmotion-menu').show()
+          $('#webmotion-jog').show()
+          $('#webmotion-control').show()
+      })
+
       // Restart the webmotion
 
       $('#webmotion-restart').click(function() {  
         console.log('Start webmotion')
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webstart?gettask=webmotion',
+          url: '/KAREL/webstart?gettask=WEBMOTION',
           cache: false,
           success: function() {
             console.log('Send RESTART webmotion is successful')

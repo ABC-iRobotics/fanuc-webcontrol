@@ -22,9 +22,9 @@ THE SOFTWARE IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT WITHOUT ANY 
 This is written in Fanuc Karel language, TP code and JavaScript. It is tested on FANUC M-430iA2P robot with R-J3iC controller v7.40
 
 The following registers [R], position registers[PR] and FLAGs are used:
-- [R]: 40 - 48,
-- [PR]: 40, 41,
-- FLAG: 1 - 6,
+- [R]: 40 - 56,
+- [PR]: 40 - 43,
+- FLAG: 1 - 8,
 
 If these (position) registers and/or flags are not free, than you can choose anothers, but you have to update these numbers in the karel programs and the `webmotion.tp` file.
 
@@ -32,7 +32,7 @@ Internet connection is also required because the Bootstrap, PEP and JQuery libra
 
 ## Installation
 1. Copy the `*.pc` and files from the `karel` folder to the robot `MD:` folder
-2. Copy the `webpanel.htm` file from the `examples` folder to the robot `MD:` folder
+2. Copy the `*.htm` file from the `examples` folder to the robot `MD:` folder
 3. Copy the `webmotion.tp` file from the `tpe` folder to the robot `MD:` folder
 
 ## Configuration
@@ -49,13 +49,15 @@ Run the WEBMOTION tp program on the controller or open a browser and type: http:
 - SET: 
   * Set the axis limits. The default values are 0, thus you have to change these to make possible any movement.
   * Move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.) **Important: SEE NOTE NO.2**
+If the WEBMOTION tp program is running these functions are also availabled:
+- Webjoystick: http://robotIP/md/webjoystick.htm
+- Webtouchpad: http://robotIP/md/webtouchpad.htm
 
 ## Notes
 1. You can change the default steps (1 degree, 3 mm) in the javascript part of the `webpanel.htm`. In this case you may also have to update the `setInt` variable in this file.
 2. The predefined positions were tested on FANUC M-430iA2P. If you have an other type of FANUC robot, you might have to change these positions' coordinates.
-3. If you try to push more buttons at the same time then your browser may be malfunctioning and will continously send the `keep` moving command... You need to be ABORT the motion and reload or re-open the browser page. Please push only one button at the same time!
-4. The PR[40] and PR[41] contain the movements coordinates. In these the UF:F and UT:F. This means that the coordinate system of the tool coordinate system number currently selected is used.
-5. TCP Z limit is -250mm. It is set for floor mounted FANUC M-430iA2P robot. If you have an other type of FANUC robot and/or it is mounted an other way, you might have to modify this limit.
+3. The PR[40] and PR[41] contain the movements coordinates. In these the UF:F and UT:F. This means that the coordinate system of the tool coordinate system number currently selected is used.
+4. TCP Z limit is -250mm. It is set for floor mounted FANUC M-430iA2P robot. If you have an other type of FANUC robot and/or it is mounted an other way, you might have to modify this limit.
 
 ## Acknowledgement
 We acknowledge the financial support of this work by the Hungarian State and the European Union under the  EFOP-3.6.1-16-2016-00010 project.
