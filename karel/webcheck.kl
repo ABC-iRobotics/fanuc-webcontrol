@@ -9,12 +9,20 @@ CONST
 	PR_WEBJOINTS = 40
 	PR_WEBXYZWPR = 41
 
+	R_WEBKEEP = 42
 	R_WEBXMAX = 43	
 	R_WEBYMAX = 44
 	R_WEBZMAX = 45
 	R_WEBXMIN = 46
 	R_WEBYMIN = 47
 	R_WEBZMIN = 48
+
+	R_WEBCOORD1 = 51
+	R_WEBCOORD2 = 52
+	R_WEBCOORD3 = 53
+	R_WEBCOORD4 = 54
+	R_WEBCOORD5 = 55
+	R_WEBCOORD6 = 56
 
 VAR
 
@@ -33,6 +41,7 @@ VAR
 	wjnt_cfg: CONFIG
 	ext_ang: ARRAY[3] OF REAL
 
+	keep_flag: BOOLEAN
 	xmax_flag: BOOLEAN
 	ymax_flag: BOOLEAN
 	zmax_flag: BOOLEAN
@@ -40,13 +49,15 @@ VAR
 	ymin_flag: BOOLEAN
 	zmin_flag: BOOLEAN
 	
+	keep_int: INTEGER
 	xmax_int: INTEGER
 	ymax_int: INTEGER
 	zmax_int: INTEGER
 	xmin_int: INTEGER
 	ymin_int: INTEGER
 	zmin_int: INTEGER
-	
+
+	keep_real: REAL
 	xmax_real: REAL
 	ymax_real: REAL
 	zmax_real: REAL
@@ -54,14 +65,43 @@ VAR
 	ymin_real: REAL
 	zmin_real: REAL
 
+	coord1_flag: BOOLEAN
+	coord2_flag: BOOLEAN
+	coord3_flag: BOOLEAN
+	coord4_flag: BOOLEAN
+	coord5_flag: BOOLEAN
+	coord6_flag: BOOLEAN
+
+	coord1_int: INTEGER
+	coord2_int: INTEGER
+	coord3_int: INTEGER
+	coord4_int: INTEGER
+	coord5_int: INTEGER
+	coord6_int: INTEGER
+	
+	coord1_real: REAL
+	coord2_real: REAL
+	coord3_real: REAL
+	coord4_real: REAL
+	coord5_real: REAL
+	coord6_real: REAL
+
 BEGIN
 
+	GET_REG(R_WEBKEEP, keep_flag, keep_int, keep_real, STATUS )
 	GET_REG(R_WEBXMAX, xmax_flag, xmax_int, xmax_real, STATUS)
 	GET_REG(R_WEBYMAX, ymax_flag, ymax_int, ymax_real, STATUS)
 	GET_REG(R_WEBZMAX, zmax_flag, zmax_int, zmax_real, STATUS)
 	GET_REG(R_WEBXMIN, xmin_flag, xmin_int, xmin_real, STATUS)
 	GET_REG(R_WEBYMIN, ymin_flag, ymin_int, ymin_real, STATUS)
 	GET_REG(R_WEBZMIN, zmin_flag, zmin_int, zmin_real, STATUS)
+
+	GET_REG(R_WEBCOORD1, coord1_flag, coord1_int, coord1_real, STATUS)
+	GET_REG(R_WEBCOORD2, coord2_flag, coord2_int, coord2_real, STATUS)
+	GET_REG(R_WEBCOORD3, coord3_flag, coord3_int, coord3_real, STATUS)
+	GET_REG(R_WEBCOORD4, coord4_flag, coord4_int, coord4_real, STATUS)
+	GET_REG(R_WEBCOORD5, coord5_flag, coord5_int, coord5_real, STATUS)
+	GET_REG(R_WEBCOORD6, coord6_flag, coord6_int, coord6_real, STATUS)
 
 	reach_ab = 0
 	limit_x = 0
@@ -130,7 +170,7 @@ BEGIN
 
 	--check the new pos is in range
 
-	IF FLG[5] OR FLG[6] OR FLG[7] OR FLG[8] THEN
+	IF FLG[5] OR FLG[6] OR FLG[7] OR FLG[8] OR FLG[9] THEN
 
 		new_pos = GET_POS_REG(PR_WEBXYZWPR, STATUS)
 
@@ -180,6 +220,16 @@ BEGIN
 			ENDIF		
 		ENDIF
 
+	ENDIF
+
+	IF FLG[9] THEN
+		IF coord1_real + coord2_real + coord3_real + coord4_real + coord5_real + coord6_real = 0 THEN
+			FLG[2] = ON
+		ENDIF
+	ENDIF		
+
+	IF keep_real > 5 THEN
+		FLG[2] = ON
 	ENDIF
 
 END webcheck

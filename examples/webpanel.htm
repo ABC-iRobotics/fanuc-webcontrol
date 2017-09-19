@@ -547,42 +547,9 @@
       var refresh
       var setInt = 50
       var enButVar
-      var setTime = 1000
+      var setTime = 100
       var axisLimit = 9999
-      
-      var j1m = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=-1&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var j1p = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=1&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var j2m = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=-1&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var j2p = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=1&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var j3m = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=0&str_coord3=-1&str_coord4=0&str_coord5=0&str_coord6=0'
-      var j3p = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=0&str_coord3=1&str_coord4=0&str_coord5=0&str_coord6=0'
-      var j4m = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=-1&str_coord5=0&str_coord6=0'
-      var j4p = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=1&str_coord5=0&str_coord6=0'
-      var j5m = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=-1&str_coord6=0'
-      var j5p = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=1&str_coord6=0'
-      var j6m = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=-1'
-      var j6p = '/KAREL/webcontrol?str_mtn_mod=2&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=1'
-      
-      var wmx = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=-3&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var wpx = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=3&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var wmy = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=-3&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var wpy = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=3&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var wmz = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=0&str_coord3=-3&str_coord4=0&str_coord5=0&str_coord6=0'
-      var wpz = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=0&str_coord3=3&str_coord4=0&str_coord5=0&str_coord6=0'
-      var wmw = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=-1&str_coord5=0&str_coord6=0'
-      var wpw = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=1&str_coord5=0&str_coord6=0'
-      var wmp = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=-1&str_coord6=0'
-      var wpp = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=1&str_coord6=0'
-      var wmr = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=-1'
-      var wpr = '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=1'
-      
-      var pose1 = '/KAREL/webcontrol?str_mtn_mod=1&str_coord1=-45&str_coord2=45&str_coord3=90&str_coord4=0&str_coord5=0&str_coord6=0'
-      var pose2 = '/KAREL/webcontrol?str_mtn_mod=1&str_coord1=0&str_coord2=0&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0'
-      var pose3 = '/KAREL/webcontrol?str_mtn_mod=1&str_coord1=0&str_coord2=45&str_coord3=135&str_coord4=0&str_coord5=45&str_coord6=0'
-      var pose4 = '/KAREL/webcontrol?str_mtn_mod=1&str_coord1=0&str_coord2=30&str_coord3=90&str_coord4=0&str_coord5=-90&str_coord6=0'
-      var pose5 = '/KAREL/webcontrol?str_mtn_mod=1&str_coord1=90&str_coord2=0&str_coord3=90&str_coord4=0&str_coord5=-90&str_coord6=-90'
-      var pose6 = '/KAREL/webcontrol?str_mtn_mod=1&str_coord1=90&str_coord2=60&str_coord3=30&str_coord4=0&str_coord5=60&str_coord6=-90'
-      
+    
       $('#info-controller').show()
       $('#info-jog').show()
       $('#info-cart').show()
@@ -968,9 +935,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '-1'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j1m,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -985,9 +959,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '1'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j1p,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1002,9 +983,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '-1'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j2m,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1019,9 +1007,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '1'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j2p,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1036,9 +1031,16 @@
         webclear()      
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '-1'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j3m,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1053,9 +1055,16 @@
         webclear()      
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '1'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j3p,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1070,9 +1079,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false) 
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '-1'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j4m,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1087,9 +1103,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '1'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j4p,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1104,9 +1127,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '-1'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j5m,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1121,9 +1151,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '1'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: j5p,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1138,9 +1175,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)  
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '-1'
         $.ajax({
           type: 'GET',
-          url: j6m,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1155,9 +1199,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false) 
+        var mtn_mod = '2' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '1'
         $.ajax({
           type: 'GET',
-          url: j6p,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1174,13 +1225,18 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '5' 
+        var coord1 = '-3'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wmx,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
-          success: function() {
-            console.log('')
-          }
+          success: function() {}
         })
         refresh = setInterval(webkeep, setInt)
       }).on('mouseup touchend', function() {
@@ -1193,9 +1249,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '5' 
+        var coord1 = '3'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wpx,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1210,9 +1273,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '5' 
+        var coord1 = '0'
+        var coord2 = '-3'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wmy,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1227,9 +1297,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '5' 
+        var coord1 = '0'
+        var coord2 = '3'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wpy,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1244,9 +1321,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '5' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '-3'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wmz,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1261,9 +1345,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '5' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '3'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wpz,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1280,9 +1371,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '6' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '-1'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wmw,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1297,9 +1395,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '6' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '1'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wpw,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1314,9 +1419,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '6' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '-1'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wmp,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1331,9 +1443,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '6' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '1'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: wpp,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1348,9 +1467,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '6' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '-1'
         $.ajax({
           type: 'GET',
-          url: wmr,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1365,9 +1491,16 @@
         webclear()
         $(".btn").not(this).prop('disabled', true)
         $(".abort").prop('disabled', false)
+        var mtn_mod = '6' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '1'
         $.ajax({
           type: 'GET',
-          url: wpr,
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1376,6 +1509,104 @@
         webstop()
         clearInterval(refresh)
         enButVar = setTimeout(enBut, setTime)
+      })
+
+      //Move to predefined pose
+      
+      $('#pickup').click(function() {
+        var mtn_mod = '1' 
+        var coord1 = '-45'
+        var coord2 = '45'
+        var coord3 = '90'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
+        $.ajax({
+          type: 'GET',
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          cache: false,
+          success: function() {}
+        })
+      })
+	  
+      $('#zero').click(function() {
+        var mtn_mod = '1' 
+        var coord1 = '0'
+        var coord2 = '0'
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
+        $.ajax({
+          type: 'GET',
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#place').click(function() {
+        var mtn_mod = '1' 
+        var coord1 = '0'
+        var coord2 = '45'
+        var coord3 = '135'
+        var coord4 = '0'
+        var coord5 = '45'
+        var coord6 = '0'
+        $.ajax({
+          type: 'GET',
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#coord').click(function() {
+        var mtn_mod = '1' 
+        var coord1 = '0'
+        var coord2 = '30'
+        var coord3 = '90'
+        var coord4 = '0'
+        var coord5 = '-90'
+        var coord6 = '0'
+        $.ajax({
+          type: 'GET',
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#show').click(function() {
+        var mtn_mod = '1' 
+        var coord1 = '90'
+        var coord2 = '0'
+        var coord3 = '90'
+        var coord4 = '0'
+        var coord5 = '-90'
+        var coord6 = '-90'
+        $.ajax({
+          type: 'GET',
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          cache: false,
+          success: function() {}
+        })
+      })
+
+      $('#touch').click(function() {
+        var mtn_mod = '1' 
+        var coord1 = '90'
+        var coord2 = '60'
+        var coord3 = '30'
+        var coord4 = '0'
+        var coord5 = '60'
+        var coord6 = '-90'
+        $.ajax({
+          type: 'GET',
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          cache: false,
+          success: function() {}
+        })
       })
 
       //Set limits
@@ -1474,62 +1705,6 @@
             }
           })
         }
-      })
-
-      //Move to predefined pose
-      
-      $('#pickup').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: pose1,
-          cache: false,
-          success: function() {}
-        })
-      })
-
-      $('#zero').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: pose2,
-          cache: false,
-          success: function() {}
-        })
-      })
-
-      $('#place').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: pose3,
-          cache: false,
-          success: function() {}
-        })
-      })
-
-      $('#coord').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: pose4,
-          cache: false,
-          success: function() {}
-        })
-      })
-
-      $('#show').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: pose5,
-          cache: false,
-          success: function() {}
-        })
-      })
-
-      $('#touch').click(function() {
-        $.ajax({
-          type: 'GET',
-          url: pose6,
-          cache: false,
-          success: function() {}
-        })
       })
 
     })

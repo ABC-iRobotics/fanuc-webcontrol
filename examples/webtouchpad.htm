@@ -52,10 +52,17 @@
       // Send new relative displacement
       
       function sendDisplacement(){
-        displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;' 
+        displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;'
+        var mtn_mod = '7' 
+        var coord1 = (-1 * Math.round(joystick.deltaY() / 2))
+        var coord2 = (-1 * Math.round(joystick.deltaX() / 2))
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?str_mtn_mod=6&str_coord1=' + (-1 * Math.round(joystick.deltaY() / 2)) + '&str_coord2=' + (-1 * Math.round(joystick.deltaX() / 2)) + '&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0',
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
             console.log('Touch is successfull send')
@@ -115,14 +122,6 @@
         webclrInt()
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webregzero',
-          cache: false,
-          success: function() {
-            console.log('Registers are zero')
-          }
-        })
-        $.ajax({
-          type: 'GET',
           url: '/KAREL/websave',
           cache: false,
           success: function() {
@@ -131,8 +130,8 @@
         })
         refresh = setInterval(websetInt, 100)
       }).on('mouseup touchend', function() {
-        webclrInt()
         webstop()
+        webclrInt()
       })
 
     })

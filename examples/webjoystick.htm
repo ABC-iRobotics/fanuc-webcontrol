@@ -47,20 +47,27 @@
       var direction  = document.getElementById('joystick-info');
       var joystick = new VirtualJoystick({ container: document.getElementById('joystick-container'), mouseSupport: true, })
 
-      direction.innerHTML  = ' x / y rate: ' + (-1 * Math.round(joystick.deltaY()) / 20).toFixed(2) + ' / ' + (-1 * Math.round(joystick.deltaX()) / 20).toFixed(2)       
+      direction.innerHTML  = ' x / y rate: ' + (-1 * Math.round(joystick.deltaY()) / 10).toFixed(2) + ' / ' + (-1 * Math.round(joystick.deltaX()) / 10).toFixed(2)       
 
       // Send new relative direction
 
       function sendDirection(){
-        direction.innerHTML  = ' x / y rate: ' + (-1 * Math.round(joystick.deltaY()) / 20).toFixed(2) + ' / ' + (-1 * Math.round(joystick.deltaX()) / 20).toFixed(2)       
+        direction.innerHTML  = ' x / y rate: ' + (-1 * Math.round(joystick.deltaY()) / 10).toFixed(2) + ' / ' + (-1 * Math.round(joystick.deltaX()) / 10).toFixed(2)       
+        var mtn_mod = '5' 
+        var coord1 = (-1 * Math.round(joystick.deltaY()) / 10).toFixed(2)
+        var coord2 = (-1 * Math.round(joystick.deltaX()) / 10).toFixed(2)
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webcontrol?str_mtn_mod=4&str_coord1=' + (-1 * Math.round(joystick.deltaY()) / 20).toFixed(2) + '&str_coord2=' + (-1 * Math.round(joystick.deltaX()) / 20).toFixed(2) + '&str_coord3=0&str_coord4=0&str_coord5=0&str_coord6=0',
+          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
-            console.log('Direction is successfull send')
+            console.log('Touch is successfull send')
           }
-       })
+        })
       }
 
       // Keep the motion
@@ -113,18 +120,10 @@
 
       $('#joystick-container').on('mousedown touchstart', function() {
         webclrInt()
-        $.ajax({
-          type: 'GET',
-          url: '/KAREL/webregzero',
-          cache: false,
-          success: function() {
-            console.log('Registers are zero')
-          }
-        })
         refresh = setInterval(websetInt, 100)
       }).on('mouseup touchend', function() {
-        webclrInt()
         webstop()
+        webclrInt()
         direction.innerHTML  = ' x / y rate: ' + 0.00 + ' / ' + 0.00
       })
 

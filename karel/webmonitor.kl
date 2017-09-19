@@ -92,19 +92,16 @@ BEGIN
 
 	running = 0
 	running_task = 0
+	
 	GET_TSK_INFO(gettask, 0, TSK_STATUS, task_att, task_dum, STATUS)
 	IF (STATUS <> 0 ) THEN
 		WRITE ('GET_TSK_INFO is failed, STATUS = ', STATUS, CR)
 	ELSE
-		--IF ( gettask = 'webmonitor') THEN
-			--running = 0
-		--ELSE
-			IF ( task_att = PG_RUNNING ) THEN
-				running = 1
-			ELSE
-				running = 0
-			ENDIF
-		--ENDIF
+		IF ( task_att = PG_RUNNING ) THEN
+			running = 1
+		ELSE
+			running = 0
+		ENDIF
 	ENDIF
 
 	IF (gettask = 'WEBMOTION    TP') OR (gettask = 'WEBMOTION') THEN

@@ -96,53 +96,38 @@ BEGIN
 
 	SELECT int_mtn_mod OF
 
-		CASE(1): --Absolute motion in Joint space
+		CASE(1): --Absolute motion in Joint space - joint interpolation
 
-			CNV_REL_JPOS(coord, new_jpos, STATUS)
-		
-			IF (STATUS <> 0 ) THEN
-			
-				WRITE ('WEBCONTROL CNV_REL_JPOS failed = ', STATUS, CR)
-			
-			ELSE
-		
-				SET_JPOS_REG(PR_WEBJOINTS, new_jpos, STATUS)
-				
-				IF (STATUS <> 0 ) THEN
-				
-					WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)
-				
-				ELSE		
-				
+			CNV_REL_JPOS(coord, new_jpos, STATUS)	
+			IF (STATUS <> 0 ) THEN		
+				WRITE ('WEBCONTROL CNV_REL_JPOS failed = ', STATUS, CR)		
+			ELSE	
+				SET_JPOS_REG(PR_WEBJOINTS, new_jpos, STATUS)			
+				IF (STATUS <> 0 ) THEN			
+					WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)			
+				ELSE			
 					FLG[3] = ON
-					FLG[1] = ON
-					
+					FLG[1] = ON				
 				ENDIF
-
 			ENDIF
 		
 			return_code = 204
 
-		CASE(2): --Relative motion in Joint space
+		CASE(2): --Relative motion in Joint space - joint interpolation
 
 			setreg
 			
-			SET_JPOS_REG(PR_WEBJOINTS, cur_jpos, STATUS)			
-
-			IF (STATUS <> 0 ) THEN
-			
-				WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)
-			
+			SET_JPOS_REG(PR_WEBJOINTS, cur_jpos, STATUS)
+			IF (STATUS <> 0 ) THEN			
+				WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)			
 			ELSE
-			
 				FLG[4] = ON
 				FLG[1] = ON
-		
 			ENDIF
 		
 			return_code = 204
 
-		CASE(3): --Absolute motion in Cartesion space
+		CASE(3): --Absolute motion in Cartesion space -  linear interpolation
 			
 			new_pos = cur_pos --Keep the current configuration
 
@@ -153,74 +138,75 @@ BEGIN
 			new_pos.p = coord[5]
 			new_pos.r = coord[6]
 
-			SET_POS_REG(PR_WEBXYZWPR, new_pos, STATUS)
-			
-			IF (STATUS <> 0 ) THEN
-			
-				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
-			
-			ELSE
-		
+			SET_POS_REG(PR_WEBXYZWPR, new_pos, STATUS)		
+			IF (STATUS <> 0 ) THEN		
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)		
+			ELSE	
 				FLG[5] = ON
 				FLG[1] = ON
-			
 			ENDIF
 		
 			return_code = 204
+
+		CASE(4): --Absolute motion in Cartesion space -  joint interpolation
 			
-		CASE(4): --Relative motion in Cartesion space (XYZ - linear motion)
-		
-			setreg
-			
-			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
-			
-			IF (STATUS <> 0 ) THEN
-			
-				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
-			
-			ELSE
-		
+			new_pos = cur_pos --Keep the current configuration
+
+			new_pos.x = coord[1]
+			new_pos.y = coord[2]
+			new_pos.z = coord[3]
+			new_pos.w = coord[4]
+			new_pos.p = coord[5]
+			new_pos.r = coord[6]
+
+			SET_POS_REG(PR_WEBXYZWPR, new_pos, STATUS)		
+			IF (STATUS <> 0 ) THEN		
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)		
+			ELSE	
 				FLG[6] = ON
 				FLG[1] = ON
-			
 			ENDIF
 		
 			return_code = 204
-
-		CASE(5): --Relative motion in Cartesion space (WPR - joint motion)
+			
+		CASE(5): --Relative motion in Cartesion space - linear interpolation
 		
 			setreg
 			
-			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
-			
-			IF (STATUS <> 0 ) THEN
-			
+			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)	
+			IF (STATUS <> 0 ) THEN	
 				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
-			
 			ELSE
-		
 				FLG[7] = ON
 				FLG[1] = ON
-			
 			ENDIF
 		
 			return_code = 204
 
-		CASE(6): --Relative motion in Cartesion space (Touchpad motion)
+		CASE(6): --Relative motion in Cartesion space - joint interpolation
+		
+			setreg
+			
+			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)			
+			IF (STATUS <> 0 ) THEN			
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
+			ELSE
+				FLG[8] = ON
+				FLG[1] = ON
+			ENDIF
+		
+			return_code = 204
+
+		CASE(7): --Relative motion in Cartesion space - liner interpolation - touchpad mode
 		
 			setreg
 			
 			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
-			
 			IF (STATUS <> 0 ) THEN
-			
 				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
-			
 			ELSE
-		
-				FLG[8] = ON
+				FLG[9] = ON
 				FLG[1] = ON
-			
 			ENDIF
 		
 			return_code = 204
