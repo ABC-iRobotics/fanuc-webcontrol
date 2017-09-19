@@ -142,7 +142,7 @@
     <div class="ts-row-20px"></div>   
     <div class="row text-center">
       <div class="col-xs-12 text-center">
-        <button type="button" class="btn btn-danger ts-btn-full abort">ABORT / STOP</button>
+        <button type="button" class="btn btn-danger ts-btn-full abort">ABORT</button>
       </div>   
     </div>
     <div class="ts-row-10px"></div> 
@@ -402,7 +402,7 @@
         <button type="button" class="btn btn-danger ts-btn-full abort">ABORT</button>
       </div>
       <div class="col-xs-4 text-center">
-        <button type="button" id="webmotion-restart" class="btn btn-info ts-btn-full">START</button>
+        <button type="button" id="webmotion-start" class="btn btn-info ts-btn-full">START</button>
       </div>
     </div>
     <div class="ts-row-10px"></div>
@@ -618,11 +618,13 @@
             $('#status').css("color", "#5cb85c")
             $('#selectTask').prop('disabled', true)
             $('#webprogram-start').prop('disabled', true)
+			$('#webmotion-start').prop('disabled', true)
           } else {
             $('#status').html("STANDBY")
             $('#status').css("color", "#428bca")
             $('#selectTask').prop('disabled', false)
             $('#webprogram-start').prop('disabled', false)
+			$('#webmotion-start').prop('disabled', false)
           }
 
           if (data.status[0] == 1 && data.status[1] == 1) {
@@ -828,14 +830,14 @@
 
       // Restart the webmotion
 
-      $('#webmotion-restart').click(function() {  
+      $('#webmotion-start').click(function() {  
         console.log('Start webmotion')
         $.ajax({
           type: 'GET',
           url: '/KAREL/webstart?gettask=WEBMOTION',
           cache: false,
           success: function() {
-            console.log('Send RESTART webmotion is successful')
+            console.log('Send START webmotion is successful')
           }
         })
       })
@@ -1525,7 +1527,9 @@
           type: 'GET',
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
-          success: function() {}
+          success: function() {
+		    webstop()
+		  }
         })
       })
 	  
@@ -1541,7 +1545,9 @@
           type: 'GET',
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
-          success: function() {}
+          success: function() {
+		    webstop()
+		  }
         })
       })
 
@@ -1557,7 +1563,9 @@
           type: 'GET',
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
-          success: function() {}
+          success: function() {
+		    webstop()
+		  }
         })
       })
 
@@ -1573,7 +1581,9 @@
           type: 'GET',
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
-          success: function() {}
+          success: function() {
+		    webstop()
+		  }
         })
       })
 
@@ -1589,7 +1599,9 @@
           type: 'GET',
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
-          success: function() {}
+          success: function() {
+		    webstop()
+		  }
         })
       })
 
@@ -1605,7 +1617,9 @@
           type: 'GET',
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
-          success: function() {}
+          success: function() {
+		    webstop()
+		  }
         })
       })
 

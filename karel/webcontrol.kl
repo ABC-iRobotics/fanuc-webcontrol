@@ -1,5 +1,5 @@
 PROGRAM webcontrol
-%COMMENT = 'v3'
+%COMMENT = 'v4'
 %NOLOCKGROUP
 %NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
@@ -106,8 +106,8 @@ BEGIN
 				IF (STATUS <> 0 ) THEN			
 					WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)			
 				ELSE			
-					FLG[3] = ON
-					FLG[1] = ON				
+					FLG[1] = ON
+					FLG[7] = ON				
 				ENDIF
 			ENDIF
 		
@@ -121,8 +121,8 @@ BEGIN
 			IF (STATUS <> 0 ) THEN			
 				WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)			
 			ELSE
-				FLG[4] = ON
-				FLG[1] = ON
+				FLG[2] = ON
+				FLG[7] = ON
 			ENDIF
 		
 			return_code = 204
@@ -142,8 +142,8 @@ BEGIN
 			IF (STATUS <> 0 ) THEN		
 				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)		
 			ELSE	
-				FLG[5] = ON
-				FLG[1] = ON
+				FLG[3] = ON
+				FLG[7] = ON
 			ENDIF
 		
 			return_code = 204
@@ -163,8 +163,8 @@ BEGIN
 			IF (STATUS <> 0 ) THEN		
 				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)		
 			ELSE	
-				FLG[6] = ON
-				FLG[1] = ON
+				FLG[4] = ON
+				FLG[7] = ON
 			ENDIF
 		
 			return_code = 204
@@ -177,8 +177,8 @@ BEGIN
 			IF (STATUS <> 0 ) THEN	
 				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
 			ELSE
+				FLG[5] = ON
 				FLG[7] = ON
-				FLG[1] = ON
 			ENDIF
 		
 			return_code = 204
@@ -191,22 +191,8 @@ BEGIN
 			IF (STATUS <> 0 ) THEN			
 				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
 			ELSE
-				FLG[8] = ON
-				FLG[1] = ON
-			ENDIF
-		
-			return_code = 204
-
-		CASE(7): --Relative motion in Cartesion space - liner interpolation - touchpad mode
-		
-			setreg
-			
-			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)
-			IF (STATUS <> 0 ) THEN
-				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
-			ELSE
-				FLG[9] = ON
-				FLG[1] = ON
+				FLG[6] = ON
+				FLG[7] = ON
 			ENDIF
 		
 			return_code = 204

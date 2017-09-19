@@ -49,27 +49,6 @@
 
       displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;' 
 
-      // Send new relative displacement
-      
-      function sendDisplacement(){
-        displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;'
-        var mtn_mod = '7' 
-        var coord1 = (-1 * Math.round(joystick.deltaY() / 2))
-        var coord2 = (-1 * Math.round(joystick.deltaX() / 2))
-        var coord3 = '0'
-        var coord4 = '0'
-        var coord5 = '0'
-        var coord6 = '0'
-        $.ajax({
-          type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
-          cache: false,
-          success: function() {
-            console.log('Touch is successfull send')
-          }
-        })
-      }
-
       // Keep the motion
 
       function webkeep() {
@@ -100,11 +79,6 @@
 
       // setInterval base
 
-      function websetInt() {
-        sendDisplacement()
-        webkeep()
-      }
-
       // clearInterval
 
       function webclrInt() {
@@ -120,15 +94,28 @@
 
       $('#touchpad-container').on('mousedown touchstart', function() {
         webclrInt()
-        $.ajax({
-          type: 'GET',
-          url: '/KAREL/websave',
-          cache: false,
-          success: function() {
-            console.log('Start pose is saved')
-          }
-        })
-        refresh = setInterval(websetInt, 100)
+		$.getJSON("/KAREL/webmonitor", function(data){
+		  function sendDisplacement(){
+		    var mtn_mod = '3' 
+			var coord1 = data.pose[0] + (-1 * Math.round(joystick.deltaY() / 2))
+			var coord2 = data.pose[1] + (-1 * Math.round(joystick.deltaX() / 2))
+			var coord3 = data.pose[2]
+			var coord4 = data.pose[3]
+			var coord5 = data.pose[4]
+			var coord6 = data.pose[5] 
+			displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;'
+			$.ajax({
+			  type: 'GET',
+			  url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+			  cache: false,
+			  success: function() {
+				console.log('Touch is successfull send')
+			  }
+			})
+			webkeep()			
+		  }
+          refresh = setInterval(sendDisplacement, 100)
+		})
       }).on('mouseup touchend', function() {
         webstop()
         webclrInt()
