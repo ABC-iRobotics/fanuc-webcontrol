@@ -8,27 +8,24 @@ VAR
 
 	STATUS: INTEGER
 	return_code: INTEGER
-	prog_index: INTEGER
 	
-	gettask: STRING[127]
+	prog_index: INTEGER
+
+	str_task: STRING[127]
 
 BEGIN
 	WRITE (CHR(128),CHR(137))
 	
-	IF UNINIT( gettask ) THEN gettask = '###@@@###'; ENDIF
+	IF UNINIT( str_task ) THEN str_task = '###@@@###'; ENDIF
 
 	CALL_PROG('webcheck', prog_index)
 	
-	RUN_TASK(gettask, 0, FALSE, FALSE, 1, STATUS )
+	RUN_TASK( str_task, 0, FALSE, FALSE, 1, STATUS )
 	
-	IF (STATUS <> 0 ) THEN
-	
-		WRITE ('RUN_TASK built-IN failed WITH STATUS = ', STATUS, CR)
-	
+	IF (STATUS <> 0 ) THEN	
+		WRITE ('RUN_TASK built-IN failed = ', STATUS, CR)
 	ELSE
-	
 		return_code = 204
-	
 	ENDIF
 	
 END webstart

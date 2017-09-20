@@ -793,8 +793,8 @@
       // Start a program
 
       $('#webprogram-start').click(function() {
-        var sendTask = $('#selectTask').find('option:selected').text();
-        if ( sendTask.indexOf("WEBMOTION") >= 0 ) {
+        var task = $('#selectTask').find('option:selected').text();
+        if ( task.indexOf("WEBMOTION") >= 0 ) {
           $('#info-controller').show()
           $('#info-jog').hide()
           $('#info-cart').hide()
@@ -804,13 +804,13 @@
           $('#webmotion-jog').show()
           $('#webmotion-control').show()
         }        
-        console.log('Start ' + sendTask)
+        console.log(`Start ${task}`)
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webstart?gettask=' + sendTask,
+          url: `/KAREL/webstart?str_task=${task}`,
           cache: false,
           success: function() {
-            console.log('Send START ' + sendTask + ' is successful')
+            console.log(`Send START ${task} is successful`)
           }
         })
       })
@@ -834,7 +834,7 @@
         console.log('Start webmotion')
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webstart?gettask=WEBMOTION',
+          url: '/KAREL/webstart?str_task=WEBMOTION',
           cache: false,
           success: function() {
             console.log('Send START webmotion is successful')
@@ -1630,9 +1630,11 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
+		  var limit_id = 1
+		  var limit_vl = $("#xMaxNew").val()
           $.ajax({
             type: 'GET',
-            url: '/KAREL/weblimit?getlimit_id=1&getlimit_val=' + $("#xMaxNew").val(),
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#xMaxSet').modal('hide')
@@ -1646,9 +1648,11 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
+		  var limit_id = 2
+		  var limit_vl = $("#yMaxNew").val()
           $.ajax({
             type: 'GET',
-            url: '/KAREL/weblimit?getlimit_id=2&getlimit_val=' + $("#yMaxNew").val(),
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#yMaxSet').modal('hide')
@@ -1662,9 +1666,11 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
+		  var limit_id = 3
+		  var limit_vl = $("#zMaxNew").val()
           $.ajax({
             type: 'GET',
-            url: '/KAREL/weblimit?getlimit_id=3&getlimit_val=' + $("#zMaxNew").val(),
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#zMaxSet').modal('hide')
@@ -1678,9 +1684,11 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
+		  var limit_id = 4
+		  var limit_vl = $("#xMinNew").val()
           $.ajax({
             type: 'GET',
-            url: '/KAREL/weblimit?getlimit_id=4&getlimit_val=' + $("#xMinNew").val(),
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#xMinSet').modal('hide')
@@ -1694,9 +1702,11 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
+		  var limit_id = 5
+		  var limit_vl = $("#yMinNew").val()
           $.ajax({
             type: 'GET',
-            url: '/KAREL/weblimit?getlimit_id=5&getlimit_val=' + $("#yMinNew").val(),
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#yMinSet').modal('hide')
@@ -1710,9 +1720,11 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
+		  var limit_id = 6
+		  var limit_vl = $("#zMinNew").val()
           $.ajax({
             type: 'GET',
-            url: '/KAREL/weblimit?getlimit_id=6&getlimit_val=' + $("#zMinNew").val(),
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#zMinSet').modal('hide')

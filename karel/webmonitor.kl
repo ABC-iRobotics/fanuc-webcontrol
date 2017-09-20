@@ -47,7 +47,7 @@ VAR
 	severity: INTEGER
 	prog_nam: STRING[127]
 
-	gettask IN DRAM FROM webstart: STRING[127]
+	str_task IN DRAM FROM webstart: STRING[127]
 	task_att: INTEGER
 	task_dum: STRING[127]
 	running: INTEGER
@@ -66,7 +66,7 @@ VAR
 
 BEGIN
 
-	IF UNINIT( gettask ) THEN gettask = '@@@###@@@'; ENDIF
+	IF UNINIT( str_task ) THEN str_task = '@@@###@@@'; ENDIF
 
 	IF UNINIT( reach_ab ) THEN reach_ab = 0; ENDIF
 
@@ -93,7 +93,7 @@ BEGIN
 	running = 0
 	running_task = 0
 	
-	GET_TSK_INFO(gettask, 0, TSK_STATUS, task_att, task_dum, STATUS)
+	GET_TSK_INFO(str_task, 0, TSK_STATUS, task_att, task_dum, STATUS)
 	IF (STATUS <> 0 ) THEN
 		WRITE ('GET_TSK_INFO is failed, STATUS = ', STATUS, CR)
 	ELSE
@@ -104,7 +104,7 @@ BEGIN
 		ENDIF
 	ENDIF
 
-	IF (gettask = 'WEBMOTION    TP') OR (gettask = 'WEBMOTION') THEN
+	IF (str_task = 'WEBMOTION    TP') OR (str_task = 'WEBMOTION') THEN
 		running_task = 1
 	ELSE
 		running_task = 0

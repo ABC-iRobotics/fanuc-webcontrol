@@ -18,61 +18,61 @@ VAR
 	STATUS: INTEGER
 	return_code: INTEGER
 	
-	getlimit_id: STRING[127]
-	getlimit_val: STRING[127]
+	str_limit_id: STRING[127]
+	str_limit_vl: STRING[127]
 
-	limit_id_r: REAL
-	limit_val_r: REAL
+	limit_id: REAL
+	limit_vl: REAL
 	limit_no: REAL
 
 BEGIN
 	
 	limit_no = 1
 	
-	CNV_STR_REAL(getlimit_id, limit_id_r)
-	CNV_STR_REAL(getlimit_val, limit_val_r)
+	CNV_STR_REAL(str_limit_id, limit_id)
+	CNV_STR_REAL(str_limit_vl, limit_vl)
 
-	IF UNINIT( limit_val_r ) THEN limit_val_r = 10000; limit_no = -1; ENDIF
+	IF UNINIT( limit_vl ) THEN limit_vl = 10000; limit_no = -1; ENDIF
 	
-	IF (limit_id_r = 1) THEN
-		SET_REAL_REG(R_WEBXMAX, limit_val_r, STATUS)
+	IF (limit_id = 1) THEN
+		SET_REAL_REG(R_WEBXMAX, limit_vl, STATUS)
 		IF (STATUS <> 0 ) THEN
-			WRITE ('SET_REL_REG built-IN failed in limit_id 1 task WITH STATUS = ', STATUS, CR)
+			WRITE ('SET_REAL_REG built-IN failed in limit_id 1 task: ', STATUS, CR)
 		ENDIF
 	ENDIF
 
-	IF (limit_id_r = 2) THEN
-		SET_REAL_REG(R_WEBYMAX, limit_val_r, STATUS)
+	IF (limit_id = 2) THEN
+		SET_REAL_REG(R_WEBYMAX, limit_vl, STATUS)
 		IF (STATUS <> 0 ) THEN
-			WRITE ('SET_REL_REG built-IN failed in limit_id 2 task WITH STATUS = ', STATUS, CR)
+			WRITE ('SET_REAL_REG built-IN failed in limit_id 2 task: ', STATUS, CR)
 		ENDIF
 	ENDIF
 
-	IF (limit_id_r = 3) THEN
-		SET_REAL_REG(R_WEBZMAX, limit_val_r, STATUS)
+	IF (limit_id = 3) THEN
+		SET_REAL_REG(R_WEBZMAX, limit_vl, STATUS)
 		IF (STATUS <> 0 ) THEN
-			WRITE ('SET_REL_REG built-IN failed in limit_id 3 task WITH STATUS = ', STATUS, CR)
+			WRITE ('SET_REAL_REG built-IN failed in limit_id 3 task: ', STATUS, CR)
 		ENDIF
 	ENDIF
 
-	IF (limit_id_r = 4) THEN
-		SET_REAL_REG(R_WEBXMIN, (limit_no * limit_val_r), STATUS)
+	IF (limit_id = 4) THEN
+		SET_REAL_REG(R_WEBXMIN, (limit_no * limit_vl), STATUS)
 		IF (STATUS <> 0 ) THEN
-			WRITE ('SET_REL_REG built-IN failed in limit_id 4 task WITH STATUS = ', STATUS, CR)
+			WRITE ('SET_REAL_REG built-IN failed in limit_id 4 task: ', STATUS, CR)
 		ENDIF
 	ENDIF
 
-	IF (limit_id_r = 5) THEN
-		SET_REAL_REG(R_WEBYMIN, (limit_no * limit_val_r), STATUS)
+	IF (limit_id = 5) THEN
+		SET_REAL_REG(R_WEBYMIN, (limit_no * limit_vl), STATUS)
 		IF (STATUS <> 0 ) THEN
-			WRITE ('SET_REL_REG built-IN failed in limit_id 5 task WITH STATUS = ', STATUS, CR)
+			WRITE ('SET_REAL_REG built-IN failed in limit_id 5 task: ', STATUS, CR)
 		ENDIF
 	ENDIF
 
-	IF (limit_id_r = 6) THEN
-		SET_REAL_REG(R_WEBZMIN, (limit_no * limit_val_r), STATUS)
+	IF (limit_id = 6) THEN
+		SET_REAL_REG(R_WEBZMIN, (limit_no * limit_vl), STATUS)
 		IF (STATUS <> 0 ) THEN
-			WRITE ('SET_REL_REG built-IN failed in limit_id 6 task WITH STATUS = ', STATUS, CR)
+			WRITE ('SET_REAL_REG built-IN failed in limit_id 6 task: ', STATUS, CR)
 		ENDIF
 	ENDIF
 
