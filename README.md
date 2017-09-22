@@ -31,7 +31,7 @@ If these (position) registers and/or flags are not free, than you can choose ano
 Internet connection is also required because the Bootstrap, PEP and JQuery libraries are loaded from CDNs.
 
 ## Installation
-1. Copy the `*.pc` and files from the `karel` folder to the robot `MD:` folder
+1. Build the `*.kl` files in the `karel` folder with Roboguide and copy them to the robot `MD:` folder
 2. Copy the `*.htm` file from the `examples` folder to the robot `MD:` folder
 3. Copy the `webmotion.tp` file from the `tpe` folder to the robot `MD:` folder
 

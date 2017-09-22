@@ -794,6 +794,7 @@
 
       $('#webprogram-start').click(function() {
         var task = $('#selectTask').find('option:selected').text();
+		var task = task.substr(0,task.indexOf(' '));
         if ( task.indexOf("WEBMOTION") >= 0 ) {
           $('#info-controller').show()
           $('#info-jog').hide()

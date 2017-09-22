@@ -51,7 +51,7 @@ VAR
 	task_att: INTEGER
 	task_dum: STRING[127]
 	running: INTEGER
-	running_task: INTEGER
+	webmotion: INTEGER
 
 	currentPos: XYZWPREXT
 	currentPosJ: JOINTPOS
@@ -91,7 +91,7 @@ BEGIN
 	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
 
 	running = 0
-	running_task = 0
+	webmotion = 0
 	
 	GET_TSK_INFO(str_task, 0, TSK_STATUS, task_att, task_dum, STATUS)
 	IF (STATUS <> 0 ) THEN
@@ -104,10 +104,10 @@ BEGIN
 		ENDIF
 	ENDIF
 
-	IF (str_task = 'WEBMOTION    TP') OR (str_task = 'WEBMOTION') THEN
-		running_task = 1
+	IF (str_task = 'WEBMOTION') THEN
+		webmotion = 1
 	ELSE
-		running_task = 0
+		webmotion = 0
 	ENDIF
 	
 	currentPos = CURPOS(0,0)
@@ -148,7 +148,7 @@ BEGIN
 			WRITE responseFile( ' ] ,', CR )
 			WRITE responseFile( '"status": [' )
 				WRITE responseFile( running,',')
-				WRITE responseFile( running_task )
+				WRITE responseFile( webmotion )
 			WRITE responseFile( ' ] ,', CR )
 			WRITE responseFile( '"message": [' )
 				WRITE responseFile( reach_ab,',')

@@ -1,3 +1,13 @@
 /tpe/webdemo.ls
 /tpe/webdemo.tp
 /backup
+/karel/webabort.pc
+/karel/webcheck.pc
+/karel/webcontrol.pc
+/karel/webkeep.pc
+/karel/weblimit.pc
+/karel/webmonitor.pc
+/karel/webprogam.pc
+/karel/webreset.pc
+/karel/webstart.pc
+/karel/webstop.pc
