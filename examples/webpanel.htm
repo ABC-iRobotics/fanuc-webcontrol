@@ -20,7 +20,10 @@
     }
     .ts-row-10px {
       padding-top: 10px;
-    }    
+    }
+    .ts-row-15px {
+      padding-top: 15px;
+    } 	
     .ts-row-20px {
       padding-top: 20px;
     }    
@@ -141,9 +144,12 @@
   <div id="webprogram-control" class="container">   
     <div class="ts-row-20px"></div>   
     <div class="row text-center">
-      <div class="col-xs-12 text-center">
+      <div class="col-xs-6 text-center">
         <button type="button" class="btn btn-danger ts-btn-full abort">ABORT</button>
-      </div>   
+      </div>
+      <div class="col-xs-6 text-center">
+        <button type="button" id="webcontrol-limit-set" class="btn btn-warning ts-btn-full">SET</button>
+      </div> 	  
     </div>
     <div class="ts-row-10px"></div> 
   </div>
@@ -157,7 +163,7 @@
         <button type="button" id="webmotion-menu-cart" class="btn btn-primary ts-btn-full">CART</button>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="webmotion-menu-set" class="btn btn-success ts-btn-full">SET</button>
+        <button type="button" id="webmotion-menu-pose" class="btn btn-success ts-btn-full">POSE</button>
       </div>
     </div>
     <div class="ts-row-20px"></div>
@@ -176,8 +182,7 @@
         <button type="button" id="j1p" class="btn btn-warning ts-btn-90">J1+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="j2m" class="btn btn-warning ts-btn-90">J2-</button>
       </div>
@@ -188,8 +193,7 @@
         <button type="button" id="j2p" class="btn btn-warning ts-btn-90">J2+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="j3m" class="btn btn-warning ts-btn-90">J3-</button>
       </div>
@@ -200,8 +204,7 @@
         <button type="button" id="j3p" class="btn btn-warning ts-btn-90">J3+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="j4m" class="btn btn-warning ts-btn-90">J4-</button>
       </div>
@@ -212,8 +215,7 @@
         <button type="button" id="j4p" class="btn btn-warning ts-btn-90">J4+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="j5m" class="btn btn-warning ts-btn-90">J5-</button>
       </div>
@@ -224,8 +226,7 @@
         <button type="button" id="j5p" class="btn btn-warning ts-btn-90">J5+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="j6m" class="btn btn-warning ts-btn-90">J6-</button>
       </div>
@@ -236,7 +237,6 @@
         <button type="button" id="j6p" class="btn btn-warning ts-btn-90">J6+</button>
       </div>
     </div>
-    <div class="ts-row-5px"></div>
   </div>
 
   <div id="webmotion-cart" class="container">
@@ -251,8 +251,7 @@
         <button type="button" id="wpx" class="btn btn-primary ts-btn-90">X+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="wmy" class="btn btn-primary ts-btn-90">Y-</button>
       </div>
@@ -263,8 +262,7 @@
         <button type="button" id="wpy" class="btn btn-primary ts-btn-90">Y+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="wmz" class="btn btn-primary ts-btn-90">Z-</button>
       </div>
@@ -275,8 +273,7 @@
         <button type="button" id="wpz" class="btn btn-primary ts-btn-90">Z+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="wmw" class="btn btn-primary ts-btn-90">W-</button>
       </div>
@@ -287,8 +284,7 @@
         <button type="button" id="wpw" class="btn btn-primary ts-btn-90">W+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="wmp" class="btn btn-primary ts-btn-90">P-</button>
       </div>
@@ -299,8 +295,7 @@
         <button type="button" id="wpp" class="btn btn-primary ts-btn-90">P+</button>
       </div>
     </div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
       <div class="col-xs-4">
         <button type="button" id="wmr" class="btn btn-primary ts-btn-90">R-</button>
       </div>
@@ -311,82 +306,214 @@
         <button type="button" id="wpr" class="btn btn-primary ts-btn-90">R+</button>
       </div>
     </div>
-    <div class="ts-row-5px"></div>
   </div>
 
-  <div id="webmotion-set" class="container">
-    <div class="ts-row-10px"></div>
+  <div id="webmotion-pose" class="container">
     <div class="row text-center">
       <div class="col-xs-4">
-        <p id="xMax" class="coord">Load...</p>
+        <p class="j1 coord">load...</p>
       </div>
-      <div class="col-xs-4">
-        <p id="yMax" class="coord">Load...</p>
-      </div>
-      <div class="col-xs-4">
-        <p id="zMax" class="coord">Load...</p>
-      </div>
-    </div>
-    <div class="row text-center">
-      <div class="col-xs-4">
-        <button type="button" id="xMaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#xMaxSet">X max</button>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="yMaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#yMaxSet">Y max</button>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="zMaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#zMaxSet">Z max</button>
-      </div>
-    </div>
-    <div class="ts-row-10px"></div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
-      <div class="col-xs-4">
-        <p id="xMin" class="coord">Load...</p>
-      </div>
-      <div class="col-xs-4">
-        <p id="yMin" class="coord">Load...</p>
-      </div>
-      <div class="col-xs-4">
-        <p id="zMin" class="coord">Load...</p>
-      </div> 
-    </div>
-    <div class="row text-center">
-      <div class="col-xs-4">
-        <button type="button" id="xMinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#xMinSet">X min</button>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="yMinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#yMinSet">Y min</button>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" id="zMinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#zMinSet">Z min</button>
-      </div>
-    </div>
-    <div class="ts-row-3px"></div>    
-    <div class="ts-row-10px"></div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
       <div class="col-xs-4">
         <button type="button" id="pickup" class="btn btn-success ts-btn-90">Pickup</button>
+      </div>
+      <div class="col-xs-4">
+        <p class="wx coord">load...</p>
+      </div>
+    </div>
+    <div class="row text-center ts-row-20px">
+      <div class="col-xs-4">
+        <p class="j2 coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="zero" class="btn btn-success ts-btn-90">Zero</button>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="place" class="btn btn-success ts-btn-90">Place</button>
+        <p class="wy coord">load...</p>
       </div>
     </div>
-    <div class="ts-row-10px"></div>
-    <div class="ts-row-20px"></div>
-    <div class="row text-center">
+    <div class="row text-center ts-row-20px">
+      <div class="col-xs-4">
+        <p class="j3 coord">load...</p>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="place" class="btn btn-success ts-btn-90">Place</button>
+      </div>
+      <div class="col-xs-4">
+        <p class="wz coord">load...</p>
+      </div>
+    </div>
+    <div class="row text-center ts-row-20px">
+      <div class="col-xs-4">
+        <p class="j4 coord">load...</p>
+      </div>
       <div class="col-xs-4">
         <button type="button" id="coord" class="btn btn-success ts-btn-90">Coord</button>
+      </div>
+      <div class="col-xs-4">
+        <p class="ww coord">load...</p>
+      </div>
+    </div>
+    <div class="row text-center ts-row-20px">
+      <div class="col-xs-4">
+        <p class="j5 coord">load...</p>
       </div>
       <div class="col-xs-4">
         <button type="button" id="show" class="btn btn-success ts-btn-90">Show</button>
       </div>
       <div class="col-xs-4">
+        <p class="wp coord">load...</p>
+      </div>
+    </div>
+    <div class="row text-center ts-row-20px">
+      <div class="col-xs-4">
+        <p class="j6 coord">load...</p>
+      </div>
+      <div class="col-xs-4">
         <button type="button" id="touch" class="btn btn-success ts-btn-90">Touch</button>
+      </div>
+      <div class="col-xs-4">
+        <p class="wr coord">load...</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="webcontrol-set" class="container">
+    <div class="row text-center">
+      <div class="col-xs-4 ts-row-15px">
+        <p id="xMax" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="yMax" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="zMax" class="coord">Load...</p>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <button type="button" id="xMaxCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#xMaxSet">X max</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="yMaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#yMaxSet">Y max</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="zMaxCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#zMaxSet">Z max</button>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4 ts-row-15px">
+        <p id="xMin" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="yMin" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="zMin" class="coord">Load...</p>
+      </div> 
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <button type="button" id="xMinCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#xMinSet">X min</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="yMinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#yMinSet">Y min</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="zMinCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#zMinSet">Z min</button>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j1Max" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j2Max" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j3Max" class="coord">Load...</p>
+      </div> 
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <button type="button" id="j1MaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#j1MaxSet">J1 max</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="j2MaxCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#j2MaxSet">J2 max</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="j3MaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#j3MaxSet">J3 max</button>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j1Min" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j2Min" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j3Min" class="coord">Load...</p>
+      </div> 
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <button type="button" id="j1MinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#j1MinSet">J1 min</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="j2MinCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#j2MinSet">J2 min</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="j3MinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#j3MinSet">J3 min</button>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j4Max" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j5Max" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j6Max" class="coord">Load...</p>
+      </div> 
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <button type="button" id="j4MaxCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#j4MaxSet">J4 max</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="j5MaxCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#j5MaxSet">J5 max</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="j6MaxCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#j6MaxSet">J6 max</button>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j4Min" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j5Min" class="coord">Load...</p>
+      </div>
+      <div class="col-xs-4 ts-row-15px">
+        <p id="j6Min" class="coord">Load...</p>
+      </div> 
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-4">
+        <button type="button" id="j4MinCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#j4MinSet">J4 min</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="j5MinCh" class="btn btn-default ts-btn-90" data-toggle="modal" data-target="#j5MinSet">J5 min</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" id="j6MinCh" class="btn btn-info ts-btn-90" data-toggle="modal" data-target="#j6MinSet">J6 min</button>
+      </div>
+    </div>
+    <div class="ts-row-10px"></div>
+    <div class="row text-center">
+      <div class="col-xs-12 ts-row-20px">
+        <button type="button" id="webcontrol-limit-done" class="btn btn-success ts-btn-full">DONE</button>
       </div>
     </div>
     <div class="ts-row-10px"></div>
@@ -540,6 +667,258 @@
     </div>
   </div>
 
+  <div id="j1MaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J1 max: <input type="number" id="j1MaxNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j1MaxSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j2MaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J2 max: <input type="number" id="j2MaxNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j2MaxSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j3MaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J3 max: <input type="number" id="j3MaxNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j3MaxSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j4MaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J4 max: <input type="number" id="j4MaxNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j4MaxSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j5MaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J5 max: <input type="number" id="j5MaxNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j5MaxSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j6MaxSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J6 max: <input type="number" id="j6MaxNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j6MaxSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j1MinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J1 min: <input type="number" id="j1MinNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j1MinSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j2MinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J2 min: <input type="number" id="j2MinNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j2MinSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j3MinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J3 min: <input type="number" id="j3MinNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j3MinSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j4MinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J4 min: <input type="number" id="j4MinNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j4MinSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j5MinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J5 min: <input type="number" id="j5MinNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j5MinSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="j6MinSet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p class="modal-title">Enter the new value</p>
+          <span>(from -360 to 360)<span>
+        </div>
+        <div class="modal-body">
+          <p>If you leave it empty the axis limit is maximized</p>
+          <p>J6 min: <input type="number" id="j6MinNew" min="-360" max="360"></p>
+          <p class="limitWarning" style="color:red">The limit is need to be between -360 and 360</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="j6MinSave" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default limit-cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
 
     $(document).ready(function() {  
@@ -548,7 +927,8 @@
       var setInt = 50
       var enButVar
       var setTime = 100
-      var axisLimit = 9999
+      var axisLimit = 10000
+      var jointLimit = 360
     
       $('#info-controller').show()
       $('#info-jog').show()
@@ -558,25 +938,26 @@
       $('#webmotion-menu').hide()
       $('#webmotion-jog').hide()
       $('#webmotion-cart').hide()
-      $('#webmotion-set').hide()
+	  $('#webmotion-pose').hide()
       $('#webmotion-control').hide()
+      $('#webcontrol-set').hide()
 
       $('#webmotion-menu-jog').click(function() {
         $('#webmotion-jog').show()
         $('#webmotion-cart').hide()
-        $('#webmotion-set').hide()
+        $('#webmotion-pose').hide()
       })     
 
       $('#webmotion-menu-cart').click(function() {
         $('#webmotion-jog').hide()
         $('#webmotion-cart').show()
-        $('#webmotion-set').hide()
+        $('#webmotion-pose').hide()
       })
 
-      $('#webmotion-menu-set').click(function() {
+      $('#webmotion-menu-pose').click(function() {
         $('#webmotion-jog').hide()
         $('#webmotion-cart').hide()
-        $('#webmotion-set').show()
+        $('#webmotion-pose').show()
       })
 
       $.getJSON("/KAREL/webprogram", function(data) {
@@ -638,6 +1019,42 @@
           if (data.message[0] == 1) {
             $('#message').html("Position not reachable")
             $('#message').css("color", "#d9534f")
+          } else if (data.message[9] == 3) {
+            $('#message').html("J6 max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[9] == 6) {
+            $('#message').html("J6 min limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[8] == 3) {
+            $('#message').html("J5 max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[8] == 6) {
+            $('#message').html("J5 min limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[7] == 3) {
+            $('#message').html("J4 max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[7] == 6) {
+            $('#message').html("J4 min limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[6] == 3) {
+            $('#message').html("J3 max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[6] == 6) {
+            $('#message').html("J3 min limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[5] == 3) {
+            $('#message').html("J2 max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[5] == 6) {
+            $('#message').html("J2 min limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[4] == 3) {
+            $('#message').html("J1 max limit STOP")
+            $('#message').css("color", "#d9534f")
+          } else if (data.message[4] == 6) {
+            $('#message').html("J1 min limit STOP")
+            $('#message').css("color", "#d9534f")
           } else if (data.message[3] == 3) {
             $('#message').html("Z max limit STOP")
             $('#message').css("color", "#d9534f")
@@ -674,7 +1091,7 @@
           // Show the current joint degree values
           
           for (i = 0; i <= 5; i++) {
-            if (data.joint[i] == 100000) { 
+            if (data.joint[i] == 10000) { 
               $('.j' + (i+1)).html('N/A')
               $('#j' + (i+1) + 'p').prop('disabled', true)
               $('#j' + (i+1) + 'm').prop('disabled', true)
@@ -694,47 +1111,119 @@
 
           // Show the current limit values
 
-          if ( data.limit[0] >= 10000 || data.limit[0] <= -10000 ) {
+          if ( data.limit[0] >= axisLimit || data.limit[0] <= -axisLimit ) {
             $('#xMax').html('max')
           } else {
             $('#xMax').html(data.limit[0]) + ' mm'
           }
 
-          if ( data.limit[1] >= 10000 || data.limit[1] <= -10000 ) {
+          if ( data.limit[1] >= axisLimit || data.limit[1] <= -axisLimit ) {
             $('#yMax').html('max')
           } else {
             $('#yMax').html(data.limit[1]) + ' mm'
           }
 
-          if ( data.limit[2] >= 10000 || data.limit[2] <= -10000 ) {
+          if ( data.limit[2] >= axisLimit || data.limit[2] <= -axisLimit ) {
             $('#zMax').html('max')
           } else {
             $('#zMax').html(data.limit[2]) + ' mm'
           }
 
-          if ( data.limit[3] >= 10000 || data.limit[3] <= -10000 ) {
+          if ( data.limit[3] >= axisLimit || data.limit[3] <= -axisLimit ) {
             $('#xMin').html('min')
           } else {
             $('#xMin').html(data.limit[3]) + ' mm'
           }
 
-          if ( data.limit[4] >= 10000 || data.limit[4] <= -10000 ) {
+          if ( data.limit[4] >= axisLimit || data.limit[4] <= -axisLimit ) {
             $('#yMin').html('min')
           } else {
             $('#yMin').html(data.limit[4]) + ' mm'
           }
 
-          if ( data.limit[5] >= 10000 || data.limit[5] <= -10000 ) {
+          if ( data.limit[5] >= axisLimit || data.limit[5] <= -axisLimit ) {
             $('#zMin').html('min')
           } else {
             $('#zMin').html(data.limit[5]) + ' mm'
+          }
+
+          if ( data.limit[6] > jointLimit || data.limit[6] < -jointLimit ) {
+            $('#j1Max').html('max')
+          } else {
+            $('#j1Max').html(data.limit[6]) + ' &#176;'
+          }
+
+          if ( data.limit[7] > jointLimit || data.limit[7] < -jointLimit ) {
+            $('#j2Max').html('max')
+          } else {
+            $('#j2Max').html(data.limit[7]) + ' &#176;'
+          }
+
+          if ( data.limit[8] > jointLimit || data.limit[8] < -jointLimit ) {
+            $('#j3Max').html('max')
+          } else {
+            $('#j3Max').html(data.limit[8]) + ' &#176;'
+          }
+
+          if ( data.limit[9] > jointLimit || data.limit[9] < -jointLimit ) {
+            $('#j4Max').html('max')
+          } else {
+            $('#j4Max').html(data.limit[9]) + ' &#176;'
+          }
+
+          if ( data.limit[10] > jointLimit || data.limit[10] < -jointLimit ) {
+            $('#j5Max').html('max')
+          } else {
+            $('#j5Max').html(data.limit[10]) + ' &#176;'
+          }
+
+          if ( data.limit[11] > jointLimit || data.limit[11] < -jointLimit ) {
+            $('#j6Max').html('max')
+          } else {
+            $('#j6Max').html(data.limit[11]) + ' &#176;'
+          }
+
+          if ( data.limit[12] > jointLimit || data.limit[12] < -jointLimit ) {
+            $('#j1Min').html('min')
+          } else {
+            $('#j1Min').html(data.limit[12]) + ' &#176;'
+          }
+
+          if ( data.limit[13] > jointLimit || data.limit[13] < -jointLimit ) {
+            $('#j2Min').html('min')
+          } else {
+            $('#j2Min').html(data.limit[13]) + ' &#176;'
+          }
+
+          if ( data.limit[14] > jointLimit || data.limit[14] < -jointLimit ) {
+            $('#j3Min').html('min')
+          } else {
+            $('#j3Min').html(data.limit[14]) + ' &#176;'
+          }
+
+          if ( data.limit[15] > jointLimit || data.limit[15] < -jointLimit ) {
+            $('#j4Min').html('min')
+          } else {
+            $('#j4Min').html(data.limit[15]) + ' &#176;'
+          }
+
+          if ( data.limit[16] > jointLimit || data.limit[16] < -jointLimit ) {
+            $('#j5Min').html('min')
+          } else {
+            $('#j5Min').html(data.limit[16]) + ' &#176;'
+          }
+
+          if ( data.limit[17] > jointLimit || data.limit[17] < -jointLimit ) {
+            $('#j6Min').html('min')
+          } else {
+            $('#j6Min').html(data.limit[17]) + ' &#176;'
           }
 
           // Set the current limit value in the new limit input box
 
           $('#xMaxCh').click(function() {
             $('.limitWarning').hide()
-            if ( data.limit[0] >= 10000 || data.limit[0] <= -10000 ) {
+            if ( data.limit[0] >= axisLimit || data.limit[0] <= -axisLimit ) {
               $("#xMaxNew").val('')
             } else {
               $("#xMaxNew").val(data.limit[0])
@@ -743,7 +1232,7 @@
 
           $('#yMaxCh').click(function() {
             $('.limitWarning').hide()
-            if ( data.limit[1] >= 10000 || data.limit[1] <= -10000 ) {
+            if ( data.limit[1] >= axisLimit || data.limit[1] <= -axisLimit ) {
               $("#yMaxNew").val('')
             } else {
               $("#yMaxNew").val(data.limit[1])
@@ -752,7 +1241,7 @@
 
           $('#zMaxCh').click(function() {
             $('.limitWarning').hide()
-            if ( data.limit[2] >= 10000 || data.limit[2] <= -10000 ) {
+            if ( data.limit[2] >= axisLimit || data.limit[2] <= -axisLimit ) {
               $("#zMaxNew").val('')
             } else {
               $("#zMaxNew").val(data.limit[2])
@@ -761,7 +1250,7 @@
 
           $('#xMinCh').click(function() {
             $('.limitWarning').hide()
-            if ( data.limit[3] >= 10000 || data.limit[3] <= -10000 ) {
+            if ( data.limit[3] >= axisLimit || data.limit[3] <= -axisLimit ) {
               $("#xMinNew").val('')
             } else {
               $("#xMinNew").val(data.limit[3])
@@ -770,7 +1259,7 @@
 
           $('#yMinCh').click(function() {
             $('.limitWarning').hide()
-            if ( data.limit[4] >= 10000 || data.limit[4] <= -10000 ) {
+            if ( data.limit[4] >= axisLimit || data.limit[4] <= -axisLimit ) {
               $("#yMinNew").val('')
             } else {
               $("#yMinNew").val(data.limit[4])
@@ -779,10 +1268,118 @@
 
           $('#zMinCh').click(function() {
             $('.limitWarning').hide()
-            if ( data.limit[5] >= 10000 || data.limit[5] <= -10000 ) {
+            if ( data.limit[5] >= axisLimit || data.limit[5] <= -axisLimit ) {
               $("#zMinNew").val('')
             } else {
               $("#zMinNew").val(data.limit[5])
+            }
+          })
+
+          $('#j1MaxCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[6] >= jointLimit || data.limit[6] <= -jointLimit ) {
+              $("#j1MaxNew").val('')
+            } else {
+              $("#j1MaxNew").val(data.limit[6])
+            }
+          })
+
+          $('#j2MaxCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[7] >= jointLimit || data.limit[7] <= -jointLimit ) {
+              $("#j2MaxNew").val('')
+            } else {
+              $("#j2MaxNew").val(data.limit[7])
+            }
+          })
+
+          $('#j3MaxCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[8] >= jointLimit || data.limit[8] <= -jointLimit ) {
+              $("#j3MaxNew").val('')
+            } else {
+              $("#j3MaxNew").val(data.limit[8])
+            }
+          })
+
+          $('#j4MaxCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[9] >= jointLimit || data.limit[9] <= -jointLimit ) {
+              $("#j4MaxNew").val('')
+            } else {
+              $("#j4MaxNew").val(data.limit[9])
+            }
+          })
+
+          $('#j5MaxCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[10] >= jointLimit || data.limit[10] <= -jointLimit ) {
+              $("#j5MaxNew").val('')
+            } else {
+              $("#j5MaxNew").val(data.limit[10])
+            }
+          })
+
+          $('#j6MaxCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[11] >= jointLimit || data.limit[11] <= -jointLimit ) {
+              $("#j6MaxNew").val('')
+            } else {
+              $("#j6MaxNew").val(data.limit[11])
+            }
+          })
+
+          $('#j1MinCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[12] >= jointLimit || data.limit[12] <= -jointLimit ) {
+              $("#j1MinNew").val('')
+            } else {
+              $("#j1MinNew").val(data.limit[12])
+            }
+          })
+
+          $('#j2MinCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[13] >= jointLimit || data.limit[13] <= -jointLimit ) {
+              $("#j2MinNew").val('')
+            } else {
+              $("#j2MinNew").val(data.limit[13])
+            }
+          })
+
+          $('#j3MinCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[14] >= jointLimit || data.limit[14] <= -jointLimit ) {
+              $("#j3MinNew").val('')
+            } else {
+              $("#j3MinNew").val(data.limit[14])
+            }
+          })
+
+          $('#j4MinCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[15] >= jointLimit || data.limit[15] <= -jointLimit ) {
+              $("#j4MinNew").val('')
+            } else {
+              $("#j4MinNew").val(data.limit[15])
+            }
+          })
+
+          $('#j5MinCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[16] >= jointLimit || data.limit[16] <= -jointLimit ) {
+              $("#j5MinNew").val('')
+            } else {
+              $("#j5MinNew").val(data.limit[16])
+            }
+          })
+
+          $('#j6MinCh').click(function() {
+            $('.limitWarning').hide()
+            if ( data.limit[17] >= jointLimit || data.limit[17] <= -jointLimit ) {
+              $("#j6MinNew").val('')
+            } else {
+              $("#j6MinNew").val(data.limit[17])
             }
           })
 
@@ -869,8 +1466,9 @@
         $('#webmotion-menu').hide()
         $('#webmotion-jog').hide()
         $('#webmotion-cart').hide()
-        $('#webmotion-set').hide()
+        $('#webmotion-pose').hide()
         $('#webmotion-control').hide()
+        $('#webcontrol-set').hide()
         $.ajax({
           type: 'GET',
           url: '/KAREL/webabort',
@@ -879,6 +1477,36 @@
             console.log('Send ABORT is successful')
           }
         })
+      })
+
+      $('#webcontrol-limit-set').click(function() {
+        console.log('Limits\' set is start')
+        $('#info-controller').hide()
+        $('#info-jog').hide()
+        $('#info-cart').hide()
+        $('#webprogram-run').hide()
+        $('#webprogram-control').hide()
+        $('#webmotion-menu').hide()
+        $('#webmotion-jog').hide()
+        $('#webmotion-cart').hide()
+        $('#webmotion-pose').hide()
+        $('#webmotion-control').hide()
+        $('#webcontrol-set').show()
+      })
+
+      $('#webcontrol-limit-done').click(function() {
+        console.log('Limits are set')
+        $('#info-controller').show()
+        $('#info-jog').show()
+        $('#info-cart').show()
+        $('#webprogram-run').show()
+        $('#webprogram-control').show()
+        $('#webmotion-menu').hide()
+        $('#webmotion-jog').hide()
+        $('#webmotion-cart').hide()
+        $('#webmotion-pose').hide()
+        $('#webmotion-control').hide()
+        $('#webcontrol-set').hide()
       })
 
       // Keep the motion
@@ -1627,7 +2255,7 @@
       //Set limits
       
       $('#xMaxSave').click(function() {
-        if ( $("#xMaxNew").val() > axisLimit || $("#xMaxNew").val() < -axisLimit) {
+        if ( $("#xMaxNew").val() >= axisLimit || $("#xMaxNew").val() <= -axisLimit) {
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1645,7 +2273,7 @@
       })
 
       $('#yMaxSave').click(function() {
-        if ( $("#yMaxNew").val() > axisLimit || $("#yMaxNew").val() < -axisLimit) {
+        if ( $("#yMaxNew").val() >= axisLimit || $("#yMaxNew").val() <= -axisLimit) {
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1663,7 +2291,7 @@
       })
 
       $('#zMaxSave').click(function() {
-        if ( $("#zMaxNew").val() > axisLimit || $("#zMaxNew").val() < -axisLimit) {
+        if ( $("#zMaxNew").val() >= axisLimit || $("#zMaxNew").val() <= -axisLimit) {
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1681,7 +2309,7 @@
       })
 
       $('#xMinSave').click(function() {
-        if ( $("#xMinNew").val() > axisLimit || $("#xMinNew").val() < -axisLimit) {
+        if ( $("#xMinNew").val() >= axisLimit || $("#xMinNew").val() <= -axisLimit) {
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1699,7 +2327,7 @@
       })
 
       $('#yMinSave').click(function() {
-        if ( $("#yMinNew").val() > axisLimit || $("#yMinNew").val() < -axisLimit) {
+        if ( $("#yMinNew").val() >= axisLimit || $("#yMinNew").val() <= -axisLimit) {
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1717,7 +2345,7 @@
       })
 
       $('#zMinSave').click(function() {
-        if ( $("#yMinNew").val() > axisLimit || $("#yMinNew").val() < -axisLimit) {
+        if ( $("#yMinNew").val() >= axisLimit || $("#yMinNew").val() <= -axisLimit) {
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
@@ -1729,6 +2357,222 @@
             cache: false,
             success: function() {
               $('#zMinSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j1MaxSave').click(function() {
+        if ( $("#j1MaxNew").val() > jointLimit || $("#j1MaxNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 11
+		  var limit_vl = $("#j1MaxNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j1MaxSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j2MaxSave').click(function() {
+        if ( $("#j2MaxNew").val() > jointLimit || $("#j2MaxNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 12
+		  var limit_vl = $("#j2MaxNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j2MaxSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j3MaxSave').click(function() {
+        if ( $("#j3MaxNew").val() > jointLimit || $("#j3MaxNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 13
+		  var limit_vl = $("#j3MaxNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j3MaxSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j4MaxSave').click(function() {
+        if ( $("#j4MaxNew").val() > jointLimit || $("#j4MaxNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 14
+		  var limit_vl = $("#j4MaxNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j4MaxSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j5MaxSave').click(function() {
+        if ( $("#j5MaxNew").val() > jointLimit || $("#j5MaxNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 15
+		  var limit_vl = $("#j5MaxNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j5MaxSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j6MaxSave').click(function() {
+        if ( $("#j6MaxNew").val() > jointLimit || $("#j6MaxNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 16
+		  var limit_vl = $("#j6MaxNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j6MaxSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j1MinSave').click(function() {
+        if ( $("#j1MinNew").val() > jointLimit || $("#j1MinNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 21
+		  var limit_vl = $("#j1MinNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j1MinSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j2MinSave').click(function() {
+        if ( $("#j2MinNew").val() > jointLimit || $("#j2MinNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 22
+		  var limit_vl = $("#j2MinNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j2MinSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j3MinSave').click(function() {
+        if ( $("#j3MinNew").val() > jointLimit || $("#j3MinNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 23
+		  var limit_vl = $("#j3MinNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j3MinSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j4MinSave').click(function() {
+        if ( $("#j4MinNew").val() > jointLimit || $("#j4MinNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 24
+		  var limit_vl = $("#j4MinNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j4MinSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j5MinSave').click(function() {
+        if ( $("#j5MinNew").val() > jointLimit || $("#j5MinNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 25
+		  var limit_vl = $("#j5MinNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j5MinSet').modal('hide')
+            }
+          })
+        }
+      })
+
+      $('#j6MinSave').click(function() {
+        if ( $("#j6MinNew").val() > jointLimit || $("#j6MinNew").val() < -jointLimit) {
+          $('.limitWarning').show()
+        } else {
+          $('.limitWarning').hide()
+		  var limit_id = 26
+		  var limit_vl = $("#j6MinNew").val()
+          $.ajax({
+            type: 'GET',
+            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            cache: false,
+            success: function() {
+              $('#j6MinSet').modal('hide')
             }
           })
         }

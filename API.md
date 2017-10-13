@@ -69,11 +69,11 @@ ____
 
           "pose": [ X, Y, Z, W, P, R ], 
 
-          "limit": [ xMax, yMax, zMax, xMin, yMin, zMin ] , 
+          "limit": [ xMax, yMax, zMax, xMin, yMin, zMin, j1Max, j2Max, j3Max, j4Max, j5Max, j6Max, j1Min, j2Min, j3Min, j4Min, j5Min, j6Min ] , 
 
           "status": [ 0, 1 ] , 
 
-          "message": [ 0, 0, 0, 0 ], 
+          "message": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
 
           "error": [ 0,"R E S E T " ] 
 
@@ -87,7 +87,7 @@ ____
 	
 	**status**: [ a task running (true(`1`)/false(`0`)) `[INTEGER]`, webmotion running (true(`1`)/false(`0`)) `[INTEGER]`]
 	
-	**message**: [ position reachable or not (true(`1`)/false(`0`)) `[INTEGER]`, x limit stop (max(`3`)/min(`6`)) `[INTEGER]`, y limit stop (max(`3`)/min(`6`)) `[INTEGER]`, z limit stop (max(`3`)/min(`6`)) `[INTEGER]` ]
+	**message**: [ position reachable or not (true(`1`)/false(`0`)) `[INTEGER]`, x limit stop (max(`3`)/min(`6`)) `[INTEGER]`, y limit stop (max(`3`)/min(`6`)) `[INTEGER]`, z limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j1 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j2 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j3 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j4 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j5 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j6 limit stop (max(`3`)/min(`6`)) `[INTEGER]` ]
 	
 	**error**: [ error code `[INTEGER]`, error string `[STRING]` ]
 	
@@ -111,7 +111,7 @@ ____
 
 * **Data Params**
 
-  `limit_id` is valid from `1` to `6`:
+  `limit_id` is valid from `1` to `6`, `11` to `16` and `21` to `26` :
   
   `1`: x max,
 
@@ -124,6 +124,30 @@ ____
   `5`: y min,
 
   `6`: z min,
+  
+  `11`: j1 max,
+
+  `12`: j2 max,
+
+  `13`: j3 max,
+
+  `14`: j4 max,
+
+  `15`: j5 max,
+
+  `16`: j6 max,
+
+  `21`: j1 min,
+
+  `22`: j2 min,
+
+  `23`: j3 min,
+
+  `24`: j4 min,
+
+  `25`: j5 min,
+
+  `26`: j6 min,
 
 * **Success Response:**
 
