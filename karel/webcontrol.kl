@@ -9,6 +9,8 @@ CONST
 	PR_WEBJOINTS = 40
 	PR_WEBXYZWPR = 41
 	
+	R_WEBJNUM = 49
+	
 	R_WEBCOORD1 = 51
 	R_WEBCOORD2 = 52
 	R_WEBCOORD3 = 53
@@ -32,12 +34,16 @@ VAR
 	str_coord6: STRING[127]
 
 	coord: ARRAY[9] OF REAL
-
+	cur_jpos_val: ARRAY[9] OF REAL
+	
 	cur_jpos: JOINTPOS
 	cur_pos: XYZWPR
 	
 	new_jpos: JOINTPOS
 	new_pos: XYZWPR
+
+	cur_joint: INTEGER
+	count: INTEGER
 
 ROUTINE setreg
 
@@ -79,6 +85,22 @@ BEGIN
 
 	WRITE (CHR(128),CHR(137))
 
+	cur_jpos = CURJPOS(0,0)
+	cur_pos = CURPOS(0,0)
+
+	CNV_JPOS_REL(cur_jpos, cur_jpos_val, STATUS)
+
+	cur_joint = 9
+
+	FOR count = 9 DOWNTO 1 DO
+		IF UNINIT ( cur_jpos_val[count] ) THEN cur_joint = cur_joint - 1; ENDIF
+	ENDFOR
+
+	SET_INT_REG(R_WEBJNUM, cur_joint, STATUS)
+	IF (STATUS <> 0 ) THEN		
+		WRITE ('SET the NUMBER OF JOINTS is  failed = ', STATUS, CR)		
+	ENDIF
+
 	CNV_STR_INT(str_mtn_mod, int_mtn_mod)
 
 	CNV_STR_REAL(str_coord1, coord[1])
@@ -90,10 +112,7 @@ BEGIN
 	coord[7] = 0
 	coord[8] = 0
 	coord[9] = 0
-
-	cur_jpos = CURJPOS(0,0)
-	cur_pos = CURPOS(0,0)
-
+	
 	SELECT int_mtn_mod OF
 
 		CASE(1): --Absolute motion in Joint space - joint interpolation

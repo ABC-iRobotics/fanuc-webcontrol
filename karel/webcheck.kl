@@ -222,147 +222,165 @@ BEGIN
 
 	--limit the joints
 
-	IF j1min_flag THEN
-		IF val_new_jpos[1] <= j1min_real THEN
-			FLG[8] = ON
-			limit_j1 = 6
-		ENDIF
+	IF UNINIT( val_new_jpos[1] ) THEN 
+		val_new_jpos[1] = 0
 	ELSE
-		IF val_new_jpos[1] <= j1min_int THEN
-			FLG[8] = ON
-			limit_j1 = 6
+		IF j1min_flag THEN
+			IF val_new_jpos[1] <= j1min_real THEN
+				FLG[8] = ON
+				limit_j1 = 6
+			ENDIF
+		ELSE
+			IF val_new_jpos[1] <= j1min_int THEN
+				FLG[8] = ON
+				limit_j1 = 6
+			ENDIF
+		ENDIF
+		IF j1max_flag THEN
+			IF val_new_jpos[1] >= j1max_real THEN
+				FLG[8] = ON
+				limit_j1 = 3
+			ENDIF
+		ELSE
+			IF val_new_jpos[1] >= j1max_int THEN
+				FLG[8] = ON
+				limit_j1 = 3
+			ENDIF
 		ENDIF
 	ENDIF
 
-	IF j1max_flag THEN
-		IF val_new_jpos[1] >= j1max_real THEN
-			FLG[8] = ON
-			limit_j1 = 3
-		ENDIF
-	ELSE
-		IF val_new_jpos[1] >= j1max_int THEN
-			FLG[8] = ON
-			limit_j1 = 3
-		ENDIF
-	ENDIF
-
-	IF j2min_flag THEN
-		IF val_new_jpos[2] <= j2min_real THEN
-			FLG[8] = ON
-			limit_j2 = 6
-		ENDIF
-	ELSE
-		IF val_new_jpos[2] <= j2min_int THEN
-			FLG[8] = ON
-			limit_j2 = 6
-		ENDIF
-	ENDIF
-
-	IF j2max_flag THEN
-		IF val_new_jpos[2] >= j2max_real THEN
-			FLG[8] = ON
-			limit_j2 = 3
-		ENDIF
-	ELSE
-		IF val_new_jpos[2] >= j2max_int THEN
-			FLG[8] = ON
-			limit_j2 = 3
+	IF UNINIT( val_new_jpos[2] ) THEN 
+		val_new_jpos[2] = 0
+	ELSE	
+		IF j2min_flag THEN
+			IF val_new_jpos[2] <= j2min_real THEN
+				FLG[8] = ON
+				limit_j2 = 6
+			ENDIF
+		ELSE
+			IF val_new_jpos[2] <= j2min_int THEN
+				FLG[8] = ON
+				limit_j2 = 6
+			ENDIF
+		ENDIF	
+		IF j2max_flag THEN
+			IF val_new_jpos[2] >= j2max_real THEN
+				FLG[8] = ON
+				limit_j2 = 3
+			ENDIF
+		ELSE
+			IF val_new_jpos[2] >= j2max_int THEN
+				FLG[8] = ON
+				limit_j2 = 3
+			ENDIF
 		ENDIF
 	ENDIF
 
-	IF j3min_flag THEN
-		IF val_new_jpos[3] <= j3min_real THEN
-			FLG[8] = ON
-			limit_j3 = 6
-		ENDIF
-	ELSE
-		IF val_new_jpos[3] <= j3min_int THEN
-			FLG[8] = ON
-			limit_j3 = 6
-		ENDIF
-	ENDIF
-
-	IF j3max_flag THEN
-		IF val_new_jpos[3] >= j3max_real THEN
-			FLG[8] = ON
-			limit_j3 = 3
-		ENDIF
-	ELSE
-		IF val_new_jpos[3] >= j3max_int THEN
-			FLG[8] = ON
-			limit_j3 = 3
-		ENDIF
-	ENDIF
-
-	IF j4min_flag THEN
-		IF val_new_jpos[4] <= j4min_real THEN
-			FLG[8] = ON
-			limit_j4 = 6
-		ENDIF
-	ELSE
-		IF val_new_jpos[4] <= j4min_int THEN
-			FLG[8] = ON
-			limit_j4 = 6
+	IF UNINIT( val_new_jpos[3] ) THEN 
+		val_new_jpos[3] = 0
+	ELSE	
+		IF j3min_flag THEN
+			IF val_new_jpos[3] <= j3min_real THEN
+				FLG[8] = ON
+				limit_j3 = 6
+			ENDIF
+		ELSE
+			IF val_new_jpos[3] <= j3min_int THEN
+				FLG[8] = ON
+				limit_j3 = 6
+			ENDIF
+		ENDIF	
+		IF j3max_flag THEN
+			IF val_new_jpos[3] >= j3max_real THEN
+				FLG[8] = ON
+				limit_j3 = 3
+			ENDIF
+		ELSE
+			IF val_new_jpos[3] >= j3max_int THEN
+				FLG[8] = ON
+				limit_j3 = 3
+			ENDIF
 		ENDIF
 	ENDIF
 
-	IF j4max_flag THEN
-		IF val_new_jpos[4] >= j4max_real THEN
-			FLG[8] = ON
-			limit_j4 = 3
-		ENDIF
-	ELSE
-		IF val_new_jpos[4] >= j4max_int THEN
-			FLG[8] = ON
-			limit_j4 = 3
-		ENDIF
-	ENDIF
-
-	IF j5min_flag THEN
-		IF val_new_jpos[5] <= j5min_real THEN
-			FLG[8] = ON
-			limit_j5 = 6
-		ENDIF
-	ELSE
-		IF val_new_jpos[5] <= j5min_int THEN
-			FLG[8] = ON
-			limit_j5 = 6
-		ENDIF
-	ENDIF
-
-	IF j5max_flag THEN
-		IF val_new_jpos[5] >= j5max_real THEN
-			FLG[8] = ON
-			limit_j5 = 3
-		ENDIF
-	ELSE
-		IF val_new_jpos[5] >= j5max_int THEN
-			FLG[8] = ON
-			limit_j5 = 3
+	IF UNINIT( val_new_jpos[4] ) THEN 
+		val_new_jpos[4] = 0
+	ELSE	
+		IF j4min_flag THEN
+			IF val_new_jpos[4] <= j4min_real THEN
+				FLG[8] = ON
+				limit_j4 = 6
+			ENDIF
+		ELSE
+			IF val_new_jpos[4] <= j4min_int THEN
+				FLG[8] = ON
+				limit_j4 = 6
+			ENDIF
+		ENDIF	
+		IF j4max_flag THEN
+			IF val_new_jpos[4] >= j4max_real THEN
+				FLG[8] = ON
+				limit_j4 = 3
+			ENDIF
+		ELSE
+			IF val_new_jpos[4] >= j4max_int THEN
+				FLG[8] = ON
+				limit_j4 = 3
+			ENDIF
 		ENDIF
 	ENDIF
 
-	IF j6min_flag THEN
-		IF val_new_jpos[6] <= j6min_real THEN
-			FLG[8] = ON
-			limit_j6 = 6
-		ENDIF
-	ELSE
-		IF val_new_jpos[6] <= j6min_int THEN
-			FLG[8] = ON
-			limit_j6 = 6
+	IF UNINIT( val_new_jpos[5] ) THEN 
+		val_new_jpos[5] = 0
+	ELSE	
+		IF j5min_flag THEN
+			IF val_new_jpos[5] <= j5min_real THEN
+				FLG[8] = ON
+				limit_j5 = 6
+			ENDIF
+		ELSE
+			IF val_new_jpos[5] <= j5min_int THEN
+				FLG[8] = ON
+				limit_j5 = 6
+			ENDIF
+		ENDIF	
+		IF j5max_flag THEN
+			IF val_new_jpos[5] >= j5max_real THEN
+				FLG[8] = ON
+				limit_j5 = 3
+			ENDIF
+		ELSE
+			IF val_new_jpos[5] >= j5max_int THEN
+				FLG[8] = ON
+				limit_j5 = 3
+			ENDIF
 		ENDIF
 	ENDIF
 
-	IF j6max_flag THEN
-		IF val_new_jpos[6] >= j6max_real THEN
-			FLG[8] = ON
-			limit_j6 = 3
-		ENDIF
-	ELSE
-		IF val_new_jpos[6] >= j6max_int THEN
-			FLG[8] = ON
-			limit_j6 = 3
+	IF UNINIT( val_new_jpos[6] ) THEN 
+		val_new_jpos[6] = 0
+	ELSE	
+		IF j6min_flag THEN
+			IF val_new_jpos[6] <= j6min_real THEN
+				FLG[8] = ON
+				limit_j6 = 6
+			ENDIF
+		ELSE
+			IF val_new_jpos[6] <= j6min_int THEN
+				FLG[8] = ON
+				limit_j6 = 6
+			ENDIF
+		ENDIF	
+		IF j6max_flag THEN
+			IF val_new_jpos[6] >= j6max_real THEN
+				FLG[8] = ON
+				limit_j6 = 3
+			ENDIF
+		ELSE
+			IF val_new_jpos[6] >= j6max_int THEN
+				FLG[8] = ON
+				limit_j6 = 3
+			ENDIF
 		ENDIF
 	ENDIF
 

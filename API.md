@@ -91,7 +91,7 @@ ____
 	
 	**error**: [ error code `[INTEGER]`, error string `[STRING]` ]
 	
-##  Set the motion XYZ limit
+##  Set the motion limits
 
 * **URL**
 
