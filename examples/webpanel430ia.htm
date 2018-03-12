@@ -314,7 +314,7 @@
         <p class="j1 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="pickup" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="pickup" class="btn btn-success ts-btn-90">Pickup</button>
       </div>
       <div class="col-xs-4">
         <p class="wx coord">load...</p>
@@ -336,7 +336,7 @@
         <p class="j3 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="place" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="place" class="btn btn-success ts-btn-90">Place</button>
       </div>
       <div class="col-xs-4">
         <p class="wz coord">load...</p>
@@ -347,7 +347,7 @@
         <p class="j4 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="coord" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="coord" class="btn btn-success ts-btn-90">Coord</button>
       </div>
       <div class="col-xs-4">
         <p class="ww coord">load...</p>
@@ -358,7 +358,7 @@
         <p class="j5 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="show" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="show" class="btn btn-success ts-btn-90">Show</button>
       </div>
       <div class="col-xs-4">
         <p class="wp coord">load...</p>
@@ -369,7 +369,7 @@
         <p class="j6 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="touch" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="touch" class="btn btn-success ts-btn-90">Touch</button>
       </div>
       <div class="col-xs-4">
         <p class="wr coord">load...</p>
@@ -2146,9 +2146,9 @@
       
       $('#pickup').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord1 = '-45'
+        var coord2 = '45'
+        var coord3 = '90'
         var coord4 = '0'
         var coord5 = '0'
         var coord6 = '0'
@@ -2183,10 +2183,10 @@
       $('#place').click(function() {
         var mtn_mod = '1' 
         var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord2 = '45'
+        var coord3 = '135'
         var coord4 = '0'
-        var coord5 = '0'
+        var coord5 = '45'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
@@ -2201,10 +2201,10 @@
       $('#coord').click(function() {
         var mtn_mod = '1' 
         var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord2 = '30'
+        var coord3 = '90'
         var coord4 = '0'
-        var coord5 = '0'
+        var coord5 = '-90'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
@@ -2218,12 +2218,12 @@
 
       $('#show').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
+        var coord1 = '90'
         var coord2 = '0'
-        var coord3 = '0'
+        var coord3 = '90'
         var coord4 = '0'
-        var coord5 = '0'
-        var coord6 = '0'
+        var coord5 = '-90'
+        var coord6 = '-90'
         $.ajax({
           type: 'GET',
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
@@ -2236,12 +2236,12 @@
 
       $('#touch').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord1 = '90'
+        var coord2 = '60'
+        var coord3 = '30'
         var coord4 = '0'
-        var coord5 = '0'
-        var coord6 = '0'
+        var coord5 = '60'
+        var coord6 = '-90'
         $.ajax({
           type: 'GET',
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,

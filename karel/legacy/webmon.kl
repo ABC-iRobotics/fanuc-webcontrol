@@ -1,0 +1,344 @@
+PROGRAM webmon
+%COMMENT = 'legacy v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+CONST
+
+	R_WEBXMAX = 43	
+	R_WEBYMAX = 44
+	R_WEBZMAX = 45
+
+	R_WEBXMIN = 46
+	R_WEBYMIN = 47
+	R_WEBZMIN = 48
+	
+	R_WEBJ1MAX = 61	
+	R_WEBJ2MAX = 62
+	R_WEBJ3MAX = 63
+	R_WEBJ4MAX = 64
+	R_WEBJ5MAX = 65
+	R_WEBJ6MAX = 66
+
+	R_WEBJ1MIN = 71	
+	R_WEBJ2MIN = 72
+	R_WEBJ3MIN = 73
+	R_WEBJ4MIN = 74
+	R_WEBJ5MIN = 75
+	R_WEBJ6MIN = 76
+
+VAR
+
+	STATUS: INTEGER
+	responseFile: FILE
+
+	xmax_flag: BOOLEAN
+	ymax_flag: BOOLEAN
+	zmax_flag: BOOLEAN
+
+	xmin_flag: BOOLEAN
+	ymin_flag: BOOLEAN
+	zmin_flag: BOOLEAN
+
+	j1max_flag: BOOLEAN
+	j2max_flag: BOOLEAN
+	j3max_flag: BOOLEAN
+	j4max_flag: BOOLEAN
+	j5max_flag: BOOLEAN
+	j6max_flag: BOOLEAN
+	
+	j1min_flag: BOOLEAN
+	j2min_flag: BOOLEAN
+	j3min_flag: BOOLEAN
+	j4min_flag: BOOLEAN
+	j5min_flag: BOOLEAN
+	j6min_flag: BOOLEAN
+	
+	xmax_int: INTEGER
+	ymax_int: INTEGER
+	zmax_int: INTEGER
+
+	xmin_int: INTEGER
+	ymin_int: INTEGER
+	zmin_int: INTEGER
+
+	j1max_int: INTEGER
+	j2max_int: INTEGER
+	j3max_int: INTEGER
+	j4max_int: INTEGER
+	j5max_int: INTEGER
+	j6max_int: INTEGER
+
+	j1min_int: INTEGER
+	j2min_int: INTEGER
+	j3min_int: INTEGER
+	j4min_int: INTEGER
+	j5min_int: INTEGER
+	j6min_int: INTEGER
+	
+	xmax_real: REAL
+	ymax_real: REAL
+	zmax_real: REAL
+
+	xmin_real: REAL
+	ymin_real: REAL
+	zmin_real: REAL
+
+	j1max_real: REAL
+	j2max_real: REAL
+	j3max_real: REAL
+	j4max_real: REAL
+	j5max_real: REAL
+	j6max_real: REAL
+
+	j1min_real: REAL
+	j2min_real: REAL
+	j3min_real: REAL
+	j4min_real: REAL
+	j5min_real: REAL
+	j6min_real: REAL
+	
+	error_code: INTEGER
+	error_string: STRING[127]
+	cause_code: INTEGER
+	cause_string: STRING[127]
+	time_int: INTEGER
+	severity: INTEGER
+	prog_nam: STRING[127]
+
+	str_task IN DRAM FROM websta: STRING[127]
+	task_att: INTEGER
+	task_dum: STRING[127]
+	running: INTEGER
+	webmotion: INTEGER
+
+	currentPos: XYZWPREXT
+	currentPosJ: JOINTPOS
+	valuePosJ: ARRAY[6] OF REAL
+	
+	reach_ab IN DRAM FROM webche: INTEGER
+
+	limit_x IN DRAM FROM webche: INTEGER
+	limit_y IN DRAM FROM webche: INTEGER
+	limit_z IN DRAM FROM webche: INTEGER
+
+	limit_j1 IN DRAM FROM webche: INTEGER
+	limit_j2 IN DRAM FROM webche: INTEGER
+	limit_j3 IN DRAM FROM webche: INTEGER
+	limit_j4 IN DRAM FROM webche: INTEGER
+	limit_j5 IN DRAM FROM webche: INTEGER
+	limit_j6 IN DRAM FROM webche: INTEGER
+
+BEGIN
+
+	IF UNINIT( str_task ) THEN str_task = '@@@@@@'; ENDIF
+
+	IF UNINIT( reach_ab ) THEN reach_ab = 0; ENDIF
+
+	IF UNINIT( limit_x ) THEN limit_x = 0; ENDIF
+	IF UNINIT( limit_y ) THEN limit_y = 0; ENDIF
+	IF UNINIT( limit_z ) THEN limit_z = 0; ENDIF
+
+	IF UNINIT( limit_j1 ) THEN limit_j1 = 0; ENDIF
+	IF UNINIT( limit_j2 ) THEN limit_j2 = 0; ENDIF
+	IF UNINIT( limit_j3 ) THEN limit_j3 = 0; ENDIF
+	IF UNINIT( limit_j4 ) THEN limit_j4 = 0; ENDIF
+	IF UNINIT( limit_j5 ) THEN limit_j5 = 0; ENDIF
+	IF UNINIT( limit_j6 ) THEN limit_j6 = 0; ENDIF
+
+	IF UNINIT( valuePosJ[1] ) THEN valuePosJ[1] = 10000; ENDIF
+	IF UNINIT( valuePosJ[2] ) THEN valuePosJ[2] = 10000; ENDIF
+	IF UNINIT( valuePosJ[3] ) THEN valuePosJ[3] = 10000; ENDIF
+	IF UNINIT( valuePosJ[4] ) THEN valuePosJ[4] = 10000; ENDIF
+	IF UNINIT( valuePosJ[5] ) THEN valuePosJ[5] = 10000; ENDIF
+	IF UNINIT( valuePosJ[6] ) THEN valuePosJ[6] = 10000; ENDIF
+
+	GET_REG(R_WEBXMAX, xmax_flag, xmax_int, xmax_real, STATUS)
+	GET_REG(R_WEBYMAX, ymax_flag, ymax_int, ymax_real, STATUS)
+	GET_REG(R_WEBZMAX, zmax_flag, zmax_int, zmax_real, STATUS)
+
+	GET_REG(R_WEBXMIN, xmin_flag, xmin_int, xmin_real, STATUS)
+	GET_REG(R_WEBYMIN, ymin_flag, ymin_int, ymin_real, STATUS)
+	GET_REG(R_WEBZMIN, zmin_flag, zmin_int, zmin_real, STATUS)
+	
+	GET_REG(R_WEBJ1MAX, j1max_flag, j1max_int, j1max_real, STATUS)
+	GET_REG(R_WEBJ2MAX, j2max_flag, j2max_int, j2max_real, STATUS)
+	GET_REG(R_WEBJ3MAX, j3max_flag, j3max_int, j3max_real, STATUS)
+	GET_REG(R_WEBJ4MAX, j4max_flag, j4max_int, j4max_real, STATUS)
+	GET_REG(R_WEBJ5MAX, j5max_flag, j5max_int, j5max_real, STATUS)
+	GET_REG(R_WEBJ6MAX, j6max_flag, j6max_int, j6max_real, STATUS)
+
+	GET_REG(R_WEBJ1MIN, j1min_flag, j1min_int, j1min_real, STATUS)
+	GET_REG(R_WEBJ2MIN, j2min_flag, j2min_int, j2min_real, STATUS)
+	GET_REG(R_WEBJ3MIN, j3min_flag, j3min_int, j3min_real, STATUS)
+	GET_REG(R_WEBJ4MIN, j4min_flag, j4min_int, j4min_real, STATUS)
+	GET_REG(R_WEBJ5MIN, j5min_flag, j5min_int, j5min_real, STATUS)
+	GET_REG(R_WEBJ6MIN, j6min_flag, j6min_int, j6min_real, STATUS)	
+
+	ERR_DATA(MAXINT, error_code, error_string, cause_code, cause_string, time_int, severity, prog_nam)
+
+	running = 0
+	webmotion = 0
+	
+	GET_TSK_INFO(str_task, 0, TSK_STATUS, task_att, task_dum, STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBMON GET_TSK_INFO is failed: ', STATUS, CR)
+	ELSE
+		IF ( task_att = PG_RUNNING ) THEN
+			running = 1
+		ELSE
+			running = 0
+		ENDIF
+	ENDIF
+
+	IF (str_task = 'WEBMOT') THEN
+		webmotion = 1
+	ELSE
+		webmotion = 0
+	ENDIF
+	
+	currentPos = CURPOS(0,0)	
+	currentPosJ = CURJPOS(0,0)
+	
+	CNV_JPOS_REL( currentPosJ, valuePosJ, STATUS )
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBMON CNV_JPOS_REL is failed: ', STATUS, CR)
+	ENDIF
+
+	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
+		
+		WRITE responseFile( '{', CR )
+			WRITE responseFile( '"joint": [' )
+				WRITE responseFile( valuePosJ[1],',') 
+				WRITE responseFile( valuePosJ[2],',')
+				WRITE responseFile( valuePosJ[3],',')
+				WRITE responseFile( valuePosJ[4],',')
+				WRITE responseFile( valuePosJ[5],',')
+				WRITE responseFile( valuePosJ[6] )
+			WRITE responseFile( ' ],', CR )
+			WRITE responseFile( '"pose": [' )
+				WRITE responseFile( currentPos.x,',')  
+				WRITE responseFile( currentPos.y,',')
+				WRITE responseFile( currentPos.z,',')
+				WRITE responseFile( currentPos.w,',')
+				WRITE responseFile( currentPos.p,',')
+				WRITE responseFile( currentPos.r )
+			WRITE responseFile( ' ],', CR )
+			WRITE responseFile( '"limit": [' )
+				IF xmax_flag THEN
+					WRITE responseFile( xmax_real,',')  
+				ELSE
+					WRITE responseFile( xmax_int,',')
+				ENDIF
+				IF ymax_flag THEN
+					WRITE responseFile( ymax_real,',')  
+				ELSE
+					WRITE responseFile( ymax_int,',')
+				ENDIF
+				IF zmax_flag THEN
+					WRITE responseFile( zmax_real,',')  
+				ELSE
+					WRITE responseFile( zmax_int,',')
+				ENDIF
+				IF xmin_flag THEN
+					WRITE responseFile( xmin_real,',')  
+				ELSE
+					WRITE responseFile( xmin_int,',')
+				ENDIF
+				IF ymin_flag THEN
+					WRITE responseFile( ymin_real,',')  
+				ELSE
+					WRITE responseFile( ymin_int,',')
+				ENDIF
+				IF zmin_flag THEN
+					WRITE responseFile( zmin_real,',')  
+				ELSE
+					WRITE responseFile( zmin_int,',')
+				ENDIF
+				IF j1max_flag THEN
+					WRITE responseFile( j1max_real,',')  
+				ELSE
+					WRITE responseFile( j1max_int,',')
+				ENDIF
+				IF j2max_flag THEN
+					WRITE responseFile( j2max_real,',')  
+				ELSE
+					WRITE responseFile( j2max_int,',')
+				ENDIF
+				IF j3max_flag THEN
+					WRITE responseFile( j3max_real,',')  
+				ELSE
+					WRITE responseFile( j3max_int,',')
+				ENDIF
+				IF j4max_flag THEN
+					WRITE responseFile( j4max_real,',')  
+				ELSE
+					WRITE responseFile( j4max_int,',')
+				ENDIF
+				IF j5max_flag THEN
+					WRITE responseFile( j5max_real,',')  
+				ELSE
+					WRITE responseFile( j5max_int,',')
+				ENDIF
+				IF j6max_flag THEN
+					WRITE responseFile( j6max_real,',')  
+				ELSE
+					WRITE responseFile( j6max_int,',')
+				ENDIF
+				IF j1min_flag THEN
+					WRITE responseFile( j1min_real,',')  
+				ELSE
+					WRITE responseFile( j1min_int,',')
+				ENDIF
+				IF j2min_flag THEN
+					WRITE responseFile( j2min_real,',')  
+				ELSE
+					WRITE responseFile( j2min_int,',')
+				ENDIF
+				IF j3min_flag THEN
+					WRITE responseFile( j3min_real,',')  
+				ELSE
+					WRITE responseFile( j3min_int,',')
+				ENDIF
+				IF j4min_flag THEN
+					WRITE responseFile( j4min_real,',')  
+				ELSE
+					WRITE responseFile( j4min_int,',')
+				ENDIF
+				IF j5min_flag THEN
+					WRITE responseFile( j5min_real,',')  
+				ELSE
+					WRITE responseFile( j5min_int,',')
+				ENDIF
+				IF j6min_flag THEN
+					WRITE responseFile( j6min_real)  
+				ELSE
+					WRITE responseFile( j6min_int)
+				ENDIF
+			WRITE responseFile( ' ] ,', CR )
+			WRITE responseFile( '"status": [' )
+				WRITE responseFile( running,',')
+				WRITE responseFile( webmotion )
+			WRITE responseFile( ' ] ,', CR )
+			WRITE responseFile( '"message": [' )
+				WRITE responseFile( reach_ab,',')
+				WRITE responseFile( limit_x,',')
+				WRITE responseFile( limit_y,',')
+				WRITE responseFile( limit_z,',')
+				WRITE responseFile( limit_j1,',')
+				WRITE responseFile( limit_j2,',')
+				WRITE responseFile( limit_j3,',')
+				WRITE responseFile( limit_j4,',')
+				WRITE responseFile( limit_j5,',')
+				WRITE responseFile( limit_j6)
+			WRITE responseFile( ' ],', CR )			
+			WRITE responseFile( '"error": [' )
+				WRITE responseFile( error_code,',' )
+				WRITE responseFile( '"',error_string,'"' )
+			WRITE responseFile( ' ] ', CR )
+		WRITE responseFile( '}')
+
+	CLOSE FILE responseFile
+
+END webmon

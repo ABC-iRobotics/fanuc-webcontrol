@@ -1,0 +1,31 @@
+PROGRAM websta
+%COMMENT = 'legacy v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+VAR
+
+	STATUS: INTEGER
+	return_code: INTEGER
+	
+	prog_index: INTEGER
+
+	str_task: STRING[127]
+
+BEGIN
+
+	WRITE (CHR(128),CHR(137))
+	
+	IF UNINIT( str_task ) THEN str_task = '@@@@@@'; ENDIF
+
+	CALL_PROG('webche', prog_index)
+	
+	RUN_TASK( str_task, 0, FALSE, FALSE, 1, STATUS )
+	IF (STATUS <> 0 ) THEN	
+		WRITE ('WEBSTA RUN_TASK built-IN failed: ', STATUS, CR)
+	ELSE
+		return_code = 204
+	ENDIF
+	
+END websta

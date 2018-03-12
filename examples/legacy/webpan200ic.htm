@@ -314,7 +314,7 @@
         <p class="j1 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="pickup" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="pickup" class="btn btn-success ts-btn-90">Pickup</button>
       </div>
       <div class="col-xs-4">
         <p class="wx coord">load...</p>
@@ -336,7 +336,7 @@
         <p class="j3 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="place" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="place" class="btn btn-success ts-btn-90">Place</button>
       </div>
       <div class="col-xs-4">
         <p class="wz coord">load...</p>
@@ -347,7 +347,7 @@
         <p class="j4 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="coord" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="coord" class="btn btn-success ts-btn-90">Coord</button>
       </div>
       <div class="col-xs-4">
         <p class="ww coord">load...</p>
@@ -358,7 +358,7 @@
         <p class="j5 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="show" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="show" class="btn btn-success ts-btn-90">Show</button>
       </div>
       <div class="col-xs-4">
         <p class="wp coord">load...</p>
@@ -369,7 +369,7 @@
         <p class="j6 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="touch" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="touch" class="btn btn-success ts-btn-90">Touch</button>
       </div>
       <div class="col-xs-4">
         <p class="wr coord">load...</p>
@@ -960,7 +960,7 @@
         $('#webmotion-pose').show()
       })
 
-      $.getJSON("/KAREL/webprogram", function(data) {
+      $.getJSON("/KAREL/webpro", function(data) {
 
         $('#selectTask').html('')
 
@@ -977,9 +977,9 @@
         })
 
         for ( var i = 2; i < progList.length; i++ ) {
-          //creates option tag and appends to select if parent div has id dropdown
+          //creates option tag and appends to select if parent div has id drop down
           jQuery('<option/>', {value: progList[i], html: progList[i]}).appendTo('#runTask select')
-          if ( progList[i].indexOf("WEBMOTION") >= 0 ) {
+          if ( progList[i].indexOf("WEBMOT") >= 0 ) {
             $('#selectTask').val(progList[i])
           }
         }
@@ -990,7 +990,7 @@
 
       function getposj () {
 
-        $.getJSON("/KAREL/webmonitor", function(data) {
+        $.getJSON("/KAREL/webmon", function(data) {
 
           // Show the current robot status
 
@@ -1392,7 +1392,7 @@
       $('#webprogram-start').click(function() {
         var task = $('#selectTask').find('option:selected').text();
 		var task = task.substr(0,task.indexOf(' '));
-        if ( task.indexOf("WEBMOTION") >= 0 ) {
+        if ( task.indexOf("WEBMOT") >= 0 ) {
           $('#info-controller').show()
           $('#info-jog').hide()
           $('#info-cart').hide()
@@ -1405,7 +1405,7 @@
         console.log(`Start ${task}`)
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webstart?str_task=${task}`,
+          url: `/KAREL/websta?str_task=${task}`,
           cache: false,
           success: function() {
             console.log(`Send START ${task} is successful`)
@@ -1432,7 +1432,7 @@
         console.log('Start webmotion')
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webstart?str_task=WEBMOTION',
+          url: '/KAREL/websta?str_task=WEBMOT',
           cache: false,
           success: function() {
             console.log('Send START webmotion is successful')
@@ -1446,7 +1446,7 @@
         console.log('Reset the controller')
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webreset',
+          url: '/KAREL/webres',
           cache: false,
           success: function() {
             console.log('Send RESET is successful')
@@ -1471,7 +1471,7 @@
         $('#webcontrol-set').hide()
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webabort',
+          url: '/KAREL/webabo',
           cache: false,
           success: function() {
             console.log('Send ABORT is successful')
@@ -1515,7 +1515,7 @@
         console.log('KEEP motion')
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webkeep',
+          url: '/KAREL/webkee',
           cache: false,
           success: function() {
             console.log('Send KEEP is successful')
@@ -1529,7 +1529,7 @@
         console.log('STOP(999) motion')
         $.ajax({
           type: 'GET',
-          url: '/KAREL/webstop',
+          url: '/KAREL/websto',
           cache: false,
           success: function() {
             console.log('Send STOP(999) is successful')
@@ -1575,7 +1575,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1599,7 +1599,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1623,7 +1623,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1647,7 +1647,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1671,7 +1671,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1695,7 +1695,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1719,7 +1719,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1743,7 +1743,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1767,7 +1767,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1791,7 +1791,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1815,7 +1815,7 @@
         var coord6 = '-1'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1839,7 +1839,7 @@
         var coord6 = '1'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1865,7 +1865,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1889,7 +1889,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1913,7 +1913,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1937,7 +1937,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1961,7 +1961,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -1985,7 +1985,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -2011,7 +2011,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -2035,7 +2035,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -2059,7 +2059,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -2083,7 +2083,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -2107,7 +2107,7 @@
         var coord6 = '-1'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -2131,7 +2131,7 @@
         var coord6 = '1'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {}
         })
@@ -2147,14 +2147,14 @@
       $('#pickup').click(function() {
         var mtn_mod = '1' 
         var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord2 = '45'
+        var coord3 = '-45'
         var coord4 = '0'
-        var coord5 = '0'
+        var coord5 = '-45'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
 		    webstop()
@@ -2172,7 +2172,7 @@
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
 		    webstop()
@@ -2182,15 +2182,15 @@
 
       $('#place').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord1 = '90'
+        var coord2 = '45'
+        var coord3 = '-45'
         var coord4 = '0'
-        var coord5 = '0'
+        var coord5 = '45'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
 		    webstop()
@@ -2204,11 +2204,11 @@
         var coord2 = '0'
         var coord3 = '0'
         var coord4 = '0'
-        var coord5 = '0'
-        var coord6 = '0'
+        var coord5 = '90'
+        var coord6 = '180'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
 		    webstop()
@@ -2218,15 +2218,15 @@
 
       $('#show').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
+        var coord1 = '90'
         var coord2 = '0'
         var coord3 = '0'
         var coord4 = '0'
-        var coord5 = '0'
-        var coord6 = '0'
+        var coord5 = '90'
+        var coord6 = '-90'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
 		    webstop()
@@ -2236,15 +2236,15 @@
 
       $('#touch').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord1 = '90'
+        var coord2 = '45'
+        var coord3 = '60'
         var coord4 = '0'
-        var coord5 = '0'
-        var coord6 = '0'
+        var coord5 = '-60'
+        var coord6 = '-90'
         $.ajax({
           type: 'GET',
-          url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
 		    webstop()
@@ -2263,7 +2263,7 @@
 		  var limit_vl = $("#xMaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#xMaxSet').modal('hide')
@@ -2281,7 +2281,7 @@
 		  var limit_vl = $("#yMaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#yMaxSet').modal('hide')
@@ -2299,7 +2299,7 @@
 		  var limit_vl = $("#zMaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#zMaxSet').modal('hide')
@@ -2317,7 +2317,7 @@
 		  var limit_vl = $("#xMinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#xMinSet').modal('hide')
@@ -2335,7 +2335,7 @@
 		  var limit_vl = $("#yMinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#yMinSet').modal('hide')
@@ -2353,7 +2353,7 @@
 		  var limit_vl = $("#zMinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#zMinSet').modal('hide')
@@ -2371,7 +2371,7 @@
 		  var limit_vl = $("#j1MaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j1MaxSet').modal('hide')
@@ -2389,7 +2389,7 @@
 		  var limit_vl = $("#j2MaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j2MaxSet').modal('hide')
@@ -2407,7 +2407,7 @@
 		  var limit_vl = $("#j3MaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j3MaxSet').modal('hide')
@@ -2425,7 +2425,7 @@
 		  var limit_vl = $("#j4MaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j4MaxSet').modal('hide')
@@ -2443,7 +2443,7 @@
 		  var limit_vl = $("#j5MaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j5MaxSet').modal('hide')
@@ -2461,7 +2461,7 @@
 		  var limit_vl = $("#j6MaxNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j6MaxSet').modal('hide')
@@ -2479,7 +2479,7 @@
 		  var limit_vl = $("#j1MinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j1MinSet').modal('hide')
@@ -2497,7 +2497,7 @@
 		  var limit_vl = $("#j2MinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j2MinSet').modal('hide')
@@ -2515,7 +2515,7 @@
 		  var limit_vl = $("#j3MinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j3MinSet').modal('hide')
@@ -2533,7 +2533,7 @@
 		  var limit_vl = $("#j4MinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j4MinSet').modal('hide')
@@ -2551,7 +2551,7 @@
 		  var limit_vl = $("#j5MinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j5MinSet').modal('hide')
@@ -2569,7 +2569,7 @@
 		  var limit_vl = $("#j6MinNew").val()
           $.ajax({
             type: 'GET',
-            url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
+            url: `/KAREL/weblim?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
             cache: false,
             success: function() {
               $('#j6MinSet').modal('hide')

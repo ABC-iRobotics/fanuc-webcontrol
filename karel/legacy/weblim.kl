@@ -1,0 +1,180 @@
+PROGRAM weblim
+%COMMENT = 'legacy v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+CONST
+
+	R_WEBXMAX = 43	
+	R_WEBYMAX = 44
+	R_WEBZMAX = 45
+
+	R_WEBXMIN = 46
+	R_WEBYMIN = 47
+	R_WEBZMIN = 48
+	
+	R_WEBJ1MAX = 61	
+	R_WEBJ2MAX = 62
+	R_WEBJ3MAX = 63
+	R_WEBJ4MAX = 64
+	R_WEBJ5MAX = 65
+	R_WEBJ6MAX = 66
+
+	R_WEBJ1MIN = 71	
+	R_WEBJ2MIN = 72
+	R_WEBJ3MIN = 73
+	R_WEBJ4MIN = 74
+	R_WEBJ5MIN = 75
+	R_WEBJ6MIN = 76
+
+VAR
+
+	STATUS: INTEGER
+	return_code: INTEGER
+	
+	str_limit_id: STRING[127]
+	str_limit_vl: STRING[127]
+
+	limit_id: REAL
+	limit_vl: REAL
+	limit_no: REAL
+
+BEGIN
+	
+	limit_no = 1
+	
+	CNV_STR_REAL(str_limit_id, limit_id)
+	CNV_STR_REAL(str_limit_vl, limit_vl)
+
+	IF UNINIT( limit_vl ) THEN limit_vl = 10000; limit_no = -1; ENDIF
+	
+	IF (limit_id = 1) THEN
+		SET_REAL_REG(R_WEBXMAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 1 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	IF (limit_id = 2) THEN
+		SET_REAL_REG(R_WEBYMAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 2 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	IF (limit_id = 3) THEN
+		SET_REAL_REG(R_WEBZMAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 3 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	IF (limit_id = 4) THEN
+		SET_REAL_REG(R_WEBXMIN, (limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 4 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	IF (limit_id = 5) THEN
+		SET_REAL_REG(R_WEBYMIN, (limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 5 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	IF (limit_id = 6) THEN
+		SET_REAL_REG(R_WEBZMIN, (limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 6 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	IF (limit_id = 11) THEN
+		SET_REAL_REG(R_WEBJ1MAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 11 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	IF (limit_id = 12) THEN
+		SET_REAL_REG(R_WEBJ2MAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 12 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+	
+	IF (limit_id = 13) THEN
+		SET_REAL_REG(R_WEBJ3MAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 13 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+	
+	IF (limit_id = 14) THEN
+		SET_REAL_REG(R_WEBJ4MAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 14 task: ', STATUS, CR)
+		ENDIF
+	ENDIF	
+
+	IF (limit_id = 15) THEN
+		SET_REAL_REG(R_WEBJ5MAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 15 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+	
+	IF (limit_id = 16) THEN
+		SET_REAL_REG(R_WEBJ6MAX, limit_vl, STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 16 task: ', STATUS, CR)
+		ENDIF
+	ENDIF	
+
+	IF (limit_id = 21) THEN
+		SET_REAL_REG(R_WEBJ1MIN, (limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 21 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	IF (limit_id = 22) THEN
+		SET_REAL_REG(R_WEBJ2MIN, (limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 22 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+	
+	IF (limit_id = 23) THEN
+		SET_REAL_REG(R_WEBJ3MIN,(limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 23 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+	
+	IF (limit_id = 24) THEN
+		SET_REAL_REG(R_WEBJ4MIN,(limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 24 task: ', STATUS, CR)
+		ENDIF
+	ENDIF	
+
+	IF (limit_id = 25) THEN
+		SET_REAL_REG(R_WEBJ5MIN, (limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 25 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+	
+	IF (limit_id = 26) THEN
+		SET_REAL_REG(R_WEBJ6MIN, (limit_no * limit_vl), STATUS)
+		IF (STATUS <> 0 ) THEN
+			WRITE ('WEBLIM SET_REAL_REG built-IN failed in limit_id 26 task: ', STATUS, CR)
+		ENDIF
+	ENDIF
+
+	return_code = 204
+
+END weblim

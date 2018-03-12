@@ -1,0 +1,270 @@
+PROGRAM webcon
+%COMMENT = 'legacy v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+CONST
+	
+	PR_WEBJOINTS = 40
+	PR_WEBXYZWPR = 41
+	
+	R_WEBJNUM = 49
+	
+	R_WEBCOORD1 = 51
+	R_WEBCOORD2 = 52
+	R_WEBCOORD3 = 53
+	R_WEBCOORD4 = 54
+	R_WEBCOORD5 = 55
+	R_WEBCOORD6 = 56
+	
+	R_MTNMOD1 = 81
+	R_MTNMOD2 = 82
+	R_MTNMOD3 = 83
+	R_MTNMOD4 = 84
+	R_MTNMOD5 = 85
+	R_MTNMOD6 = 86
+
+VAR
+
+	STATUS: INTEGER
+	return_code: INTEGER
+
+	str_mtn_mod: STRING[127]
+	int_mtn_mod: INTEGER
+
+	str_coord1: STRING[127]
+	str_coord2: STRING[127]
+	str_coord3: STRING[127]
+	str_coord4: STRING[127]
+	str_coord5: STRING[127]
+	str_coord6: STRING[127]
+
+	coord: ARRAY[9] OF REAL
+	cur_jpos_val: ARRAY[9] OF REAL
+	
+	cur_jpos: JOINTPOS
+	cur_pos: XYZWPR
+	
+	new_jpos: JOINTPOS
+	new_pos: XYZWPR
+
+	cur_joint: INTEGER
+	count: INTEGER
+
+ROUTINE setreg
+
+BEGIN
+	
+	SET_REAL_REG( R_WEBCOORD1, coord[1], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord1  failed = ', STATUS, CR)
+	ENDIF
+	
+	SET_REAL_REG( R_WEBCOORD2, coord[2], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord2  failed = ', STATUS, CR)
+	ENDIF
+	
+	SET_REAL_REG( R_WEBCOORD3, coord[3], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord3  failed = ', STATUS, CR)
+	ENDIF
+	
+	SET_REAL_REG( R_WEBCOORD4, coord[4], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord4  failed = ', STATUS, CR)
+	ENDIF
+	
+	SET_REAL_REG( R_WEBCOORD5, coord[5], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord5  failed = ', STATUS, CR)
+	ENDIF
+	
+	SET_REAL_REG( R_WEBCOORD6, coord[6], STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBCONTROL SET_REAL_REG coord6  failed = ', STATUS, CR)
+	ENDIF
+
+END setreg
+
+BEGIN
+
+	WRITE (CHR(128),CHR(137))
+
+	cur_jpos = CURJPOS(0,0)
+	cur_pos = CURPOS(0,0)
+
+	CNV_JPOS_REL(cur_jpos, cur_jpos_val, STATUS)
+
+	cur_joint = 9
+
+	FOR count = 9 DOWNTO 1 DO
+		IF UNINIT ( cur_jpos_val[count] ) THEN cur_joint = cur_joint - 1; ENDIF
+	ENDFOR
+
+	SET_INT_REG(R_WEBJNUM, cur_joint, STATUS)
+	IF (STATUS <> 0 ) THEN		
+		WRITE ('SET the NUMBER OF JOINTS is  failed = ', STATUS, CR)		
+	ENDIF
+
+	CNV_STR_INT(str_mtn_mod, int_mtn_mod)
+
+	CNV_STR_REAL(str_coord1, coord[1])
+	CNV_STR_REAL(str_coord2, coord[2])
+	CNV_STR_REAL(str_coord3, coord[3])
+	CNV_STR_REAL(str_coord4, coord[4])
+	CNV_STR_REAL(str_coord5, coord[5])
+	CNV_STR_REAL(str_coord6, coord[6])
+	coord[7] = 0
+	coord[8] = 0
+	coord[9] = 0
+	
+	SELECT int_mtn_mod OF
+
+		CASE(1): --Absolute motion in Joint space - joint interpolation
+
+			CNV_REL_JPOS(coord, new_jpos, STATUS)	
+			IF (STATUS <> 0 ) THEN		
+				WRITE ('WEBCONTROL CNV_REL_JPOS failed = ', STATUS, CR)		
+			ELSE	
+				SET_JPOS_REG(PR_WEBJOINTS, new_jpos, STATUS)			
+				IF (STATUS <> 0 ) THEN			
+					WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)			
+				ELSE
+					SET_REAL_REG(R_MTNMOD1, 81, STATUS)
+					IF (STATUS <> 0 ) THEN
+						WRITE ('WEBCON R_MTNMOD1 set is  failed: ', STATUS, CR)
+					ENDIF
+					RUN_TASK( 'F7ON', 0, FALSE, FALSE, 1, STATUS )
+					IF (STATUS <> 0 ) THEN
+						WRITE ('WEBCON F7ON1 set is  failed: ', STATUS, CR)
+					ENDIF			
+				ENDIF
+			ENDIF
+		
+			return_code = 204
+
+		CASE(2): --Relative motion in Joint space - joint interpolation
+
+			setreg
+			
+			SET_JPOS_REG(PR_WEBJOINTS, cur_jpos, STATUS)
+			IF (STATUS <> 0 ) THEN			
+				WRITE ('WEBCONTROL SET_JPOS_REG failed = ', STATUS, CR)			
+			ELSE
+				SET_REAL_REG(R_MTNMOD2, 82, STATUS)
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON R_MTNMOD2 set is  failed: ', STATUS, CR)
+				ENDIF
+				RUN_TASK( 'F7ON', 0, FALSE, FALSE, 1, STATUS )
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON F7ON2 set is  failed: ', STATUS, CR)
+				ENDIF
+			ENDIF
+		
+			return_code = 204
+
+		CASE(3): --Absolute motion in Cartesion space -  linear interpolation
+			
+			new_pos = cur_pos --Keep the current configuration
+
+			new_pos.x = coord[1]
+			new_pos.y = coord[2]
+			new_pos.z = coord[3]
+			new_pos.w = coord[4]
+			new_pos.p = coord[5]
+			new_pos.r = coord[6]
+
+			SET_POS_REG(PR_WEBXYZWPR, new_pos, STATUS)		
+			IF (STATUS <> 0 ) THEN		
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)		
+			ELSE	
+				SET_REAL_REG(R_MTNMOD3, 83, STATUS)
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON R_MTNMOD3 set is  failed: ', STATUS, CR)
+				ENDIF
+				RUN_TASK( 'F7ON', 0, FALSE, FALSE, 1, STATUS )
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON F7ON3 set is  failed: ', STATUS, CR)
+				ENDIF
+			ENDIF
+		
+			return_code = 204
+
+		CASE(4): --Absolute motion in Cartesion space -  joint interpolation
+			
+			new_pos = cur_pos --Keep the current configuration
+
+			new_pos.x = coord[1]
+			new_pos.y = coord[2]
+			new_pos.z = coord[3]
+			new_pos.w = coord[4]
+			new_pos.p = coord[5]
+			new_pos.r = coord[6]
+
+			SET_POS_REG(PR_WEBXYZWPR, new_pos, STATUS)		
+			IF (STATUS <> 0 ) THEN		
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)		
+			ELSE	
+				SET_REAL_REG(R_MTNMOD4, 84, STATUS)
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON R_MTNMOD4 set is  failed: ', STATUS, CR)
+				ENDIF
+				RUN_TASK( 'F7ON', 0, FALSE, FALSE, 1, STATUS )
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON F7ON4 set is  failed: ', STATUS, CR)
+				ENDIF
+			ENDIF
+		
+			return_code = 204
+			
+		CASE(5): --Relative motion in Cartesion space - linear interpolation
+		
+			setreg
+			
+			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)	
+			IF (STATUS <> 0 ) THEN	
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
+			ELSE
+				SET_REAL_REG(R_MTNMOD5, 85, STATUS)
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON R_MTNMOD5 set is  failed: ', STATUS, CR)
+				ENDIF
+				RUN_TASK( 'F7ON', 0, FALSE, FALSE, 1, STATUS )
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON F7ON5 set is  failed: ', STATUS, CR)
+				ENDIF
+			ENDIF
+		
+			return_code = 204
+
+		CASE(6): --Relative motion in Cartesion space - joint interpolation
+		
+			setreg
+			
+			SET_POS_REG(PR_WEBXYZWPR, cur_pos, STATUS)			
+			IF (STATUS <> 0 ) THEN			
+				WRITE ('WEBCONTROL SET_POS_REG  failed = ', STATUS, CR)
+			ELSE
+				SET_REAL_REG(R_MTNMOD6, 86, STATUS)
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON R_MTNMOD6 set is  failed: ', STATUS, CR)
+				ENDIF
+				RUN_TASK( 'F7ON', 0, FALSE, FALSE, 1, STATUS )
+				IF (STATUS <> 0 ) THEN
+					WRITE ('WEBCON F7ON6 set is  failed: ', STATUS, CR)
+				ENDIF
+			ENDIF
+		
+			return_code = 204
+
+		ELSE:
+
+			WRITE('WEBCONTROL ERROR',CR)
+
+			return_code = 204
+
+	ENDSELECT
+	
+END webcon

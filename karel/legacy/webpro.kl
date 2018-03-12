@@ -1,0 +1,40 @@
+PROGRAM webpro
+%COMMENT = 'legacy v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+VAR
+
+	STATUS: INTEGER
+	responseFile: FILE
+
+	proga: ARRAY[100] OF STRING[16]
+	progc: INTEGER
+	progn: INTEGER
+
+BEGIN
+
+	FOR progc = 1 TO ARRAY_LEN(proga) DO
+		IF UNINIT( proga[progc] ) THEN  proga[progc] = '######'; ENDIF
+	ENDFOR
+
+	PROG_LIST('*', 8, 0, 2, proga, ARRAY_LEN(proga), STATUS)
+	IF (STATUS <> 0 ) THEN
+		WRITE ('WEBPRO PROG_LIST built-IN failed: ', STATUS, CR)
+	ENDIF
+
+	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
+		
+		WRITE responseFile( '{', CR )
+			WRITE responseFile( '"progs": [' )
+				FOR progn = 1 TO ARRAY_LEN(proga) - 1 DO
+					WRITE responseFile('"' ,proga[progn],'"',',' )
+				ENDFOR				
+				WRITE responseFile( '"',proga[ARRAY_LEN(proga)],'"' )
+			WRITE responseFile( ' ] ', CR )
+		WRITE responseFile( '}')
+
+	CLOSE FILE responseFile
+
+END webpro

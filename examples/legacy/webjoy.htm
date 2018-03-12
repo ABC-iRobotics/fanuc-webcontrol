@@ -1,0 +1,135 @@
+<html>
+<head>
+  <title>WEBJOYSTICK</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="http://rawgit.com/jeromeetienne/virtualjoystick.js/master/virtualjoystick.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400" rel="stylesheet">
+  <style>
+    body {
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      background-color: #000000;
+    }
+    #joystick-info {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      padding-top: 5px;
+      text-align: center;
+      color: #428bca;
+      font-family: 'Oswald', sans-serif;
+      font-size: 27px;
+    }
+    #joystick-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <div id="joystick-info"></div>
+  <div id="joystick-container"></div>
+
+  <script>
+
+    $(document).ready(function() {
+
+      var refresh
+      var direction  = document.getElementById('joystick-info');
+      var joystick = new VirtualJoystick({ container: document.getElementById('joystick-container'), mouseSupport: true, })
+
+      direction.innerHTML  = ' x / y rate: ' + (-1 * Math.round(joystick.deltaY()) / 10).toFixed(2) + ' / ' + (-1 * Math.round(joystick.deltaX()) / 10).toFixed(2)       
+
+      // Send new relative direction
+
+      function sendDirection(){
+        direction.innerHTML  = ' x / y rate: ' + (-1 * Math.round(joystick.deltaY()) / 10).toFixed(2) + ' / ' + (-1 * Math.round(joystick.deltaX()) / 10).toFixed(2)       
+        var mtn_mod = '5' 
+        var coord1 = (-1 * Math.round(joystick.deltaY()) / 10).toFixed(2)
+        var coord2 = (-1 * Math.round(joystick.deltaX()) / 10).toFixed(2)
+        var coord3 = '0'
+        var coord4 = '0'
+        var coord5 = '0'
+        var coord6 = '0'
+        $.ajax({
+          type: 'GET',
+          url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+          cache: false,
+          success: function() {
+            console.log('Touch is successfull send')
+          }
+        })
+      }
+
+      // Keep the motion
+
+      function webkeep() {
+        console.log('KEEP motion')
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webkee',
+          cache: false,
+          success: function() {
+            console.log('Send KEEP is successful')
+          }
+        })    
+      }
+
+      // Stop the motion
+
+      function webstop() {
+        console.log('STOP(999) motion')
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/websto',
+          cache: false,
+          success: function() {
+            console.log('Send STOP(999) is successful')
+          }
+        })
+      }
+
+      // setInterval base
+
+      function websetInt() {
+        sendDirection()
+        webkeep()
+      }
+
+      // clearInterval
+
+      function webclrInt() {
+        if (refresh !== undefined) {
+          clearInterval(refresh)
+          console.log('refresh is cleared')
+        } else {
+          console.log('refresh is undefined')
+        }
+      }
+
+      // Start motion
+
+      $('#joystick-container').on('mousedown touchstart', function() {
+        webclrInt()
+        refresh = setInterval(websetInt, 100)
+      }).on('mouseup touchend', function() {
+        webstop()
+        webclrInt()
+        direction.innerHTML  = ' x / y rate: ' + 0.00 + ' / ' + 0.00
+      })
+
+    })
+
+  </script>
+
+</body>
+</html>

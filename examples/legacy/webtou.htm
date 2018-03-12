@@ -1,0 +1,129 @@
+<html>
+<head>
+  <title>WEBTOUCHPAD</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="http://rawgit.com/jeromeetienne/virtualjoystick.js/master/virtualjoystick.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400" rel="stylesheet">
+  <style>
+    body {
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      background-color: #BBB;
+    }
+    #touchpad-info {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      padding-top: 5px;
+      text-align: center;
+      color: #428bca;
+      font-family: 'Oswald', sans-serif;
+      font-size: 27px;
+    }
+    #touchpad-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <div id="touchpad-info"></div>
+  <div id="touchpad-container"></div>
+
+  <script>
+
+    $(document).ready(function() {
+
+      var refresh
+      var displacement  = document.getElementById('touchpad-info');
+      var joystick = new VirtualJoystick({ container: document.getElementById('touchpad-container'), mouseSupport: true, })
+
+      displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;' 
+
+      // Keep the motion
+
+      function webkeep() {
+        console.log('KEEP motion')
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/webkee',
+          cache: false,
+          success: function() {
+            console.log('Send KEEP is successful')
+          }
+        })
+      }
+
+      // Stop the motion
+
+      function webstop() {
+        console.log('STOP(999) motion')
+        $.ajax({
+          type: 'GET',
+          url: '/KAREL/websto',
+          cache: false,
+          success: function() {
+            console.log('Send STOP(999) is successful')
+          }
+        })
+      }
+
+      // setInterval base
+
+      // clearInterval
+
+      function webclrInt() {
+        if (refresh !== undefined) {
+          clearInterval(refresh)
+          console.log('refresh is cleared')
+        } else {
+          console.log('refresh is undefined')
+        }
+      }
+
+      // Start motion
+
+      $('#touchpad-container').on('mousedown touchstart', function() {
+        webclrInt()
+		$.getJSON("/KAREL/webmon", function(data){
+		  function sendDisplacement(){
+		    var mtn_mod = '3' 
+			var coord1 = data.pose[0] + (-1 * Math.round(joystick.deltaY() / 2))
+			var coord2 = data.pose[1] + (-1 * Math.round(joystick.deltaX() / 2))
+			var coord3 = data.pose[2]
+			var coord4 = data.pose[3]
+			var coord5 = data.pose[4]
+			var coord6 = data.pose[5] 
+			displacement.innerHTML  = ' dx: ' + (-1 * Math.round(joystick.deltaY() / 2)) + 'mm; dy: ' + (-1 * Math.round(joystick.deltaX() / 2)) + 'mm;'
+			$.ajax({
+			  type: 'GET',
+			  url: `/KAREL/webcon?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
+			  cache: false,
+			  success: function() {
+				console.log('Touch is successfull send')
+			  }
+			})
+			webkeep()			
+		  }
+          refresh = setInterval(sendDisplacement, 100)
+		})
+      }).on('mouseup touchend', function() {
+        webstop()
+        webclrInt()
+      })
+
+    })
+
+  </script>
+
+</body>
+</html>

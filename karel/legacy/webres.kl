@@ -1,0 +1,21 @@
+PROGRAM webres
+%COMMENT = 'legacy v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+VAR
+
+	successful: BOOLEAN
+	prog_index: INTEGER
+
+BEGIN
+	
+	RESET(successful)
+	IF successful <> TRUE THEN
+		WRITE('RESET is NOT sucessful',CR)
+	ENDIF
+
+	CALL_PROG('webabo', prog_index)
+	
+END webres
