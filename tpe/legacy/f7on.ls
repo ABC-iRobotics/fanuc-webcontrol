@@ -16,7 +16,7 @@ TCD:  STACK_SIZE	= 0,
       BUSY_LAMP_OFF	= 0,
       ABORT_REQUEST	= 0,
       PAUSE_REQUEST	= 0;
-DEFAULT_GROUP	= *,*,*,*,*,*,*;
+DEFAULT_GROUP	= *,*,*,*,*;
 CONTROL_CODE	= 00000000 00000000;
 /MN
    1:  F[7]=(ON) ;

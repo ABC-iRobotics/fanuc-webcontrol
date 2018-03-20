@@ -1,14 +1,14 @@
 /PROG  WEBMOT
 /ATTR
 OWNER		= MNEDITOR;
-COMMENT		= "v2";
-PROG_SIZE	= 1768;
+COMMENT		= "LEGACY_v1";
+PROG_SIZE	= 1754;
 CREATE		= DATE 17-06-26  TIME 17:33:34;
-MODIFIED	= DATE 18-03-10  TIME 13:12:10;
+MODIFIED	= DATE 18-03-12  TIME 11:29:24;
 FILE_NAME	= ;
 VERSION		= 0;
 LINE_COUNT	= 91;
-MEMORY_SIZE	= 2144;
+MEMORY_SIZE	= 2130;
 PROTECT		= READ_WRITE;
 TCD:  STACK_SIZE	= 0,
       TASK_PRIORITY	= 50,
@@ -16,13 +16,13 @@ TCD:  STACK_SIZE	= 0,
       BUSY_LAMP_OFF	= 0,
       ABORT_REQUEST	= 0,
       PAUSE_REQUEST	= 0;
-DEFAULT_GROUP	= 1,*,*,*,*,*,*;
+DEFAULT_GROUP	= 1,*,*,*,*;
 CONTROL_CODE	= 00000000 00000000;
 /MN
    1:  JMP LBL[999] ;
    2:   ;
    3:  LBL[7] ;
-   4:  WAIT R[87]=87    ;
+   4:  WAIT (F[7])    ;
    5:  R[42]=0    ;
    6:  IF R[81]=81,JMP LBL[1] ;
    7:  IF R[82]=82,JMP LBL[2] ;
@@ -32,7 +32,7 @@ CONTROL_CODE	= 00000000 00000000;
   11:  IF R[86]=86,JMP LBL[6] ;
   12:   ;
   13:  LBL[1] ;
-  14:  CALL WEBCHECK    ;
+  14:  CALL WEBCHE    ;
   15:  IF R[88]<>88,JMP LBL[999] ;
   16:J PR[40] 10% CNT100    ;
   17:  R[42]=R[42]+1    ;
@@ -47,21 +47,21 @@ CONTROL_CODE	= 00000000 00000000;
   26:  PR[40,R[50]]=PR[40,R[50]]+R[R[60]]    ;
   27:  JMP LBL[21] ;
   28:  LBL[22] ;
-  29:  CALL WEBCHECK    ;
+  29:  CALL WEBCHE    ;
   30:  IF R[88]<>88,JMP LBL[999] ;
   31:J PR[40] 5% CNT100    ;
   32:  R[42]=R[42]+1    ;
   33:  JMP LBL[2] ;
   34:   ;
   35:  LBL[3] ;
-  36:  CALL WEBCHECK    ;
+  36:  CALL WEBCHE    ;
   37:  IF R[88]<>88,JMP LBL[999] ;
   38:L PR[41] 50mm/sec CNT100    ;
   39:  R[42]=R[42]+1    ;
   40:  JMP LBL[3] ;
   41:   ;
   42:  LBL[4] ;
-  43:  CALL WEBCHECK    ;
+  43:  CALL WEBCHE    ;
   44:  IF R[88]<>88,JMP LBL[999] ;
   45:J PR[41] 5% CNT100    ;
   46:  R[42]=R[42]+1    ;
@@ -74,7 +74,7 @@ CONTROL_CODE	= 00000000 00000000;
   53:  PR[41,4]=PR[41,4]+R[54]    ;
   54:  PR[41,5]=PR[41,5]+R[55]    ;
   55:  PR[41,6]=PR[41,6]+R[56]    ;
-  56:  CALL WEBCHECK    ;
+  56:  CALL WEBCHE    ;
   57:  IF R[88]<>88,JMP LBL[999] ;
   58:L PR[41] 50mm/sec CNT100    ;
   59:  R[42]=R[42]+1    ;
@@ -87,7 +87,7 @@ CONTROL_CODE	= 00000000 00000000;
   66:  PR[41,4]=PR[41,4]+R[54]    ;
   67:  PR[41,5]=PR[41,5]+R[55]    ;
   68:  PR[41,6]=PR[41,6]+R[56]    ;
-  69:  CALL WEBCHECK    ;
+  69:  CALL WEBCHE    ;
   70:  IF R[88]<>88,JMP LBL[999] ;
   71:J PR[41] 5% CNT100    ;
   72:  R[42]=R[42]+1    ;
@@ -107,8 +107,8 @@ CONTROL_CODE	= 00000000 00000000;
   86:  R[84]=0    ;
   87:  R[85]=0    ;
   88:  R[86]=0    ;
-  89:  R[87]=0    ;
-  90:  R[88]=0    ;
+  89:  R[88]=88    ;
+  90:  F[7]=(OFF) ;
   91:  JMP LBL[7] ;
 /POS
 /END
