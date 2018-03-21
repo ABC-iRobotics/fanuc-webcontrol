@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WEBPANEL</title>
+  <title>WEBPANEL LR-MATE-200iC</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -314,7 +314,7 @@
         <p class="j1 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="pickup" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="pickup" class="btn btn-success ts-btn-90">Pickup</button>
       </div>
       <div class="col-xs-4">
         <p class="wx coord">load...</p>
@@ -336,7 +336,7 @@
         <p class="j3 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="place" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="place" class="btn btn-success ts-btn-90">Place</button>
       </div>
       <div class="col-xs-4">
         <p class="wz coord">load...</p>
@@ -347,7 +347,7 @@
         <p class="j4 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="coord" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="coord" class="btn btn-success ts-btn-90">Coord</button>
       </div>
       <div class="col-xs-4">
         <p class="ww coord">load...</p>
@@ -358,7 +358,7 @@
         <p class="j5 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="show" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="show" class="btn btn-success ts-btn-90">Show</button>
       </div>
       <div class="col-xs-4">
         <p class="wp coord">load...</p>
@@ -369,7 +369,7 @@
         <p class="j6 coord">load...</p>
       </div>
       <div class="col-xs-4">
-        <button type="button" id="touch" class="btn btn-success ts-btn-90">Zero</button>
+        <button type="button" id="touch" class="btn btn-success ts-btn-90">Touch</button>
       </div>
       <div class="col-xs-4">
         <p class="wr coord">load...</p>
@@ -1383,7 +1383,7 @@
             }
           })
 
-          setTimeout(getposj(), 333)
+          setTimeout(getposj(), 1000)
         })
       }
 
@@ -2147,10 +2147,10 @@
       $('#pickup').click(function() {
         var mtn_mod = '1' 
         var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord2 = '20'
+        var coord3 = '-45'
         var coord4 = '0'
-        var coord5 = '0'
+        var coord5 = '-45'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
@@ -2182,11 +2182,11 @@
 
       $('#place').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
-        var coord2 = '0'
-        var coord3 = '0'
+        var coord1 = '90'
+        var coord2 = '20'
+        var coord3 = '-45'
         var coord4 = '0'
-        var coord5 = '0'
+        var coord5 = '-45'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
@@ -2204,7 +2204,7 @@
         var coord2 = '0'
         var coord3 = '0'
         var coord4 = '0'
-        var coord5 = '0'
+        var coord5 = '-90'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
@@ -2218,11 +2218,11 @@
 
       $('#show').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
+        var coord1 = '90'
         var coord2 = '0'
         var coord3 = '0'
         var coord4 = '0'
-        var coord5 = '0'
+        var coord5 = '-90'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
@@ -2236,11 +2236,11 @@
 
       $('#touch').click(function() {
         var mtn_mod = '1' 
-        var coord1 = '0'
-        var coord2 = '0'
+        var coord1 = '110'
+        var coord2 = '10'
         var coord3 = '0'
-        var coord4 = '0'
-        var coord5 = '0'
+        var coord4 = '-90'
+        var coord5 = '-70'
         var coord6 = '0'
         $.ajax({
           type: 'GET',
