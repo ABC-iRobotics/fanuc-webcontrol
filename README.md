@@ -36,7 +36,7 @@ Internet connection is also required because the Bootstrap, PEP and JQuery libra
 
 1. Build the `*.kl` files in the `karel` folder with Roboguide and copy them to the robot `MD:` folder
 2. Copy the `*.htm` file from the `examples` folder to the robot `MD:` folder
-3. Copy the `webmotion.tp` file from the `tpe` folder to the robot `MD:` folder
+3. Copy the `webmotion.ls` file from the `tpe` folder to the robot `MD:` folder
 
 ## Configuration
 Set UNLOCK to HTTP authentication of KAREL: 
@@ -52,7 +52,7 @@ Set UNLOCK to HTTP authentication of KAREL:
 Run the WEBMOTION TP program (or WEBMOT TP program in the legacy version) on the controller or open a browser and type: http://robotIP/md/webpanel.htm (or http://robotIP/md/webpan.htm in the legacy version) and click on the `Start` button (`Reset` may be needed)
 - SET: 
   * Set the axis limits. The default values are 0, thus you have to change these to make possible any movement.
-  * Move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.) **Important: SEE NOTE NO.2**
+  * Move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.) **Important: SEE NOTE No.2**
 - JOG: Jogging the robot (Push and hold down a button, but only use just one at the same time!)
 - CART: Move the TCP +/-xyz direction and/or rotate it in the currently selected tool coordinate system. (Push and hold down a button, but only use just one at the same time!)
 - Webjoystick: http://robotIP/md/webjoystick.htm (or http://robotIP/md/webjoy.htm in the legacy version)
