@@ -2,6 +2,8 @@
 
 ## Overview
 Simple software to control FANUC six degree of freedom robotic arms through a web browser.
+This version is used to robot controller software 7.30x or above.
+If the robot controller version is 7.20x then use the [LEGACY]: https://github.com/ABC-iRobotics/fanuc-webcontrol-legacy version
 
 ![Image of fanuc-webcontrol](preview.png)
 
@@ -19,7 +21,7 @@ THE SOFTWARE IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT WITHOUT ANY 
 7. [Bugs, feature requests, etc](#bugs-feature-requests-etc)
 
 ## Requirements
-This is written in Fanuc Karel language, TP code and JavaScript. It is tested on FANUC M-430iA2P robot with R-J3iC controller v7.40 and FANUC LR MATE 200iC with R30iA Mate Controller v7.20
+This is written in FANUC KAREL language, TP code and JavaScript. It is tested on a FANUC M-430iA2P robot with R-J3iC controller v7.40
 
 The following registers [R], position registers[PR] and FLAGs are used:
 - [R]: [See Register page](register.md),
@@ -47,20 +49,18 @@ Set UNLOCK to HTTP authentication of KAREL:
 
 ## Example usage
 
-**NOTE**: If the Robot Software Version is 7.20x or earlier, than must be used the files from `legacy` folders!
-
-Run the WEBMOTION TP program (or WEBMOT TP program in the legacy version) on the controller or open a browser and type: http://robotIP/md/webpanel.htm (or http://robotIP/md/webpan.htm in the legacy version) and click on the `Start` button (`Reset` may be needed)
+Run the WEBMOTION TP program on the controller or open a browser and type: http://robotIP/md/webpanel.htm and click on the `Start` button (`Reset` may be needed before it)
 - SET: 
   * Set the axis limits. The default values are 0, thus you have to change these to make possible any movement.
   * Move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.) **Important: SEE NOTE No.2**
 - JOG: Jogging the robot (Push and hold down a button, but only use just one at the same time!)
 - CART: Move the TCP +/-xyz direction and/or rotate it in the currently selected tool coordinate system. (Push and hold down a button, but only use just one at the same time!)
-- Webjoystick: http://robotIP/md/webjoystick.htm (or http://robotIP/md/webjoy.htm in the legacy version)
-- Webtouchpad: http://robotIP/md/webtouchpad.htm (or http://robotIP/md/webtou.htm in the legacy version)
+- Webjoystick: http://robotIP/md/webjoystick.htm
+- Webtouchpad: http://robotIP/md/webtouchpad.htm
 
 ## Notes
-1. You can change the default steps (1 degree, 3 mm) in the javascript part of the `webpanel.htm`. In this case you may also have to update the `setInt` variable in this file.
-2. The predefined positions are zero. However there is example for FANUC M-430iA2P and FANUC LR MATE 200iC. If you have an other type of FANUC robot, you should change these positions' coordinates.
+1. You can change the default steps (1 degree, 3 mm) in the JavaScript part of the `webpanel.htm`. In this case you may also have to update the `setInt` variable in this file.
+2. The predefined positions are zero. However there is example for FANUC M-430iA2P. If you have an other type of FANUC robot, you should change these positions' coordinates.
 3. The PR[40] and PR[41] contain the movements coordinates. In these the UF:F and UT:F. This means that the coordinate system of the tool coordinate system number currently selected is used.
 
 ## API
