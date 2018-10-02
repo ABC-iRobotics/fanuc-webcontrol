@@ -204,6 +204,9 @@ ____
   `webstop`
     * Stop the webmotion program
 
+  `webrobotid`
+    * Get the robot controller ID from `$FNO`
+
 * **Success Response:**
 
   * Code: 204
