@@ -1,5 +1,5 @@
 PROGRAM webmonitor
-%COMMENT = 'v5'
+%COMMENT = 'v6'
 %NOLOCKGROUP
 %NOPAUSE=ERROR+COMMAND+TPENABLE
 %NOBUSYLAMP
@@ -129,9 +129,6 @@ VAR
 	limit_j4 IN DRAM FROM webcheck: INTEGER
 	limit_j5 IN DRAM FROM webcheck: INTEGER
 	limit_j6 IN DRAM FROM webcheck: INTEGER
-	
-	fnoentry: INTEGER
-	fnovalue: STRING[127]
 
 BEGIN
 
@@ -156,8 +153,6 @@ BEGIN
 	IF UNINIT( valuePosJ[4] ) THEN valuePosJ[4] = 10000; ENDIF
 	IF UNINIT( valuePosJ[5] ) THEN valuePosJ[5] = 10000; ENDIF
 	IF UNINIT( valuePosJ[6] ) THEN valuePosJ[6] = 10000; ENDIF
-	
-	GET_VAR(fnoentry, '*SYSTEM*', '$FNO', fnovalue, STATUS)
 
 	GET_REG(R_WEBXMAX, xmax_flag, xmax_int, xmax_real, STATUS)
 	GET_REG(R_WEBYMAX, ymax_flag, ymax_int, ymax_real, STATUS)
@@ -342,9 +337,6 @@ BEGIN
 			WRITE responseFile( '"error": [' )
 				WRITE responseFile( error_code,',' )
 				WRITE responseFile( '"',error_string,'"' )
-			WRITE responseFile( ' ],', CR )
-			WRITE responseFile( '"controller": [' )
-				WRITE responseFile( fnovalue)
 			WRITE responseFile( ' ]', CR )
 		WRITE responseFile( '}')
 

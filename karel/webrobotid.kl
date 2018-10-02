@@ -1,0 +1,28 @@
+PROGRAM webrobotid
+%COMMENT = 'v1'
+%NOLOCKGROUP
+%NOPAUSE=ERROR+COMMAND+TPENABLE
+%NOBUSYLAMP
+
+VAR
+
+	STATUS: INTEGER
+	responseFile: FILE
+	fnoentry: INTEGER
+	fnovalue: STRING[127]
+
+BEGIN
+	
+	GET_VAR(fnoentry, '*SYSTEM*', '$FNO', fnovalue, STATUS)
+
+	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
+		
+		WRITE responseFile( '{', CR)
+			WRITE responseFile( '"controller": [ ',CR )
+				WRITE responseFile( '"',fnovalue,'"')
+			WRITE responseFile( ' ]', CR )
+		WRITE responseFile( '}')
+
+	CLOSE FILE responseFile
+
+END webrobotid
