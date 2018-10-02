@@ -960,6 +960,10 @@
         $('#webmotion-pose').show()
       })
 
+      $.getJSON("/KAREL/webrobotid", function(data) {
+        $('#status').html(data.controller[0])
+      })
+
       $.getJSON("/KAREL/webprogram", function(data) {
 
         $('#selectTask').html('')
@@ -995,13 +999,11 @@
           // Show the current robot status
 
           if (data.status[0] == 1) {
-            $('#status').html("RUNNING")
             $('#status').css("color", "#5cb85c")
             $('#selectTask').prop('disabled', true)
             $('#webprogram-start').prop('disabled', true)
 			$('#webmotion-start').prop('disabled', true)
           } else {
-            $('#status').html("STANDBY")
             $('#status').css("color", "#428bca")
             $('#selectTask').prop('disabled', false)
             $('#webprogram-start').prop('disabled', false)
@@ -1391,7 +1393,7 @@
 
       $('#webprogram-start').click(function() {
         var task = $('#selectTask').find('option:selected').text();
-		var task = task.substr(0,task.indexOf(' '));
+	    	var task = task.substr(0,task.indexOf(' '));
         if ( task.indexOf("WEBMOTION") >= 0 ) {
           $('#info-controller').show()
           $('#info-jog').hide()
@@ -2157,8 +2159,8 @@
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
-		    webstop()
-		  }
+            webstop()
+          }
         })
       })
 	  
@@ -2175,8 +2177,8 @@
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
-		    webstop()
-		  }
+            webstop()
+          }
         })
       })
 
@@ -2193,8 +2195,8 @@
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
-		    webstop()
-		  }
+            webstop()
+          }
         })
       })
 
@@ -2211,8 +2213,8 @@
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
-		    webstop()
-		  }
+            webstop()
+          }
         })
       })
 
@@ -2229,8 +2231,8 @@
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
-		    webstop()
-		  }
+            webstop()
+          }
         })
       })
 
@@ -2247,8 +2249,8 @@
           url: `/KAREL/webcontrol?str_mtn_mod=${mtn_mod}&str_coord1=${coord1}&str_coord2=${coord2}&str_coord3=${coord3}&str_coord4=${coord4}&str_coord5=${coord5}&str_coord6=${coord6}`,
           cache: false,
           success: function() {
-		    webstop()
-		  }
+            webstop()
+          }
         })
       })
 
@@ -2259,8 +2261,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 1
-		  var limit_vl = $("#xMaxNew").val()
+          var limit_id = 1
+          var limit_vl = $("#xMaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2277,8 +2279,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 2
-		  var limit_vl = $("#yMaxNew").val()
+          var limit_id = 2
+          var limit_vl = $("#yMaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2295,8 +2297,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 3
-		  var limit_vl = $("#zMaxNew").val()
+          var limit_id = 3
+          var limit_vl = $("#zMaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2313,8 +2315,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 4
-		  var limit_vl = $("#xMinNew").val()
+          var limit_id = 4
+          var limit_vl = $("#xMinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2331,8 +2333,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 5
-		  var limit_vl = $("#yMinNew").val()
+          var limit_id = 5
+          var limit_vl = $("#yMinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2349,8 +2351,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 6
-		  var limit_vl = $("#zMinNew").val()
+          var limit_id = 6
+          var limit_vl = $("#zMinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2367,8 +2369,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 11
-		  var limit_vl = $("#j1MaxNew").val()
+          var limit_id = 11
+          var limit_vl = $("#j1MaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2385,8 +2387,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 12
-		  var limit_vl = $("#j2MaxNew").val()
+          var limit_id = 12
+          var limit_vl = $("#j2MaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2403,8 +2405,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 13
-		  var limit_vl = $("#j3MaxNew").val()
+          var limit_id = 13
+          var limit_vl = $("#j3MaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2421,8 +2423,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 14
-		  var limit_vl = $("#j4MaxNew").val()
+          var limit_id = 14
+          var limit_vl = $("#j4MaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2439,8 +2441,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 15
-		  var limit_vl = $("#j5MaxNew").val()
+          var limit_id = 15
+          var limit_vl = $("#j5MaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2457,8 +2459,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 16
-		  var limit_vl = $("#j6MaxNew").val()
+          var limit_id = 16
+          var limit_vl = $("#j6MaxNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2475,8 +2477,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 21
-		  var limit_vl = $("#j1MinNew").val()
+          var limit_id = 21
+          var limit_vl = $("#j1MinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2493,8 +2495,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 22
-		  var limit_vl = $("#j2MinNew").val()
+          var limit_id = 22
+          var limit_vl = $("#j2MinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2511,8 +2513,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 23
-		  var limit_vl = $("#j3MinNew").val()
+          var limit_id = 23
+          var limit_vl = $("#j3MinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2529,8 +2531,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 24
-		  var limit_vl = $("#j4MinNew").val()
+          var limit_id = 24
+          var limit_vl = $("#j4MinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2547,8 +2549,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 25
-		  var limit_vl = $("#j5MinNew").val()
+          var limit_id = 25
+          var limit_vl = $("#j5MinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
@@ -2565,8 +2567,8 @@
           $('.limitWarning').show()
         } else {
           $('.limitWarning').hide()
-		  var limit_id = 26
-		  var limit_vl = $("#j6MinNew").val()
+          var limit_id = 26
+          var limit_vl = $("#j6MinNew").val()
           $.ajax({
             type: 'GET',
             url: `/KAREL/weblimit?str_limit_id=${limit_id}&str_limit_vl=${limit_vl}`,
