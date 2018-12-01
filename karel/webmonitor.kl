@@ -129,6 +129,12 @@ VAR
 	limit_j4 IN DRAM FROM webcheck: INTEGER
 	limit_j5 IN DRAM FROM webcheck: INTEGER
 	limit_j6 IN DRAM FROM webcheck: INTEGER
+	
+	currentTime: INTEGER
+	timeStamp: STRING[127]
+	
+	fnoentry: INTEGER
+	fnovalue: STRING[127]
 
 BEGIN
 
@@ -207,9 +213,17 @@ BEGIN
 		WRITE ('CNV_JPOS_REL is failed, STATUS = ', STATUS, CR)
 	ENDIF
 
+	GET_TIME(currentTime)
+	CNV_TIME_STR(currentTime, timeStamp)
+	
+	GET_VAR(fnoentry, '*SYSTEM*', '$FNO', fnovalue, STATUS)
+
 	OPEN FILE responseFile ('RW', 'RD:RESPONSE.HTM')
 		
 		WRITE responseFile( '{', CR )
+			WRITE responseFile( '"robotid": [' )
+				WRITE responseFile( '"',fnovalue,'"')
+			WRITE responseFile( ' ],', CR )
 			WRITE responseFile( '"joint": [' )
 				WRITE responseFile( valuePosJ[1],',') 
 				WRITE responseFile( valuePosJ[2],',')
@@ -333,7 +347,10 @@ BEGIN
 				WRITE responseFile( limit_j4,',')
 				WRITE responseFile( limit_j5,',')
 				WRITE responseFile( limit_j6)
-			WRITE responseFile( ' ],', CR )			
+			WRITE responseFile( ' ],', CR )
+			WRITE responseFile( '"timestamp": [' )
+				WRITE responseFile( '"',timeStamp,'"')
+			WRITE responseFile( ' ],', CR )
 			WRITE responseFile( '"error": [' )
 				WRITE responseFile( error_code,',' )
 				WRITE responseFile( '"',error_string,'"' )

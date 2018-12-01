@@ -960,10 +960,6 @@
         $('#webmotion-pose').show()
       })
 
-      $.getJSON("/KAREL/webrobotid", function(data) {
-        $('#status').html(data.controller[0])
-      })
-
       $.getJSON("/KAREL/webprogram", function(data) {
 
         $('#selectTask').html('')
@@ -992,11 +988,13 @@
 
       getposj()
 
-      function getposj () {
+      function getposj() {
 
         $.getJSON("/KAREL/webmonitor", function(data) {
 
           // Show the current robot status
+
+          $('#status').html(data.robotid[0])
 
           if (data.status[0] == 1) {
             $('#status').css("color", "#5cb85c")

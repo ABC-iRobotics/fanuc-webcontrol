@@ -65,7 +65,9 @@ ____
 
         {
 
-          "joint": [ J1, J2, J3, J4, J5, J6 ], 
+          "robotid": [ "id " ], 
+		  
+		  "joint": [ J1, J2, J3, J4, J5, J6 ], 
 
           "pose": [ X, Y, Z, W, P, R ], 
 
@@ -73,12 +75,16 @@ ____
 
           "status": [ 0, 1 ] , 
 
-          "message": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+          "message": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+		  
+		  "timestamp": ["time " ],
 
           "error": [ 0,"R E S E T " ] 
 
         }
 
+	**id**: [ Get the robot controller ID from `$FNO` `[STRING]` ]
+	
     `J1, J2, J3, J4, J5, J6=[REAL]`
 	
 	`X, Y, Z, W, P, R=[REAL]`
@@ -88,6 +94,8 @@ ____
 	**status**: [ a task running (true(`1`)/false(`0`)) `[INTEGER]`, webmotion running (true(`1`)/false(`0`)) `[INTEGER]`]
 	
 	**message**: [ position reachable or not (true(`1`)/false(`0`)) `[INTEGER]`, x limit stop (max(`3`)/min(`6`)) `[INTEGER]`, y limit stop (max(`3`)/min(`6`)) `[INTEGER]`, z limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j1 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j2 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j3 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j4 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j5 limit stop (max(`3`)/min(`6`)) `[INTEGER]`, j6 limit stop (max(`3`)/min(`6`)) `[INTEGER]` ]
+	
+	**timestamp**: [ The current time from within the KAREL system `[STRING]` ]
 	
 	**error**: [ error code `[INTEGER]`, error string `[STRING]` ]
 	
@@ -203,9 +211,6 @@ ____
   
   `webstop`
     * Stop the webmotion program
-
-  `webrobotid`
-    * Get the robot controller ID from `$FNO`
 
 * **Success Response:**
 
