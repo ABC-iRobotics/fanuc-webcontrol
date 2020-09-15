@@ -33,17 +33,17 @@ ____
 
   mtn_mod value is valid from `1` to `6`:
   
-  `1`: Absolute motion in joint space with joint interpolation
+  `1`: Absolute motion in joint space with joint interpolation [degree]
   
-  `2`: Relative motion in joint space with joint interpolation
+  `2`: Relative motion in joint space with joint interpolation [degree]
   
-  `3`: Absolute motion in Chartesian space with linear interpolation
+  `3`: Absolute motion in Chartesian space with linear interpolation [mm]
   
-  `4`: Absolute motion in Chartesian space with joint interpolation
+  `4`: Absolute motion in Chartesian space with joint interpolation [mm]
   
-  `5`: Relative motion in Chartesian space with linear interpolation
+  `5`: Relative motion in Chartesian space with linear interpolation [mm]
   
-  `6`: Relative motion in Chartesian space with joint interpolation
+  `6`: Relative motion in Chartesian space with joint interpolation [mm]
 
 * **Success Response:**
 

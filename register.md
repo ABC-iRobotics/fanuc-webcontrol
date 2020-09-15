@@ -1,7 +1,5 @@
 ## Used Registers [R]
 
-- R_WEBKEEP = 42 moving while this is smaller than 5
-
 - R_WEBXMAX = 43 X axis maximum limit
 - R_WEBYMAX = 44 Y axis maximum limit
 - R_WEBZMAX = 45 Z axis maximum limit

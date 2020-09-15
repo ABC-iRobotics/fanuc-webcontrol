@@ -51,10 +51,8 @@ Run the WEBMOTION TP program on the controller or open a browser and type: http:
 - SET: 
   * Set the axis limits. The default values are 0, thus you have to change these to make possible any movement.
   * Move the TCP to a predefined position (Click on a button, and wait until the robot completes the movement.) **Important: SEE NOTE No.2**
-- JOG: Jogging the robot (Push and hold down a button, but only use just one at the same time!)
-- CART: Move the TCP +/-xyz direction and/or rotate it in the currently selected tool coordinate system. (Push and hold down a button, but only use just one at the same time!)
-- Webjoystick: http://robotIP/md/webjoystick.htm
-- Webtouchpad: http://robotIP/md/webtouchpad.htm
+- JOG: Jogging the robot 
+- CART: Move the TCP +/-xyz direction and/or rotate it in the currently selected tool coordinate system. 
 
 ## Notes
 1. You can change the default steps (1 degree, 3 mm) in the JavaScript part of the `webpanel.htm`. In this case you may also have to update the `setInt` variable in this file.

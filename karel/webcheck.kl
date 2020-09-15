@@ -9,8 +9,6 @@ CONST
 	PR_WEBJOINTS = 40
 	PR_WEBXYZWPR = 41
 
-	R_WEBKEEP = 42
-
 	R_WEBXMAX = 43	
 	R_WEBYMAX = 44
 	R_WEBZMAX = 45
@@ -69,12 +67,6 @@ VAR
 	out_pos: POSITION
 	wjnt_cfg: CONFIG
 	ext_ang: ARRAY[3] OF REAL
-
-	keep_flag: BOOLEAN
-
-	keep_int: INTEGER
-
-	keep_real: REAL
 
 	xmax_flag: BOOLEAN
 	ymax_flag: BOOLEAN
@@ -388,8 +380,6 @@ END checkLimit
 
 BEGIN
 
-	GET_REG(R_WEBKEEP, keep_flag, keep_int, keep_real, STATUS )
-
 	GET_REG(R_WEBXMAX, xmax_flag, xmax_int, xmax_real, STATUS)
 	GET_REG(R_WEBYMAX, ymax_flag, ymax_int, ymax_real, STATUS)
 	GET_REG(R_WEBZMAX, zmax_flag, zmax_int, zmax_real, STATUS)
@@ -494,16 +484,6 @@ BEGIN
 			
 		ENDIF
 
-	ENDIF		
-
-	IF keep_flag THEN
-		IF keep_real > 5 THEN
-			FLG[8] = ON
-		ENDIF
-	ELSE
-		IF keep_int > 5 THEN
-			FLG[8] = ON
-		ENDIF
 	ENDIF
 
 END webcheck
